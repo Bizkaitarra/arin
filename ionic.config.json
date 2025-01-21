@@ -1,0 +1,7 @@
+{
+  "name": "arin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
