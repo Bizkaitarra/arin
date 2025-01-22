@@ -1,0 +1,39 @@
+.stops-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+}
+
+.stop-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.stop-card-header {
+    background-color: #f44336; /* Color rojo */
+    color: white;
+    padding: 16px;
+    border-radius: 8px 8px 0 0;
+}
+
+.bus-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bus-card {
+    margin-bottom: 8px;
+}
+
+.error-text {
+    color: red;
+    text-align: center;
+    margin: 16px 0;
+}
+
+.ml-1 {
+    margin-left: 8px;
+}

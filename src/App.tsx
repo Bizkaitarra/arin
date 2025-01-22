@@ -1,7 +1,15 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import {
+  IonApp,
+  IonContent,
+  IonHeader, IonIcon, IonItem, IonList,
+  IonMenu, IonPage,
+  IonRouterOutlet, IonSplitPane,
+  IonTitle,
+  IonToolbar,
+  setupIonicReact
+} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,22 +40,76 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import BizkaibusViewers from "./pages/BizkaibusViewers";
+import ConfigureBizkaibus from "./pages/ConfigureBizkaibus";
+import MetroBilbaoViewers from "./pages/MetroBilbaoViewers";
+import ConfigureMetroBilbao from "./pages/ConfigureMetroBilbao";
+import {busOutline, settingsOutline, trainOutline} from "ionicons/icons";
+import React from "react";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const closeMenu = async () => {
+  };
+
+  return (
+      <IonApp>
+        <IonReactRouter>
+          <IonSplitPane contentId="main">
+            {/* Menú Lateral */}
+            <IonMenu contentId="main">
+              <IonHeader>
+                <IonToolbar>
+                  <IonTitle>Menú</IonTitle>
+                </IonToolbar>
+              </IonHeader>
+              <IonContent>
+                <IonList>
+                  <IonItem
+                      routerLink="/bizkaibus-viewers"
+                      routerDirection="root"
+                      onClick={closeMenu}
+                  >
+                    <IonIcon icon={busOutline}></IonIcon>Visores Bizkaibus
+                  </IonItem>
+                  <IonItem
+                      routerLink="/configure-bizkaibus"
+                      routerDirection="root"
+                      onClick={closeMenu}
+                  >
+                    <IonIcon icon={settingsOutline}></IonIcon>  Configurar Bizkaibus
+                  </IonItem>
+                  <IonItem
+                      routerLink="/metro-bilbao-viewers"
+                      routerDirection="root"
+                      onClick={closeMenu}
+                  >
+                    <IonIcon icon={trainOutline}></IonIcon> Visores Metro Bilbao
+                  </IonItem>
+                  <IonItem
+                      routerLink="/configure-metro-bilbao"
+                      routerDirection="root"
+                      onClick={closeMenu}
+                  >
+                    <IonIcon icon={settingsOutline}></IonIcon> Configurar Metro Bilbao
+                  </IonItem>
+                </IonList>
+              </IonContent>
+            </IonMenu>
+
+            {/* Contenido Principal */}
+            <IonRouterOutlet id="main">
+              <Route exact path="/bizkaibus-viewers" component={BizkaibusViewers} />
+              <Route exact path="/configure-bizkaibus" component={ConfigureBizkaibus} />
+              <Route exact path="/metro-bilbao-viewers" component={MetroBilbaoViewers} />
+              <Route exact path="/configure-metro-bilbao" component={ConfigureMetroBilbao} />
+              <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers" />} />
+            </IonRouterOutlet>
+          </IonSplitPane>
+        </IonReactRouter>
+      </IonApp>
+  );
+};
 
 export default App;

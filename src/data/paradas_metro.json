@@ -1,0 +1,212 @@
+[
+  {
+    "Code": "ABA",
+    "Name": "Abando",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "ABT",
+    "Name": "Abatxolo",
+    "Lines": "L2"
+  },
+  {
+    "Code": "AIB",
+    "Name": "Aiboa",
+    "Lines": "L1"
+  },
+  {
+    "Code": "ALG",
+    "Name": "Algorta",
+    "Lines": "L1"
+  },
+  {
+    "Code": "ANS",
+    "Name": "Ansio",
+    "Lines": "L2"
+  },
+  {
+    "Code": "ARE",
+    "Name": "Areeta",
+    "Lines": "L1"
+  },
+  {
+    "Code": "ARZ",
+    "Name": "Ariz",
+    "Lines": "L2"
+  },
+  {
+    "Code": "AST",
+    "Name": "Astrabudua",
+    "Lines": "L1"
+  },
+  {
+    "Code": "BAG",
+    "Name": "Bagatza",
+    "Lines": "L2"
+  },
+  {
+    "Code": "BAR",
+    "Name": "Barakaldo",
+    "Lines": "L2"
+  },
+  {
+    "Code": "BAS",
+    "Name": "Basarrate",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "BSR",
+    "Name": "Basauri",
+    "Lines": "L2"
+  },
+  {
+    "Code": "BER",
+    "Name": "Berango",
+    "Lines": "L1"
+  },
+  {
+    "Code": "BID",
+    "Name": "Bidezabal",
+    "Lines": "L1"
+  },
+  {
+    "Code": "BOL",
+    "Name": "Bolueta",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "DEU",
+    "Name": "Deustu",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "ERA",
+    "Name": "Erandio",
+    "Lines": "L1"
+  },
+  {
+    "Code": "ETX",
+    "Name": "Etxebarri",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "GOB",
+    "Name": "Gobela",
+    "Lines": "L1"
+  },
+  {
+    "Code": "GUR",
+    "Name": "Gurutzeta\/Cruces",
+    "Lines": "L2"
+  },
+  {
+    "Code": "IBB",
+    "Name": "Ibarbengoa",
+    "Lines": "L1"
+  },
+  {
+    "Code": "IND",
+    "Name": "Indautxu",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "KAB",
+    "Name": "Kabiezes",
+    "Lines": "L2"
+  },
+  {
+    "Code": "LAM",
+    "Name": "Lamiako",
+    "Lines": "L1"
+  },
+  {
+    "Code": "LAR",
+    "Name": "Larrabasterra",
+    "Lines": "L1"
+  },
+  {
+    "Code": "LEI",
+    "Name": "Leioa",
+    "Lines": "L1"
+  },
+  {
+    "Code": "LUT",
+    "Name": "Lutxana",
+    "Lines": "L1"
+  },
+  {
+    "Code": "MOY",
+    "Name": "Moyua",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "NEG",
+    "Name": "Neguri",
+    "Lines": "L1"
+  },
+  {
+    "Code": "PEN",
+    "Name": "Pe\u00f1ota",
+    "Lines": "L2"
+  },
+  {
+    "Code": "PLE",
+    "Name": "Plentzia",
+    "Lines": "L1"
+  },
+  {
+    "Code": "POR",
+    "Name": "Portugalete",
+    "Lines": "L2"
+  },
+  {
+    "Code": "SIN",
+    "Name": "San Ignazio",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "SAM",
+    "Name": "Santimami\/San Mam\u00e9s",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "STZ",
+    "Name": "Santurtzi",
+    "Lines": "L2"
+  },
+  {
+    "Code": "SAN",
+    "Name": "Santutxu",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "SAR",
+    "Name": "Sarriko",
+    "Lines": "L1, L2"
+  },
+  {
+    "Code": "SES",
+    "Name": "Sestao",
+    "Lines": "L2"
+  },
+  {
+    "Code": "SOP",
+    "Name": "Sopela",
+    "Lines": "L1"
+  },
+  {
+    "Code": "URB",
+    "Name": "Urbinaga",
+    "Lines": "L2"
+  },
+  {
+    "Code": "URD",
+    "Name": "Urduliz",
+    "Lines": "L1"
+  },
+  {
+    "Code": "CAV",
+    "Name": "Zazpikaleak\/Casco Viejo",
+    "Lines": "L1, L2, L3"
+  }
+]
