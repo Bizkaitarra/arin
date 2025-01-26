@@ -64,39 +64,30 @@ const App: React.FC = () => {
                         <IonContent>
                             <IonList>
                                 <IonMenuToggle>
+                                    <IonItem routerLink="/bizkaibus-viewers" routerDirection="root">
+                                        <IonIcon icon={busOutline} slot="start"></IonIcon>
+                                        Visores Bizkaibus
+                                    </IonItem>
+                                </IonMenuToggle>
+                                <IonMenuToggle>
+                                    <IonItem routerLink="/configure-bizkaibus" routerDirection="root">
+                                        <IonIcon icon={settingsOutline} slot="start"></IonIcon>
+                                        Configurar Bizkaibus
+                                    </IonItem>
+                                </IonMenuToggle>
+                                <IonMenuToggle>
+                                    <IonItem routerLink="/metro-bilbao-viewers" routerDirection="root">
+                                        <IonIcon icon={trainOutline} slot="start"></IonIcon>
+                                        Visores Metro Bilbao
+                                    </IonItem>
+                                </IonMenuToggle>
+                                <IonMenuToggle>
+                                    <IonItem routerLink="/configure-metro-bilbao" routerDirection="root">
+                                        <IonIcon icon={settingsOutline} slot="start"></IonIcon>
+                                        Configurar Metro Bilbao
+                                    </IonItem>
+                                </IonMenuToggle>
 
-                                    <IonItem
-                                        routerLink="/bizkaibus-viewers"
-                                        routerDirection="root"
-                                    >
-                                        <IonIcon icon={busOutline}></IonIcon>Visores Bizkaibus
-                                    </IonItem>
-                                </IonMenuToggle>
-                                <IonMenuToggle>
-
-                                    <IonItem
-                                        routerLink="/configure-bizkaibus"
-                                        routerDirection="root"
-                                    >
-                                        <IonIcon icon={settingsOutline}></IonIcon> Configurar Bizkaibus
-                                    </IonItem>
-                                </IonMenuToggle>
-                                <IonMenuToggle>
-                                    <IonItem
-                                        routerLink="/metro-bilbao-viewers"
-                                        routerDirection="root"
-                                    >
-                                        <IonIcon icon={trainOutline}></IonIcon> Visores Metro Bilbao
-                                    </IonItem>
-                                </IonMenuToggle>
-                                <IonMenuToggle>
-                                    <IonItem
-                                        routerLink="/configure-metro-bilbao"
-                                        routerDirection="root"
-                                    >
-                                        <IonIcon icon={settingsOutline}></IonIcon> Configurar Metro Bilbao
-                                    </IonItem>
-                                </IonMenuToggle>
                             </IonList>
                         </IonContent>
                     </IonMenu>
