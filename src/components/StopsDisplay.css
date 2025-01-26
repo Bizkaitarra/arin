@@ -1,21 +1,21 @@
 .stops-display {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     gap: 16px;
     padding: 16px;
 }
 
 .stop-card {
-    width: 100%;
-    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.stop-card-header {
-    background-color: #f44336; /* Color rojo */
-    color: white;
-    padding: 16px;
-    border-radius: 8px 8px 0 0;
+.stop-card .ion-card-header {
+    background-color: #f4f4f4; /* Fondo neutro */
+    color: #333; /* Texto oscuro */
+    font-weight: bold;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
 }
 
 .bus-cards-container {
@@ -28,10 +28,23 @@
     margin-bottom: 8px;
 }
 
-.error-text {
-    color: red;
-    text-align: center;
-    margin: 16px 0;
+.bus-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.badges {
+    display: flex;
+    gap: 8px;
+}
+
+.loading-container,
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
 }
 
 .ml-1 {

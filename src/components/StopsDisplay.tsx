@@ -8,12 +8,13 @@ import {
     IonSpinner,
     IonRefresher,
     IonRefresherContent,
+    IonText,
 } from '@ionic/react';
 import { fetchStopsData } from '../services/ApiBizkaibus';
 import './StopsDisplay.css';
 
 interface StopsDisplayProps {
-    stops: string[]; // Array de identificadores de paradas
+    stops: string[];
 }
 
 const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
@@ -26,7 +27,7 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
             const data = await fetchStopsData(stops);
             setStopData(data);
             setLoading(false);
-            setError(null); // Limpiamos errores si la solicitud tiene éxito
+            setError(null);
         } catch (err) {
             setError('Error fetching stop data');
             setLoading(false);
@@ -34,24 +35,14 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
     };
 
     useEffect(() => {
-        let intervalId: NodeJS.Timeout;
-
-        // Llamar a la API al montar el componente
         fetchData();
-
-        // Configurar el intervalo para llamar a la API cada 30 segundos
-        intervalId = setInterval(() => {
-            fetchData();
-        }, 30000);
-
-        // Limpiar el intervalo al desmontar el componente
+        const intervalId = setInterval(fetchData, 30000);
         return () => clearInterval(intervalId);
     }, [stops]);
 
-    // Manejar el refresco manual
     const handleRefresh = async (event: CustomEvent) => {
         await fetchData();
-        event.detail.complete(); // Finalizar la animación de refresco
+        event.detail.complete();
     };
 
     const generateBusCards = (xmlDoc: Document) => {
@@ -59,27 +50,27 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
         return Array.from(pasosParada).map((paso, index) => {
             const linea = paso.getElementsByTagName('linea')[0]?.textContent || 'N/A';
             const ruta = paso.getElementsByTagName('ruta')[0]?.textContent || 'N/A';
-            const e1Minutos = parseInt(paso.getElementsByTagName('e1')[0]?.getElementsByTagName('minutos')[0]?.textContent || 'N/A', 10);
+            const e1Minutos = parseInt(paso.getElementsByTagName('e1')[0]?.getElementsByTagName('minutos')[0]?.textContent || '0', 10);
             const e2Element = paso.getElementsByTagName('e2')[0]?.getElementsByTagName('minutos')[0];
-            const e2Minutos = parseInt(e2Element?.textContent || '', 10);
+            const e2Minutos = parseInt(e2Element?.textContent || '0', 10);
 
             return (
                 <div key={index} className="bus-card">
                     <IonCard>
-                        <IonCardHeader>
-                            <IonCardTitle>{`Línea ${linea} - ${ruta}`}</IonCardTitle>
-                        </IonCardHeader>
                         <IonCardContent>
-                            <p>
-                                <IonBadge color={e1Minutos < 3 ? 'danger' : 'success'}>
-                                    Próximo: {e1Minutos} min
-                                </IonBadge>
-                                {!isNaN(e2Minutos) && (
-                                    <IonBadge color="secondary" className="ml-1">
-                                        Siguiente: {e2Minutos} min
+                            <div className="bus-info">
+                                <IonCardTitle>{`Línea ${linea} - ${ruta}`}</IonCardTitle>
+                                <div className="badges">
+                                    <IonBadge color={e1Minutos < 3 ? 'danger' : 'success'}>
+                                        Próximo: {e1Minutos} min
                                     </IonBadge>
-                                )}
-                            </p>
+                                    {!isNaN(e2Minutos) && (
+                                        <IonBadge color="secondary" className="ml-1">
+                                            Siguiente: {e2Minutos} min
+                                        </IonBadge>
+                                    )}
+                                </div>
+                            </div>
                         </IonCardContent>
                     </IonCard>
                 </div>
@@ -87,14 +78,14 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
         });
     };
 
-    const appendStops = (xmlData: string) => {
+    const appendStop = (xmlData: string) => {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
         const denominacionParada = xmlDoc.getElementsByTagName('DenominacionParada')[0]?.textContent || 'Parada desconocida';
 
         return (
             <IonCard className="stop-card">
-                <IonCardHeader className="stop-card-header">
+                <IonCardHeader>
                     <IonCardTitle>{denominacionParada}</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
@@ -106,15 +97,24 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
 
     return (
         <div className="stops-display">
-            {/* IonRefresher para el gesto de refrescar */}
             <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
                 <IonRefresherContent pullingText="Desliza hacia abajo para refrescar" />
             </IonRefresher>
 
-            {loading && <IonSpinner name="crescent" />}
-            {error && <p className="error-text">{error}</p>}
+            {loading && (
+                <div className="loading-container">
+                    <IonSpinner name="crescent" />
+                </div>
+            )}
+            {error && (
+                <div className="error-container">
+                    <IonText color="danger">
+                        <h4>{error}</h4>
+                    </IonText>
+                </div>
+            )}
             {!loading && !error && stopData.length > 0 && stopData.map((data, index) => (
-                <React.Fragment key={index}>{appendStops(data)}</React.Fragment>
+                <React.Fragment key={index}>{appendStop(data)}</React.Fragment>
             ))}
         </div>
     );
