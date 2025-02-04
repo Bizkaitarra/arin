@@ -46,16 +46,28 @@ import MetroBilbaoViewers from "./pages/MetroBilbaoViewers";
 import ConfigureMetroBilbao from "./pages/ConfigureMetroBilbao";
 import {busOutline, settingsOutline, trainOutline} from "ionicons/icons";
 import React from "react";
+import {StatusBar} from "@capacitor/status-bar";
+import {Capacitor} from "@capacitor/core";
+import BizkaibusConfiguration from "./pages/BizkaibusConfiguration";
+import MetroBilbaoConfiguration from "./pages/MetroBilbaoConfiguration";
+import BizkaibusHorarioPage from "./pages/BizkaibusHorarioPage";
 
 setupIonicReact();
 
 const App: React.FC = () => {
+    React.useEffect(() => {
+        if (Capacitor.isNativePlatform()) {
+            StatusBar.setOverlaysWebView({ overlay: false });
+            StatusBar.setBackgroundColor({ color: '#ffffff' });
+        }
+    }, []);
+
     return (
         <IonApp>
             <IonReactRouter>
                 <IonSplitPane contentId="main">
                     {/* Menú Lateral */}
-                    <IonMenu contentId="main">
+                    <IonMenu side="end"  contentId="main">
                         <IonHeader>
                             <IonToolbar>
                                 <IonTitle>Menú</IonTitle>
@@ -95,10 +107,14 @@ const App: React.FC = () => {
                     {/* Contenido Principal */}
                     <IonRouterOutlet id="main">
                         <Route exact path="/bizkaibus-viewers" component={BizkaibusViewers}/>
-                        <Route exact path="/configure-bizkaibus" component={ConfigureBizkaibus}/>
+                        <Route exact path="/configure-bizkaibus" component={BizkaibusConfiguration}/>
                         <Route exact path="/metro-bilbao-viewers" component={MetroBilbaoViewers}/>
-                        <Route exact path="/configure-metro-bilbao" component={ConfigureMetroBilbao}/>
+                        <Route exact path="/configure-metro-bilbao" component={MetroBilbaoConfiguration}/>
                         <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers"/>}/>
+                        <Route
+                            path="/horarios/:parada"
+                            component={BizkaibusHorarioPage}
+                        />
                     </IonRouterOutlet>
                 </IonSplitPane>
             </IonReactRouter>

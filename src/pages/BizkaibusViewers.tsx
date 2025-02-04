@@ -8,24 +8,16 @@ import {
     IonButtons,
     IonMenuButton,
     IonIcon,
-    IonText
+    IonText, IonButton
 } from '@ionic/react';
 import StopsDisplay from '../components/StopsDisplay';
-import {busOutline} from "ionicons/icons";
-import {Link} from "react-router-dom";
-
-const STORAGE_KEY = 'bizkaibus_selected_stops';
+import {busOutline, settingsOutline, timerOutline} from "ionicons/icons";
+import {useHistory} from "react-router-dom";
+import {getSavedStationIds} from "../services/BizkaibusStorage";
 
 const BizkaibusViewers: React.FC = () => {
-    let stops = [];
-    const savedStops = localStorage.getItem(STORAGE_KEY);
-    if (savedStops) {
-        try {
-            stops = JSON.parse(savedStops);
-        } catch (error) {
-            console.error('Error al cargar paradas desde localStorage:', error);
-        }
-    }
+    let stops = getSavedStationIds();
+    const history = useHistory();
 
     return (
         <IonPage>
@@ -39,7 +31,12 @@ const BizkaibusViewers: React.FC = () => {
             </IonHeader>
             <IonContent className="ion-padding">
                 {stops.length > 0 ? (
-                    <StopsDisplay stops={stops} />
+                    <div>
+                        <IonButton color="secondary" onClick={() => history.push(`/configure-bizkaibus`)}>
+                            <IonIcon icon={settingsOutline} /> Configurar paradas
+                        </IonButton>
+                        <StopsDisplay stops={stops} />
+                    </div>
                 ) : (
                     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
                         <IonText>
@@ -48,13 +45,12 @@ const BizkaibusViewers: React.FC = () => {
                                 Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración.
                             </p>
                         </IonText>
-                        <Link to="/configure-bizkaibus" style={{ textDecoration: 'none' }}>
-                            <IonText color="primary" style={{ fontWeight: 'bold' }}>
-                                Configurar Paradas
-                            </IonText>
-                        </Link>
+                        <IonButton color="secondary" onClick={() => history.push(`/configure-bizkaibus`)}>
+                            <IonIcon icon={settingsOutline} /> Configurar paradas
+                        </IonButton>
                     </div>
                 )}
+
             </IonContent>
         </IonPage>
     );

@@ -8,10 +8,12 @@ import {
     IonSpinner,
     IonRefresher,
     IonRefresherContent,
-    IonText,
+    IonText, IonIcon, IonButton,
 } from '@ionic/react';
 import { fetchStopsData } from '../services/ApiBizkaibus';
 import './StopsDisplay.css';
+import {timerOutline, trashBinOutline} from "ionicons/icons";
+import { useHistory } from 'react-router-dom';
 
 interface StopsDisplayProps {
     stops: string[];
@@ -53,6 +55,7 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
             const e1Minutos = parseInt(paso.getElementsByTagName('e1')[0]?.getElementsByTagName('minutos')[0]?.textContent || '0', 10);
             const e2Element = paso.getElementsByTagName('e2')[0]?.getElementsByTagName('minutos')[0];
             const e2Minutos = parseInt(e2Element?.textContent || '0', 10);
+            const history = useHistory();
 
             return (
                 <div key={index} className="bus-card">
@@ -62,14 +65,17 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
                                 <IonCardTitle>{`Línea ${linea} - ${ruta}`}</IonCardTitle>
                                 <div className="badges">
                                     <IonBadge color={e1Minutos < 3 ? 'danger' : 'success'}>
-                                        Próximo: {e1Minutos} min
+                                        {e1Minutos} min ({calcularHora(e1Minutos)})
                                     </IonBadge>
                                     {!isNaN(e2Minutos) && (
                                         <IonBadge color="secondary" className="ml-1">
-                                            Siguiente: {e2Minutos} min
+                                            {e2Minutos} min ({calcularHora(e2Minutos)})
                                         </IonBadge>
                                     )}
                                 </div>
+                                <IonButton color="secondary" onClick={() => history.push(`/horarios/${linea}`)}>
+                                    Ver horarios <IonIcon icon={timerOutline} />
+                                </IonButton>
                             </div>
                         </IonCardContent>
                     </IonCard>
@@ -77,6 +83,13 @@ const StopsDisplay: React.FC<StopsDisplayProps> = ({ stops }) => {
             );
         });
     };
+
+    const calcularHora = (minutos: number): string => {
+        const ahora = new Date(); // Hora actual
+        const horaLlegada = new Date(ahora.getTime() + minutos * 60000); // Suma los minutos
+        return horaLlegada.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }); // Formatea la hora
+    };
+
 
     const appendStop = (xmlData: string) => {
         const parser = new DOMParser();

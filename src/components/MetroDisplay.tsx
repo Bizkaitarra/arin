@@ -8,7 +8,7 @@ import {
     IonSpinner,
     IonRefresher,
     IonRefresherContent,
-    IonText
+    IonText, IonList, IonItem, IonLabel
 } from '@ionic/react';
 import { fetchStopsData } from '../services/ApiMetroBilbao'; // Asegúrate de importar la función de tu servicio
 import './MetroDisplay.css';
@@ -65,35 +65,54 @@ const MetroDisplay: React.FC<MetroDisplayProps> = ({ stops }) => {
         }
 
         return platforms.map((platform, platformIndex) => {
-            return platform.map((train, trainIndex) => {
-                const destination = train.Destination || 'N/A';
-                const line = train.line || 'N/A';
-                const minutes = parseInt(train.Minutes, 10);
-                const nextArrival = train.Time || 'N/A';
+            // Si la plataforma no tiene trenes, no la mostramos
+            if (platform.length === 0) {
+                return null;
+            }
 
-                // Determinar si "Próximo" debe parpadear
-                const e1Class = minutes < 1 ? 'blink' : 'd-none';
-                return (
-                    <div key={`${platformIndex}-${trainIndex}`} className="train-card">
-                        <IonCard>
-                            <IonCardHeader>
-                                <IonCardTitle>{`Línea ${line} - ${destination}`}</IonCardTitle>
-                            </IonCardHeader>
-                            <IonCardContent>
-                                <p>
-                                    <IonBadge color={minutes < 1 ? 'danger' : 'success'}>
-                                        Próximo: {minutes} min
-                                    </IonBadge>
-                                    <IonBadge color="secondary" className="ml-1">
-                                        H. estimada: {new Date(nextArrival).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                    </IonBadge>
-                                </p>
-                            </IonCardContent>
-                        </IonCard>
-                    </div>
-                );
-            });
+            // Determinar el título de la plataforma
+            const platformTitle = platform.find((train) => isNaN(train.Direction))
+                ? platform.find((train) => isNaN(train.Direction)).Direction
+                : platform.some((train) => train.Direction === 1)
+                    ? 'Kabiezes/Plentzia'
+                    : 'Etxebarri/Basauri';
+
+            return (
+                <IonCard key={platformIndex} className="platform-section">
+                    <IonCardHeader>
+                        <IonCardTitle>{platformTitle}</IonCardTitle>
+                    </IonCardHeader>
+                    <IonList>
+                        {platform.map((train, trainIndex) => {
+                            const destination = train.Destination || 'N/A';
+                            const line = train.line || 'N/A';
+                            const minutes = parseInt(train.Minutes, 10);
+                            const nextArrival = train.Time || 'N/A';
+
+                            // Determinar si "Próximo" debe parpadear
+                            const e1Class = minutes < 1 ? 'blink' : 'd-none';
+                            return (
+                                <IonItem key={`${platformIndex}-${trainIndex}`} className="train-card">
+                                    <IonLabel>
+                                        <h2>{`${destination} Línea ${line}`}</h2>
+                                        <p>
+                                            <IonBadge color={minutes < 1 ? 'danger' : 'success'}>
+                                                Próximo: {minutes} min ({new Date(nextArrival).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})
+                                            </IonBadge>
+                                            <IonBadge className="ml-1">
+                                                Número de vagones: {train.Length}
+                                            </IonBadge>
+                                        </p>
+                                    </IonLabel>
+                                </IonItem>
+                            );
+                        })}
+                    </IonList>
+                </IonCard>
+            );
         });
+
+
     };
 
 

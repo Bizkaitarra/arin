@@ -10,21 +10,13 @@ import {
 } from '@ionic/react';
 import { reorderThreeOutline, trashBinOutline } from 'ionicons/icons';
 import { ItemReorderEventDetail } from '@ionic/core';
+import {getSavedStations, Parada, saveStationIds} from "../services/BizkaibusStorage";
 
-interface Parada {
-    PROVINCIA: string;
-    DESCRIPCION_PROVINCIA: string;
-    MUNICIPIO: string;
-    DESCRIPCION_MUNICIPIO: string;
-    PARADA: string;
-    DENOMINACION: string;
-}
+
 
 interface BizkaibusSelectedStopsListProps {
     stations: Parada[]; // Todas las estaciones disponibles
 }
-
-const STORAGE_KEY = 'bizkaibus_selected_stops';
 
 const BizkaibusSelectedStopsList = forwardRef(
     ({ stations }: BizkaibusSelectedStopsListProps, ref) => {
@@ -32,19 +24,7 @@ const BizkaibusSelectedStopsList = forwardRef(
 
         // Cargar paradas seleccionadas desde localStorage al iniciar
         useEffect(() => {
-            const savedStops = localStorage.getItem(STORAGE_KEY);
-            if (savedStops) {
-                try {
-                    const stopIds: string[] = JSON.parse(savedStops);
-                    // Cargar las paradas en el mismo orden que estaban en localStorage
-                    const stops = stopIds
-                        .map((stopId) => stations.find((station) => station.PARADA === stopId))
-                        .filter(Boolean) as Parada[];
-                    setSelectedStops(stops);
-                } catch (error) {
-                    console.error('Error al cargar paradas desde localStorage:', error);
-                }
-            }
+            setSelectedStops(getSavedStations(stations));
         }, [stations]);  // Dependencia en `stations` para recargar las estaciones si cambian
 
         // Guardar las paradas seleccionadas en localStorage cada vez que cambien
@@ -52,7 +32,7 @@ const BizkaibusSelectedStopsList = forwardRef(
             if (selectedStops.length > 0) {
                 // Guardamos solo las IDs de las paradas, pero en el orden actual
                 const stopIds = selectedStops.map((stop) => stop.PARADA);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(stopIds));
+                saveStationIds(stopIds);
             }
         }, [selectedStops]);  // Cada vez que se actualiza la lista de paradas seleccionadas
 

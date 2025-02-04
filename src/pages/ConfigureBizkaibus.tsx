@@ -22,7 +22,7 @@ import {
 import { loadStops } from "../services/ApiBizkaibus";
 import { ItemReorderEventDetail } from '@ionic/core';
 import BizkaibusSelectedStopsList from '../components/BizkaibusSelectedStopsList';
-import {settingsOutline} from "ionicons/icons";
+import {addCircle, settingsOutline} from "ionicons/icons";
 
 interface Parada {
     PROVINCIA: string;
@@ -73,6 +73,7 @@ const ConfigureBizkaibus: React.FC = () => {
                 station.DENOMINACION.toLowerCase().includes(stopName.toLowerCase())
             );
         }
+        console.log(selectedStopsRef.current);
 
         setFilteredStations(results);
     }, [province, town, stopName, stations]);
@@ -155,8 +156,7 @@ const ConfigureBizkaibus: React.FC = () => {
                             <IonCol>{station.PARADA}</IonCol>
                             <IonCol>{station.DENOMINACION}</IonCol>
                             <IonCol>
-                                <IonButton onClick={() => handleAddStop(station)}>Añadir</IonButton>
-
+                                <IonIcon onClick={() => handleAddStop(station)} icon={addCircle}></IonIcon>
                             </IonCol>
                         </IonRow>
                     ))}
