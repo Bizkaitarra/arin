@@ -3,3 +3,7 @@ http://ionicframework.com/docs/theming/ */
 ion-header {
     padding-top: env(safe-area-inset-top);
 }
+
+:root {
+    --ion-safe-area-bottom: env(safe-area-inset-bottom);
+}

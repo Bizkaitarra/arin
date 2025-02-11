@@ -1,0 +1,105 @@
+/* Contenedor principal */
+.metro-display {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: #f9f9f9;
+}
+
+/* Tarjeta de estación */
+.station-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Cabecera de la tarjeta de estación con gradiente */
+.station-card-header {
+    background: linear-gradient(135deg, #ccbbb1, #dd7105);
+    color: white;
+}
+
+/* Título de la estación */
+.station-card-header .ion-card-title {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/* Contenedor para las tarjetas de trenes */
+.train-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Sección de plataforma */
+.platform-section {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.platform-section:hover {
+    transform: scale(1.02);
+}
+
+
+.platform-section .ion-card-title {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* Tarjeta de tren (IonItem) */
+.train-card {
+    --background: transparent;
+}
+
+/* Estilos para el contenido de la etiqueta en la tarjeta de tren */
+.train-card .ion-label h2 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.train-card .ion-label p {
+    margin: 4px 0 0;
+    font-size: 0.9em;
+}
+
+/* Espaciado para badges */
+.ml-1 {
+    margin-left: 4px;
+}
+
+/* Contenedores de error y carga */
+.error-container,
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Opcional: Clase para parpadeo si se requiere */
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Clase para ocultar elementos */
+.d-none {
+    display: none;
+}
+
+/* Estilos para mensaje sin datos */
+.no-data {
+    padding: 12px;
+    text-align: center;
+    color: #666;
+}

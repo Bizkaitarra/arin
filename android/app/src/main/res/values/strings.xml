@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">arin</string>
-    <string name="title_activity_main">arin</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Arin</string>
+    <string name="title_activity_main">Arin</string>
+    <string name="package_name">bizkaitarra.arin</string>
+    <string name="custom_url_scheme">bizkaitarra.arin</string>
 </resources>

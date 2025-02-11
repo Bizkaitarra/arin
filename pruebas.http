@@ -1,0 +1,73 @@
+GET https://data.renfe.com/api/3/action/datastore_search?resource_id=3254a1ed-a2b7-4fd1-9e9e-23eefe35f162&limit=50
+###
+POST https://horarios.renfe.com/cer/HorariosServlet
+Accept: application/json, text/plain, */*
+Accept-Language: es-ES,es;q=0.9
+Connection: keep-alive
+Cookie: rxVisitor=1738053832003F39UEUKAFVHTOGA82UBN09T9S769LF4F; dtCookie=v_4_srv_7_sn_DRORGICMI1A12JC49FS42BNP8CML5PPL_perc_100000_ol_0_mul_1_app-3Aea7c4b59f27d43eb_0; OptanonAlertBoxClosed=2025-01-28T08:43:59.629Z; _gcl_au=1.1.986615873.1738053840; AMCVS_3C9D27E253DB254D0A490D4E%40AdobeOrg=1; AMCV_3C9D27E253DB254D0A490D4E%40AdobeOrg=179643557%7CMCMID%7C43339798761956936242286860364764444242%7CMCAAMLH-1738658639%7C6%7CMCAAMB-1738658639%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCOPTOUT-1738061039s%7CNONE%7CvVersion%7C5.5.0; at_check=true; JSESSIONID=0000pIUkTGG1Hw27Qf3ClkhinR3:1fiumv9g6; dtSa=-; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Jan+28+2025+09%3A44%3A29+GMT%2B0100+(hora+est%C3%A1ndar+de+Europa+central)&version=202411.2.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=160cedfa-d044-461b-8ee0-d041f76784fc&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1%2CR0001%3A1&intType=1&geolocation=ES%3BPV&AwaitingReconsent=false; s_nr30=1738053869237-Nuevo; s_gpv=renfe%3Acercanias%3Acercanias%20bilbao; s_plt=0.21; s_pltp=renfe%3Acercanias%3Acercanias%20bilbao; s_dur=1738053869238; s_sq=%5B%5BB%5D%5D; s_cc=true; mbox=session#e4f1475de761422f9044e78636df066f#1738055730|PC#e4f1475de761422f9044e78636df066f.37_0#1801298670; rxvt=1738055673006|1738053832003; dtPC=$453872985_644h-vKAUDFGUBIIDQCCWMKGDVPFGRDBKAUUKL-0e0
+Origin: https://horarios.renfe.com
+Referer: https://horarios.renfe.com/cer/hjcer300.jsp?NUCLEO=60&CP=NO&I=s
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+sec-ch-ua: "Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Content-Type: application/json;charset=UTF-8
+
+{
+  "nucleo": "60",
+  "origen": "13118",
+  "destino": "00000",
+  "fchaViaje": "20250128",
+  "validaReglaNegocio": true,
+  "tiempoReal": true,
+  "servicioHorarios": "VTI",
+  "horaViajeOrigen": "00",
+  "horaViajeLlegada": "26",
+  "accesibilidadTrenes": false
+}
+
+###
+POST https://horarios.renfe.com/cer/
+Accept: application/json, text/plain, */*
+Accept-Language: es-ES,es;q=0.9
+Connection: keep-alive
+Cookie: rxVisitor=1738053832003F39UEUKAFVHTOGA82UBN09T9S769LF4F; dtCookie=v_4_srv_7_sn_DRORGICMI1A12JC49FS42BNP8CML5PPL_perc_100000_ol_0_mul_1_app-3Aea7c4b59f27d43eb_0; OptanonAlertBoxClosed=2025-01-28T08:43:59.629Z; _gcl_au=1.1.986615873.1738053840; AMCVS_3C9D27E253DB254D0A490D4E%40AdobeOrg=1; AMCV_3C9D27E253DB254D0A490D4E%40AdobeOrg=179643557%7CMCMID%7C43339798761956936242286860364764444242%7CMCAAMLH-1738658639%7C6%7CMCAAMB-1738658639%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCOPTOUT-1738061039s%7CNONE%7CvVersion%7C5.5.0; at_check=true; JSESSIONID=0000pIUkTGG1Hw27Qf3ClkhinR3:1fiumv9g6; dtSa=-; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Jan+28+2025+09%3A44%3A29+GMT%2B0100+(hora+est%C3%A1ndar+de+Europa+central)&version=202411.2.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=160cedfa-d044-461b-8ee0-d041f76784fc&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1%2CR0001%3A1&intType=1&geolocation=ES%3BPV&AwaitingReconsent=false; s_nr30=1738053869237-Nuevo; s_gpv=renfe%3Acercanias%3Acercanias%20bilbao; s_plt=0.21; s_pltp=renfe%3Acercanias%3Acercanias%20bilbao; s_dur=1738053869238; s_sq=%5B%5BB%5D%5D; s_cc=true; mbox=session#e4f1475de761422f9044e78636df066f#1738055730|PC#e4f1475de761422f9044e78636df066f.37_0#1801298670; rxvt=1738055673006|1738053832003; dtPC=$453872985_644h-vKAUDFGUBIIDQCCWMKGDVPFGRDBKAUUKL-0e0
+Origin: https://horarios.renfe.com
+Referer: https://horarios.renfe.com/cer/hjcer300.jsp?NUCLEO=60&CP=NO&I=s
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+sec-ch-ua: "Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Content-Type: application/json;charset=UTF-8
+
+{
+  "nucleo": "60",
+  "origen": "13118",
+  "destino": "13200",
+  "fchaViaje": "20250128",
+  "validaReglaNegocio": true,
+  "tiempoReal": true,
+  "servicioHorarios": "VTI",
+  "horaViajeOrigen": "00",
+  "horaViajeLlegada": "26",
+  "accesibilidadTrenes": false
+}
+
+###
+
+GET https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetHorario_JSON?callback=jsonCallbackHorario&sCodigoLinea=A0651&
+    sNumeroRuta=001&sFechaHorario=4%2F2%2F2025
+
+
+###
+
+
+
+
+

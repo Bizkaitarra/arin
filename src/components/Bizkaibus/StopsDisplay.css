@@ -1,0 +1,83 @@
+/* Contenedor principal */
+.stops-display {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 4px;
+    background-color: #f9f9f9;
+}
+
+/* Tarjeta de parada */
+.stop-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: none;
+    height: 90%;
+}
+
+/* Cabecera de la tarjeta de parada con gradiente */
+.stop-card-header {
+    background: linear-gradient(135deg, #dcd3d3, #147014);
+    color: white;
+    padding: 12px;
+}
+
+
+/* Título de la parada */
+.stop-card-header ion-card-title {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/* Contenedor para las tarjetas de autobús */
+.bus-cards-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tarjetas de autobús */
+.bus-card {
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Efecto hover para resaltar la tarjeta */
+.bus-card:hover {
+    transform: scale(1.02);
+}
+
+/* Contenido interno de las tarjetas de autobús */
+.bus-card .ion-card-content {
+    padding: 16px;
+}
+
+/* Contenedor de badges (tiempos de espera) */
+.badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+/* Pequeño margen para separar badges */
+.ml-1 {
+    margin-left: 4px;
+}
+
+/* Ajuste en el botón para separar visualmente */
+.ion-button {
+    margin-top: 8px;
+}
+
+/* Contenedores de error y carga */
+.error-container,
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
