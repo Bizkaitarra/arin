@@ -6,6 +6,15 @@ export interface Parada {
     DESCRIPCION_MUNICIPIO: string;
     PARADA: string;
     DENOMINACION: string;
+    LATITUD: string;
+    LONGITUD: string;
+}
+export interface Municipio
+{
+    PROVINCIA: string;
+    DESCRIPCION_PROVINCIA: string;
+    MUNICIPIO: string;
+    DESCRIPCION_MUNICIPIO: string;
 }
 export function getSavedStationIds(): string[] {
     const savedStops = localStorage.getItem(STORAGE_KEY);

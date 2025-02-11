@@ -1,0 +1,47 @@
+.municipio-item {
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    padding: 12px 16px;
+    border-radius: 5px;
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Asegura que el texto y la flecha estén separados */
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    position: relative;
+    background: white;
+}
+
+.municipio-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 123, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: 5px;
+}
+
+.municipio-item:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
+
+.municipio-item:active::after {
+    opacity: 1;
+}
+
+.municipio-arrow {
+    font-size: 1.2rem;
+    color: #007bff; /* Azul material */
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.municipio-item:active .municipio-arrow {
+    transform: translateX(3px); /* Efecto de movimiento en el click */
+}
