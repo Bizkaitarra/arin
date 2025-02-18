@@ -19,53 +19,6 @@
     color: white;
 }
 
-/* Título de la estación */
-.station-card-header .ion-card-title {
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-/* Contenedor para las tarjetas de trenes */
-.train-cards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-/* Sección de plataforma */
-.platform-section {
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-}
-
-.platform-section:hover {
-    transform: scale(1.02);
-}
-
-
-.platform-section .ion-card-title {
-    font-size: 1.1em;
-    font-weight: 500;
-}
-
-/* Tarjeta de tren (IonItem) */
-.train-card {
-    --background: transparent;
-}
-
-/* Estilos para el contenido de la etiqueta en la tarjeta de tren */
-.train-card .ion-label h2 {
-    font-size: 1em;
-    font-weight: 600;
-    margin: 0;
-}
-
-.train-card .ion-label p {
-    margin: 4px 0 0;
-    font-size: 0.9em;
-}
 
 /* Espaciado para badges */
 .ml-1 {

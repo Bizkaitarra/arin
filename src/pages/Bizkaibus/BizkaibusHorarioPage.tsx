@@ -1,41 +1,36 @@
-import React, { useState, useEffect } from "react";
-import {useHistory, useParams} from "react-router-dom";
-import {
-    IonPage,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButtons,
-    IonMenuButton,
-    IonIcon,
-    IonButton
-} from "@ionic/react";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import {ConsultaHorario, loadHorarios} from "../../services/ApiBizkaibus";
 import ConsultaHorarioViewer from "../../components/Bizkaibus/ConsultaHorarioViewer";
-import {settingsOutline, timerOutline} from "ionicons/icons";
-import NavigationTabs from "../../components/NavigationTabs";
+import {timerOutline} from "ionicons/icons";
+import Page from "../Page";
 
 interface RouteParams {
-    parada: string; // El parámetro de la parada desde la URL
+    line: string;
 }
 
 const BizkaibusHorarioPage: React.FC = () => {
-    const { parada } = useParams<RouteParams>(); // Obtener el parámetro de la URL
-    const [horarios, setHorarios] = useState<ConsultaHorario[]>([]);
+    const { line } = useParams<RouteParams>(); // Obtener el parámetro de la URL
+    const [horarios, setHorarios] = useState<Record<string, ConsultaHorario[]>>();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const history = useHistory();
 
     // Cuando el parámetro de parada cambie, cargar los horarios correspondientes
     useEffect(() => {
-        if (parada) {
+        if (line) {
             const fetchHorarios = async () => {
                 setLoading(true);
                 setError(null);
                 try {
-                    const data = await loadHorarios(parada); // Obtener los horarios usando la API
-                    setHorarios(data);
+                    const data = await loadHorarios(line); // Obtener los horarios usando la API
+                    const groupedHorarios = data.reduce((acc, horario) => {
+                        if (!acc[horario.TRTipoRuta]) {
+                            acc[horario.TRTipoRuta] = [];
+                        }
+                        acc[horario.TRTipoRuta].push(horario);
+                        return acc;
+                    }, {} as Record<string, ConsultaHorario[]>);
+                    setHorarios(groupedHorarios);
                 } catch (err) {
                     setError("Error al obtener los horarios.");
                 } finally {
@@ -44,31 +39,16 @@ const BizkaibusHorarioPage: React.FC = () => {
             };
             fetchHorarios();
         }
-    }, [parada]); // Solo volver a ejecutar si el número de parada cambia
+    }, [line]); // Solo volver a ejecutar si el número de parada cambia
 
     return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton />
-                    </IonButtons>
-                    <IonTitle><IonIcon icon={timerOutline} /> Horarios Bizkaibus</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent className="ion-padding">
-                <NavigationTabs />
-                <IonButton color="secondary" onClick={() => history.push(`/bizkaibus-viewers`)}>
-                    Volver a visores <IonIcon icon={timerOutline} />
-                </IonButton>
+        <Page title="Horario de línea" icon={timerOutline}>
                 <div style={{ padding: "20px" }}>
-                    <h2>Horarios de la parada: {parada}</h2>
                     {loading && <p>Obteniendo información de Bizkabus, espera con un ☕️...</p>}
                     {error && <p>{error}</p>}
-                    {horarios.length > 0 && <ConsultaHorarioViewer horarios={horarios} />}
+                    {horarios && Object.keys(horarios).length > 0 && <ConsultaHorarioViewer horarios={horarios} />}
                 </div>
-            </IonContent>
-        </IonPage>
+        </Page>
     );
 };
 

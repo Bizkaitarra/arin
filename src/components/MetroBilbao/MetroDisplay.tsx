@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    IonBadge,
+    IonBadge, IonButton,
     IonCard,
     IonCardContent,
     IonCardHeader,
-    IonCardTitle,
+    IonCardTitle, IonIcon,
     IonItem,
     IonLabel,
     IonList,
@@ -13,15 +13,17 @@ import {
     IonText,
     useIonViewWillEnter,
 } from '@ionic/react';
-import { fetchStopsData } from '../../services/ApiMetroBilbao';
+import {getMetroStopsTrains} from '../../services/ApiMetroBilbao';
 import './MetroDisplay.css';
-import { setIntervalMetroBilbao } from '../../services/IntervalServices';
+import {setIntervalMetroBilbao} from '../../services/IntervalServices';
 import Loader from '../Loader';
+import {ellipsisVertical} from "ionicons/icons";
+import {getMetroStops, MetroStopTrains, MetroTrain} from "../../services/MetroBilbaoStorage";
 
 const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
 const MetroDisplay: React.FC = () => {
-    const [metroData, setMetroData] = useState<any[]>([]);
+    const [metroData, setMetroData] = useState<MetroStopTrains[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [reloading, setReloading] = useState<boolean>(true);
@@ -30,16 +32,8 @@ const MetroDisplay: React.FC = () => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            let stops = [];
-            const savedStops = localStorage.getItem(STORAGE_KEY);
-            if (savedStops) {
-                try {
-                    stops = JSON.parse(savedStops);
-                } catch (error) {
-                    console.error('Error al cargar paradas desde localStorage:', error);
-                }
-            }
-            const data = await fetchStopsData(stops); // Llamada a la API del Metro
+            const favoriteStops = getMetroStops(true).filter(parada => parada.IsFavorite);
+            const data = await getMetroStopsTrains(favoriteStops); // Llamada a la API del Metro
             setMetroData(data);
             setLoading(false);
             setError(null);
@@ -66,53 +60,79 @@ const MetroDisplay: React.FC = () => {
         event.detail.complete();
     };
 
+    function getPlatformTitle(stationData: MetroStopTrains, platform: MetroTrain[]): string {
+        const hasTrainToEtxebarriOrBasauri = platform.some(
+            (train) => train.Direction === 'Etxebarri' || train.Direction === 'Basauri'
+        );
+        const hasL1 = stationData.Station.Lines.includes('L1');
+        const hasL2 = stationData.Station.Lines.includes('L2');
+
+        if (hasTrainToEtxebarriOrBasauri) {
+            if (hasL1 && hasL2) {
+                return 'Etxebarri/Basauri';
+            } else if (hasL1) {
+                return 'Etxebarri';
+            } else if (hasL2) {
+                return 'Basauri';
+            }
+        } else {
+            if (hasL1 && hasL2) {
+                return 'Kabiezes/Plentzia';
+            } else if (hasL1) {
+                return 'Plentzia';
+            } else if (hasL2) {
+                return 'Kabiezes';
+            }
+        }
+
+        return ''; // En caso de que no haya líneas (caso extremo)
+    }
+
+
     // Generar las tarjetas de los trenes para cada plataforma
-    const generateTrainCards = (stationData: any) => {
-        const platforms = stationData.platforms?.Platforms;
-        if (!Array.isArray(platforms) || platforms.length === 0) {
+    const generateTrainCards = (stationData: MetroStopTrains) => {
+        if (stationData.Platform1.length === 0 && stationData.Platform2.length === 0) {
             return (
                 <div className="no-data">
-                    <p>No hay datos de la estación en este momento</p>
+                    <p>No hay trenes en la estación en este momento</p>
                 </div>
             );
         }
+        const plataforms = [stationData.Platform1, stationData.Platform2];
 
-        return platforms.map((platform: any, platformIndex: number) => {
-            // Si la plataforma no tiene trenes, no la mostramos
+        return plataforms.map((platform: any, platformIndex: number) => {
             if (platform.length === 0) {
                 return null;
             }
+            const platformTitle = getPlatformTitle(stationData, platform);
 
-            // Determinar el título de la plataforma
-            const platformTitle = platform.find((train: any) => isNaN(train.Direction))
-                ? platform.find((train: any) => isNaN(train.Direction)).Direction
-                : platform.some((train: any) => train.Direction === 1)
-                    ? 'Kabiezes/Plentzia'
-                    : 'Etxebarri/Basauri';
 
             return (
-                <IonCard key={platformIndex} className="platform-section">
+                <IonCard key={platformIndex} className="bus-card">
                     <IonCardHeader>
-                        <IonCardTitle>{platformTitle}</IonCardTitle>
+                        <div className="ion-justify-content-between ion-align-items-center" style={{display: 'flex'}}>
+                            <IonCardTitle>
+                                {platformTitle}
+                            </IonCardTitle>
+
+                        </div>
                     </IonCardHeader>
                     <IonList>
-                        {platform.map((train: any, trainIndex: number) => {
-                            const destination = train.Destination || 'N/A';
-                            const line = train.line || 'N/A';
-                            const minutes = parseInt(train.Minutes, 10);
+                        {platform.map((train: MetroTrain, trainIndex: number) => {
+                            const destination = train.Direction || 'N/A';
+
+                            const minutes = train.Estimated;
                             const nextArrival = train.Time || 'N/A';
 
                             return (
                                 <IonItem key={`${platformIndex}-${trainIndex}`} className="train-card">
-                                    <IonLabel>
-                                        <h2>{`${destination} - Línea ${line}`}</h2>
-                                        <p>
-                                            <IonBadge color={minutes < 1 ? 'danger' : 'success'}>
-                                                {minutes} min ({new Date(nextArrival).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}) {train.Length} vagones
-                                            </IonBadge>
-
-                                        </p>
-                                    </IonLabel>
+                                    <IonLabel>{`${destination}`}</IonLabel>
+                                    <IonBadge color={minutes < 1 ? 'danger' : 'success'}>
+                                        {minutes < 0 ? 0 : minutes} min ({new Date(nextArrival).toLocaleTimeString([], {
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    })}) {train.Wagons === 4 || train.Wagons === 5 ? `${train.Wagons} vagones` : ''}
+                                    </IonBadge>
                                 </IonItem>
                             );
                         })}
@@ -123,16 +143,16 @@ const MetroDisplay: React.FC = () => {
     };
 
     // Crear la tarjeta de la estación de metro
-    const appendStation = (stationData: any) => {
-        const denominacionEstacion = stationData.name || 'Estación desconocida';
+    const appendStation = (stationData: MetroStopTrains) => {
+        const denominacionEstacion = stationData.Station.Name;
 
         return (
-            <IonCard className="station-card">
+            <IonCard className="stop-card">
                 <IonCardHeader className="station-card-header">
-                    <IonCardTitle>{denominacionEstacion}</IonCardTitle>
+                    <IonCardTitle>{denominacionEstacion} - {stationData.Station.Lines.join(',')}</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
-                    <div className="train-cards-container">
+                    <div className="bus-cards-container">
                         {generateTrainCards(stationData)}
                     </div>
                 </IonCardContent>
@@ -143,11 +163,11 @@ const MetroDisplay: React.FC = () => {
     return (
         <div className="metro-display">
             <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
-                <IonRefresherContent pullingText="Desliza hacia abajo para refrescar" />
+                <IonRefresherContent pullingText="Desliza hacia abajo para refrescar"/>
             </IonRefresher>
 
             {loading && (
-                <Loader serviceName={"Metro Bilbao"} reloading={reloading} />
+                <Loader serviceName={"Metro Bilbao"} reloading={reloading}/>
             )}
             {error && (
                 <div className="error-container">

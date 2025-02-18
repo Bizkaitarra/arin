@@ -26,6 +26,7 @@ import {StatusBar} from "@capacitor/status-bar";
 import {Capacitor} from "@capacitor/core";
 import BizkaibusStopsManagement from "./pages/Bizkaibus/BizkaibusStopsManagement";
 import MetroBilbaoStopsManagement from "./pages/MetroBilbao/MetroBilbaoStopsManagement";
+import AboutTheApp from "./pages/AboutTheApp";
 
 setupIonicReact();
 
@@ -48,8 +49,9 @@ const App: React.FC = () => {
                         <Route exact path="/metro-bilbao-viewers" component={MetroBilbaoViewers} />
                         <Route exact path="/configure-metro-bilbao" component={MetroBilbaoConfiguration} />
                         <Route exact path="/manage-metro-bilbao-stops" component={MetroBilbaoStopsManagement} />
+                        <Route exact path="/about-app" component={AboutTheApp} />
                         <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers" />} />
-                        <Route path="/horarios/:parada" component={BizkaibusHorarioPage} />
+                        <Route path="/horarios/:line" component={BizkaibusHorarioPage} />
                     </IonRouterOutlet>
                 </IonTabs>
             </IonReactRouter>

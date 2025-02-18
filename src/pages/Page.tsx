@@ -37,13 +37,18 @@ const Page: React.FC<PageProps> = ({title, icon, children}) => {
                             <IonLabel><strong>Bizkaibus</strong></IonLabel>
                         </IonItem>
                         <IonMenuToggle>
-                            <IonItem routerLink="/configure-bizkaibus">
+                            <IonItem routerLink="/bizkaibus-viewers" className="submenu-item">
+                                <IonLabel>Visor</IonLabel>
+                            </IonItem>
+                        </IonMenuToggle>
+                        <IonMenuToggle>
+                            <IonItem routerLink="/configure-bizkaibus" className="submenu-item">
                                 <IonLabel>Añadir paradas</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
-                            <IonItem routerLink="/manage-bizkaibus-stops">
-                                <IonLabel>Gestionar mis paradas</IonLabel>
+                            <IonItem routerLink="/manage-bizkaibus-stops" className="submenu-item">
+                                <IonLabel>Mis paradas</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
@@ -52,18 +57,34 @@ const Page: React.FC<PageProps> = ({title, icon, children}) => {
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
-                            <IonItem routerLink="/configure-metro-bilbao">
+                            <IonItem routerLink="/metro-bilbao-viewers" className="submenu-item">
+                                <IonLabel>Visor</IonLabel>
+                            </IonItem>
+                        </IonMenuToggle>
+                        <IonMenuToggle>
+                            <IonItem routerLink="/configure-metro-bilbao" className="submenu-item">
                                 <IonLabel>Añadir paradas</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
-                            <IonItem routerLink="/manage-metro-bilbao-stops">
-                                <IonLabel>Gestionar mis paradas</IonLabel>
+                            <IonItem routerLink="/manage-metro-bilbao-stops" className="submenu-item">
+                                <IonLabel>Mis paradas</IonLabel>
+                            </IonItem>
+                        </IonMenuToggle>
+                        <IonMenuToggle>
+                            <IonItem>
+                                <IonLabel><strong>Otras opciones</strong></IonLabel>
+                            </IonItem>
+                        </IonMenuToggle>
+                        <IonMenuToggle>
+                            <IonItem routerLink="/about-app" className="submenu-item">
+                                <IonLabel>Sobre Arin</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                     </IonList>
                 </IonContent>
             </IonMenu>
+
             <IonPage id="main">
                 <IonHeader>
                     <IonToolbar>
@@ -75,9 +96,9 @@ const Page: React.FC<PageProps> = ({title, icon, children}) => {
                             {title}
                         </IonTitle>
                     </IonToolbar>
+                    <NavigationTabs/>
                 </IonHeader>
                 <IonContent className="ion-padding">
-                    <NavigationTabs/>
                     {children}
                 </IonContent>
             </IonPage>

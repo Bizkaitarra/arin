@@ -10,22 +10,15 @@ import {
     useIonViewWillEnter,
 } from '@ionic/react';
 import {addCircleOutline, settingsOutline} from 'ionicons/icons';
-import {loadStops} from '../../services/ApiMetroBilbao';
 import Page from "../Page";
+import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
+import {Star, StarOff} from "lucide-react";
 
-interface Parada {
-    Code: string;
-    Name: string;
-    Lines: string;
-}
-
-const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
 const MetroBilbaoConfiguration: React.FC = () => {
     const [stopName, setStopName] = useState<string>('');
-    const [stations, setStations] = useState<Parada[]>([]);
-    const [filteredStations, setFilteredStations] = useState<Parada[]>([]);
-    const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
+    const [stations, setStations] = useState<MetroStop[]>([]);
+    const [filteredStations, setFilteredStations] = useState<MetroStop[]>([]);
     const [presentToast] = useIonToast();
 
     useIonViewWillEnter(() => {
@@ -34,63 +27,93 @@ const MetroBilbaoConfiguration: React.FC = () => {
 
     const fetchStations = async () => {
         try {
-            const estaciones = await loadStops();
-            setStations(estaciones);
+            setStations(getMetroStops());
         } catch (error) {
             console.error("Error al cargar las estaciones:", error);
         }
     };
 
-    const getSavedStations = () => {
-        const savedStops = localStorage.getItem(STORAGE_KEY);
-        if (savedStops) {
-            try {
-                const stopIds: string[] = JSON.parse(savedStops);
-                const stops = stopIds
-                    .map((stopId) => stations.find((station) => station.Code === stopId))
-                    .filter(Boolean) as Parada[];
-                setSelectedStops(stops);
-            } catch (error) {
-                console.error('Error al cargar paradas desde localStorage:', error);
-            }
-        }
-    }
-
     useEffect(() => {
         if (stations.length > 0) {
-            getSavedStations();
+            saveMetroStops(stations);
         }
     }, [stations]);
 
     useEffect(() => {
-        console.log('filtrando estaciones');
         if (stations.length > 0) {
             filterStations();
         }
-    }, [selectedStops, stopName, stations]);
+    }, [stopName, stations]);
 
     const filterStations = () => {
         let results = stations.filter(station =>
-            (station.Name.toLowerCase().includes(stopName.toLowerCase())) &&
-            (!selectedStops.some(selected => selected.Code === station.Code))
+            (station.Name.toLowerCase().includes(stopName.toLowerCase()))
         );
         setFilteredStations(results);
-        if (selectedStops.length > 0) {
-            const stopIds = selectedStops.map((stop) => stop.Code);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(stopIds));
-        }
     }
 
-    const handleAddStop = (newStop: Parada) => {
-        if (selectedStops.some((stop) => stop.Code === newStop.Code)) {
-            console.warn('La parada ya está en la lista seleccionada.');
-            return;
-        }
-        setSelectedStops([...selectedStops, newStop]);
+
+
+    const handleAddStop = (stop: MetroStop) => {
+        const station = stations.find(s => s.Code === stop.Code);
+
+        if (!station) return; // Evita errores si la estación no se encuentra
+
+        const wasFavorite = station.IsFavorite; // Guardamos el estado actual
+
+        setStations(prevStations =>
+            prevStations.map(s =>
+                s.Code === stop.Code ? {...s, IsFavorite: !s.IsFavorite} : s
+            )
+        );
+
         presentToast({
-            message: `Parada "${newStop.Name}" añadida`,
+            message: wasFavorite
+                ? `La parada "${stop.Code} - ${stop.Name}" ha sido eliminada de favoritos`
+                : `Parada "${stop.Code} - ${stop.Name}" añadida a favoritos`,
             duration: 2000,
-            color: 'success'
+            color: wasFavorite ? 'warning' : 'success'
+        });
+    };
+
+
+    const handleRemoveStop = (stop: MetroStop) => {
+        const station = stations.find(s => s.Code === stop.Code);
+
+        if (!station || !station.IsFavorite) return; // Solo eliminamos si es favorito
+
+        setStations(prevStations =>
+            prevStations.map(s =>
+                s.Code === stop.Code ? {...s, IsFavorite: false} : s
+            )
+        );
+
+        presentToast({
+            message: `La parada "${stop.Code} - ${stop.Name}" ha sido eliminada de favoritos`,
+            duration: 2000,
+            color: 'warning'
+        });
+    };
+
+    const handleToggleStop = (stop: MetroStop) => {
+        const station = stations.find(s => s.Code === stop.Code);
+
+        if (!station) return; // Evita errores si la estación no se encuentra
+
+        const newFavoriteStatus = !station.IsFavorite;
+
+        setStations(prevStations =>
+            prevStations.map(s =>
+                s.Code === stop.Code ? {...s, IsFavorite: newFavoriteStatus} : s
+            )
+        );
+
+        presentToast({
+            message: newFavoriteStatus
+                ? `Parada "${stop.Code} - ${stop.Name}" añadida a favoritos`
+                : `La parada "${stop.Code} - ${stop.Name}" ha sido eliminada de favoritos`,
+            duration: 2000,
+            color: newFavoriteStatus ? 'success' : 'warning'
         });
     };
 
@@ -112,11 +135,11 @@ const MetroBilbaoConfiguration: React.FC = () => {
                     <IonItem key={stop.Code}>
                         <IonLabel>
                             <h3>{stop.Code} - {stop.Name}</h3>
-                            <p>{stop.Lines}</p>
+                            <p>{stop.Lines.join(',')}</p>
                         </IonLabel>
-                        <IonButton fill="clear" size="large" slot="end" color="tertiary" onClick={() => handleAddStop(stop)}>
-                            <IonIcon icon={addCircleOutline}/>
-                        </IonButton>
+                        {stop.IsFavorite ?
+                            <Star color="red" onClick={() => handleRemoveStop(stop)}/> :
+                            <StarOff color="gray" onClick={() => handleAddStop(stop)}/>}
                     </IonItem>
                 ))}
             </IonGrid>

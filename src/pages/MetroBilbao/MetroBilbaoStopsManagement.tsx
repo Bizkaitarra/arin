@@ -1,80 +1,42 @@
 import React, {useEffect, useState} from 'react';
 import {
     IonButton,
-    IonGrid,
     IonIcon,
-    IonInput,
     IonItem,
     IonLabel,
     IonList,
     IonReorder,
-    IonReorderGroup, IonText, useIonToast, useIonViewWillEnter,
+    IonReorderGroup,
+    IonText,
+    useIonToast,
+    useIonViewWillEnter,
 } from '@ionic/react';
-import {addCircleOutline, reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
-import {loadStops} from '../../services/ApiMetroBilbao';
+import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {ItemReorderEventDetail} from '@ionic/core';
 import Page from "../Page";
 import {useHistory} from "react-router-dom";
+import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
 
-interface Parada {
-    Code: string;
-    Name: string;
-    Lines: string;
-}
-
-const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
 const MetroBilbaoStopsManagement: React.FC = () => {
-    const [stations, setStations] = useState<Parada[]>([]);
-    const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
+    const [selectedStops, setSelectedStops] = useState<MetroStop[]>([]);
     const history = useHistory();
     const [presentToast] = useIonToast();
 
     useIonViewWillEnter(() => {
-        fetchStations();
+        setSelectedStops(getMetroStops(true).filter(parada => parada.IsFavorite));
     }, []);
-
-    const fetchStations = async () => {
-        try {
-            const estaciones = await loadStops();
-            setStations(estaciones);
-        } catch (error) {
-            console.error("Error al cargar las estaciones:", error);
-        }
-    };
-
-    useEffect(() => {
-        getSavedStations();
-    }, [stations]);
-
-    const getSavedStations = () => {
-        const savedStops = localStorage.getItem(STORAGE_KEY);
-        if (savedStops) {
-            try {
-                const stopIds: string[] = JSON.parse(savedStops);
-                const stops = stopIds
-                    .map((stopId) => stations.find((station) => station.Code === stopId))
-                    .filter(Boolean) as Parada[];
-                setSelectedStops(stops);
-            } catch (error) {
-                console.error('Error al cargar paradas desde localStorage:', error);
-            }
-        }
-    }
 
     useEffect(() => {
         if (selectedStops.length > 0) {
-            const stopIds = selectedStops.map((stop) => stop.Code);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(stopIds));
+            saveMetroStops(selectedStops);
         }
     }, [selectedStops]);
 
 
     const handleRemoveStop = (id: string) => {
         const stops = selectedStops.filter((stop) => stop.Code !== id);
-        if (stops.length === 0) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
-        }
+        saveMetroStops(stops);
         setSelectedStops(stops);
         presentToast({
             message: `Parada eliminada`,
@@ -96,10 +58,10 @@ const MetroBilbaoStopsManagement: React.FC = () => {
     };
 
     return (
-        <Page title="Gestionar mis paradas Metro Bilbao" icon={settingsOutline}>
+        <Page title="Mis paradas Metro Bilbao" icon={settingsOutline}>
             {selectedStops.length > 0 ? (
                 <>
-                    <h2>Paradas Seleccionadas</h2>
+                    <h2>Mis paradas</h2>
                     <p>Ordena las paradas seleccionadas y elimina las que no desees seguir viendo</p>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
@@ -107,7 +69,7 @@ const MetroBilbaoStopsManagement: React.FC = () => {
                                 <IonItem key={stop.Code}>
                                     <IonLabel>
                                         <h3>{stop.Code} - {stop.Name}</h3>
-                                        <p>{stop.Lines}</p>
+                                        <p>{stop.Lines.join(',')}</p>
                                     </IonLabel>
                                     <IonButton
                                         size="large"
@@ -118,7 +80,7 @@ const MetroBilbaoStopsManagement: React.FC = () => {
                                     >
                                         <IonIcon icon={trashBinOutline}/>
                                     </IonButton>
-                                    <IonReorder  slot="start">
+                                    <IonReorder slot="start">
                                         <IonIcon size="large" icon={reorderThreeOutline}/>
                                     </IonReorder>
                                 </IonItem>
@@ -127,13 +89,13 @@ const MetroBilbaoStopsManagement: React.FC = () => {
                     </IonList>
                 </>
             ) : (
-                <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                <div style={{textAlign: 'center', marginTop: '2rem'}}>
                     <IonText>
                         <h2>No tienes paradas favoritas configuradas</h2>
                         <p>Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración.</p>
                     </IonText>
                     <IonButton color="secondary" onClick={() => history.push(`/configure-metro-bilbao`)}>
-                        <IonIcon icon={settingsOutline} /> Configurar paradas
+                        <IonIcon icon={settingsOutline}/> Configurar paradas
                     </IonButton>
                 </div>
             )}

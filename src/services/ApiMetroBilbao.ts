@@ -1,27 +1,44 @@
 import paradas from "../data/paradas_metro.json";
+import {Capacitor} from "@capacitor/core";
+import {MetroStop, MetroStopTrains, MetroTrain} from "./MetroBilbaoStorage";
 
-async function fetchStopData(stop: string) {
-    const url = `https://api.metrobilbao.eus/api/stations/${stop}?lang=es`;
-    const opciones = {
-        method: "GET",
-        headers: {
-            "Origin": "https://www.metrobilbao.eus",
-            "Content-Type": "application/json",
-        },
-    };
 
+const maxEstimatedTrainMinutes = 60;
+
+async function fetchTrainData(origin: string, destination: string): Promise<MetroTrain[]> {
     try {
-        const response = await fetch(url, opciones);
-        if (!response.ok) throw new Error("Error al obtener datos de la estación");
-        return await response.json();
+        const response = await fetch(`https://api.metrobilbao.eus/metro/real-time/${origin}/${destination}`);
+        const data = await response.json();
+        return data.trains
+            .filter((train: any) => train.estimated <= maxEstimatedTrainMinutes)
+            .map((train: any) => ({
+                Wagons: train.wagons,
+                Estimated: train.estimated,
+                Direction: train.direction,
+                Time: train.time,
+                TimeRounded: train.timeRounded
+            }));
     } catch (error) {
-        console.error("Error al obtener datos de la estación:", error);
-        return null;
+        console.error(`Error fetching train data for ${origin} to ${destination}:`, error);
+        return [];
     }
 }
 
-export async function fetchStopsData(stops: string[]): Promise<any[]> {
-    const promises = stops.map(stop => fetchStopData(stop));
+
+export async function getMetroStopTrains(metroStop: MetroStop): Promise<MetroStopTrains> {
+    const platform1Trains = await Promise.all(metroStop.Platform1.map(dest => fetchTrainData(metroStop.Code, dest)));
+    const platform2Trains = await Promise.all(metroStop.Platform2.map(dest => fetchTrainData(metroStop.Code, dest)));
+
+    return {
+        Station: metroStop,
+        Platform1: platform1Trains.flat(),
+        Platform2: platform2Trains.flat()
+    };
+}
+
+
+export async function getMetroStopsTrains(stops: MetroStop[]): Promise<MetroStopTrains[]> {
+    const promises = stops.map(stop => getMetroStopTrains(stop));
     return Promise.all(promises);
 }
 
@@ -34,3 +51,87 @@ export const loadStops = async () => {
         throw error; // Relanzar el error para manejarlo externamente si es necesario
     }
 };
+
+
+
+export async function getBarikData(barikNumber: string) {
+    const url = "https://www.ctb.eus/llamadaServicioBarik.php";
+    const params = `p=IdTarjeta*${barikNumber}|vacio*vacio&metodo=consultaTitulosRecargablesAnt`;
+
+    try {
+        let response;
+
+        const headers = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Origin": "https://www.ctb.eus",  // Cabecera Origin
+            "Referer": "https://www.ctb.eus",  // Cabecera Referer
+            "Sec-Fetch-Dest": "empty",  // Cabecera Sec-Fetch-Dest
+            "Sec-Fetch-Mode": "cors",   // Cabecera Sec-Fetch-Mode
+            "Sec-Fetch-Site": "same-origin" // Cabecera Sec-Fetch-Site
+        };
+
+        if (Capacitor.isNativePlatform()) {
+            response = await fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: params
+            });
+            const data = await response.text();
+            console.log(data);
+            return parseBarikResponse(data);
+        } else {
+            response = await fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: params
+            });
+            const data = await response.text();
+            console.log(data);
+            return parseBarikResponse(data);
+        }
+    } catch (error) {
+        console.error("Error es:", error);
+        return {
+            Status: 'ERROR',
+            Gizatrans: undefined,
+            Creditrans: undefined
+        };
+    }
+}
+
+
+
+function parseBarikResponse(xmlString) {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+    const status = xmlDoc.getElementsByTagName("resultado")[0]?.textContent || "";
+
+    let gizatrans;
+    let creditrans;
+
+    const titulosMonedero = xmlDoc.getElementsByTagName("titulosMonedero");
+
+    for (let monedero of titulosMonedero) {
+        const tipoTitulo = monedero.getElementsByTagName("TipoTitulo")[0]?.textContent || "";
+        const sldMon = monedero.getElementsByTagName("SldMon")[0]?.textContent;
+
+        if (tipoTitulo === "Monedero Gizatrans") {
+            gizatrans = sldMon !== undefined ? sldMon : undefined;
+        }
+
+        if (tipoTitulo === "Monedero Creditrans") {
+            creditrans = sldMon !== undefined ? sldMon : undefined;
+        }
+    }
+
+    return {
+        Status: status,
+        Gizatrans: gizatrans,
+        Creditrans: creditrans
+    };
+}
+
+
+
+

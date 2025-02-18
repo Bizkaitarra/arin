@@ -1,0 +1,7 @@
+.favorite-bus-marker {
+    filter: invert(70%) sepia(94%) saturate(800%) hue-rotate(300deg) brightness(96%) contrast(90%);
+}
+
+.non-favorite-bus-marker {
+
+}

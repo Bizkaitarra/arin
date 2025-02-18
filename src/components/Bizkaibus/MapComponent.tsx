@@ -3,7 +3,10 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { Parada } from "../../services/BizkaibusStorage";
-
+import { Heart, HeartOff } from "lucide-react";
+import {ellipsisVertical} from "ionicons/icons";
+import {IonIcon} from "@ionic/react";
+import './MapComponent.css';
 const defaultIcon = new L.Icon({
     iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
     iconSize: [25, 41],
@@ -12,9 +15,32 @@ const defaultIcon = new L.Icon({
     shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
     shadowSize: [41, 41],
 });
+const busStopIcon = new L.Icon({
+    iconUrl: `https://raw.githubusercontent.com/Templarian/MaterialDesign/master/svg/bus.svg`, // Material Design Icons
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30],
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowSize: [41, 41],
+});
+
+const busStopCustomIcon = (isFavorite) => new L.Icon({
+    iconUrl: "https://raw.githubusercontent.com/Templarian/MaterialDesign/master/svg/bus.svg",
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30],
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowSize: [41, 41],
+    className: isFavorite ? "favorite-bus-marker" : "non-favorite-bus-marker"
+});
+
+
+
+
 
 interface MapComponentProps {
     paradas: Parada[];
+    onToggleFavorite: (parada: Parada) => void;
 }
 
 const MapUpdater: React.FC<{ positions: [number, number][] }> = ({ positions }) => {
@@ -28,7 +54,7 @@ const MapUpdater: React.FC<{ positions: [number, number][] }> = ({ positions }) 
     return null;
 };
 
-const MapComponent: React.FC<MapComponentProps> = ({ paradas }) => {
+const MapComponent: React.FC<MapComponentProps> = ({ paradas, onToggleFavorite }) => {
     if (paradas.length === 0) return <p>No hay paradas disponibles.</p>;
 
     const positions: [number, number][] = paradas
@@ -39,25 +65,32 @@ const MapComponent: React.FC<MapComponentProps> = ({ paradas }) => {
         })
         .filter((pos): pos is [number, number] => pos !== null);
 
-    const handleAddToFavorite = (parada: Parada) => {
-        console.log(`Parada añadida a favoritos: ${parada.DENOMINACION}`);
-    };
-
     return (
         <MapContainer style={{ height: "500px", width: "100%" }} zoom={13}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <MapUpdater positions={positions} />
             {positions.map((position, index) => (
-                <Marker key={index} position={position} icon={defaultIcon as L.Icon<L.IconOptions>}>
+                <Marker key={index} position={position} icon={busStopCustomIcon(paradas[index].IS_FAVORITE) as L.Icon<L.IconOptions>}>
                     <Popup>
-                        <strong>{paradas[index].DENOMINACION}</strong>
-                        <br />
-                        {paradas[index].DESCRIPCION_MUNICIPIO} ({paradas[index].DESCRIPCION_PROVINCIA})
-                        <button onClick={() => handleAddToFavorite(paradas[index])}>
-                            Añadir a favoritos
-                        </button>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "10px", minWidth: "150px" }}>
+                            <strong style={{ fontSize: "16px" }}>{paradas[index].DENOMINACION}</strong>
+
+                            <button
+                                onClick={() => onToggleFavorite(paradas[index])}
+                                style={{
+                                    border: "none",
+                                    background: "none",
+                                    cursor: "pointer",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    fontSize: "20px",
+                                    color: paradas[index].IS_FAVORITE ? "red" : "gray"
+                                }}
+                            >
+                                {paradas[index].IS_FAVORITE ? <Heart color="red" /> : <HeartOff color="gray" />}
+                            </button>
+                        </div>
                     </Popup>
                 </Marker>
             ))}

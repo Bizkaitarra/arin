@@ -7,3 +7,18 @@ ion-header {
 :root {
     --ion-safe-area-bottom: env(safe-area-inset-bottom);
 }
+
+.submenu-item {
+    padding-left: 20px;
+}
+
+.subtext {
+    font-size: 10px;
+    display: block;
+    margin-top: -2px;
+}
+
+ion-tab-button.tab-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}

@@ -6,33 +6,32 @@ import {
     IonLabel,
     IonList,
     IonReorder,
-    IonReorderGroup, IonText, useIonToast,
+    IonReorderGroup,
+    IonText,
+    useIonToast,
     useIonViewWillEnter
 } from '@ionic/react';
 import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
-import {loadStops} from "../../services/ApiBizkaibus";
-import {getSavedStations, Parada, saveStationIds} from "../../services/BizkaibusStorage";
+import {getStations, Parada, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
 import {useHistory} from "react-router-dom";
 
-const BizkaibusStopsManager: React.FC = () => {
+const BizkaibusStopsManagement: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
     const history = useHistory();
     const [presentToast] = useIonToast();
 
     useIonViewWillEnter(() => {
-        console.log('vamos a cargar');
+
         const fetchStations = async () => {
             try {
-                const estaciones = await loadStops();
                 // Cargar paradas guardadas solo después de cargar estaciones
-                const savedStations = getSavedStations(estaciones);
+                const savedStations = getStations(true).filter(station => station.IS_FAVORITE);
                 setSelectedStops(savedStations);
             } catch (error) {
                 console.error("Error al cargar las estaciones:", error);
             }
         };
-
         fetchStations();
     }, []);
 
@@ -65,10 +64,10 @@ const BizkaibusStopsManager: React.FC = () => {
     };
 
     return (
-        <Page title="Gestionar mis paradas Bizkaibus" icon={settingsOutline}>
+        <Page title="Mis paradas Bizkaibus" icon={settingsOutline}>
             {selectedStops.length > 0 ? (
                 <>
-                    <h2>Paradas Seleccionadas</h2>
+                    <h2>Mis paradas</h2>
                     <p>Ordena las paradas seleccionadas y elimina las que no desees seguir viendo</p>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
@@ -105,4 +104,4 @@ const BizkaibusStopsManager: React.FC = () => {
     );
 };
 
-export default BizkaibusStopsManager;
+export default BizkaibusStopsManagement;

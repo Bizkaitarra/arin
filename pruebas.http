@@ -68,6 +68,29 @@ GET https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetHorario_JSON?callback=js
 ###
 
 
+GET https://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?strLinea=""&strParada=0276&callback=""
+
+###
+POST https://www.ctb.eus/llamadaServicioBarik.php
+Content-Type: application/x-www-form-urlencoded
+
+p = IdTarjeta*MITARJETA|vacio*vacio &
+metodo = consultaTitulosRecargablesAnt
+
+###
+
+### Endpoints interesantes
+### GetVehiculos_JSON: Posicionar los vehículos de una línea
+### GetRutaParadas_JSON, GetRutaSecundariaParadas_JSON, GetRutasSecundariasLineaParadas_JSON: Rutas de una línea
+### https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetItinerarioLinea_JSON?callback=jsonCallbackParadas&sCodigoLinea=A0651&sNumeroRuta=001&sSentido=I : Listado de paradas de una línea
+### https://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetListaRutaParadas_JSON?callback=jQuery331034572466233975985_1739431251234&sListaCodigoRutas=%27A0651-001-I%27&_=1739431251235: Las rutas en si con sus coordenadas. No están ordenadas
+### GetLineasPrincipalesSecundarias_JSON : dando solo la línea te dice las secundarias y sentidos
+
+
+
+
+
+
 
 
 
