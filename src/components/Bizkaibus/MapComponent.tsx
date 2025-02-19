@@ -1,28 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import React, {useEffect} from "react";
+import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { Parada } from "../../services/BizkaibusStorage";
-import { Heart, HeartOff } from "lucide-react";
-import {ellipsisVertical} from "ionicons/icons";
-import {IonIcon} from "@ionic/react";
+import {Parada} from "../../services/BizkaibusStorage";
+import {Heart, HeartOff} from "lucide-react";
 import './MapComponent.css';
-const defaultIcon = new L.Icon({
-    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-    shadowSize: [41, 41],
-});
-const busStopIcon = new L.Icon({
-    iconUrl: `https://raw.githubusercontent.com/Templarian/MaterialDesign/master/svg/bus.svg`, // Material Design Icons
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
-    popupAnchor: [0, -30],
-    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-    shadowSize: [41, 41],
-});
+import {useTranslation} from "react-i18next";
+
 
 const busStopCustomIcon = (isFavorite) => new L.Icon({
     iconUrl: "https://raw.githubusercontent.com/Templarian/MaterialDesign/master/svg/bus.svg",
@@ -33,9 +17,6 @@ const busStopCustomIcon = (isFavorite) => new L.Icon({
     shadowSize: [41, 41],
     className: isFavorite ? "favorite-bus-marker" : "non-favorite-bus-marker"
 });
-
-
-
 
 
 interface MapComponentProps {
@@ -55,7 +36,8 @@ const MapUpdater: React.FC<{ positions: [number, number][] }> = ({ positions }) 
 };
 
 const MapComponent: React.FC<MapComponentProps> = ({ paradas, onToggleFavorite }) => {
-    if (paradas.length === 0) return <p>No hay paradas disponibles.</p>;
+    const { t } = useTranslation();
+    if (paradas.length === 0) return <p>{t('No hay paradas disponibles')}.</p>;
 
     const positions: [number, number][] = paradas
         .map((parada) => {

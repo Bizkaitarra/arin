@@ -4,6 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Municipio, Parada } from "../../services/BizkaibusStorage";
 import './AcordeonDeParadas.css';
+import {useTranslation} from "react-i18next";
 
 interface AcordeonDeParadasProps {
     paradas: Parada[];
@@ -11,6 +12,7 @@ interface AcordeonDeParadasProps {
 }
 
 const AcordeonDeParadas: React.FC<AcordeonDeParadasProps> = ({ paradas, onMunicipioClick }) => {
+    const { t } = useTranslation();
     const provincias = paradas.reduce((acc: { [key: string]: Parada[] }, parada) => {
         const { PROVINCIA, MUNICIPIO } = parada;
         let index = PROVINCIA !== '48' ? "1" : "0";
@@ -39,7 +41,7 @@ const AcordeonDeParadas: React.FC<AcordeonDeParadasProps> = ({ paradas, onMunici
 
     return (
         <div className="acordeon-container">
-            <p>Para poder añadir paradas a favoritas seleccione un municipio</p>
+            <p>{t('Para poder añadir paradas a favoritas seleccione un municipio')}</p>
             {Object.keys(provincias).map((provincia) => {
                 const filteredMunicipios = provincias[provincia].filter(municipio =>
                     municipio.DESCRIPCION_MUNICIPIO.toLowerCase().includes(searchTerms[provincia].toLowerCase())
@@ -53,13 +55,13 @@ const AcordeonDeParadas: React.FC<AcordeonDeParadasProps> = ({ paradas, onMunici
                             id={`panel-${provincia}-header`}
                         >
                             <h3 className="provincia-nombre">
-                                {provincia === "0" ? "Municipios de Bizkaia" : "Otros municipios"}
+                                {provincia === "0" ? t("Municipios de Bizkaia") : t("Otros municipios")}
                             </h3>
                         </AccordionSummary>
                         <AccordionDetails>
                             <TextField
                                 fullWidth
-                                label="Buscar municipio"
+                                label={t("Buscar municipio")}
                                 variant="outlined"
                                 size="small"
                                 value={searchTerms[provincia]}

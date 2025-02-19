@@ -12,6 +12,8 @@ import {
 } from '@ionic/react';
 import NavigationTabs from "../components/NavigationTabs";
 import {clearIntervals} from "../services/IntervalServices";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import {useTranslation} from "react-i18next";
 
 interface PageProps {
     title: string;
@@ -20,6 +22,7 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({title, icon, children}) => {
+    const { t } = useTranslation();
     useIonViewWillLeave(() => {
         clearIntervals();
     });
@@ -28,7 +31,7 @@ const Page: React.FC<PageProps> = ({title, icon, children}) => {
             <IonMenu contentId="main">
                 <IonHeader>
                     <IonToolbar>
-                        <IonTitle>Menú</IonTitle>
+                        <IonTitle>{t('Menú')}</IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
@@ -38,17 +41,17 @@ const Page: React.FC<PageProps> = ({title, icon, children}) => {
                         </IonItem>
                         <IonMenuToggle>
                             <IonItem routerLink="/bizkaibus-viewers" className="submenu-item">
-                                <IonLabel>Visor</IonLabel>
+                                <IonLabel>{t('Visor')}</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
                             <IonItem routerLink="/configure-bizkaibus" className="submenu-item">
-                                <IonLabel>Añadir paradas</IonLabel>
+                                <IonLabel>{t('Añadir paradas')}</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
                             <IonItem routerLink="/manage-bizkaibus-stops" className="submenu-item">
-                                <IonLabel>Mis paradas</IonLabel>
+                                <IonLabel>{t('Mis paradas')}</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
@@ -58,29 +61,35 @@ const Page: React.FC<PageProps> = ({title, icon, children}) => {
                         </IonMenuToggle>
                         <IonMenuToggle>
                             <IonItem routerLink="/metro-bilbao-viewers" className="submenu-item">
-                                <IonLabel>Visor</IonLabel>
+                                <IonLabel>{t('Visor')}</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
                             <IonItem routerLink="/configure-metro-bilbao" className="submenu-item">
-                                <IonLabel>Añadir paradas</IonLabel>
+                                <IonLabel>{t('Añadir paradas')}</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
                             <IonItem routerLink="/manage-metro-bilbao-stops" className="submenu-item">
-                                <IonLabel>Mis paradas</IonLabel>
+                                <IonLabel>{t('Mis paradas')}</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
                             <IonItem>
-                                <IonLabel><strong>Otras opciones</strong></IonLabel>
+                                <IonLabel><strong>{t('Otras opciones')}</strong></IonLabel>
                             </IonItem>
                         </IonMenuToggle>
                         <IonMenuToggle>
                             <IonItem routerLink="/about-app" className="submenu-item">
-                                <IonLabel>Sobre Arin</IonLabel>
+                                <IonLabel>{t('Sobre Arin')}</IonLabel>
                             </IonItem>
                         </IonMenuToggle>
+                        <IonMenuToggle>
+                            <IonItem routerLink="/configuration" className="submenu-item">
+                                <IonLabel>{t('Configuración')}</IonLabel>
+                            </IonItem>
+                        </IonMenuToggle>
+
                     </IonList>
                 </IonContent>
             </IonMenu>
@@ -92,7 +101,7 @@ const Page: React.FC<PageProps> = ({title, icon, children}) => {
                             <IonMenuButton/>
                         </IonButtons>
                         <IonTitle>
-                            {icon && <IonIcon icon={icon} style={{marginRight: 8}}/>}
+
                             {title}
                         </IonTitle>
                     </IonToolbar>

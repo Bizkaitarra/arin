@@ -1,25 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {
-    IonButton,
-    IonGrid,
-    IonIcon,
-    IonInput,
-    IonItem,
-    IonLabel,
-    useIonToast,
-    useIonViewWillEnter,
-} from '@ionic/react';
-import {addCircleOutline, settingsOutline} from 'ionicons/icons';
+import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter,} from '@ionic/react';
+import {settingsOutline} from 'ionicons/icons';
 import Page from "../Page";
 import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
 import {Star, StarOff} from "lucide-react";
+import {useTranslation} from "react-i18next";
 
 
 const MetroBilbaoConfiguration: React.FC = () => {
     const [stopName, setStopName] = useState<string>('');
     const [stations, setStations] = useState<MetroStop[]>([]);
     const [filteredStations, setFilteredStations] = useState<MetroStop[]>([]);
-    const [presentToast] = useIonToast();
+    const { t } = useTranslation();
 
     useIonViewWillEnter(() => {
          fetchStations();
@@ -29,7 +21,7 @@ const MetroBilbaoConfiguration: React.FC = () => {
         try {
             setStations(getMetroStops());
         } catch (error) {
-            console.error("Error al cargar las estaciones:", error);
+            console.error(t("Error al cargar las estaciones:"), error);
         }
     };
 
@@ -57,23 +49,13 @@ const MetroBilbaoConfiguration: React.FC = () => {
     const handleAddStop = (stop: MetroStop) => {
         const station = stations.find(s => s.Code === stop.Code);
 
-        if (!station) return; // Evita errores si la estación no se encuentra
-
-        const wasFavorite = station.IsFavorite; // Guardamos el estado actual
+        if (!station) return;
 
         setStations(prevStations =>
             prevStations.map(s =>
                 s.Code === stop.Code ? {...s, IsFavorite: !s.IsFavorite} : s
             )
         );
-
-        presentToast({
-            message: wasFavorite
-                ? `La parada "${stop.Code} - ${stop.Name}" ha sido eliminada de favoritos`
-                : `Parada "${stop.Code} - ${stop.Name}" añadida a favoritos`,
-            duration: 2000,
-            color: wasFavorite ? 'warning' : 'success'
-        });
     };
 
 
@@ -87,12 +69,6 @@ const MetroBilbaoConfiguration: React.FC = () => {
                 s.Code === stop.Code ? {...s, IsFavorite: false} : s
             )
         );
-
-        presentToast({
-            message: `La parada "${stop.Code} - ${stop.Name}" ha sido eliminada de favoritos`,
-            duration: 2000,
-            color: 'warning'
-        });
     };
 
     const handleToggleStop = (stop: MetroStop) => {
@@ -107,25 +83,17 @@ const MetroBilbaoConfiguration: React.FC = () => {
                 s.Code === stop.Code ? {...s, IsFavorite: newFavoriteStatus} : s
             )
         );
-
-        presentToast({
-            message: newFavoriteStatus
-                ? `Parada "${stop.Code} - ${stop.Name}" añadida a favoritos`
-                : `La parada "${stop.Code} - ${stop.Name}" ha sido eliminada de favoritos`,
-            duration: 2000,
-            color: newFavoriteStatus ? 'success' : 'warning'
-        });
     };
 
     return (
-        <Page title="Añadir paradas de Metro Bilbao" icon={settingsOutline}>
-            <h2>Añadir Paradas</h2>
-            <p>Añade las paradas deseadas con el botón +</p>
+        <Page title={`${t('Añadir paradas')} Metro Bilbao`} icon={settingsOutline}>
+            <h2>{t('Añadir paradas')}</h2>
+            <p>{t('Añade o elimina las paradas favoritas usando la estrella')}</p>
             <IonItem>
-                <IonLabel position="stacked">Nombre de la parada</IonLabel>
+                <IonLabel position="stacked">{t('Nombre de la parada')}</IonLabel>
                 <IonInput
                     value={stopName}
-                    placeholder="Escribe para filtrar"
+                    placeholder={t('Escribe para filtrar')}
                     onIonInput={(e) => setStopName(e.detail.value!)}
                 />
             </IonItem>

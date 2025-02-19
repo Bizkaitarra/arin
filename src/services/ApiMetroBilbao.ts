@@ -1,16 +1,13 @@
-import paradas from "../data/paradas_metro.json";
 import {Capacitor} from "@capacitor/core";
 import {MetroStop, MetroStopTrains, MetroTrain} from "./MetroBilbaoStorage";
 
 
-const maxEstimatedTrainMinutes = 60;
-
-async function fetchTrainData(origin: string, destination: string): Promise<MetroTrain[]> {
+async function fetchTrainData(origin: string, destination: string, maxTrains: number): Promise<MetroTrain[]> {
     try {
         const response = await fetch(`https://api.metrobilbao.eus/metro/real-time/${origin}/${destination}`);
         const data = await response.json();
         return data.trains
-            .filter((train: any) => train.estimated <= maxEstimatedTrainMinutes)
+            .filter((train: any) => train.estimated <= maxTrains)
             .map((train: any) => ({
                 Wagons: train.wagons,
                 Estimated: train.estimated,
@@ -25,9 +22,9 @@ async function fetchTrainData(origin: string, destination: string): Promise<Metr
 }
 
 
-export async function getMetroStopTrains(metroStop: MetroStop): Promise<MetroStopTrains> {
-    const platform1Trains = await Promise.all(metroStop.Platform1.map(dest => fetchTrainData(metroStop.Code, dest)));
-    const platform2Trains = await Promise.all(metroStop.Platform2.map(dest => fetchTrainData(metroStop.Code, dest)));
+async function getMetroStopTrains(metroStop: MetroStop, maxTrains: number): Promise<MetroStopTrains> {
+    const platform1Trains = await Promise.all(metroStop.Platform1.map(dest => fetchTrainData(metroStop.Code, dest, maxTrains)));
+    const platform2Trains = await Promise.all(metroStop.Platform2.map(dest => fetchTrainData(metroStop.Code, dest, maxTrains)));
 
     return {
         Station: metroStop,
@@ -37,20 +34,10 @@ export async function getMetroStopTrains(metroStop: MetroStop): Promise<MetroSto
 }
 
 
-export async function getMetroStopsTrains(stops: MetroStop[]): Promise<MetroStopTrains[]> {
-    const promises = stops.map(stop => getMetroStopTrains(stop));
+export async function getMetroStopsTrains(stops: MetroStop[], maxTrains: number = 60): Promise<MetroStopTrains[]> {
+    const promises = stops.map(stop => getMetroStopTrains(stop, maxTrains));
     return Promise.all(promises);
 }
-
-export const loadStops = async () => {
-    try {
-        // Retornar directamente el JSON importado
-        return paradas;
-    } catch (error) {
-        console.error("Error al cargar el archivo JSON:", error);
-        throw error; // Relanzar el error para manejarlo externamente si es necesario
-    }
-};
 
 
 

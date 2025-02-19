@@ -2,6 +2,18 @@
     filter: invert(70%) sepia(94%) saturate(800%) hue-rotate(300deg) brightness(96%) contrast(90%);
 }
 
-.non-favorite-bus-marker {
-
+.leaflet-control-attribution a[href="https://leafletjs.com"]::after {
+    content: "Leaflet";
+    display: inline;
 }
+
+.leaflet-control-attribution a[href="https://leafletjs.com"] {
+    font-size: 0; /* Oculta el contenido original (incluida la bandera) */
+}
+
+.leaflet-control-attribution a[href="https://leafletjs.com"]::before {
+    content: "Leaflet"; /* Agrega solo el texto sin la bandera */
+    font-size: 12px; /* Restaura el tamaño de fuente */
+}
+
+

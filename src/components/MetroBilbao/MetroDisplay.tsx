@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     IonBadge, IonButton,
     IonCard,
@@ -19,21 +19,26 @@ import {setIntervalMetroBilbao} from '../../services/IntervalServices';
 import Loader from '../Loader';
 import {ellipsisVertical} from "ionicons/icons";
 import {getMetroStops, MetroStopTrains, MetroTrain} from "../../services/MetroBilbaoStorage";
+import {useTranslation} from "react-i18next";
+import {useConfiguration} from "../../context/ConfigurationContext";
 
-const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
 const MetroDisplay: React.FC = () => {
+    const {t} = useTranslation();
     const [metroData, setMetroData] = useState<MetroStopTrains[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [reloading, setReloading] = useState<boolean>(true);
+    const { settings } = useConfiguration(); // Accede a los valores del contexto
+
+
 
     // Función para obtener los datos de las estaciones de metro
     const fetchData = async () => {
         try {
             setLoading(true);
             const favoriteStops = getMetroStops(true).filter(parada => parada.IsFavorite);
-            const data = await getMetroStopsTrains(favoriteStops); // Llamada a la API del Metro
+            const data = await getMetroStopsTrains(favoriteStops, settings.maxTrenes); // Llamada a la API del Metro
             setMetroData(data);
             setLoading(false);
             setError(null);
@@ -94,7 +99,7 @@ const MetroDisplay: React.FC = () => {
         if (stationData.Platform1.length === 0 && stationData.Platform2.length === 0) {
             return (
                 <div className="no-data">
-                    <p>No hay trenes en la estación en este momento</p>
+                    <p>{t('No hay trenes en la estación en este momento')}</p>
                 </div>
             );
         }
@@ -131,7 +136,12 @@ const MetroDisplay: React.FC = () => {
                                         {minutes < 0 ? 0 : minutes} min ({new Date(nextArrival).toLocaleTimeString([], {
                                         hour: '2-digit',
                                         minute: '2-digit'
-                                    })}) {train.Wagons === 4 || train.Wagons === 5 ? `${train.Wagons} vagones` : ''}
+                                    })})
+                                        {settings.verNumeroVagones && (
+                                            train.Wagons === 4 || train.Wagons === 5
+                                                ? ` ${train.Wagons} ` + t('vagones')
+                                                : '4 ' + t('vagones')
+                                        )}
                                     </IonBadge>
                                 </IonItem>
                             );
@@ -163,7 +173,7 @@ const MetroDisplay: React.FC = () => {
     return (
         <div className="metro-display">
             <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
-                <IonRefresherContent pullingText="Desliza hacia abajo para refrescar"/>
+                <IonRefresherContent pullingText={t("Desliza hacia abajo para refrescar")}/>
             </IonRefresher>
 
             {loading && (

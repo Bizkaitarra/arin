@@ -6,8 +6,10 @@ import Page from "../Page";
 import MapComponent from "../../components/Bizkaibus/MapComponent";
 import AcordeonDeParadas from "../../components/Bizkaibus/AcordeonDeParadas";
 import {Star, StarOff} from "lucide-react";
+import {useTranslation} from "react-i18next";
 
 const BizkaibusConfiguration: React.FC = () => {
+    const {t} = useTranslation();
     const [town, setTown] = useState<Municipio | null>(null);
     const [stations, setStations] = useState<Parada[]>([]);
     const [filteredStations, setFilteredStations] = useState<Parada[]>([]);
@@ -62,13 +64,13 @@ const BizkaibusConfiguration: React.FC = () => {
             )
         );
 
-        presentToast({
-            message: wasFavorite
-                ? `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`
-                : `Parada "${stop.PARADA} - ${stop.DENOMINACION}" añadida a favoritos`,
-            duration: 2000,
-            color: wasFavorite ? 'warning' : 'success'
-        });
+        // presentToast({
+        //     message: wasFavorite
+        //         ? `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`
+        //         : `Parada "${stop.PARADA} - ${stop.DENOMINACION}" añadida a favoritos`,
+        //     duration: 2000,
+        //     color: wasFavorite ? 'warning' : 'success'
+        // });
     };
 
 
@@ -83,11 +85,11 @@ const BizkaibusConfiguration: React.FC = () => {
             )
         );
 
-        presentToast({
-            message: `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`,
-            duration: 2000,
-            color: 'warning'
-        });
+        // presentToast({
+        //     message: `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`,
+        //     duration: 2000,
+        //     color: 'warning'
+        // });
     };
 
     const handleToggleStop = (stop: Parada) => {
@@ -103,13 +105,13 @@ const BizkaibusConfiguration: React.FC = () => {
             )
         );
 
-        presentToast({
-            message: newFavoriteStatus
-                ? `Parada "${stop.PARADA} - ${stop.DENOMINACION}" añadida a favoritos`
-                : `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`,
-            duration: 2000,
-            color: newFavoriteStatus ? 'success' : 'warning'
-        });
+        // presentToast({
+        //     message: newFavoriteStatus
+        //         ? `Parada "${stop.PARADA} - ${stop.DENOMINACION}" añadida a favoritos`
+        //         : `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`,
+        //     duration: 2000,
+        //     color: newFavoriteStatus ? 'success' : 'warning'
+        // });
     };
 
 
@@ -122,16 +124,15 @@ const BizkaibusConfiguration: React.FC = () => {
     };
 
     return (
-        <Page title="Configurar Bizkaibus" icon={settingsOutline}>
+        <Page title={t("Configurar Bizkaibus")} icon={settingsOutline}>
             <div>
                 {!town ? (
                     <AcordeonDeParadas paradas={stations} onMunicipioClick={handleTownSelect}/>
                 ) : (
                     <p>
-                        <strong>Pueblo
-                            seleccionado:</strong> {town.DESCRIPCION_PROVINCIA}{' '}{town.DESCRIPCION_MUNICIPIO}
+                        <strong>{t('Pueblo seleccionado')}:</strong> {town.DESCRIPCION_MUNICIPIO}{' ('}{town.DESCRIPCION_PROVINCIA}{')'}
                         <IonButton fill="clear" color="danger" onClick={clearTownSelection}>
-                            Deseleccionar
+                            {t('Deseleccionar')}
                         </IonButton>
                     </p>
                 )}
@@ -145,17 +146,17 @@ const BizkaibusConfiguration: React.FC = () => {
                         onClick={() => setIsMapView(!isMapView)}
                     >
                         <IonIcon icon={isMapView ? listOutline : mapOutline} slot="start"/>
-                        {isMapView ? 'Ver como lista' : 'Ver como mapa'}
+                        {isMapView ? t('Ver como lista') : t('Ver como mapa')}
                     </IonButton>
 
                     {isMapView ? (
                         <div>
-                            <h1>Mapa de Paradas</h1>
+                            <h1>{t('Mapa de Paradas')}</h1>
                             <MapComponent paradas={filteredStations} onToggleFavorite={handleToggleStop}/>
                         </div>
                     ) : (
                         <>
-                            <h1>Listado de Paradas</h1>
+                            <h1>{t('Listado de Paradas')}</h1>
                             {filteredStations.map(station => (
                                 <IonItem key={station.PARADA}>
                                     <IonLabel>

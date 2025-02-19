@@ -16,12 +16,14 @@ import {ItemReorderEventDetail} from '@ionic/core';
 import Page from "../Page";
 import {useHistory} from "react-router-dom";
 import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
+import {useTranslation} from "react-i18next";
 
 
 const MetroBilbaoStopsManagement: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<MetroStop[]>([]);
     const history = useHistory();
     const [presentToast] = useIonToast();
+    const { t } = useTranslation();
 
     useIonViewWillEnter(() => {
         setSelectedStops(getMetroStops(true).filter(parada => parada.IsFavorite));
@@ -58,11 +60,11 @@ const MetroBilbaoStopsManagement: React.FC = () => {
     };
 
     return (
-        <Page title="Mis paradas Metro Bilbao" icon={settingsOutline}>
-            {selectedStops.length > 0 ? (
+        <Page title={`${t('Mis paradas')} Metro Bilbao`} icon={settingsOutline}>
+        {selectedStops.length > 0 ? (
                 <>
-                    <h2>Mis paradas</h2>
-                    <p>Ordena las paradas seleccionadas y elimina las que no desees seguir viendo</p>
+                    <h2>{t('Mis paradas')}</h2>
+                    <p>{t('Ordena las paradas seleccionadas y elimina las que no desees seguir viendo')}</p>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
                             {selectedStops.map((stop) => (
@@ -91,11 +93,11 @@ const MetroBilbaoStopsManagement: React.FC = () => {
             ) : (
                 <div style={{textAlign: 'center', marginTop: '2rem'}}>
                     <IonText>
-                        <h2>No tienes paradas favoritas configuradas</h2>
-                        <p>Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración.</p>
+                        <h2>{t('No tienes paradas favoritas configuradas')}</h2>
+                        <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
                     </IonText>
                     <IonButton color="secondary" onClick={() => history.push(`/configure-metro-bilbao`)}>
-                        <IonIcon icon={settingsOutline}/> Configurar paradas
+                        <IonIcon icon={settingsOutline}/> {t('Configurar paradas')}
                     </IonButton>
                 </div>
             )}

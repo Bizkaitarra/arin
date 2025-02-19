@@ -4,12 +4,14 @@ import {ConsultaHorario, loadHorarios} from "../../services/ApiBizkaibus";
 import ConsultaHorarioViewer from "../../components/Bizkaibus/ConsultaHorarioViewer";
 import {timerOutline} from "ionicons/icons";
 import Page from "../Page";
+import {useTranslation} from "react-i18next";
 
 interface RouteParams {
     line: string;
 }
 
 const BizkaibusHorarioPage: React.FC = () => {
+    const {t} = useTranslation();
     const { line } = useParams<RouteParams>(); // Obtener el parámetro de la URL
     const [horarios, setHorarios] = useState<Record<string, ConsultaHorario[]>>();
     const [loading, setLoading] = useState<boolean>(false);
@@ -32,7 +34,7 @@ const BizkaibusHorarioPage: React.FC = () => {
                     }, {} as Record<string, ConsultaHorario[]>);
                     setHorarios(groupedHorarios);
                 } catch (err) {
-                    setError("Error al obtener los horarios.");
+                    setError(t("Error al obtener los horarios."));
                 } finally {
                     setLoading(false);
                 }
@@ -44,7 +46,7 @@ const BizkaibusHorarioPage: React.FC = () => {
     return (
         <Page title="Horario de línea" icon={timerOutline}>
                 <div style={{ padding: "20px" }}>
-                    {loading && <p>Obteniendo información de Bizkabus, espera con un ☕️...</p>}
+                    {loading && <p>{t('Obteniendo información de Bizkabus, espera con un ☕️...')}</p>}
                     {error && <p>{error}</p>}
                     {horarios && Object.keys(horarios).length > 0 && <ConsultaHorarioViewer horarios={horarios} />}
                 </div>

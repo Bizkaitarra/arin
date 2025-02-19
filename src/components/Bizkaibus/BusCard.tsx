@@ -14,6 +14,7 @@ import {ellipsisVertical, map, timerOutline} from 'ionicons/icons';
 import React, {useState} from 'react';
 import {BusArrival} from "../../services/ApiBizkaibus";
 import {useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 interface Props {
     arrival: BusArrival,
@@ -21,7 +22,7 @@ interface Props {
 }
 const BusCard: React.FC<Props> = ({ arrival, index }) => {
     const [popoverEvent, setPopoverEvent] = useState<MouseEvent | null>(null);
-
+    const { t } = useTranslation();
     const history = useHistory();
     return (
         <IonCard key={index} className="bus-card">
@@ -46,7 +47,7 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
                             setPopoverEvent(null);
                             history.push(`/horarios/${arrival.linea}`);
                         }}>
-                            <IonIcon icon={timerOutline} className="ion-margin-end" /> Ver horarios
+                            <IonIcon icon={timerOutline} className="ion-margin-end" />{t('Ver horarios')}
                         </IonItem>
 
                     </IonList>
@@ -56,7 +57,7 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
                 {/* Listado de información */}
                 <IonList>
                     <IonItem>
-                        <IonLabel>Primero:</IonLabel>
+                        <IonLabel>{t('Primero')}:</IonLabel>
                         <IonBadge color={arrival.e1Minutos < 3 ? 'danger' : 'success'}>
                             {arrival.e1Minutos} min ({arrival.e1Hora})
                         </IonBadge>
@@ -64,13 +65,13 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
                     {arrival.e2Minutos && (
                         <>
                             <IonItem>
-                                <IonLabel>Segundo:</IonLabel>
+                                <IonLabel>{t('Segundo')}:</IonLabel>
                                 <IonBadge color="secondary">
                                     {arrival.e2Minutos} min ({arrival.e2Hora})
                                 </IonBadge>
                             </IonItem>
                             <IonItem>
-                                <IonLabel>Frecuencia aproximada:</IonLabel>
+                                <IonLabel>{t('Frecuencia aproximada')}:</IonLabel>
                                 <IonBadge color="secondary">
                                     {arrival.e2Minutos - arrival.e1Minutos} min
                                 </IonBadge>

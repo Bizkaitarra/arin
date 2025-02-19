@@ -15,8 +15,10 @@ import {getStations} from '../../services/BizkaibusStorage';
 import {setIntervalBizkaibus} from '../../services/IntervalServices';
 import Loader from '../Loader';
 import BusCard from "./BusCard";
+import {useTranslation} from "react-i18next";
 
 const StopsDisplay: React.FC = () => {
+    const { t } = useTranslation();
     const [stopData, setStopData] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -81,7 +83,7 @@ const StopsDisplay: React.FC = () => {
                                 <BusCard arrival={arrival} index={index} />
                             ))
                         ) : (
-                            <p>No hay ningún autobús</p>
+                            <p>{t('No hay ningún autobús')}</p>
                         )}
                     </div>
                 </IonCardContent>
@@ -94,7 +96,7 @@ const StopsDisplay: React.FC = () => {
     return (
         <div className="stops-display">
             <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
-                <IonRefresherContent pullingText="Desliza para refrescar" />
+                <IonRefresherContent pullingText="{t('Desliza para refrescar')}" />
             </IonRefresher>
 
             {loading && <Loader serviceName="Bizkaibus" reloading={reloading} />}

@@ -15,11 +15,13 @@ import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/ic
 import {getStations, Parada, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
 import {useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const BizkaibusStopsManagement: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
     const history = useHistory();
     const [presentToast] = useIonToast();
+    const { t } = useTranslation();
 
     useIonViewWillEnter(() => {
 
@@ -29,7 +31,7 @@ const BizkaibusStopsManagement: React.FC = () => {
                 const savedStations = getStations(true).filter(station => station.IS_FAVORITE);
                 setSelectedStops(savedStations);
             } catch (error) {
-                console.error("Error al cargar las estaciones:", error);
+                console.error(t("Error al cargar las estaciones:"), error);
             }
         };
         fetchStations();
@@ -47,7 +49,7 @@ const BizkaibusStopsManagement: React.FC = () => {
         saveStationIds(stops.map(stop => stop.PARADA));
         setSelectedStops(stops);
         presentToast({
-            message: `Parada eliminada`,
+            message: t('`Parada eliminada`'),
             duration: 2000,
             color: 'success'
         });
@@ -64,11 +66,11 @@ const BizkaibusStopsManagement: React.FC = () => {
     };
 
     return (
-        <Page title="Mis paradas Bizkaibus" icon={settingsOutline}>
+        <Page title={`${t('Mis paradas')} Bizkaibus`} icon={settingsOutline}>
             {selectedStops.length > 0 ? (
                 <>
-                    <h2>Mis paradas</h2>
-                    <p>Ordena las paradas seleccionadas y elimina las que no desees seguir viendo</p>
+                    <h2>{t('Mis paradas')}</h2>
+                    <p>{t('Ordena las paradas seleccionadas y elimina las que no desees seguir viendo')}</p>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
                             {selectedStops.map((stop) => (
@@ -92,11 +94,11 @@ const BizkaibusStopsManagement: React.FC = () => {
             ) : (
                 <div style={{ textAlign: 'center', marginTop: '2rem' }}>
                     <IonText>
-                        <h2>No tienes paradas favoritas configuradas</h2>
-                        <p>Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración.</p>
+                        <h2>{t('No tienes paradas favoritas configuradas')}</h2>
+                        <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
                     </IonText>
                     <IonButton color="secondary" onClick={() => history.push(`/configure-bizkaibus`)}>
-                        <IonIcon icon={settingsOutline} /> Configurar paradas
+                        <IonIcon icon={settingsOutline} />{t('Configurar paradas')}
                     </IonButton>
                 </div>
             )}

@@ -2,6 +2,7 @@ import React from "react";
 import { IonButton, IonIcon } from "@ionic/react";
 import { logoPaypal } from "ionicons/icons";
 import { Browser } from "@capacitor/browser";
+import {useTranslation} from "react-i18next";
 
 interface PayPalDonateButtonProps {
     amount?: number; // Cantidad opcional
@@ -9,6 +10,7 @@ interface PayPalDonateButtonProps {
 }
 
 const PayPalDonateButton: React.FC<PayPalDonateButtonProps> = ({ amount, message }) => {
+    const {t} = useTranslation();
     const openPayPal = async () => {
         let url = "https://www.paypal.me/bizkaitarra"; // Reemplaza con tu enlace
 
@@ -38,7 +40,7 @@ const PayPalDonateButton: React.FC<PayPalDonateButtonProps> = ({ amount, message
             }}
         >
             <IonIcon slot="start" icon={logoPaypal} style={{ fontSize: "1.5rem" }} />
-            {amount ? `Donar ${amount}€ con PayPal` : "Donar con PayPal"}
+            {amount ? t("Donar {{amount}}€ con PayPal", { amount }) : t("Donar con PayPal")}
         </IonButton>
     );
 };

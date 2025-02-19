@@ -2,12 +2,13 @@ import React from "react";
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel } from "@ionic/react";
 import {ConsultaHorario} from "../../services/ApiBizkaibus";
 import './ConsultaHorarioViewer.css';
+import {useTranslation} from "react-i18next";
 interface Props {
     horarios: Record<string, ConsultaHorario[]>;
 }
 
 const ConsultaHorarioViewer: React.FC<Props> = ({ horarios }) => {
-
+    const { t } = useTranslation();
     const parseText = (input) => {
         const lines = input.split('\n');
         const elements = [];
@@ -58,7 +59,7 @@ const ConsultaHorarioViewer: React.FC<Props> = ({ horarios }) => {
                         <IonCard className="stop-card" key={tipoRuta}>
                             <IonCardHeader>
                                 <IonCardTitle>
-                                    Desde: {item.FechaConsultaHorario}
+                                    {t('Desde')}: {item.FechaConsultaHorario}
                                 </IonCardTitle>
                             </IonCardHeader>
                         <IonCardContent key={index}>
