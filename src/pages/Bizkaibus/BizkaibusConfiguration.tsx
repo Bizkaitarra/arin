@@ -124,7 +124,7 @@ const BizkaibusConfiguration: React.FC = () => {
     };
 
     return (
-        <Page title={t("Configurar Bizkaibus")} icon={settingsOutline}>
+        <Page title={t("Añadir paradas")} icon={settingsOutline}>
             <div>
                 {!town ? (
                     <AcordeonDeParadas paradas={stations} onMunicipioClick={handleTownSelect}/>

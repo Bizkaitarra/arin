@@ -1,4 +1,3 @@
-import paradas from '../data/paradas.json';
 import {Parada} from "./BizkaibusStorage";
 
 export interface BusArrival {
@@ -17,8 +16,8 @@ export interface StopData {
 
 export interface BusArrivalResponse {
     status: "OK" | "NOINFO" | "ERROR";
-    message: string;
     data?: StopData;
+    parada: Parada;
 }
 
 
@@ -32,11 +31,15 @@ async function fetchStopData(parada: Parada): Promise<BusArrivalResponse> {
         const jsonData = JSON.parse(cleanedText);
 
         if (jsonData.STATUS === "NOINFO") {
-            return { status: "NOINFO", message: "Bizkaibus no está proporcionando información para la parada " + parada.PARADA + " " +  parada.DENOMINACION };
+            return {
+                status: "NOINFO",
+                parada
+            };
+
         }
 
         if (jsonData.STATUS !== "OK") {
-            return { status: "ERROR", message: jsonData.Error || "Error desconocido." };
+            return { status: "ERROR", parada: parada };
         }
 
         const parser = new DOMParser();
@@ -72,11 +75,11 @@ async function fetchStopData(parada: Parada): Promise<BusArrivalResponse> {
 
         return {
             status: "OK",
-            message: "Datos obtenidos correctamente.",
             data: { parada, arrivals },
+            parada
         };
     } catch (error) {
-        return { status: "ERROR", message: "Error al obtener los datos." };
+        return { status: "ERROR", parada: parada};
     }
 }
 

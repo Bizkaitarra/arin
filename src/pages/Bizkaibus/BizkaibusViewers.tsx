@@ -12,7 +12,7 @@ const BizkaibusViewers: React.FC = () => {
     const history = useHistory();
 
     return (
-        <Page title={t("Visores Bizkaibus")} icon={busOutline}>
+        <Page title={t("Visores")} icon={busOutline}>
                 {getSavedStationIds().length > 0 ? (
                     <StopsDisplay/>
                 ) : (

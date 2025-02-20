@@ -10,11 +10,12 @@ import {
     IonList,
     IonPopover
 } from '@ionic/react';
-import {ellipsisVertical, map, timerOutline} from 'ionicons/icons';
+import {ellipsisVertical, timerOutline} from 'ionicons/icons';
 import React, {useState} from 'react';
 import {BusArrival} from "../../services/ApiBizkaibus";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {useConfiguration} from "../../context/ConfigurationContext";
 
 interface Props {
     arrival: BusArrival,
@@ -24,6 +25,7 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
     const [popoverEvent, setPopoverEvent] = useState<MouseEvent | null>(null);
     const { t } = useTranslation();
     const history = useHistory();
+    const { settings } = useConfiguration();
     return (
         <IonCard key={index} className="bus-card">
             <IonCardContent>
@@ -57,7 +59,7 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
                 {/* Listado de información */}
                 <IonList>
                     <IonItem>
-                        <IonLabel>{t('Primero')}:</IonLabel>
+                        <IonLabel>{t('Próximo autobús')}:</IonLabel>
                         <IonBadge color={arrival.e1Minutos < 3 ? 'danger' : 'success'}>
                             {arrival.e1Minutos} min ({arrival.e1Hora})
                         </IonBadge>
@@ -65,17 +67,19 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
                     {arrival.e2Minutos && (
                         <>
                             <IonItem>
-                                <IonLabel>{t('Segundo')}:</IonLabel>
+                                <IonLabel>{t('Siguiente en llegar')}:</IonLabel>
                                 <IonBadge color="secondary">
                                     {arrival.e2Minutos} min ({arrival.e2Hora})
                                 </IonBadge>
                             </IonItem>
-                            <IonItem>
-                                <IonLabel>{t('Frecuencia aproximada')}:</IonLabel>
-                                <IonBadge color="secondary">
-                                    {arrival.e2Minutos - arrival.e1Minutos} min
-                                </IonBadge>
-                            </IonItem>
+                            {settings.verFrecuencia && (
+                                <IonItem>
+                                    <IonLabel>{t('Frecuencia aproximada')}:</IonLabel>
+                                    <IonBadge color="secondary">
+                                        {arrival.e2Minutos - arrival.e1Minutos} min
+                                    </IonBadge>
+                                </IonItem>
+                            )}
                         </>
                     )}
                 </IonList>

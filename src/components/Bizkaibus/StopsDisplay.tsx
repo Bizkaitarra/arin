@@ -59,12 +59,24 @@ const StopsDisplay: React.FC = () => {
 
     const renderStopCard = (response: BusArrivalResponse) => {
         if (response.status === "ERROR") {
-            return <IonCard><IonCardContent>{response.message}</IonCardContent></IonCard>;
+            return (
+                <IonCard>
+                    <IonCardContent>
+                        {t("error_bizkaibus", { parada: response.parada.PARADA, denominacion: response.parada.DENOMINACION })}
+                    </IonCardContent>
+                </IonCard>
+            );
+        }
+        if (response.status === "NOINFO") {
+            return (
+                <IonCard>
+                    <IonCardContent>
+                        {t("no_info_bizkaibus", { parada: response.parada.PARADA, denominacion: response.parada.DENOMINACION })}
+                    </IonCardContent>
+                </IonCard>
+            );
         }
 
-        if (response.status === "NOINFO") {
-            return <IonCard><IonCardContent>{response.message}</IonCardContent></IonCard>;
-        }
 
         if (!response.data) return null;
 

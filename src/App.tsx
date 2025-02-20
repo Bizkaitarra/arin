@@ -36,6 +36,7 @@ import { ConfigurationProvider } from './context/ConfigurationContext';
 
 setupIonicReact();
 
+
 const App: React.FC = () => {
     const { i18n } = useTranslation();
     const [isLanguageLoaded, setIsLanguageLoaded] = useState(false); // Estado para evitar re-render innecesario

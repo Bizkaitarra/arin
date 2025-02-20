@@ -21,7 +21,7 @@ const MetroBilbaoViewers: React.FC = () => {
         }
     }
     return (
-        <Page title={t("Visores Metro Bilbao")} icon={trainOutline}>
+        <Page title={t("Visores")} icon={trainOutline}>
             {stops.length > 0 ? (
                 <div>
                     <MetroDisplay/>

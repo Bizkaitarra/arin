@@ -86,8 +86,7 @@ const MetroBilbaoConfiguration: React.FC = () => {
     };
 
     return (
-        <Page title={`${t('Añadir paradas')} Metro Bilbao`} icon={settingsOutline}>
-            <h2>{t('Añadir paradas')}</h2>
+        <Page title={`${t('Añadir paradas')}`} icon={settingsOutline}>
             <p>{t('Añade o elimina las paradas favoritas usando la estrella')}</p>
             <IonItem>
                 <IonLabel position="stacked">{t('Nombre de la parada')}</IonLabel>

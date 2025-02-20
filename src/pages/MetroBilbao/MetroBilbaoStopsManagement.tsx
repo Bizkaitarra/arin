@@ -60,10 +60,9 @@ const MetroBilbaoStopsManagement: React.FC = () => {
     };
 
     return (
-        <Page title={`${t('Mis paradas')} Metro Bilbao`} icon={settingsOutline}>
+        <Page title={`${t('Mis paradas')}`} icon={settingsOutline}>
         {selectedStops.length > 0 ? (
                 <>
-                    <h2>{t('Mis paradas')}</h2>
                     <p>{t('Ordena las paradas seleccionadas y elimina las que no desees seguir viendo')}</p>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>

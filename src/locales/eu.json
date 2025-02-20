@@ -2,14 +2,15 @@
   "Castellano": "Gaztelera",
   "Euskera": "Euskera",
   "Visor": "Bisorea",
+  "Visores": "Bisoreak",
   "Mis paradas": "Nire geltokiak",
   "Añadir paradas": "Geltokiak gehitu",
   "Sobre Arin": "Arin buruz",
   "Otras opciones": "Beste aukera batzuk",
   "Ordena las paradas seleccionadas y elimina las que no desees seguir viendo": "Aukeratutako geltokiak ordenatu eta nahi ez dituzunak ezabatu",
-  "Frecuencia aproximada": "Maiztasun estimatua",
-  "Primero": "Lehenengoa",
-  "Segundo": "Bigarrena",
+  "Frecuencia aproximada": "Autobus arteko denbora",
+  "Próximo autobús": "Hurrengoa",
+  "Siguiente en llegar": "Ondorengoa",
   "Vagones": "Bagoiak",
   "vagones": "bagoi",
   "Configurar": "Kudeatu",
@@ -58,9 +59,17 @@
   "Indica si quieres ver la diferencia de tiempo entre los autobuses que proporiciona Bizkaibus. Esto puede dar una orientación de cuando puede ser el siguiente que venga ya que Bizkaibus solo proporciona dos autobuses por línea.": "Aukeratu autobuses arteko minutu tartea ikusi nahi baduzu. Hau interesgarria izan daiteke hurrengo autobusa noiz etorri den jakiteko, Bizkaibus-en bidez bi autobus bakarrik jasotzen direlako.",
   "Ver frecuencia": "Maiztasuna ikusi",
   "Ninguno": "Bat ere ez",
-  "Configuración general": "Konfigurazio orokorra"
-
-
-
-
+  "Configuración general": "Konfigurazio orokorra",
+  "no_info_bizkaibus": "Bizkaibus ez du informaziorik ematen momentu honetan {{parada}} {{denominacion}} geltokiarentzat",
+  "error_bizkaibus": "Bizkaibus errore bat ematen du momentu honetan {{parada}} {{denominacion}} geltokiarentzat",
+  "Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración": "Zure geltoki gogokoak ikusteko, konfigurazio orrialdean gehitu behar dituzu",
+  "Configurar paradas": "Geltokiak kudeatu",
+  "bizkaibus_nav_1": "Bizkaibus",
+  "bizkaibus_nav_2": "Bisoreak",
+  "metro_nav_1": "Metro",
+  "metro_nav_2": "Bisoreak",
+  "Configuración": "Konfigurazioa",
+  "Cerrar": "Itxi",
+  "General": "Orokorra",
+  "Menú": "Menua"
 }

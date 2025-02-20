@@ -1,11 +1,10 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
-ion-header {
-    padding-top: env(safe-area-inset-top);
-}
+
 
 :root {
     --ion-safe-area-bottom: env(safe-area-inset-bottom);
+    --ion-safe-area-top: env(safe-area-inset-top);
 }
 
 .submenu-item {
@@ -22,3 +21,33 @@ ion-tab-button.tab-selected {
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
+
+.section-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 0;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    color: #1f3d60;
+    margin-left: 30px;
+}
+
+.bizkaibus-header-icon ion-label {
+    color: #147014;
+    font-size: large;
+}
+
+.metro-header-icon ion-label {
+    color: #dd7105;
+    font-size: large;
+}
+.bizkaibus-header-icon ion-icon {
+    color: #147014;
+}
+.metro-header-icon ion-icon {
+    color: #dd7105;
+}
+
+
