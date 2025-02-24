@@ -14,7 +14,7 @@ const NavigationTabs: React.FC = () => {
     return (
         <IonTabBar>
             {settings.visores === 'bizkaibus' || settings.visores === 'bizkaibus_metro' ? (
-                <IonTabButton tab="bizkaibus-viewers" href="/bizkaibus-viewers">
+                <IonTabButton className={"bizkaibus-fast-tab"} tab="bizkaibus-viewers" href="/bizkaibus-viewers">
                     <span className="subtext">{t('bizkaibus_nav_1')}</span>
                     <IonIcon icon={busOutline} />
                     <IonLabel>{t('bizkaibus_nav_2')}</IonLabel>
@@ -22,7 +22,7 @@ const NavigationTabs: React.FC = () => {
             ) : null}
 
             {settings.visores === 'metro' || settings.visores === 'bizkaibus_metro' ? (
-                <IonTabButton tab="metro-bilbao-viewers" href="/metro-bilbao-viewers">
+                <IonTabButton className={"metro-bilbao-fast-tab"} tab="metro-bilbao-viewers" href="/metro-bilbao-viewers">
                     <span className="subtext">{t('metro_nav_1')}</span>
                     <IonIcon icon={trainOutline} />
                     <IonLabel>{t('bizkaibus_nav_2')}</IonLabel>

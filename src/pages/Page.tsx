@@ -1,40 +1,35 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    IonPage,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
+    IonButton,
     IonButtons,
-    IonMenuButton,
+    IonChip,
     IonContent,
+    IonHeader,
     IonIcon,
-    useIonViewWillLeave,
-    IonMenu,
-    IonList,
     IonItem,
     IonLabel,
-    IonMenuToggle,
-    IonAccordion,
-    IonAccordionGroup,
-    IonButton,
-    IonModal, IonChip
+    IonList,
+    IonModal,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    useIonViewWillLeave
 } from '@ionic/react';
 import NavigationTabs from "../components/NavigationTabs";
-import { clearIntervals } from "../services/IntervalServices";
-import LanguageSwitcher from "../components/LanguageSwitcher";
-import { useTranslation } from "react-i18next";
+import {clearIntervals} from "../services/IntervalServices";
+import {useTranslation} from "react-i18next";
 import {
     addCircleOutline,
     busOutline,
-    chevronDownOutline,
     informationCircleOutline,
     listOutline,
     menuOutline,
     settingsOutline,
     trainOutline
 } from "ionicons/icons";
-import { useHistory } from 'react-router-dom';  // Importa useHistory
-import { useLocation } from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom'; // Importa useHistory
+import ArinRide from "../components/ArinRide";
+
 
 interface PageProps {
     title: string;
@@ -48,6 +43,7 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
     const history = useHistory();  // Instancia el hook de historia
     const location = useLocation();
     const [transportType, setTransportType] = useState('');
+
 
     // Determinar el tipo de transporte según la ruta
     useState(() => {
@@ -70,6 +66,11 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
         history.push(path);    // Navega a la ruta correspondiente
     };
 
+    const handleMenuFromTutorial = (isOpen: boolean) => {
+        console.log('handleMenuFromTutorial', isOpen);
+        setShowModal(isOpen);  // Si isOpen es true, abre el menú; si es false, lo cierra
+    };
+
     return (
         <>
             {/* Modal en lugar del menú lateral */}
@@ -85,19 +86,19 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                     <IonContent>
                         <IonList>
                             <h3 className="section-title">Bizkaibus</h3>
-                            <IonItem button onClick={() => handleNavigation("/bizkaibus-viewers")}>
+                            <IonItem id={"menu-visores-bizkaibus"} button onClick={() => handleNavigation("/bizkaibus-viewers")}>
                                 <IonIcon slot="start" icon={busOutline} />
                                 <IonLabel>{t('Visores')}</IonLabel>
                             </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/configure-bizkaibus")}>
+                            <IonItem id={"menu-add-bizkaibus"} button onClick={() => handleNavigation("/configure-bizkaibus")}>
                                 <IonIcon slot="start" icon={addCircleOutline} />
                                 <IonLabel>{t('Añadir paradas')}</IonLabel>
                             </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/manage-bizkaibus-stops")}>
+                            <IonItem id={"menu-manage-bizkaibus"} button onClick={() => handleNavigation("/manage-bizkaibus-stops")}>
                                 <IonIcon slot="start" icon={listOutline} />
                                 <IonLabel>{t('Mis paradas')}</IonLabel>
                             </IonItem>
-                            <h3 className="section-title">Metro Bilbao</h3>
+                            <h3 id={"menu-title-metro-bilbao"} className="section-title">Metro Bilbao</h3>
 
                             <IonItem button onClick={() => handleNavigation("/metro-bilbao-viewers")}>
                                 <IonIcon slot="start" icon={trainOutline} />
@@ -112,7 +113,7 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                                 <IonLabel>{t('Mis paradas')}</IonLabel>
                             </IonItem>
                             <h3 className="section-title">{t('General')}</h3>
-                            <IonItem button onClick={() => handleNavigation("/configuration")}>
+                            <IonItem id={"menu-configuration"} button onClick={() => handleNavigation("/configuration")}>
                                 <IonIcon slot="start" icon={settingsOutline} />
                                 <IonLabel>{t('Configuración')}</IonLabel>
                             </IonItem>
@@ -128,12 +129,14 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                     <IonHeader>
                         <IonToolbar>
                             <IonButtons slot="start">
-                                <IonButton onClick={() => setShowModal(true)}>
+                                <IonButton id={"open-menu"} onClick={() => setShowModal(true)}>
                                     <IonIcon icon={menuOutline} />
                                 </IonButton>
                             </IonButtons>
+
+
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                                <IonTitle>{title}</IonTitle>
+                                <IonTitle id={"arin-header-title"}>{title}</IonTitle>
                                 {transportType && (
                                     <IonChip outline={true} className={transportType === 'Bizkaibus' ? 'bizkaibus-header-icon' : 'metro-header-icon'}>
                                         <IonIcon icon={transportType === 'Bizkaibus' ? busOutline : trainOutline} />
@@ -144,9 +147,13 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                         </IonToolbar>
                         <NavigationTabs />
                     </IonHeader>
-                    <IonContent className="ion-padding">
+                    <IonContent id={"general-content"} className="ion-padding">
                         {children}
+
                     </IonContent>
+                    <ArinRide onMenuOpen={handleMenuFromTutorial} showModal={showModal}/>
+
+
                 </IonPage>
         </>
     );
