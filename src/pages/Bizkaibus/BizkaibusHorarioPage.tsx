@@ -44,7 +44,7 @@ const BizkaibusHorarioPage: React.FC = () => {
     }, [line]); // Solo volver a ejecutar si el número de parada cambia
 
     return (
-        <Page title="Horario de línea" icon={timerOutline}>
+        <Page title="Horario de línea" icon={timerOutline} internalPage={true}>
                 <div style={{ padding: "20px" }}>
                     {loading && <p>{t('Obteniendo información de Bizkabus, espera con un ☕️...')}</p>}
                     {error && <p>{error}</p>}

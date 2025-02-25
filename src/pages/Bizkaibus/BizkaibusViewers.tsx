@@ -6,6 +6,7 @@ import {useHistory} from 'react-router-dom';
 import {getSavedStationIds} from '../../services/BizkaibusStorage';
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
+import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 
 const BizkaibusViewers: React.FC = () => {
     const {t} = useTranslation();
@@ -21,9 +22,7 @@ const BizkaibusViewers: React.FC = () => {
                             <h2>{t('No tienes paradas favoritas configuradas')}</h2>
                             <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
                         </IonText>
-                        <IonButton color="secondary" onClick={() => history.push(`/configure-bizkaibus`)}>
-                            <IonIcon icon={settingsOutline} /> {t('Configurar paradas')}
-                        </IonButton>
+                        <BizkaibusAddStopButton/>
                     </div>
                 )}
         </Page>

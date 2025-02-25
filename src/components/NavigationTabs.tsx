@@ -25,7 +25,7 @@ const NavigationTabs: React.FC = () => {
                 <IonTabButton tab="metro-bilbao-viewers" href="/metro-bilbao-viewers">
                     <span className="subtext">{t('metro_nav_1')}</span>
                     <IonIcon icon={trainOutline} />
-                    <IonLabel>{t('bizkaibus_nav_2')}</IonLabel>
+                    <IonLabel>{t('metro_nav_2')}</IonLabel>
                 </IonTabButton>
             ) : null}
         </IonTabBar>

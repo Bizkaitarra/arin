@@ -49,5 +49,31 @@ ion-tab-button.tab-selected {
 .metro-header-icon ion-icon {
     color: #dd7105;
 }
+.user-marker-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1414a1;
+    animation: pulse 1.5s infinite;
+}
+
+/* Animación de parpadeo para destacar la ubicación del usuario */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
 
 

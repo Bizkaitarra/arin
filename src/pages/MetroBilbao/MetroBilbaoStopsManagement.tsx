@@ -11,12 +11,13 @@ import {
     useIonToast,
     useIonViewWillEnter,
 } from '@ionic/react';
-import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
+import {add, reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {ItemReorderEventDetail} from '@ionic/core';
 import Page from "../Page";
 import {useHistory} from "react-router-dom";
 import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
 import {useTranslation} from "react-i18next";
+import MetroBilbaoAddStopsButton from "./MetroBilbaoAddStopsButton";
 
 
 const MetroBilbaoStopsManagement: React.FC = () => {
@@ -95,11 +96,10 @@ const MetroBilbaoStopsManagement: React.FC = () => {
                         <h2>{t('No tienes paradas favoritas configuradas')}</h2>
                         <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
                     </IonText>
-                    <IonButton color="secondary" onClick={() => history.push(`/configure-metro-bilbao`)}>
-                        <IonIcon icon={settingsOutline}/> {t('Configurar paradas')}
-                    </IonButton>
+
                 </div>
             )}
+            <MetroBilbaoAddStopsButton/>
         </Page>
     );
 };

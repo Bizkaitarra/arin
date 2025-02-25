@@ -87,6 +87,9 @@ metodo = consultaTitulosRecargablesAnt
 ### GetLineasPrincipalesSecundarias_JSON : dando solo la línea te dice las secundarias y sentidos
 
 
+GET https://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetLineas_JSON?callback=""&iTipoConsulta=string&sCodigoLinea=string&sNumeroRuta=string&sSentido=string&sDescripcionLinea=string&sListaCodigosLineas=string HTTP/1.1
+
+
 
 
 

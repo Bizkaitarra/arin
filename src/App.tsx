@@ -33,6 +33,7 @@ import {loadSettings} from "./services/ConfigurationStorage";
 
 // Importar el ConfigurationProvider
 import { ConfigurationProvider } from './context/ConfigurationContext';
+import BizkaibusAddByLocalization from "./pages/Bizkaibus/BizkaibusAddByLocalization";
 
 setupIonicReact();
 
@@ -69,7 +70,8 @@ const App: React.FC = () => {
                     <IonTabs>
                         <IonRouterOutlet>
                             <Route exact path="/bizkaibus-viewers" component={BizkaibusViewers} />
-                            <Route exact path="/configure-bizkaibus" component={BizkaibusConfiguration} />
+                            <Route exact path="/add-stop-by-town-bizkaibus" component={BizkaibusConfiguration} />
+                            <Route exact path="/add-stop-by-location-bizkaibus" component={BizkaibusAddByLocalization} />
                             <Route exact path="/manage-bizkaibus-stops" component={BizkaibusStopsManagement} />
                             <Route exact path="/metro-bilbao-viewers" component={MetroBilbaoViewers} />
                             <Route exact path="/configure-metro-bilbao" component={MetroBilbaoConfiguration} />

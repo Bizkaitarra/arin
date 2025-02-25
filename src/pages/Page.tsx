@@ -1,48 +1,43 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    IonPage,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
+    IonButton,
     IonButtons,
-    IonMenuButton,
+    IonChip,
     IonContent,
+    IonHeader,
     IonIcon,
-    useIonViewWillLeave,
-    IonMenu,
-    IonList,
     IonItem,
     IonLabel,
-    IonMenuToggle,
-    IonAccordion,
-    IonAccordionGroup,
-    IonButton,
-    IonModal, IonChip
+    IonList,
+    IonModal,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    useIonViewWillLeave
 } from '@ionic/react';
 import NavigationTabs from "../components/NavigationTabs";
-import { clearIntervals } from "../services/IntervalServices";
-import LanguageSwitcher from "../components/LanguageSwitcher";
-import { useTranslation } from "react-i18next";
+import {clearIntervals} from "../services/IntervalServices";
+import {useTranslation} from "react-i18next";
 import {
     addCircleOutline,
+    arrowBackOutline,
     busOutline,
-    chevronDownOutline,
     informationCircleOutline,
     listOutline,
     menuOutline,
     settingsOutline,
     trainOutline
 } from "ionicons/icons";
-import { useHistory } from 'react-router-dom';  // Importa useHistory
-import { useLocation } from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom'; // Importa useHistory
 
 interface PageProps {
     title: string;
     icon?: string;
     children: React.ReactNode;
+    internalPage?: boolean;
 }
 
-const Page: React.FC<PageProps> = ({ title, icon, children }) => {
+const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false }) => {
     const { t } = useTranslation();
     const [showModal, setShowModal] = useState(false);
     const history = useHistory();  // Instancia el hook de historia
@@ -78,7 +73,7 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                         <IonToolbar>
                             <IonTitle>{t('Menú')}</IonTitle>
                             <IonButtons slot="end">
-                                <IonButton onClick={() => setShowModal(false)}>{t('Cerrar')}</IonButton>
+                                <IonButton onClick={() => setShowModal(false)}>{t('X')}</IonButton>
                             </IonButtons>
                         </IonToolbar>
                     </IonHeader>
@@ -89,10 +84,6 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                                 <IonIcon slot="start" icon={busOutline} />
                                 <IonLabel>{t('Visores')}</IonLabel>
                             </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/configure-bizkaibus")}>
-                                <IonIcon slot="start" icon={addCircleOutline} />
-                                <IonLabel>{t('Añadir paradas')}</IonLabel>
-                            </IonItem>
                             <IonItem button onClick={() => handleNavigation("/manage-bizkaibus-stops")}>
                                 <IonIcon slot="start" icon={listOutline} />
                                 <IonLabel>{t('Mis paradas')}</IonLabel>
@@ -102,10 +93,6 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                             <IonItem button onClick={() => handleNavigation("/metro-bilbao-viewers")}>
                                 <IonIcon slot="start" icon={trainOutline} />
                                 <IonLabel>{t('Visores')}</IonLabel>
-                            </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/configure-metro-bilbao")}>
-                                <IonIcon slot="start" icon={addCircleOutline} />
-                                <IonLabel>{t('Añadir paradas')}</IonLabel>
                             </IonItem>
                             <IonItem button onClick={() => handleNavigation("/manage-metro-bilbao-stops")}>
                                 <IonIcon slot="start" icon={listOutline} />
@@ -128,9 +115,16 @@ const Page: React.FC<PageProps> = ({ title, icon, children }) => {
                     <IonHeader>
                         <IonToolbar>
                             <IonButtons slot="start">
-                                <IonButton onClick={() => setShowModal(true)}>
-                                    <IonIcon icon={menuOutline} />
-                                </IonButton>
+                                {internalPage ? (
+                                    <IonButton onClick={() => history.goBack()}>
+                                        <IonIcon icon={arrowBackOutline} />
+                                    </IonButton>
+                                ) : (
+                                    <IonButton onClick={() => setShowModal(true)}>
+                                        <IonIcon icon={menuOutline} />
+                                    </IonButton>
+                                )}
+
                             </IonButtons>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                                 <IonTitle>{title}</IonTitle>

@@ -164,6 +164,12 @@ function hasHorarios(consultaHorario: ConsultaHorario): boolean {
 }
 
 const toTitleCase = (str) => {
+    if (str.toUpperCase() === "UPV/EHU") {
+        return "UPV/EHU";
+    }
+    if (str.toUpperCase() === "EHU/UPV") {
+        return "EHU/UPV";
+    }
     return str
         .toLowerCase()
         .split(/[\s\-.]+/) // Divide por espacios, guiones o puntos

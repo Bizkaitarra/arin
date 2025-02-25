@@ -5,6 +5,7 @@ import {settingsOutline, trainOutline} from "ionicons/icons";
 import {useHistory} from "react-router-dom";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
+import MetroBilbaoAddStopsButton from "./MetroBilbaoAddStopsButton";
 
 const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
@@ -34,9 +35,7 @@ const MetroBilbaoViewers: React.FC = () => {
                             {t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.
                         </p>
                     </IonText>
-                    <IonButton color="secondary" onClick={() => history.push(`/configure-metro-bilbao`)}>
-                        <IonIcon icon={settingsOutline}/> {t('Configurar paradas')}
-                    </IonButton>
+                    <MetroBilbaoAddStopsButton/>
                 </div>
             )}
         </Page>

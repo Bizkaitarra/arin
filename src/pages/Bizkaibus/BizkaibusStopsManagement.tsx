@@ -1,27 +1,37 @@
 import React, {useEffect, useState} from 'react';
 import {
-    IonButton,
+    IonButton, IonFab, IonFabButton, IonFabList,
     IonIcon,
     IonItem,
     IonLabel,
-    IonList,
+    IonList, IonPopover,
     IonReorder,
     IonReorderGroup,
     IonText,
     useIonToast,
     useIonViewWillEnter
 } from '@ionic/react';
-import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
+import {
+    add,
+    businessOutline,
+    locateOutline,
+    reorderThreeOutline,
+    settingsOutline,
+    trashBinOutline
+} from 'ionicons/icons';
 import {getStations, Parada, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 
 const BizkaibusStopsManagement: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
     const history = useHistory();
     const [presentToast] = useIonToast();
     const { t } = useTranslation();
+    const [showPopover, setShowPopover] = useState(false);
+
 
     useIonViewWillEnter(() => {
 
@@ -65,6 +75,16 @@ const BizkaibusStopsManagement: React.FC = () => {
         event.detail.complete();
     };
 
+    const handleSearchByTown = (event: CustomEvent) => {
+        setShowPopover(false);
+        history.push('/add-stop-by-town-bizkaibus');
+    };
+
+    const handleSearchByLocation = (event: CustomEvent) => {
+        setShowPopover(false);
+        history.push('/add-stop-by-location-bizkaibus');
+    };
+
     return (
         <Page title={`${t('Mis paradas')}`} icon={settingsOutline}>
             {selectedStops.length > 0 ? (
@@ -96,11 +116,10 @@ const BizkaibusStopsManagement: React.FC = () => {
                         <h2>{t('No tienes paradas favoritas configuradas')}</h2>
                         <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
                     </IonText>
-                    <IonButton color="secondary" onClick={() => history.push(`/configure-bizkaibus`)}>
-                        <IonIcon icon={settingsOutline} />{t('Configurar paradas')}
-                    </IonButton>
+
                 </div>
             )}
+            <BizkaibusAddStopButton/>
         </Page>
     );
 };
