@@ -14,7 +14,7 @@ const MetroBilbaoAddStopsButton: React.FC = () => {
             <IonButton
                 color="primary"
                 expand="block"
-                onClick={() => history.push(`/configure-metro-bilbao`)}
+                onClick={() => history.push(`/metro-bilbao-add-stop`)}
             >
                 <IonIcon icon={add} />
                 {t('Añadir parada')}

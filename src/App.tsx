@@ -17,15 +17,15 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 
 import BizkaibusViewers from "./pages/Bizkaibus/BizkaibusViewers";
-import BizkaibusConfiguration from "./pages/Bizkaibus/BizkaibusConfiguration";
+import BizkaibusAddByTown from "./pages/Bizkaibus/BizkaibusAddByTown";
 import MetroBilbaoViewers from "./pages/MetroBilbao/MetroBilbaoViewers";
-import MetroBilbaoConfiguration from "./pages/MetroBilbao/MetroBilbaoConfiguration";
+import MetroBilbaoAddStop from "./pages/MetroBilbao/MetroBilbaoAddStop";
 import BizkaibusHorarioPage from "./pages/Bizkaibus/BizkaibusHorarioPage";
 import React, {useEffect, useState} from "react";
 import {StatusBar} from "@capacitor/status-bar";
 import {Capacitor} from "@capacitor/core";
-import BizkaibusStopsManagement from "./pages/Bizkaibus/BizkaibusStopsManagement";
-import MetroBilbaoStopsManagement from "./pages/MetroBilbao/MetroBilbaoStopsManagement";
+import BizkaibusMyStops from "./pages/Bizkaibus/BizkaibusMyStops";
+import MetroBilbaoMyStops from "./pages/MetroBilbao/MetroBilbaoMyStops";
 import AboutTheApp from "./pages/AboutTheApp";
 import Configuration from "./pages/Configuration";
 import {useTranslation} from "react-i18next";
@@ -70,12 +70,12 @@ const App: React.FC = () => {
                     <IonTabs>
                         <IonRouterOutlet>
                             <Route exact path="/bizkaibus-viewers" component={BizkaibusViewers} />
-                            <Route exact path="/add-stop-by-town-bizkaibus" component={BizkaibusConfiguration} />
-                            <Route exact path="/add-stop-by-location-bizkaibus" component={BizkaibusAddByLocalization} />
-                            <Route exact path="/manage-bizkaibus-stops" component={BizkaibusStopsManagement} />
+                            <Route exact path="/bizkaibus-add-stop-by-town" component={BizkaibusAddByTown} />
+                            <Route exact path="/bizkaibus-add-stop-by-location" component={BizkaibusAddByLocalization} />
+                            <Route exact path="/bizkaibus-my-stops" component={BizkaibusMyStops} />
                             <Route exact path="/metro-bilbao-viewers" component={MetroBilbaoViewers} />
-                            <Route exact path="/configure-metro-bilbao" component={MetroBilbaoConfiguration} />
-                            <Route exact path="/manage-metro-bilbao-stops" component={MetroBilbaoStopsManagement} />
+                            <Route exact path="/metro-bilbao-add-stop" component={MetroBilbaoAddStop} />
+                            <Route exact path="/metro-bilbao-my-stops" component={MetroBilbaoMyStops} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
                             <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers" />} />

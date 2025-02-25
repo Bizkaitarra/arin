@@ -7,7 +7,7 @@ import {Star, StarOff} from "lucide-react";
 import {useTranslation} from "react-i18next";
 
 
-const MetroBilbaoConfiguration: React.FC = () => {
+const MetroBilbaoAddStop: React.FC = () => {
     const [stopName, setStopName] = useState<string>('');
     const [stations, setStations] = useState<MetroStop[]>([]);
     const [filteredStations, setFilteredStations] = useState<MetroStop[]>([]);
@@ -114,4 +114,4 @@ const MetroBilbaoConfiguration: React.FC = () => {
     );
 };
 
-export default MetroBilbaoConfiguration;
+export default MetroBilbaoAddStop;

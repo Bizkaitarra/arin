@@ -12,10 +12,10 @@ import {
 } from '@ionic/react';
 import {ellipsisVertical, timerOutline} from 'ionicons/icons';
 import React, {useState} from 'react';
-import {BusArrival} from "../../services/ApiBizkaibus";
+import {BusArrival} from "../../../services/ApiBizkaibus";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {useConfiguration} from "../../context/ConfigurationContext";
+import {useConfiguration} from "../../../context/ConfigurationContext";
 
 interface Props {
     arrival: BusArrival,

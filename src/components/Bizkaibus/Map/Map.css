@@ -1,0 +1,67 @@
+.favorite-bus-marker {
+    filter: invert(70%) sepia(94%) saturate(800%) hue-rotate(300deg) brightness(96%) contrast(90%);
+}
+
+.leaflet-control-attribution a[href="https://leafletjs.com"]::after {
+    content: "Leaflet";
+    display: inline;
+}
+
+.leaflet-control-attribution a[href="https://leafletjs.com"] {
+    font-size: 0; /* Oculta el contenido original (incluida la bandera) */
+}
+
+.leaflet-control-attribution a[href="https://leafletjs.com"]::before {
+    content: "Leaflet"; /* Agrega solo el texto sin la bandera */
+    font-size: 12px; /* Restaura el tamaño de fuente */
+}
+
+.map-container {
+    height: 500px;
+    width: 100%;
+}
+
+.user-marker-icon {
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    min-width: 150px;
+}
+
+.popup-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+}
+
+.favorite-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 12px;
+}
+
+.favorite-button.active {
+    color: red;
+}
+
+.popup-description {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+

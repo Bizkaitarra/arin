@@ -1,6 +1,6 @@
 import React from 'react';
 import {IonButton, IonIcon, IonText} from '@ionic/react';
-import StopsDisplay from '../../components/Bizkaibus/StopsDisplay';
+import StopsDisplay from '../../components/Bizkaibus/StopsDisplay/StopsDisplay';
 import {busOutline, settingsOutline} from 'ionicons/icons';
 import {useHistory} from 'react-router-dom';
 import {getSavedStationIds} from '../../services/BizkaibusStorage';

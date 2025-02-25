@@ -9,12 +9,12 @@ import {
     IonText,
     useIonViewWillEnter,
 } from '@ionic/react';
-import {BusArrivalResponse, fetchStopsData} from '../../services/ApiBizkaibus';
+import {BusArrivalResponse, fetchStopsData} from '../../../services/ApiBizkaibus';
 import './StopsDisplay.css';
-import {getStations} from '../../services/BizkaibusStorage';
-import {setIntervalBizkaibus} from '../../services/IntervalServices';
-import Loader from '../Loader';
-import BusCard from "./BusCard";
+import {getStations} from '../../../services/BizkaibusStorage';
+import {setIntervalBizkaibus} from '../../../services/IntervalServices';
+import Loader from '../../Loader';
+import BusCard from "../BusCard/BusCard";
 import {useTranslation} from "react-i18next";
 
 const StopsDisplay: React.FC = () => {

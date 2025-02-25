@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {IonButton, IonIcon, IonItem, IonLabel, useIonToast, useIonViewWillEnter} from '@ionic/react';
+import {IonButton, IonIcon, IonItem, IonLabel, useIonViewWillEnter} from '@ionic/react';
 import {listOutline, mapOutline, settingsOutline} from 'ionicons/icons';
 import {getStations, Municipio, Parada, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
-import MapComponent from "../../components/Bizkaibus/MapComponent";
-import AcordeonDeParadas from "../../components/Bizkaibus/AcordeonDeParadas";
+import Map from "../../components/Bizkaibus/Map/Map";
+import StopsByTownSelector from "../../components/Bizkaibus/StopsByTownSelector/StopsByTownSelector";
 import {Star, StarOff} from "lucide-react";
 import {useTranslation} from "react-i18next";
 
-const BizkaibusConfiguration: React.FC = () => {
+const BizkaibusAddByTown: React.FC = () => {
     const {t} = useTranslation();
     const [town, setTown] = useState<Municipio | null>(null);
     const [stations, setStations] = useState<Parada[]>([]);
     const [filteredStations, setFilteredStations] = useState<Parada[]>([]);
     const [isMapView, setIsMapView] = useState<boolean>(true);
-    const [presentToast] = useIonToast();
+
 
     useIonViewWillEnter(() => {
         fetchStations();
@@ -63,14 +63,6 @@ const BizkaibusConfiguration: React.FC = () => {
                 s.PARADA === stop.PARADA ? {...s, IS_FAVORITE: !s.IS_FAVORITE} : s
             )
         );
-
-        // presentToast({
-        //     message: wasFavorite
-        //         ? `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`
-        //         : `Parada "${stop.PARADA} - ${stop.DENOMINACION}" añadida a favoritos`,
-        //     duration: 2000,
-        //     color: wasFavorite ? 'warning' : 'success'
-        // });
     };
 
 
@@ -84,12 +76,6 @@ const BizkaibusConfiguration: React.FC = () => {
                 s.PARADA === stop.PARADA ? {...s, IS_FAVORITE: false} : s
             )
         );
-
-        // presentToast({
-        //     message: `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`,
-        //     duration: 2000,
-        //     color: 'warning'
-        // });
     };
 
     const handleToggleStop = (stop: Parada) => {
@@ -104,14 +90,6 @@ const BizkaibusConfiguration: React.FC = () => {
                 s.PARADA === stop.PARADA ? {...s, IS_FAVORITE: newFavoriteStatus} : s
             )
         );
-
-        // presentToast({
-        //     message: newFavoriteStatus
-        //         ? `Parada "${stop.PARADA} - ${stop.DENOMINACION}" añadida a favoritos`
-        //         : `La parada "${stop.PARADA} - ${stop.DENOMINACION}" ha sido eliminada de favoritos`,
-        //     duration: 2000,
-        //     color: newFavoriteStatus ? 'success' : 'warning'
-        // });
     };
 
 
@@ -127,7 +105,7 @@ const BizkaibusConfiguration: React.FC = () => {
         <Page title={t("Añadir paradas")} icon={settingsOutline} internalPage={true}>
             <div>
                 {!town ? (
-                    <AcordeonDeParadas paradas={stations} onMunicipioClick={handleTownSelect}/>
+                    <StopsByTownSelector paradas={stations} onMunicipioClick={handleTownSelect}/>
                 ) : (
                     <p>
                         <strong>{t('Pueblo seleccionado')}:</strong> {town.DESCRIPCION_MUNICIPIO}{' ('}{town.DESCRIPCION_PROVINCIA}{')'}
@@ -152,7 +130,7 @@ const BizkaibusConfiguration: React.FC = () => {
                     {isMapView ? (
                         <div>
                             <h1>{t('Mapa de Paradas')}</h1>
-                            <MapComponent paradas={filteredStations} onToggleFavorite={handleToggleStop}/>
+                            <Map paradas={filteredStations} onToggleFavorite={handleToggleStop}/>
                         </div>
                     ) : (
                         <>
@@ -177,4 +155,4 @@ const BizkaibusConfiguration: React.FC = () => {
     );
 };
 
-export default BizkaibusConfiguration;
+export default BizkaibusAddByTown;

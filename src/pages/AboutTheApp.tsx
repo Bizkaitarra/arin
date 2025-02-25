@@ -8,7 +8,6 @@ const AboutTheApp: React.FC = () => {
     return (
         <Page title={t("Sobre Arin")} icon={informationCircle}>
             <div>
-                <h1>Arin</h1>
                 <p>{t('Esta APP ha sido desarrollada de manera personal y sin ánimo de lucro')}.</p>
                 <p>{t('La información proporcionada sobre los tiempos y las paradas son obtenidas de los medios de transporte afectados')}</p>
                 <h2>{t('Objetivos')}</h2>

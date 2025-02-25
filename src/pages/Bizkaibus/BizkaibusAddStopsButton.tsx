@@ -22,12 +22,12 @@ const BizkaibusAddStopButton: React.FC = () => {
 
     const handleSearchByTown = () => {
         setShowPopover(false);
-        history.push('/add-stop-by-town-bizkaibus');
+        history.push('/bizkaibus-add-stop-by-town');
     };
 
     const handleSearchByLocation = () => {
         setShowPopover(false);
-        history.push('/add-stop-by-location-bizkaibus');
+        history.push('/bizkaibus-add-stop-by-location');
     };
 
     return (

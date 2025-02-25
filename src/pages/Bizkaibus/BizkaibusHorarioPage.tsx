@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {ConsultaHorario, loadHorarios} from "../../services/ApiBizkaibus";
-import ConsultaHorarioViewer from "../../components/Bizkaibus/ConsultaHorarioViewer";
+import ScheduleViewer from "../../components/Bizkaibus/ScheduleViewer/ScheduleViewer";
 import {timerOutline} from "ionicons/icons";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
@@ -48,7 +48,7 @@ const BizkaibusHorarioPage: React.FC = () => {
                 <div style={{ padding: "20px" }}>
                     {loading && <p>{t('Obteniendo información de Bizkabus, espera con un ☕️...')}</p>}
                     {error && <p>{error}</p>}
-                    {horarios && Object.keys(horarios).length > 0 && <ConsultaHorarioViewer horarios={horarios} />}
+                    {horarios && Object.keys(horarios).length > 0 && <ScheduleViewer horarios={horarios} />}
                 </div>
         </Page>
     );

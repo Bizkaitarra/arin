@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText, TextField } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Municipio, Parada } from "../../services/BizkaibusStorage";
-import './AcordeonDeParadas.css';
+import { Municipio, Parada } from "../../../services/BizkaibusStorage";
+import './StopsByTownSelector.css';
 import {useTranslation} from "react-i18next";
 
 interface AcordeonDeParadasProps {
@@ -11,7 +11,7 @@ interface AcordeonDeParadasProps {
     onMunicipioClick: (municipio: Municipio) => void;
 }
 
-const AcordeonDeParadas: React.FC<AcordeonDeParadasProps> = ({ paradas, onMunicipioClick }) => {
+const StopsByTownSelector: React.FC<AcordeonDeParadasProps> = ({ paradas, onMunicipioClick }) => {
     const { t } = useTranslation();
     const provincias = paradas.reduce((acc: { [key: string]: Parada[] }, parada) => {
         const { PROVINCIA, MUNICIPIO } = parada;
@@ -99,4 +99,4 @@ const AcordeonDeParadas: React.FC<AcordeonDeParadasProps> = ({ paradas, onMunici
     );
 };
 
-export default AcordeonDeParadas;
+export default StopsByTownSelector;

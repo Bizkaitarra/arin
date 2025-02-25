@@ -61,12 +61,12 @@ const Configuration: React.FC = () => {
 
     return (
         <Page title={t("Configuración general")} icon={trainOutline}>
-            <h2>{t('Configuración general')}</h2>
             <IonItem>
                 <LanguageSwitcher language={settings.language} onLanguageChange={handleLanguageChange} />
             </IonItem>
+            <p>{t('Indica qué atajos quieres mostrar en la cabecera. También puedes elegir que no quieres atajos')}.</p>
             <IonItem>
-                <IonLabel>{t('Visores a mostrar')}</IonLabel>
+                <IonLabel>{t('Atajos')}</IonLabel>
                 <IonSelect name="visores" value={settings.visores} onIonChange={handleSelectVisoresChange}>
                     <IonSelectOption value="bizkaibus_metro">Bizkaibus + Metro Bilbao</IonSelectOption>
                     <IonSelectOption value="bizkaibus">Bizkaibus</IonSelectOption>
@@ -74,7 +74,8 @@ const Configuration: React.FC = () => {
                     <IonSelectOption value="ninguno">{t('Ninguno')}</IonSelectOption>
                 </IonSelect>
             </IonItem>
-            <h4>Metro Bilbao</h4>
+            <hr></hr>
+            <strong>Metro Bilbao</strong>
             <p>{t('Indica si deseas ver o no el número de vagones en los resultados del visor')}.</p>
             <IonItem>
                 <IonLabel>{t('¿Ver número de vagones?')}</IonLabel>
@@ -91,7 +92,8 @@ const Configuration: React.FC = () => {
                 </IonSelect>
 
             </IonItem>
-            <h4>Bizkaibus</h4>
+            <hr></hr>
+            <strong>Bizkaibus</strong>
             <p>{t('Indica si quieres ver la diferencia de tiempo entre los autobuses que proporiciona Bizkaibus. Esto puede dar una orientación de cuando puede ser el siguiente que venga ya que Bizkaibus solo proporciona dos autobuses por línea.')}</p>
             <IonItem>
                 <IonLabel>{t('Ver frecuencia')}</IonLabel>

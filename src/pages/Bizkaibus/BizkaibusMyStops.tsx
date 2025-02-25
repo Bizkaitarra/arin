@@ -1,36 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {
-    IonButton, IonFab, IonFabButton, IonFabList,
+    IonButton,
     IonIcon,
     IonItem,
     IonLabel,
-    IonList, IonPopover,
+    IonList,
     IonReorder,
     IonReorderGroup,
     IonText,
     useIonToast,
     useIonViewWillEnter
 } from '@ionic/react';
-import {
-    add,
-    businessOutline,
-    locateOutline,
-    reorderThreeOutline,
-    settingsOutline,
-    trashBinOutline
-} from 'ionicons/icons';
+import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {getStations, Parada, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
-import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 
-const BizkaibusStopsManagement: React.FC = () => {
+const BizkaibusMyStops: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
-    const history = useHistory();
     const [presentToast] = useIonToast();
     const { t } = useTranslation();
-    const [showPopover, setShowPopover] = useState(false);
 
 
     useIonViewWillEnter(() => {
@@ -75,15 +65,6 @@ const BizkaibusStopsManagement: React.FC = () => {
         event.detail.complete();
     };
 
-    const handleSearchByTown = (event: CustomEvent) => {
-        setShowPopover(false);
-        history.push('/add-stop-by-town-bizkaibus');
-    };
-
-    const handleSearchByLocation = (event: CustomEvent) => {
-        setShowPopover(false);
-        history.push('/add-stop-by-location-bizkaibus');
-    };
 
     return (
         <Page title={`${t('Mis paradas')}`} icon={settingsOutline}>
@@ -124,4 +105,4 @@ const BizkaibusStopsManagement: React.FC = () => {
     );
 };
 
-export default BizkaibusStopsManagement;
+export default BizkaibusMyStops;

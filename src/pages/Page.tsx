@@ -84,7 +84,7 @@ const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false
                                 <IonIcon slot="start" icon={busOutline} />
                                 <IonLabel>{t('Visores')}</IonLabel>
                             </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/manage-bizkaibus-stops")}>
+                            <IonItem button onClick={() => handleNavigation("/bizkaibus-my-stops")}>
                                 <IonIcon slot="start" icon={listOutline} />
                                 <IonLabel>{t('Mis paradas')}</IonLabel>
                             </IonItem>
@@ -94,7 +94,7 @@ const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false
                                 <IonIcon slot="start" icon={trainOutline} />
                                 <IonLabel>{t('Visores')}</IonLabel>
                             </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/manage-metro-bilbao-stops")}>
+                            <IonItem button onClick={() => handleNavigation("/metro-bilbao-my-stops")}>
                                 <IonIcon slot="start" icon={listOutline} />
                                 <IonLabel>{t('Mis paradas')}</IonLabel>
                             </IonItem>

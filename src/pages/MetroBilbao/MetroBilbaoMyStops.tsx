@@ -11,18 +11,16 @@ import {
     useIonToast,
     useIonViewWillEnter,
 } from '@ionic/react';
-import {add, reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
+import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {ItemReorderEventDetail} from '@ionic/core';
 import Page from "../Page";
-import {useHistory} from "react-router-dom";
 import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
 import {useTranslation} from "react-i18next";
 import MetroBilbaoAddStopsButton from "./MetroBilbaoAddStopsButton";
 
 
-const MetroBilbaoStopsManagement: React.FC = () => {
+const MetroBilbaoMyStops: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<MetroStop[]>([]);
-    const history = useHistory();
     const [presentToast] = useIonToast();
     const { t } = useTranslation();
 
@@ -104,4 +102,4 @@ const MetroBilbaoStopsManagement: React.FC = () => {
     );
 };
 
-export default MetroBilbaoStopsManagement;
+export default MetroBilbaoMyStops;

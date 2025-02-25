@@ -71,5 +71,12 @@
   "Configuración": "Konfigurazioa",
   "Cerrar": "Itxi",
   "General": "Orokorra",
-  "Menú": "Menua"
+  "Menú": "Menua",
+  "Indica qué atajos quieres mostrar en la cabecera. También puedes elegir que no quieres atajos": "Aukeratu nahi dituzun lasterbideak. Aukeratu dezakezu ez dituzula lasterbiderik nahi",
+  "Añadir parada": "Geltokia gehitu",
+  "Buscar paradas por pueblo": "Geltokiak herriaren arabera bilatu",
+  "Buscar paradas por localización": "Geltokiak kokapenaren arabera bilatu",
+  "Paradas cercanas": "Gertuko geltokiak",
+  "A continuación se muestran las paradas cercanas.": "Ondoren gertuko geltokiak erakusten dira",
+  "No se ha podido obtener la localización o no hay paradas cercanas.": "Ez da kokapena lortu edo ez dago gertuko geltokirik."
 }
