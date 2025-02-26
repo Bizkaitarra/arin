@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useIonToast} from '@ionic/react';
+import {IonButton, useIonToast} from '@ionic/react';
 import {useHistory} from 'react-router-dom';
 import {getStations, Parada, saveStationIds} from '../../services/BizkaibusStorage';
 import {Geolocation, Position} from '@capacitor/geolocation';
@@ -44,9 +44,9 @@ const BizkaibusAddByLocalization: React.FC = () => {
     const requestLocation = async () => {
         try {
             console.log('Requesting location...');
+            setLoading(true);
 
             if (Capacitor.getPlatform() === 'web') {
-                // Usar la API de geolocalización del navegador
                 if (!navigator.geolocation) {
                     throw new Error(t('La geolocalización no está disponible en este navegador.'));
                 }
@@ -68,44 +68,47 @@ const BizkaibusAddByLocalization: React.FC = () => {
                         setLoading(false);
                     },
                     (error) => {
-                        throw error;
+                        console.error('Error obteniendo ubicación (web):', error);
+                        setLoading(false);
+                        presentToast({ message: t('Error obteniendo ubicación.'), duration: 2000, color: 'danger' });
                     },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 0,
-                    }
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
                 );
             } else {
-                // Usar Capacitor Geolocation en plataformas nativas
-                await Geolocation.requestPermissions();
-                const position = await Geolocation.getCurrentPosition({
+                // Comprobar permisos en móvil antes de llamar a getCurrentPosition()
+                const permStatus = await Geolocation.checkPermissions();
+                if (permStatus.location !== 'granted') {
+                    const newPermStatus = await Geolocation.requestPermissions();
+                    if (newPermStatus.location !== 'granted') {
+                        throw new Error(t('Permiso de ubicación denegado.'));
+                    }
+                }
+
+                // Implementar timeout manual para evitar bloqueo
+                const positionPromise = Geolocation.getCurrentPosition({
                     enableHighAccuracy: true,
-                    timeout: 10000,
+                    timeout: 10000, // Timeout de 10s
                     maximumAge: 0,
                 });
-                setLocation(position);
-                console.log('Location:', position);
+
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error(t('Tiempo de espera agotado para la ubicación.'))), 15000)
+                );
+
+                const position = await Promise.race([positionPromise, timeoutPromise]); // Si se pasa de 15s, lanza error
+
+                setLocation(position as Position);
+                console.log('Location (mobile):', position);
+                setLoading(false);
             }
         } catch (error: any) {
-            presentToast({
-                message: t('No se pudo acceder a la localización.'),
-                duration: 2000,
-                color: 'danger',
-            });
-
-            presentToast({
-                message: error.message,
-                duration: 2000,
-                color: 'danger',
-            });
-
-            history.goBack();
-        } finally {
-            console.log('estableciendo loading a false');
-            setLoading(false);
+            console.error('Error obteniendo ubicación:', error);
+            setLoading(false); // Asegurar que el loading se detiene
+            setLocation(null);
         }
     };
+
+
 
     useEffect(() => {
         if (stations.length === 0) return;
@@ -167,22 +170,25 @@ const BizkaibusAddByLocalization: React.FC = () => {
 
     return (
         <Page title={`${t('Paradas cercanas')}`} icon={settingsOutline} internalPage={true}>
+
             <p>{t('A continuación se muestran las paradas cercanas.')}</p>
             {loading ? (
                 <Loader serviceName="Bizkaibus" reloading={false} />
             ) : location && nearbyStations.length > 0 ? (
+                <Map paradas={nearbyStations} onToggleFavorite={handleToggleStop} userPosition={location} />
+            ) : location ? (
                 <>
-                    <Map
-                        paradas={nearbyStations}
-                        onToggleFavorite={handleToggleStop}
-                        userPosition={location}
-                    />
+                    <p>{t('No hay paradas cercanas.')}</p>
                 </>
-            ) : (
+            ) :  (
                 <>
-                    <p>{t('No se ha podido obtener la localización o no hay paradas cercanas.')}</p>
+                    <p>{t('No se ha podido obtener la localización. Asegurate de tener el GPS activo y de dar permiso a la obtención de la ubicación.')}</p>
+                    <IonButton onClick={requestLocation} className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md">
+                        {t("Reintentar")}
+                    </IonButton>
                 </>
             )}
+
         </Page>
 
     );
