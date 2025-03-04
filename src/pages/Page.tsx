@@ -19,7 +19,6 @@ import NavigationTabs from "../components/NavigationTabs";
 import {clearIntervals} from "../services/IntervalServices";
 import {useTranslation} from "react-i18next";
 import {
-    addCircleOutline,
     arrowBackOutline,
     busOutline,
     informationCircleOutline,

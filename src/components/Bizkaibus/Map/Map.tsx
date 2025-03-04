@@ -6,7 +6,7 @@ import {Parada} from "../../../services/BizkaibusStorage";
 import {Star, StarOff} from "lucide-react";
 import './Map.css';
 import {useTranslation} from "react-i18next";
-import {Position} from "@capacitor/geolocation";
+import {Location} from "../../../services/GeoLocation";
 
 
 const busStopCustomIcon = (isFavorite) => new L.Icon({
@@ -30,10 +30,11 @@ const userPositionIcon = new L.DivIcon({
 interface MapComponentProps {
     paradas: Parada[];
     onToggleFavorite: (parada: Parada) => void;
-    userPosition?: Position;
+    userPosition?: Location;
+    isReal?: boolean;
 }
 
-const MapUpdater: React.FC<{ positions: [number, number][]; userPosition?: Position }> = ({ positions, userPosition }) => {
+const MapUpdater: React.FC<{ positions: [number, number][]; userPosition?: Location }> = ({ positions, userPosition }) => {
     const map = useMap();
     const previousPositions = React.useRef<string | null>(null);
     const previousUserPosition = React.useRef<string | null>(null);
@@ -41,7 +42,7 @@ const MapUpdater: React.FC<{ positions: [number, number][]; userPosition?: Posit
     useEffect(() => {
         const positionsKey = JSON.stringify(positions.map(([lat, lng]) => [lat.toFixed(5), lng.toFixed(5)]));
         const userPositionKey = userPosition
-            ? `${userPosition.coords.latitude.toFixed(5)},${userPosition.coords.longitude.toFixed(5)}`
+            ? `${userPosition.latitude.toFixed(5)},${userPosition.longitude.toFixed(5)}`
             : null;
 
         // Verificar si las posiciones o la ubicación del usuario han cambiado realmente
@@ -50,7 +51,7 @@ const MapUpdater: React.FC<{ positions: [number, number][]; userPosition?: Posit
 
         if (hasNewStops || hasNewUserPosition) {
             if (userPosition) {
-                map.setView([userPosition.coords.latitude, userPosition.coords.longitude], 17);
+                map.setView([userPosition.latitude, userPosition.longitude], 17);
             } else if (positions.length > 0) {
                 map.fitBounds(L.latLngBounds(positions));
             }
@@ -65,7 +66,7 @@ const MapUpdater: React.FC<{ positions: [number, number][]; userPosition?: Posit
 
 
 
-const Map: React.FC<MapComponentProps> = ({ paradas, onToggleFavorite, userPosition }) => {
+const Map: React.FC<MapComponentProps> = ({ paradas, onToggleFavorite, userPosition, isReal }) => {
     const { t } = useTranslation();
     if (paradas.length === 0) return <p>{t('No hay paradas disponibles')}.</p>;
 
@@ -77,12 +78,12 @@ const Map: React.FC<MapComponentProps> = ({ paradas, onToggleFavorite, userPosit
         })
         .filter((pos): pos is [number, number] => pos !== null);
 
-    if (userPosition) {
-        positions.push([userPosition.coords.latitude, userPosition.coords.longitude]);
+    if (userPosition && isReal) {
+        positions.push([userPosition.latitude, userPosition.longitude]);
     }
 
     return (
-        <MapContainer className="map-container" zoom={13}>
+        <MapContainer className="map-container" zoom={12}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <MapUpdater positions={positions} userPosition={userPosition} />
             {positions.map((position, index) => {

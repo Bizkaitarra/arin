@@ -60,7 +60,7 @@
     "Name": "Bagatza",
     "Lines": ["L2"],
     "Platform1": ["URB"],
-    "Platform2": ["BAG"]
+    "Platform2": ["BAR"]
   },
   {
     "Code": "BAR",
@@ -87,7 +87,7 @@
     "Code": "BER",
     "Name": "Berango",
     "Lines": ["L1"],
-    "Platform1": ["SOP"],
+    "Platform1": ["LAR"],
     "Platform2": ["IBB"]
   },
   {
@@ -136,8 +136,8 @@
     "Code": "GUR",
     "Name": "Gurutzeta\/Cruces",
     "Lines": ["L2"],
-    "Platform1": ["BAR"],
-    "Platform2": ["ANS"]
+    "Platform1": ["ANS"],
+    "Platform2": ["SIN"]
   },
   {
     "Code": "IBB",
@@ -276,8 +276,8 @@
     "Code": "URB",
     "Name": "Urbinaga",
     "Lines": ["L2"],
-    "Platform1": ["BAG"],
-    "Platform2": ["SIN"]
+    "Platform1": ["SES"],
+    "Platform2": ["BAG"]
   },
   {
     "Code": "URD",

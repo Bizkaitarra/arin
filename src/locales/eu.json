@@ -77,6 +77,17 @@
   "Buscar paradas por pueblo": "Geltokiak herriaren arabera bilatu",
   "Buscar paradas por localización": "Geltokiak kokapenaren arabera bilatu",
   "Paradas cercanas": "Gertuko geltokiak",
-  "A continuación se muestran las paradas cercanas.": "Ondoren gertuko geltokiak erakusten dira",
-  "No se ha podido obtener la localización o no hay paradas cercanas.": "Ez da kokapena lortu edo ez dago gertuko geltokirik."
+  "A continuación se muestran las paradas cercanas": "Ondoren gertuko geltokiak erakusten dira",
+  "No hay paradas cercanas.": "Ez dago gertuko geltokirik.",
+  "Obteniendo ubicación": "Kokapena eskuratzen",
+  "Geolocalización no permitida": "Kokapena ez dago baimendua",
+  "Ubicación obtenida": "Kokapena lortuta",
+  "Parada": "Geltokia",
+  "Nombre personalizado": "Izen pertsonalizatua",
+  "Nombre original": "Izen originala",
+  "Municipio": "Udalerria",
+  "Provincia": "Probintzia",
+  "Escribe el nuevo nombre": "Escribe el nuevo nombre",
+  "Guardar": "Gorde"
+
 }

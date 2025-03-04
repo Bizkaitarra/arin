@@ -86,7 +86,7 @@ const StopsDisplay: React.FC = () => {
         return (
             <IonCard className="stop-card">
                 <IonCardHeader className="stop-card-header">
-                    <IonCardTitle>{stopData.parada.PARADA}-{stopData.parada.DENOMINACION}</IonCardTitle>
+                    <IonCardTitle>{stopData.parada.PARADA}-{stopData.parada.CUSTOM_NAME}</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
                     <div className="bus-cards-container">

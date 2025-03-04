@@ -73,9 +73,19 @@
   "Menú": "Menú",
   "Indica qué atajos quieres mostrar en la cabecera. También puedes elegir que no quieres atajos": "Indica qué atajos quieres mostrar en la cabecera. También puedes elegir que no quieres atajos",
   "Añadir parada": "Añadir parada",
-  "Buscar paradas por puebloa": "Buscar paradas por pueblo",
+  "Buscar paradas por pueblo": "Buscar paradas por pueblo",
   "Buscar paradas por localización": "Buscar paradas por localización",
   "Paradas cercanas": "Paradas cercanas",
   "A continuación se muestran las paradas cercanas": "A continuación se muestran las paradas cercanas",
-  "No se ha podido obtener la localización o no hay paradas cercanas.": "No se ha podido obtener la localización o no hay paradas cercanas."
+  "No hay paradas cercanas.": "No hay paradas cercanas.",
+  "Obteniendo ubicación": "Obteniendo ubicación",
+  "Geolocalización no permitida": "Geolocalización no permitida",
+  "Ubicación obtenida": "Ubicación obtenida",
+  "Parada": "Parada",
+  "Nombre personalizado": "Nombre personalizado",
+  "Nombre original": "Nombre original",
+  "Municipio": "Municipio",
+  "Provincia": "Provincia",
+  "Escribe el nuevo nombre": "Escribe el nuevo nombre",
+  "Guardar": "Guardar"
 }

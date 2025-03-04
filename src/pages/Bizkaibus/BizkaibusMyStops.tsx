@@ -11,11 +11,12 @@ import {
     useIonToast,
     useIonViewWillEnter
 } from '@ionic/react';
-import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
-import {getStations, Parada, saveStationIds} from "../../services/BizkaibusStorage";
+import {pencilOutline, reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
+import {getStations, Parada, saveRenamedStation, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
+import RenameStopComponent from "../../components/Bizkaibus/RenameStopComponent/RenameStopComponent";
 
 const BizkaibusMyStops: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
@@ -54,6 +55,19 @@ const BizkaibusMyStops: React.FC = () => {
             color: 'success'
         });
     };
+    const handleStopRename = (newStopName: string, stop: Parada) => {
+        stop.CUSTOM_NAME = newStopName;
+        const updatedStops = selectedStops.map(s =>
+            s.PARADA === stop.PARADA ? { ...s, CUSTOM_NAME: newStopName } : s
+        );
+        saveRenamedStation(stop);
+        setSelectedStops(updatedStops);
+        presentToast({
+            message: t('`Parada renombrada`'),
+            duration: 2000,
+            color: 'success'
+        });
+    };
 
     const handleReorder = (event: CustomEvent) => {
         const fromIndex = event.detail.from;
@@ -70,21 +84,23 @@ const BizkaibusMyStops: React.FC = () => {
         <Page title={`${t('Mis paradas')}`} icon={settingsOutline}>
             {selectedStops.length > 0 ? (
                 <>
-                    <p>{t('Ordena las paradas seleccionadas y elimina las que no desees seguir viendo')}</p>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
                             {selectedStops.map((stop) => (
                                 <IonItem key={stop.PARADA}>
                                     <IonLabel>
-                                        <h3>{stop.PARADA} - {stop.DENOMINACION}</h3>
+                                        <h3>{stop.PARADA} - {stop.CUSTOM_NAME}</h3>
                                         <p>{stop.DESCRIPCION_MUNICIPIO}, {stop.DESCRIPCION_PROVINCIA}</p>
                                     </IonLabel>
-                                    <IonButton fill="clear" slot="end" color="danger" size="large"
+                                    <RenameStopComponent stop={stop} onRename={handleStopRename} />
+
+                                    <IonButton fill="clear" slot="end" color="danger" size="default"
                                                onClick={() => handleRemoveStop(stop.PARADA)}>
                                         <IonIcon icon={trashBinOutline}/>
                                     </IonButton>
+
                                     <IonReorder slot="start">
-                                        <IonIcon size="large" icon={reorderThreeOutline}/>
+                                        <IonIcon size="default" icon={reorderThreeOutline}/>
                                     </IonReorder>
                                 </IonItem>
                             ))}

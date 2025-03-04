@@ -28,8 +28,8 @@ async function getMetroStopTrains(metroStop: MetroStop, maxTrains: number): Prom
 
     return {
         Station: metroStop,
-        Platform1: platform1Trains.flat(),
-        Platform2: platform2Trains.flat()
+        Platform1: platform1Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
+        Platform2: platform2Trains.flat().sort((a, b) => a.Estimated - b.Estimated)
     };
 }
 
