@@ -73,6 +73,46 @@ ion-tab-button.tab-selected {
     }
 }
 
+.expanded {
+    opacity: 1;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.collapsed {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    overflow: hidden;
+}
+.station-card-header {
+    padding: 1px;
+    cursor: pointer;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.station-card-title {
+    flex-grow: 1; /* El título ocupa el espacio disponible */
+}
+
+.toggle-button {
+    font-size: 22px;
+    cursor: pointer;
+    color: black;
+}
+
+
+
+
 
 
 

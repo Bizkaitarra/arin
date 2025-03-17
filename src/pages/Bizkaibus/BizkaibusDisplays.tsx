@@ -8,7 +8,7 @@ import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 
-const BizkaibusViewers: React.FC = () => {
+const BizkaibusDisplays: React.FC = () => {
     const {t} = useTranslation();
     const history = useHistory();
 
@@ -19,8 +19,8 @@ const BizkaibusViewers: React.FC = () => {
                 ) : (
                     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
                         <IonText>
-                            <h2>{t('No tienes paradas favoritas configuradas')}</h2>
-                            <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
+                            <h2>{t('No tienes visores favoritos configurados')}</h2>
+                            <p>{t('Para poder ver tus visores favoritos, debes configurarlos en la página de configuración')}.</p>
                         </IonText>
                         <BizkaibusAddStopButton/>
                     </div>
@@ -29,4 +29,4 @@ const BizkaibusViewers: React.FC = () => {
     );
 };
 
-export default BizkaibusViewers;
+export default BizkaibusDisplays;

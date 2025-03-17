@@ -11,14 +11,14 @@ import {
     useIonToast,
     useIonViewWillEnter
 } from '@ionic/react';
-import {pencilOutline, reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
+import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {getStations, Parada, saveRenamedStation, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 import RenameStopComponent from "../../components/Bizkaibus/RenameStopComponent/RenameStopComponent";
 
-const BizkaibusMyStops: React.FC = () => {
+const BizkaibusMyDisplays: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
     const [presentToast] = useIonToast();
     const { t } = useTranslation();
@@ -81,7 +81,7 @@ const BizkaibusMyStops: React.FC = () => {
 
 
     return (
-        <Page title={`${t('Mis paradas')}`} icon={settingsOutline}>
+        <Page title={`${t('Mis visores')}`} icon={settingsOutline}>
             {selectedStops.length > 0 ? (
                 <>
                     <IonList>
@@ -110,8 +110,8 @@ const BizkaibusMyStops: React.FC = () => {
             ) : (
                 <div style={{ textAlign: 'center', marginTop: '2rem' }}>
                     <IonText>
-                        <h2>{t('No tienes paradas favoritas configuradas')}</h2>
-                        <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
+                        <h2>{t('No tienes visores favoritos configurados')}</h2>
+                        <p>{t('Para poder ver tus visores favoritos, debes configurarlos en la página de configuración')}.</p>
                     </IonText>
 
                 </div>
@@ -121,4 +121,4 @@ const BizkaibusMyStops: React.FC = () => {
     );
 };
 
-export default BizkaibusMyStops;
+export default BizkaibusMyDisplays;

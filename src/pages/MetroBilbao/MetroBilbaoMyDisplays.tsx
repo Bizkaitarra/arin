@@ -14,37 +14,43 @@ import {
 import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {ItemReorderEventDetail} from '@ionic/core';
 import Page from "../Page";
-import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
+import {getSavedDisplays, saveMetroDisplays} from "../../services/MetroBilbaoStorage";
 import {useTranslation} from "react-i18next";
-import MetroBilbaoAddStopsButton from "./MetroBilbaoAddStopsButton";
+import MetroBilbaoAddTripButton from "../../components/MetroBilbao/MetroBilbaoAddVisorButton";
+import {Display} from "../../services/MetroBilbao/Display";
 
 
-const MetroBilbaoMyStops: React.FC = () => {
-    const [selectedStops, setSelectedStops] = useState<MetroStop[]>([]);
+const MetroBilbaoMyDisplays: React.FC = () => {
+    const [selectedStops, setSelectedStops] = useState<Display[]>([]);
     const [presentToast] = useIonToast();
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     useIonViewWillEnter(() => {
-        setSelectedStops(getMetroStops(true).filter(parada => parada.IsFavorite));
+        setSelectedStops(getSavedDisplays);
     }, []);
 
     useEffect(() => {
         if (selectedStops.length > 0) {
-            saveMetroStops(selectedStops);
+            saveMetroDisplays(selectedStops);
         }
     }, [selectedStops]);
 
 
-    const handleRemoveStop = (id: string) => {
-        const stops = selectedStops.filter((stop) => stop.Code !== id);
-        saveMetroStops(stops);
+    const handleRemoveDisplay = (display: Display) => {
+        const stops = selectedStops.filter(
+            (currentDisplay) => currentDisplay.origin.Code !== display.origin.Code || currentDisplay.destination?.Code !== display.destination?.Code
+        );
+
+        saveMetroDisplays(stops);
         setSelectedStops(stops);
+
         presentToast({
             message: `Parada eliminada`,
             duration: 2000,
             color: 'success'
         });
     };
+
 
     const handleReorder = (event: CustomEvent<ItemReorderEventDetail>) => {
         const fromIndex = event.detail.from;
@@ -59,24 +65,27 @@ const MetroBilbaoMyStops: React.FC = () => {
     };
 
     return (
-        <Page title={`${t('Mis paradas')}`} icon={settingsOutline}>
-        {selectedStops.length > 0 ? (
+        <Page title={`${t('Mis visores')}`} icon={settingsOutline}>
+            {selectedStops.length > 0 ? (
                 <>
                     <p>{t('Ordena las paradas seleccionadas y elimina las que no desees seguir viendo')}</p>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
-                            {selectedStops.map((stop) => (
-                                <IonItem key={stop.Code}>
+                            {selectedStops.map((display) => (
+                                <IonItem key={display.origin.Code}>
                                     <IonLabel>
-                                        <h3>{stop.Code} - {stop.Name}</h3>
-                                        <p>{stop.Lines.join(',')}</p>
+                                        <h3>
+                                            {display.origin.Name}
+                                            {display.destination && ` → ${display.destination.Name}`}
+                                        </h3>
+                                        <p>{display.origin.Lines.join(',')}</p>
                                     </IonLabel>
                                     <IonButton
                                         size="large"
                                         fill="clear"
                                         slot="end"
                                         color="danger"
-                                        onClick={() => handleRemoveStop(stop.Code)}
+                                        onClick={() => handleRemoveDisplay(display)}
                                     >
                                         <IonIcon icon={trashBinOutline}/>
                                     </IonButton>
@@ -88,18 +97,19 @@ const MetroBilbaoMyStops: React.FC = () => {
                         </IonReorderGroup>
                     </IonList>
                 </>
+
             ) : (
                 <div style={{textAlign: 'center', marginTop: '2rem'}}>
                     <IonText>
-                        <h2>{t('No tienes paradas favoritas configuradas')}</h2>
-                        <p>{t('Para poder ver tus paradas favoritas, debes configurarlas en la página de configuración')}.</p>
+                        <h2>{t('No tienes visores favoritos configurados')}</h2>
+                        <p>{t('Para poder ver tus visores favoritos, debes configurarlos en la página de configuración')}.</p>
                     </IonText>
 
                 </div>
             )}
-            <MetroBilbaoAddStopsButton/>
+            <MetroBilbaoAddTripButton/>
         </Page>
     );
 };
 
-export default MetroBilbaoMyStops;
+export default MetroBilbaoMyDisplays;

@@ -22,7 +22,7 @@ const NavigationTabs: React.FC = () => {
             ) : null}
 
             {settings.visores === 'metro' || settings.visores === 'bizkaibus_metro' ? (
-                <IonTabButton tab="metro-bilbao-viewers" href="/metro-bilbao-viewers">
+                <IonTabButton tab="metro-bilbao-displays" href="/metro-bilbao-displays">
                     <span className="subtext">{t('metro_nav_1')}</span>
                     <IonIcon icon={trainOutline} />
                     <IonLabel>{t('metro_nav_2')}</IonLabel>

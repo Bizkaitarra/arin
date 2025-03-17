@@ -1,11 +1,16 @@
 import {Capacitor} from "@capacitor/core";
 import {MetroStop, MetroStopTrains, MetroTrain} from "./MetroBilbaoStorage";
-
+import {IncidentsResult, MetroBilbaoResponse} from "./MetroBilbao/Incidences";
+import i18next from "i18next";
+import {Display} from "./MetroBilbao/Display";
 
 async function fetchTrainData(origin: string, destination: string, maxTrains: number): Promise<MetroTrain[]> {
     try {
         const response = await fetch(`https://api.metrobilbao.eus/metro/real-time/${origin}/${destination}`);
         const data = await response.json();
+        const duration = data.trip?.duration;
+
+        console.log(duration);
         return data.trains
             .filter((train: any) => train.estimated <= maxTrains)
             .map((train: any) => ({
@@ -13,7 +18,9 @@ async function fetchTrainData(origin: string, destination: string, maxTrains: nu
                 Estimated: train.estimated,
                 Direction: train.direction,
                 Time: train.time,
-                TimeRounded: train.timeRounded
+                TimeRounded: train.timeRounded,
+                Duration: duration,
+                Transfer: data.trip.transfer
             }));
     } catch (error) {
         console.error(`Error fetching train data for ${origin} to ${destination}:`, error);
@@ -21,23 +28,61 @@ async function fetchTrainData(origin: string, destination: string, maxTrains: nu
     }
 }
 
-
-async function getMetroStopTrains(metroStop: MetroStop, maxTrains: number): Promise<MetroStopTrains> {
-    const platform1Trains = await Promise.all(metroStop.Platform1.map(dest => fetchTrainData(metroStop.Code, dest, maxTrains)));
-    const platform2Trains = await Promise.all(metroStop.Platform2.map(dest => fetchTrainData(metroStop.Code, dest, maxTrains)));
-
+async function getMetroStopTrains(display: Display, maxTrains: number): Promise<MetroStopTrains> {
+    if (!display.destination) {
+        const platform1Trains = await Promise.all(display.origin.Platform1.map(dest => fetchTrainData(display.origin.Code, dest, maxTrains)));
+        const platform2Trains = await Promise.all(display.origin.Platform2.map(dest => fetchTrainData(display.origin.Code, dest, maxTrains)));
+        return {
+            Display: display,
+            Platform1: platform1Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
+            Platform2: platform2Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
+            isRoute: false
+        };
+    }
+    const platform1Trains = [await fetchTrainData(display.origin.Code, display.destination.Code, maxTrains)];
+    const platform2Trains = [await fetchTrainData(display.destination.Code, display.origin.Code, maxTrains)];
     return {
-        Station: metroStop,
+        Display: display,
         Platform1: platform1Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
-        Platform2: platform2Trains.flat().sort((a, b) => a.Estimated - b.Estimated)
+        Platform2: platform2Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
+        isRoute: true
     };
 }
 
 
-export async function getMetroStopsTrains(stops: MetroStop[], maxTrains: number = 60): Promise<MetroStopTrains[]> {
-    const promises = stops.map(stop => getMetroStopTrains(stop, maxTrains));
+export async function getMetroDisplaysTrains(displays: Display[], maxTrains: number = 60): Promise<MetroStopTrains[]> {
+    const promises = displays.map(display => getMetroStopTrains(display, maxTrains));
     return Promise.all(promises);
 }
+
+
+
+export async function fetchMetroBilbaoIncidents(): Promise<IncidentsResult> {
+    let language = i18next.language || "es"; // Idioma actual o español por defecto
+
+    // Solo permitimos "es" y "eu", cualquier otro idioma usa "es"
+    if (language !== "es" && language !== "eu") {
+        language = "es";
+    }
+
+    const endpoint = language === "eu" ? "abisuak" : "avisos";
+    const response = await fetch(`https://api.metrobilbao.eus/metro_page/${language}/${endpoint}`);
+
+    if (!response.ok) {
+        throw new Error("Error fetching Metro Bilbao incidents");
+    }
+
+    const data: MetroBilbaoResponse = await response.json();
+
+    return {
+        serviceIssues: [],
+        installationIssues: data.configuration.incidences.installation_issue.map(incident => ({
+            ...incident,
+            station: { code: incident.station.code },
+        })),
+    };
+}
+
 
 
 

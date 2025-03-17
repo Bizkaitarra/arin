@@ -15,7 +15,7 @@
 
 /* Cabecera de la tarjeta de estación con gradiente */
 .station-card-header {
-    background: linear-gradient(135deg, #ccbbb1, #dd7105);
+    background: linear-gradient(135deg, #ccc7c4, #dd7105);
     color: white;
 }
 

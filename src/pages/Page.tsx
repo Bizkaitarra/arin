@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     IonButton,
     IonButtons,
@@ -27,7 +27,10 @@ import {
     settingsOutline,
     trainOutline
 } from "ionicons/icons";
-import {useHistory, useLocation} from 'react-router-dom'; // Importa useHistory
+import {useHistory, useLocation} from 'react-router-dom';
+import { App } from '@capacitor/app';
+import { Toast } from '@capacitor/toast';
+import ReviewModal from "./ReviewModal";
 
 interface PageProps {
     title: string;
@@ -42,6 +45,38 @@ const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false
     const history = useHistory();  // Instancia el hook de historia
     const location = useLocation();
     const [transportType, setTransportType] = useState('');
+    const [exitAttempt, setExitAttempt] = useState(false);
+
+    useEffect(() => {
+        let backButtonListener: any;
+
+        const setupBackButtonListener = async () => {
+            backButtonListener = await App.addListener('backButton', () => {
+                if (history.length > 1) {
+                    history.goBack(); // Si hay historial, vuelve atrás
+                } else {
+                    if (exitAttempt) {
+                        App.exitApp(); // Cierra la app si ya ha pulsado una vez antes
+                    } else {
+                        setExitAttempt(true);
+                        Toast.show({ text: 'Pulsa otra vez para salir' });
+
+                        setTimeout(() => {
+                            setExitAttempt(false); // Resetea el intento después de 2 segundos
+                        }, 2000);
+                    }
+                }
+            });
+        };
+
+        setupBackButtonListener();
+
+        return () => {
+            if (backButtonListener) {
+                backButtonListener.remove(); // Limpia el listener al desmontar
+            }
+        };
+    }, [exitAttempt, history]);
 
     // Determinar el tipo de transporte según la ruta
     useState(() => {
@@ -64,8 +99,21 @@ const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false
         history.push(path);    // Navega a la ruta correspondiente
     };
 
+    const [showReviewModal, setShowReviewModal] = useState(false);
+
+    useEffect(() => {
+        const launchCount = parseInt(localStorage.getItem("launchCount") || "0", 10) + 1;
+        localStorage.setItem("launchCount", launchCount.toString());
+
+        if (launchCount === 5) { // Mostrar después de 5 usos
+            setShowReviewModal(true);
+        }
+    }, []);
+
     return (
         <>
+            <ReviewModal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)} />
+
             {/* Modal en lugar del menú lateral */}
                 <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
                     <IonHeader>
@@ -83,19 +131,19 @@ const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false
                                 <IonIcon slot="start" icon={busOutline} />
                                 <IonLabel>{t('Visores')}</IonLabel>
                             </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/bizkaibus-my-stops")}>
+                            <IonItem button onClick={() => handleNavigation("/bizkaibus-my-displays")}>
                                 <IonIcon slot="start" icon={listOutline} />
-                                <IonLabel>{t('Mis paradas')}</IonLabel>
+                                <IonLabel>{t('Mis visores')}</IonLabel>
                             </IonItem>
                             <h3 className="section-title">Metro Bilbao</h3>
 
-                            <IonItem button onClick={() => handleNavigation("/metro-bilbao-viewers")}>
+                            <IonItem button onClick={() => handleNavigation("/metro-bilbao-displays")}>
                                 <IonIcon slot="start" icon={trainOutline} />
                                 <IonLabel>{t('Visores')}</IonLabel>
                             </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/metro-bilbao-my-stops")}>
+                            <IonItem button onClick={() => handleNavigation("/metro-bilbao-my-displays")}>
                                 <IonIcon slot="start" icon={listOutline} />
-                                <IonLabel>{t('Mis paradas')}</IonLabel>
+                                <IonLabel>{t('Mis visores')}</IonLabel>
                             </IonItem>
                             <h3 className="section-title">{t('General')}</h3>
                             <IonItem button onClick={() => handleNavigation("/configuration")}>

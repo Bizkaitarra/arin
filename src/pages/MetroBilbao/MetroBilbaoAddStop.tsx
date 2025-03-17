@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter,} from '@ionic/react';
 import {settingsOutline} from 'ionicons/icons';
 import Page from "../Page";
-import {getMetroStops, MetroStop, saveMetroStops} from "../../services/MetroBilbaoStorage";
+import {addDisplay, getMetroStops, MetroStop, removeDisplay, saveMetroStops} from "../../services/MetroBilbaoStorage";
 import {Star, StarOff} from "lucide-react";
 import {useTranslation} from "react-i18next";
 
@@ -27,12 +27,6 @@ const MetroBilbaoAddStop: React.FC = () => {
 
     useEffect(() => {
         if (stations.length > 0) {
-            saveMetroStops(stations);
-        }
-    }, [stations]);
-
-    useEffect(() => {
-        if (stations.length > 0) {
             filterStations();
         }
     }, [stopName, stations]);
@@ -47,28 +41,18 @@ const MetroBilbaoAddStop: React.FC = () => {
 
 
     const handleAddStop = (stop: MetroStop) => {
-        const station = stations.find(s => s.Code === stop.Code);
-
-        if (!station) return;
-
-        setStations(prevStations =>
-            prevStations.map(s =>
-                s.Code === stop.Code ? {...s, IsFavorite: !s.IsFavorite} : s
-            )
-        );
+        addDisplay({
+            origin: stop
+        })
+        fetchStations();
     };
 
 
     const handleRemoveStop = (stop: MetroStop) => {
-        const station = stations.find(s => s.Code === stop.Code);
-
-        if (!station || !station.IsFavorite) return; // Solo eliminamos si es favorito
-
-        setStations(prevStations =>
-            prevStations.map(s =>
-                s.Code === stop.Code ? {...s, IsFavorite: false} : s
-            )
-        );
+        removeDisplay({
+            origin: stop
+        })
+        fetchStations();
     };
 
     const handleToggleStop = (stop: MetroStop) => {

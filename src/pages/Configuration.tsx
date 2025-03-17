@@ -1,62 +1,49 @@
-import { useEffect, useState } from "react";
-import { IonInput, IonItem, IonLabel, IonSelect, IonSelectOption, IonToggle } from "@ionic/react";
+import {IonItem, IonLabel, IonSelect, IonSelectOption, IonToggle} from "@ionic/react";
 import LanguageSwitcher from "../components/LanguageSwitcher";
-import { trainOutline } from "ionicons/icons";
+import {trainOutline} from "ionicons/icons";
 import Page from "./Page";
-import { useTranslation } from "react-i18next";
-import { useConfiguration } from "../context/ConfigurationContext";
+import {useTranslation} from "react-i18next";
+import {useConfiguration} from "../context/ConfigurationContext";
 
 const Configuration: React.FC = () => {
     const { t, i18n } = useTranslation();
     const { settings, updateSettings } = useConfiguration(); // Usamos el hook del contexto
 
-    const [isSettingsModified, setIsSettingsModified] = useState(false); // Indicador de si los valores se han modificado
-
-    // Elimina la carga desde storage, ya no es necesario
-
-    // Guardar configuraciones solo cuando haya cambios
-    useEffect(() => {
-        console.log('comprobar si guardar');
-        if (isSettingsModified) {
-            console.log('guardar');
-            // Aquí es donde normalmente se guardaría en el storage, pero ya no lo hacemos
-            setIsSettingsModified(false); // Reiniciamos el flag de cambios
-        }
-    }, [settings, isSettingsModified]);
 
     // Manejo de cambios en los select/input/toggle
     const handleSelectVisoresChange = (e: CustomEvent) => {
         const { value } = e.detail;
         const name = "visores";
         updateSettings({ [name]: value });
-        setIsSettingsModified(true); // Marcamos que hubo un cambio
     };
 
     const handleToggleFrecuenciaChange = (e: CustomEvent) => {
         const { checked } = e.detail; // Los toggles usan "checked"
         const name = "verFrecuencia";
         updateSettings({ [name]: checked });
-        setIsSettingsModified(true); // Marcamos que hubo un cambio
     };
 
     const handleToggleNumeroVagonesChange = (e: CustomEvent) => {
         const { checked } = e.detail; // Los toggles usan "checked"
         const name = "verNumeroVagones";
         updateSettings({ [name]: checked });
-        setIsSettingsModified(true); // Marcamos que hubo un cambio
     };
 
     const handleMaxTrenes = (e: CustomEvent) => {
         const { value } = e.detail;
         const name = "maxTrenes";
         updateSettings({ [name]: parseInt(value) || 60 }); // Actualizamos el estado global
-        setIsSettingsModified(true); // Marcamos que hubo un cambio
+    };
+
+    const handleMetroDisplayFolding = (e: CustomEvent) => {
+        const { value } = e.detail;
+        const name = "metroDisplayFolding";
+        updateSettings({ [name]: value || 'disabled' }); // Actualizamos el estado global
     };
 
     const handleLanguageChange = (language: string) => {
         i18n.changeLanguage(language);
         updateSettings({ language });
-        setIsSettingsModified(true); // Marcamos que hubo un cambio
     };
 
     return (
@@ -90,7 +77,15 @@ const Configuration: React.FC = () => {
                     <IonSelectOption value={45}>45 {t('minutos')}</IonSelectOption>
                     <IonSelectOption value={60}>60 {t('minutos')}</IonSelectOption>
                 </IonSelect>
-
+            </IonItem>
+            <p>{t('Indica cómo quieres que se comporte el plegado de visores en Metro Bilbao')}</p>
+            <IonItem>
+                <IonLabel>{t('Plegado de visores')}</IonLabel>
+                <IonSelect okText={t("Confirmar")} cancelText={t("Salir")} name="metroDisplayFolding" value={settings.metroDisplayFolding}  onIonChange={handleMetroDisplayFolding}>
+                    <IonSelectOption value={"disabled"}>{t('Desactivado')}</IonSelectOption>
+                    <IonSelectOption value={"collapsed"}>{t('Empiezan plegados')}</IonSelectOption>
+                    <IonSelectOption value={"not-collapsed"}>{t('Empiezan desplegados')}</IonSelectOption>
+                </IonSelect>
             </IonItem>
             <hr></hr>
             <strong>Bizkaibus</strong>

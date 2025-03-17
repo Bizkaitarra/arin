@@ -30,6 +30,7 @@ export const ConfigurationProvider: React.FC<ConfigurationProviderProps> = ({ ch
                     verNumeroVagones: true,
                     maxTrenes: 60,
                     verFrecuencia: true,
+                    metroDisplayFolding: 'disabled',
                 });
             }
         };
