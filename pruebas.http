@@ -90,10 +90,92 @@ metodo = consultaTitulosRecargablesAnt
 GET https://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetLineas_JSON?callback=""&iTipoConsulta=string&sCodigoLinea=string&sNumeroRuta=string&sSentido=string&sDescripcionLinea=string&sListaCodigosLineas=string HTTP/1.1
 
 
+###
+
+GET https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetLineasPrincipalesSecundarias_JSON?
+    callback=""&sNumeroRuta=&
+    sSentido=&sDescripcionLinea=&sListaCodigosLineas=
+Accept: */*
+Accept-Language: es-ES,es;q=0.9
+Connection: keep-alive
+Referer: https://www.bizkaia.eus/
+Sec-Fetch-Dest: script
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Storage-Access: active
+User-Agent: Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+
+###
+
+
+
+# curl 'https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetLineasPrincipalesSecundarias_JSON?callback=jQuery35105507599400648919_1742482167127&callback=xmlCallbackHorarios&sCodigoLinea=A3613&sNumeroRuta=&sSentido=&sDescripcionLinea=&sListaCodigosLineas='
+#  -H 'Accept: */*'
+#  -H 'Accept-Language: es-ES,es;q=0.9'
+#  -H 'Connection: keep-alive'
+#  -H 'Referer: https://www.bizkaia.eus/'
+#  -H 'Sec-Fetch-Dest: script'
+#  -H 'Sec-Fetch-Mode: no-cors'
+#  -H 'Sec-Fetch-Site: cross-site'
+#  -H 'Sec-Fetch-Storage-Access: active'
+#  -H 'User-Agent: Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36'
+#  -H 'sec-ch-ua: "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"'
+#  -H 'sec-ch-ua-mobile: ?1'
+#  -H 'sec-ch-ua-platform: "Android"'
+GET https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetLineasPrincipalesSecundarias_JSON?
+    callback=""&callback=xmlCallbackHorarios&sCodigoLinea=A3613&sNumeroRuta=&
+    sSentido=&sDescripcionLinea=&sListaCodigosLineas=
+Accept: */*
+Accept-Language: es-ES,es;q=0.9
+Connection: keep-alive
+Referer: https://www.bizkaia.eus/
+Sec-Fetch-Dest: script
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Storage-Access: active
+User-Agent: Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
+
+###
 
 
 
 
+# curl 'https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetLineasPrincipalesSecundarias_JSON?callback=jQuery35101106694603096583_1742482340355&callback=xmlCallbackHorarios&sCodigoLinea=&sNumeroRuta=&sSentido=&sDescripcionLinea=&sListaCodigosLineas='
+#  -H 'Accept: */*'
+#  -H 'Accept-Language: es-ES,es;q=0.9'
+#  -H 'Connection: keep-alive'
+#  -H 'Referer: https://www.bizkaia.eus/'
+#  -H 'Sec-Fetch-Dest: script'
+#  -H 'Sec-Fetch-Mode: no-cors'
+#  -H 'Sec-Fetch-Site: cross-site'
+#  -H 'Sec-Fetch-Storage-Access: active'
+#  -H 'User-Agent: Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36'
+#  -H 'sec-ch-ua: "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"'
+#  -H 'sec-ch-ua-mobile: ?1'
+#  -H 'sec-ch-ua-platform: "Android"'
+GET https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetLineasPrincipalesSecundarias_JSON?
+    callback=jQuery35101106694603096583_1742482340355&callback=xmlCallbackHorarios&sCodigoLinea=&sNumeroRuta=&sSentido=&
+    sDescripcionLinea=&sListaCodigosLineas=
+Accept: */*
+Accept-Language: es-ES,es;q=0.9
+Connection: keep-alive
+Referer: https://www.bizkaia.eus/
+Sec-Fetch-Dest: script
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Storage-Access: active
+User-Agent: Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+sec-ch-ua-mobile: ?1
+sec-ch-ua-platform: "Android"
 
+###
 
+GET https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetLineasPrincipalesSecundarias_JSON?callback=jQuery35101106694603096583_1742482340355&callback=xmlCallbackHorarios&sCodigoLinea=&sNumeroRuta=&sSentido=&sDescripcionLinea=&sListaCodigosLineas=
 

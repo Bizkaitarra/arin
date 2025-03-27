@@ -3,7 +3,7 @@ import {
     IonButton,
     IonButtons,
     IonChip,
-    IonContent,
+    IonContent, IonFooter,
     IonHeader,
     IonIcon,
     IonItem,
@@ -28,9 +28,10 @@ import {
     trainOutline
 } from "ionicons/icons";
 import {useHistory, useLocation} from 'react-router-dom';
-import { App } from '@capacitor/app';
-import { Toast } from '@capacitor/toast';
+import {App} from '@capacitor/app';
+import {Toast} from '@capacitor/toast';
 import ReviewModal from "./ReviewModal";
+import AdBanner from "../components/AdBanner";
 
 interface PageProps {
     title: string;
@@ -39,8 +40,8 @@ interface PageProps {
     internalPage?: boolean;
 }
 
-const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false }) => {
-    const { t } = useTranslation();
+const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}) => {
+    const {t} = useTranslation();
     const [showModal, setShowModal] = useState(false);
     const history = useHistory();  // Instancia el hook de historia
     const location = useLocation();
@@ -59,7 +60,7 @@ const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false
                         App.exitApp(); // Cierra la app si ya ha pulsado una vez antes
                     } else {
                         setExitAttempt(true);
-                        Toast.show({ text: 'Pulsa otra vez para salir' });
+                        Toast.show({text: 'Pulsa otra vez para salir'});
 
                         setTimeout(() => {
                             setExitAttempt(false); // Resetea el intento después de 2 segundos
@@ -112,83 +113,92 @@ const Page: React.FC<PageProps> = ({ title, icon, children, internalPage = false
 
     return (
         <>
-            <ReviewModal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)} />
+            <ReviewModal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)}/>
 
             {/* Modal en lugar del menú lateral */}
-                <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-                    <IonHeader>
-                        <IonToolbar>
-                            <IonTitle>{t('Menú')}</IonTitle>
-                            <IonButtons slot="end">
-                                <IonButton onClick={() => setShowModal(false)}>{t('X')}</IonButton>
-                            </IonButtons>
-                        </IonToolbar>
-                    </IonHeader>
-                    <IonContent>
-                        <IonList>
-                            <h3 className="section-title">Bizkaibus</h3>
-                            <IonItem button onClick={() => handleNavigation("/bizkaibus-viewers")}>
-                                <IonIcon slot="start" icon={busOutline} />
-                                <IonLabel>{t('Visores')}</IonLabel>
-                            </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/bizkaibus-my-displays")}>
-                                <IonIcon slot="start" icon={listOutline} />
-                                <IonLabel>{t('Mis visores')}</IonLabel>
-                            </IonItem>
-                            <h3 className="section-title">Metro Bilbao</h3>
+            <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+                <IonHeader>
+                    <IonToolbar>
+                        <IonTitle>{t('Menú')}</IonTitle>
+                        <IonButtons slot="end">
+                            <IonButton onClick={() => setShowModal(false)}>{t('X')}</IonButton>
+                        </IonButtons>
+                    </IonToolbar>
+                </IonHeader>
+                <IonContent>
+                    <IonList>
+                        <h3 className="section-title">Bizkaibus</h3>
+                        <IonItem button onClick={() => handleNavigation("/bizkaibus-viewers")}>
+                            <IonIcon slot="start" icon={busOutline}/>
+                            <IonLabel>{t('Visores')}</IonLabel>
+                        </IonItem>
+                        <IonItem button onClick={() => handleNavigation("/bizkaibus-my-displays")}>
+                            <IonIcon slot="start" icon={listOutline}/>
+                            <IonLabel>{t('Mis visores')}</IonLabel>
+                        </IonItem>
+                        <h3 className="section-title">Metro Bilbao</h3>
 
-                            <IonItem button onClick={() => handleNavigation("/metro-bilbao-displays")}>
-                                <IonIcon slot="start" icon={trainOutline} />
-                                <IonLabel>{t('Visores')}</IonLabel>
-                            </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/metro-bilbao-my-displays")}>
-                                <IonIcon slot="start" icon={listOutline} />
-                                <IonLabel>{t('Mis visores')}</IonLabel>
-                            </IonItem>
-                            <h3 className="section-title">{t('General')}</h3>
-                            <IonItem button onClick={() => handleNavigation("/configuration")}>
-                                <IonIcon slot="start" icon={settingsOutline} />
-                                <IonLabel>{t('Configuración')}</IonLabel>
-                            </IonItem>
-                            <IonItem button onClick={() => handleNavigation("/about-app")}>
-                                <IonIcon slot="start" icon={informationCircleOutline} />
-                                <IonLabel>{t('Sobre Arin')}</IonLabel>
-                            </IonItem>
-                        </IonList>
-                    </IonContent>
-                </IonModal>
+                        <IonItem button onClick={() => handleNavigation("/metro-bilbao-displays")}>
+                            <IonIcon slot="start" icon={trainOutline}/>
+                            <IonLabel>{t('Visores')}</IonLabel>
+                        </IonItem>
+                        <IonItem button onClick={() => handleNavigation("/metro-bilbao-my-displays")}>
+                            <IonIcon slot="start" icon={listOutline}/>
+                            <IonLabel>{t('Mis visores')}</IonLabel>
+                        </IonItem>
+                        <h3 className="section-title">{t('General')}</h3>
+                        <IonItem button onClick={() => handleNavigation("/configuration")}>
+                            <IonIcon slot="start" icon={settingsOutline}/>
+                            <IonLabel>{t('Configuración')}</IonLabel>
+                        </IonItem>
+                        <IonItem button onClick={() => handleNavigation("/about-app")}>
+                            <IonIcon slot="start" icon={informationCircleOutline}/>
+                            <IonLabel>{t('Sobre Arin')}</IonLabel>
+                        </IonItem>
+                    </IonList>
+                </IonContent>
+            </IonModal>
 
-                <IonPage>
-                    <IonHeader>
-                        <IonToolbar>
-                            <IonButtons slot="start">
-                                {internalPage ? (
-                                    <IonButton onClick={() => history.goBack()}>
-                                        <IonIcon icon={arrowBackOutline} />
-                                    </IonButton>
-                                ) : (
-                                    <IonButton onClick={() => setShowModal(true)}>
-                                        <IonIcon icon={menuOutline} />
-                                    </IonButton>
-                                )}
+            <IonPage>
+                <IonHeader>
+                    <IonToolbar>
+                        <IonButtons slot="start">
+                            {internalPage ? (
+                                <IonButton onClick={() => history.goBack()}>
+                                    <IonIcon icon={arrowBackOutline}/>
+                                </IonButton>
+                            ) : (
+                                <IonButton onClick={() => setShowModal(true)}>
+                                    <IonIcon icon={menuOutline}/>
+                                </IonButton>
+                            )}
 
-                            </IonButtons>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                                <IonTitle>{title}</IonTitle>
-                                {transportType && (
-                                    <IonChip outline={true} className={transportType === 'Bizkaibus' ? 'bizkaibus-header-icon' : 'metro-header-icon'}>
-                                        <IonIcon icon={transportType === 'Bizkaibus' ? busOutline : trainOutline} />
-                                        <IonLabel>{transportType}</IonLabel>
-                                    </IonChip>
-                                )}
-                            </div>
-                        </IonToolbar>
-                        <NavigationTabs />
-                    </IonHeader>
-                    <IonContent className="ion-padding">
-                        {children}
-                    </IonContent>
-                </IonPage>
+                        </IonButtons>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%'
+                        }}>
+                            <IonTitle>{title}</IonTitle>
+                            {transportType && (
+                                <IonChip outline={true}
+                                         className={transportType === 'Bizkaibus' ? 'bizkaibus-header-icon' : 'metro-header-icon'}>
+                                    <IonIcon icon={transportType === 'Bizkaibus' ? busOutline : trainOutline}/>
+                                    <IonLabel>{transportType}</IonLabel>
+                                </IonChip>
+                            )}
+                        </div>
+                    </IonToolbar>
+                    <NavigationTabs/>
+                </IonHeader>
+                <IonContent className="ion-padding">
+                    {children}
+                </IonContent>
+            </IonPage>
+            <IonFooter>
+                <AdBanner/>
+            </IonFooter>
         </>
     );
 };

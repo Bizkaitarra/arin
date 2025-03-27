@@ -35,6 +35,8 @@ import {loadSettings} from "./services/ConfigurationStorage";
 import { ConfigurationProvider } from './context/ConfigurationContext';
 import BizkaibusAddByLocalization from "./pages/Bizkaibus/BizkaibusAddByLocalization";
 import MetroBilbaoAddRoute from "./pages/MetroBilbao/MetroBilbaoAddRoute";
+import BizkaibusRoutes from "./pages/Bizkaibus/BizkaibusRoutes";
+import RouteItineraries from "./pages/Bizkaibus/RouteItineraries";
 
 setupIonicReact();
 
@@ -81,7 +83,9 @@ const App: React.FC = () => {
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
                             <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers" />} />
-                            <Route path="/horarios/:line" component={BizkaibusHorarioPage} />
+                            <Route path="/scheduled/:line/:route" component={BizkaibusHorarioPage} />
+                            <Route path="/itinerary/:line/:route" component={RouteItineraries} />
+                            <Route path="/routes/:line" component={BizkaibusRoutes} />
                         </IonRouterOutlet>
                     </IonTabs>
                 </IonReactRouter>

@@ -47,9 +47,9 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
                     <IonList>
                         <IonItem key={index + 'I'} button onClick={() => {
                             setPopoverEvent(null);
-                            history.push(`/horarios/${arrival.linea}`);
+                            history.push(`/routes/${arrival.linea}`);
                         }}>
-                            <IonIcon icon={timerOutline} className="ion-margin-end" />{t('Ver horarios')}
+                            <IonIcon icon={timerOutline} className="ion-margin-end" />{t('Ver línea')}
                         </IonItem>
 
                     </IonList>

@@ -116,5 +116,14 @@
   "Empiezan desplegados": "Tolestuta hasten dira",
   "Confirmar": "Aukeratu",
   "Salir": "Irten",
-  "Modificar": "Aldatu"
+  "Modificar": "Aldatu",
+  "Horario actual": "Oraingo ordutegia",
+  "Descarga el itinerario": "Ibilbidea jeitsi",
+  "Ida": "Joan",
+  "Vuelta": "Etorria",
+  "Horario de línea": "Linearen ordutegia",
+  "Desde": "Noiztik",
+  "Itinerario de la ruta": "Linearen ibilbidea",
+  "Cambiar a vuelta": "Etorrira aldatu",
+  "Cambiar a ida": "Joanera aldatu"
 }
