@@ -179,3 +179,22 @@ sec-ch-ua-platform: "Android"
 
 GET https://apli.bizkaia.net/apps/danok/tqws/tq.asmx/GetLineasPrincipalesSecundarias_JSON?callback=jQuery35101106694603096583_1742482340355&callback=xmlCallbackHorarios&sCodigoLinea=&sNumeroRuta=&sSentido=&sDescripcionLinea=&sListaCodigosLineas=
 
+###
+
+# curl 'https://www.kbus.eus/getNodeTime.php?node=6100'
+#  -H 'Accept: application/json'
+#  -H 'Accept-Language: es-ES,es;q=0.9'
+#  -H 'Connection: keep-alive'
+#  -H 'Referer: https://www.kbus.eus/proximo-bus/'
+#  -H 'Sec-Fetch-Dest: empty'
+#  -H 'Sec-Fetch-Mode: cors'
+#  -H 'Sec-Fetch-Site: same-origin'
+#  -H 'User-Agent: Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36'
+#  -H 'sec-ch-ua: "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"'
+#  -H 'sec-ch-ua-mobile: ?1'
+#  -H 'sec-ch-ua-platform: "Android"'
+GET https://www.kbus.eus/getNodeTime.php?node=6100
+Accept: application/json
+
+###
+

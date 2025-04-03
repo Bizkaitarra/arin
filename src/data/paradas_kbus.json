@@ -1,0 +1,1424 @@
+[
+    {
+        "id": "6095",
+        "name": "Altos Hornos 27",
+        "latitude": "43.301020040272917",
+        "longitude": "-2.9819440001805666",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6100",
+        "name": "Altos Hornos 1",
+        "latitude": "43.295947039851541",
+        "longitude": "-2.9790120011325509",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6105",
+        "name": "Buen Pastor (Carlos Ibañez Lopez)",
+        "latitude": "43.290165041289356",
+        "longitude": "-2.9762439992695575",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6021",
+        "name": "Andikollano 2",
+        "latitude": "43.290649040866946",
+        "longitude": "-2.9795060008114809",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6022",
+        "name": "Orcorena (Andikollano)",
+        "latitude": "43.288578034523518",
+        "longitude": "-2.9805150058742806",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6023",
+        "name": "Bolera (Balejo)",
+        "latitude": "43.285491037368566",
+        "longitude": "-2.9839950015708157",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6024",
+        "name": "Ospitalea\/Hospital (Balejo)",
+        "latitude": "43.282450041547811",
+        "longitude": "-2.9829819945411842",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6107",
+        "name": "Burtzeña Gasolindegia\/Gasolinera",
+        "latitude": "43.279651036660674",
+        "longitude": "-2.978922998668891",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6117",
+        "name": "Gurutzeta\/Cruces (Plaza)",
+        "latitude": "43.281665000897505",
+        "longitude": "-2.9830289933931109",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6025",
+        "name": "La Paz 21",
+        "latitude": "43.281196034797716",
+        "longitude": "-2.9876709967395847",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6026",
+        "name": "Anaitasuna",
+        "latitude": "43.283320041751317",
+        "longitude": "-2.9899790038642604",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6027",
+        "name": "Retuerto (Av. Euskadi Et.)",
+        "latitude": "43.2849870403583",
+        "longitude": "-2.9944119999992549",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6028",
+        "name": "Ansio",
+        "latitude": "43.289209041534185",
+        "longitude": "-2.9861220013969554",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6029",
+        "name": "Azkue 12",
+        "latitude": "43.290945041948092",
+        "longitude": "-2.991060999808429",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6030",
+        "name": "Azkue 34",
+        "latitude": "43.290167040651284",
+        "longitude": "-2.9950460008871107",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6031",
+        "name": "Zuazo",
+        "latitude": "43.2909680375833",
+        "longitude": "-2.9997429942174447",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6032",
+        "name": "Zuloko",
+        "latitude": "43.291979034767323",
+        "longitude": "-3.0027879961925326",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6033",
+        "name": "Gernikako Arbola 73",
+        "latitude": "43.294023037699105",
+        "longitude": "-2.999660004111155",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6034",
+        "name": "San Vicente (Gernikako Arbola 41)",
+        "latitude": "43.294375040032811",
+        "longitude": "-2.9952879971669506",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6035",
+        "name": "San Eloy (Av. Miranda Et.)",
+        "latitude": "43.297325041353012",
+        "longitude": "-2.9940569990389156",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6036",
+        "name": "Santa Teresa (Av. La Libertad Et.)",
+        "latitude": "43.29917403511287",
+        "longitude": "-2.9928539973893522",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6037",
+        "name": "Polideportivo Lasesarre Kiroldegia",
+        "latitude": "43.301927034785329",
+        "longitude": "-2.9910669981529221",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6098",
+        "name": "Murrieta 31",
+        "latitude": "43.300750036348788",
+        "longitude": "-2.9880499969225967",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6099",
+        "name": "Manolo Travieso",
+        "latitude": "43.302780040099407",
+        "longitude": "-2.9855100031006581",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6126",
+        "name": "Altos Hornos 27",
+        "latitude": "43.3010741590281",
+        "longitude": "-2.9819933003867614",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Ida)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6102",
+        "name": "Altos Hornos 26",
+        "latitude": "43.30184899563659",
+        "longitude": "-2.9819730110780491",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6096",
+        "name": "La Fandería",
+        "latitude": "43.302408036209691",
+        "longitude": "-2.9855390037011462",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6097",
+        "name": "Murrieta 33",
+        "latitude": "43.300906035017107",
+        "longitude": "-2.9883379968237334",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6002",
+        "name": "Polideportivo Lasesarre Kiroldegia",
+        "latitude": "43.302052037982243",
+        "longitude": "-2.99096700198891",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6003",
+        "name": "Bagatza 3",
+        "latitude": "43.301035041349046",
+        "longitude": "-2.9938549962222041",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6004",
+        "name": "Beurko (Av. Miranda Et.)",
+        "latitude": "43.298768037317117",
+        "longitude": "-2.9936590027924086",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6005",
+        "name": "San Eloy (Av. Miranda Et.)",
+        "latitude": "43.296371041083248",
+        "longitude": "-2.9946740023467742",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6006",
+        "name": "San Vicente (Plaza Anteiglesia)",
+        "latitude": "43.295219041145394",
+        "longitude": "-2.9967770026410938",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6007",
+        "name": "San Bartolomé 1",
+        "latitude": "43.295051039812506",
+        "longitude": "-3.0016180033387672",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6118",
+        "name": "San Bartolomé 7",
+        "latitude": "43.293751041179242",
+        "longitude": "-3.0041510009224313",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6008",
+        "name": "San Bartolomé 13",
+        "latitude": "43.291188036814972",
+        "longitude": "-3.0038630022736905",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6009",
+        "name": "Zuazo",
+        "latitude": "43.28919504101053",
+        "longitude": "-2.9992060035195349",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6010",
+        "name": "Azkue 33",
+        "latitude": "43.289726035068441",
+        "longitude": "-2.9951699945459418",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6011",
+        "name": "Azkue (BEC)",
+        "latitude": "43.290664034968643",
+        "longitude": "-2.991068005686687",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6012",
+        "name": "Ansio",
+        "latitude": "43.290359386961065",
+        "longitude": "-2.9871952223989195",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6013",
+        "name": "Retuerto (Av. Euskadi Et.)",
+        "latitude": "43.284529040761655",
+        "longitude": "-2.9948700035805405",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6014",
+        "name": "San Ignacio (Vicente Aleixandre)",
+        "latitude": "43.28380803944416",
+        "longitude": "-2.9904000019365666",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6015",
+        "name": "Anaitasuna",
+        "latitude": "43.282740040300723",
+        "longitude": "-2.9897380029626195",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6016",
+        "name": "La Paz 27",
+        "latitude": "43.281315038017041",
+        "longitude": "-2.9879889961973953",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6017",
+        "name": "La Paz 14",
+        "latitude": "43.280362038850086",
+        "longitude": "-2.9863700043597",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6018",
+        "name": "Ospitalea\/Hospital (Horacio Etxebarrieta)",
+        "latitude": "43.282033040158979",
+        "longitude": "-2.9817219942873856",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6116",
+        "name": "Munoa 22",
+        "latitude": "43.279470039348624",
+        "longitude": "-2.9790489947879504",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6019",
+        "name": "Cirilo Sagastagoitia",
+        "latitude": "43.28614603990323",
+        "longitude": "-2.9826109983485574",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6020",
+        "name": "Orconera (Andikollano)",
+        "latitude": "43.288342040166192",
+        "longitude": "-2.980669001926421",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6103",
+        "name": "Andikollano 3",
+        "latitude": "43.290652041074836",
+        "longitude": "-2.9793650042211075",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6106",
+        "name": "Buen Pastor 78",
+        "latitude": "43.290065037685054",
+        "longitude": "-2.9764270052571002",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6101",
+        "name": "Altos Hornos 2",
+        "latitude": "43.29632303497845",
+        "longitude": "-2.9788549968849423",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6127",
+        "name": "Altos Hornos 26",
+        "latitude": "43.301782318821672",
+        "longitude": "-2.9819359636898906",
+        "lines": [
+            {
+                "lineName": "ZIRKULARRA\/CIRCULAR (Vuelta)",
+                "direction": "ida",
+                "ruteName": "ZIRKULARRA\/CIRCULAR",
+                "bus": "KBus1"
+            }
+        ]
+    },
+    {
+        "id": "6072",
+        "name": "Urkullu",
+        "latitude": "43.262034042279495",
+        "longitude": "-3.0207929945068623",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            },
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6073",
+        "name": "Anbia 3 (Eliza\/Iglesia)",
+        "latitude": "43.263584039519962",
+        "longitude": "-3.0152149961068271",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6074",
+        "name": "Anbia 10",
+        "latitude": "43.263382039976648",
+        "longitude": "-3.0125219964437733",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6075",
+        "name": "Olarte (Colegio El Regato lkastetxea)",
+        "latitude": "43.267396038467744",
+        "longitude": "-3.0027429944527011",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6076",
+        "name": "Ureta 29",
+        "latitude": "43.270530039044473",
+        "longitude": "-2.9957429987349715",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6077",
+        "name": "Ureta 8",
+        "latitude": "43.273252034711561",
+        "longitude": "-2.9949479969838779",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6078",
+        "name": "Polideportivo Gorostiza Kiroldegia",
+        "latitude": "43.27890803595109",
+        "longitude": "-2.9930200028547231",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6079",
+        "name": "Ametzaga",
+        "latitude": "43.282088037551738",
+        "longitude": "-2.9935010005836138",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6104",
+        "name": "Av. La Ribera Et. (Zubitxueta)",
+        "latitude": "43.287497040473141",
+        "longitude": "-2.9980129993573414",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6080",
+        "name": "La Florida 7",
+        "latitude": "43.292764036763238",
+        "longitude": "-2.986676997222752",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6128",
+        "name": "Landaburu (frente al 11)",
+        "latitude": "43.29401844050458",
+        "longitude": "-2.9872758828858976",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6129",
+        "name": "Arrandi 1",
+        "latitude": "43.297091934829382",
+        "longitude": "-2.9850443598921026",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6082",
+        "name": "Murrieta (Geltokia\/Estación)",
+        "latitude": "43.300161039059773",
+        "longitude": "-2.985090001181304",
+        "lines": [
+            {
+                "lineName": "LASESARRE",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            },
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6083",
+        "name": "Herriko Plaza",
+        "latitude": "43.297391037429826",
+        "longitude": "-2.986689005761797",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6084",
+        "name": "Juntas Generales 32",
+        "latitude": "43.29824903971204",
+        "longitude": "-2.9906610050215812",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6085",
+        "name": "Landeta",
+        "latitude": "43.293364034800746",
+        "longitude": "-2.9891659963599264",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6086",
+        "name": "Lurkizaga",
+        "latitude": "43.292139034205896",
+        "longitude": "-2.9885900014342526",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6087",
+        "name": "Ansio (Av. Euskadi Et.)",
+        "latitude": "43.286495040048059",
+        "longitude": "-2.9939170058513715",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6088",
+        "name": "Ametzaga",
+        "latitude": "43.281541040813032",
+        "longitude": "-2.9933350026772567",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6089",
+        "name": "Polideportivo Gorostiza Kiroldegia",
+        "latitude": "43.277888040324846",
+        "longitude": "-2.9946370024383722",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6090",
+        "name": "Ureta 8",
+        "latitude": "43.273252034711561",
+        "longitude": "-2.9949479969838779",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6091",
+        "name": "Ureta 29",
+        "latitude": "43.270530039044473",
+        "longitude": "-2.9957429987349715",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6092",
+        "name": "Olarte (Colegio El Regato lkastetxea)",
+        "latitude": "43.267473036540338",
+        "longitude": "-3.0027780054663848",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6093",
+        "name": "Anbia 10",
+        "latitude": "43.263483042422827",
+        "longitude": "-3.012384004463311",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6094",
+        "name": "Anbia 3 (Eliza\/Iglesia)",
+        "latitude": "43.263584039519962",
+        "longitude": "-3.0152149961068271",
+        "lines": [
+            {
+                "lineName": "ERREKATXO\/EL REGATO",
+                "direction": "ida",
+                "ruteName": "ERREKATXO\/EL REGATO - LASESARRE",
+                "bus": "KBus2"
+            }
+        ]
+    },
+    {
+        "id": "6109",
+        "name": "Kastrexana",
+        "latitude": "43.255738037136943",
+        "longitude": "-2.9734840044617208",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6125",
+        "name": "Zubileta 64",
+        "latitude": "43.258078038037432",
+        "longitude": "-2.971856995854159",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6124",
+        "name": "Zubileta 56",
+        "latitude": "43.262590037949138",
+        "longitude": "-2.9754460041254354",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6123",
+        "name": "Zubileta 50",
+        "latitude": "43.263708035630465",
+        "longitude": "-2.9762769977188896",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6122",
+        "name": "Zubileta 47",
+        "latitude": "43.265576039040212",
+        "longitude": "-2.9757289959267035",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6121",
+        "name": "Zubileta 27",
+        "latitude": "43.269402038562774",
+        "longitude": "-2.9770679957259305",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6120",
+        "name": "Zubileta 24",
+        "latitude": "43.272414039013867",
+        "longitude": "-2.9774040046771995",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6119",
+        "name": "Zubileta 12",
+        "latitude": "43.278227040597251",
+        "longitude": "-2.9789680060419381",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6114",
+        "name": "La Paz 1 (Basatxu)",
+        "latitude": "43.280153040817311",
+        "longitude": "-2.9852090032877743",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6110",
+        "name": "La Constancia (Basatxu)",
+        "latitude": "43.278118041202553",
+        "longitude": "-2.9823330027944004",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6112",
+        "name": "La Constancia 13",
+        "latitude": "43.2759580406306",
+        "longitude": "-2.9800829982856891",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6108",
+        "name": "Cadagua 5",
+        "latitude": "43.274665037871173",
+        "longitude": "-2.9793869944282072",
+        "lines": [
+            {
+                "lineName": "CADAGUA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            },
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6113",
+        "name": "La Constancia 13",
+        "latitude": "43.2759580406306",
+        "longitude": "-2.9800829982856891",
+        "lines": [
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6111",
+        "name": "La Constancia (Basatxu)",
+        "latitude": "43.278118041202553",
+        "longitude": "-2.9823330027944004",
+        "lines": [
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    },
+    {
+        "id": "6115",
+        "name": "La Paz 1 (Basatxu)",
+        "latitude": "43.280153040817311",
+        "longitude": "-2.9852090032877743",
+        "lines": [
+            {
+                "lineName": "KASTREXANA",
+                "direction": "ida",
+                "ruteName": "CADAGUA - KASTREXANA",
+                "bus": "KBus3"
+            }
+        ]
+    }
+]

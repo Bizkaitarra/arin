@@ -24,6 +24,8 @@ const MetroBilbaoDisplays: React.FC = () => {
     const {t} = useTranslation();
     const history = useHistory();
     const [installationIssues, setInstallationIssues] = useState([]);
+    const stripHtml = (html) => html.replace(/<\/?[^>]+(>|$)/g, "");
+
     let stops = [];
     const savedStops = localStorage.getItem(STORAGE_KEY);
     if (savedStops) {
@@ -59,11 +61,10 @@ const MetroBilbaoDisplays: React.FC = () => {
                                         <IonCardHeader>
                                             <IonCardTitle style={{ fontSize: '1rem' }}>{title}</IonCardTitle>
                                         </IonCardHeader>
-                                        {title !== resume && (
-                                            <IonCardContent style={{ fontSize: '0.9rem', color: '#666' }}>
-                                                {resume}
-                                            </IonCardContent>
-                                        )}
+                                        <IonCardContent style={{ fontSize: '0.9rem', color: '#666' }}>
+                                            {stripHtml(issue.description.trim())}
+                                        </IonCardContent>
+
                                     </IonCard>
                                 );
                             })}
