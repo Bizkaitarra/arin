@@ -37,6 +37,9 @@ import BizkaibusAddByLocalization from "./pages/Bizkaibus/BizkaibusAddByLocaliza
 import MetroBilbaoAddRoute from "./pages/MetroBilbao/MetroBilbaoAddRoute";
 import BizkaibusRoutes from "./pages/Bizkaibus/BizkaibusRoutes";
 import RouteItineraries from "./pages/Bizkaibus/RouteItineraries";
+import KBusMyDisplays from "./pages/KBus/KBusMyDisplays";
+import KBusAddStop from "./pages/KBus/KBusAddStop";
+import KBusDisplays from "./pages/KBus/KBusDisplays";
 
 setupIonicReact();
 
@@ -80,6 +83,9 @@ const App: React.FC = () => {
                             <Route exact path="/metro-bilbao-add-stop" component={MetroBilbaoAddStop} />
                             <Route exact path="/metro-bilbao-add-route" component={MetroBilbaoAddRoute} />
                             <Route exact path="/metro-bilbao-my-displays" component={MetroBilbaoMyDisplays} />
+                            <Route exact path="/k-bus-displays" component={KBusDisplays} />
+                            <Route exact path="/k-bus-my-displays" component={KBusMyDisplays} />
+                            <Route exact path="/k-bus-add-stop" component={KBusAddStop} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
                             <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers" />} />

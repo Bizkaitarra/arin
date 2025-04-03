@@ -51,13 +51,17 @@ const Configuration: React.FC = () => {
             <IonItem>
                 <LanguageSwitcher language={settings.language} onLanguageChange={handleLanguageChange} />
             </IonItem>
-            <p>{t('Indica qué atajos quieres mostrar en la cabecera. También puedes elegir que no quieres atajos')}.</p>
+            <p>{t('Indica qué atajos quieres mostrar en la cabecera. Si elijes más de 2 es posible que no se ajuste bien a tu dispositivo')}.</p>
             <IonItem>
                 <IonLabel>{t('Atajos')}</IonLabel>
                 <IonSelect name="visores" value={settings.visores} onIonChange={handleSelectVisoresChange}>
                     <IonSelectOption value="bizkaibus_metro">Bizkaibus + Metro Bilbao</IonSelectOption>
+                    <IonSelectOption value="bizkaibus_kbus">Bizkaibus + KBus</IonSelectOption>
+                    <IonSelectOption value="metro_kbus">Metro Bilbao + KBus</IonSelectOption>
+                    <IonSelectOption value="bizkaibus_metro_kbus">Bizkaibus + Metro Bilbao + KBus</IonSelectOption>
                     <IonSelectOption value="bizkaibus">Bizkaibus</IonSelectOption>
                     <IonSelectOption value="metro">Metro Bilbao</IonSelectOption>
+                    <IonSelectOption value="kbus">Metro Bilbao</IonSelectOption>
                     <IonSelectOption value="ninguno">{t('Ninguno')}</IonSelectOption>
                 </IonSelect>
             </IonItem>

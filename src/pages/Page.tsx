@@ -136,8 +136,8 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             <IonIcon slot="start" icon={listOutline}/>
                             <IonLabel>{t('Mis visores')}</IonLabel>
                         </IonItem>
-                        <h3 className="section-title">Metro Bilbao</h3>
 
+                        <h3 className="section-title">Metro Bilbao</h3>
                         <IonItem button onClick={() => handleNavigation("/metro-bilbao-displays")}>
                             <IonIcon slot="start" icon={trainOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
@@ -146,6 +146,17 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             <IonIcon slot="start" icon={listOutline}/>
                             <IonLabel>{t('Mis visores')}</IonLabel>
                         </IonItem>
+
+                        <h3 className="section-title">K Bus Barakaldo</h3>
+                        <IonItem button onClick={() => handleNavigation("/k-bus-displays")}>
+                            <IonIcon slot="start" icon={trainOutline}/>
+                            <IonLabel>{t('Visores')}</IonLabel>
+                        </IonItem>
+                        <IonItem button onClick={() => handleNavigation("/k-bus-my-displays")}>
+                            <IonIcon slot="start" icon={listOutline}/>
+                            <IonLabel>{t('Mis visores')}</IonLabel>
+                        </IonItem>
+
                         <h3 className="section-title">{t('General')}</h3>
                         <IonItem button onClick={() => handleNavigation("/configuration")}>
                             <IonIcon slot="start" icon={settingsOutline}/>
