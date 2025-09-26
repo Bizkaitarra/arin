@@ -6,12 +6,22 @@ import {
     IonCardContent,
     IonCardHeader,
     IonCardTitle,
+    IonFab,
+    IonFabButton,
     IonIcon,
     IonItem,
-    IonText
+    IonText,
+    useIonActionSheet
 } from "@ionic/react";
 import MetroDisplay from "../../components/MetroBilbao/MetroDisplay";
-import {trainOutline, warningOutline} from "ionicons/icons";
+import {
+    addCircleOutline,
+    addCircleSharp,
+    chevronUpSharp,
+    listOutline,
+    trainOutline,
+    warningOutline
+} from "ionicons/icons";
 import {useHistory} from "react-router-dom";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
@@ -25,6 +35,8 @@ const MetroBilbaoDisplays: React.FC = () => {
     const history = useHistory();
     const [installationIssues, setInstallationIssues] = useState([]);
     const stripHtml = (html) => html.replace(/<\/?[^>]+(>|$)/g, "");
+    const [presentActionSheet] = useIonActionSheet();
+
 
     let stops = [];
     const savedStops = localStorage.getItem(STORAGE_KEY);
@@ -48,10 +60,11 @@ const MetroBilbaoDisplays: React.FC = () => {
                 <IonAccordionGroup>
                     <IonAccordion value="installationIssues">
                         <IonItem slot="header" color="light">
-                            <IonIcon icon={warningOutline} slot="start" />
+                            <IonIcon icon={warningOutline} slot="start"/>
                             <IonText>{t("Incidencias en instalaciones")}</IonText>
                         </IonItem>
-                        <div slot="content" style={{ padding: '1rem', background: '#f8f9fa', borderTop: '1px solid #ddd' }}>
+                        <div slot="content"
+                             style={{padding: '1rem', background: '#f8f9fa', borderTop: '1px solid #ddd'}}>
                             {installationIssues.map((issue, index) => {
                                 const title = issue.title.trim();
                                 const resume = issue.resume.trim();
@@ -59,9 +72,9 @@ const MetroBilbaoDisplays: React.FC = () => {
                                 return (
                                     <IonCard key={index} color="light">
                                         <IonCardHeader>
-                                            <IonCardTitle style={{ fontSize: '1rem' }}>{title}</IonCardTitle>
+                                            <IonCardTitle style={{fontSize: '1rem'}}>{title}</IonCardTitle>
                                         </IonCardHeader>
-                                        <IonCardContent style={{ fontSize: '0.9rem', color: '#666' }}>
+                                        <IonCardContent style={{fontSize: '0.9rem', color: '#666'}}>
                                             {stripHtml(issue.description.trim())}
                                         </IonCardContent>
 
@@ -72,7 +85,6 @@ const MetroBilbaoDisplays: React.FC = () => {
                     </IonAccordion>
                 </IonAccordionGroup>
             )}
-
 
 
             {stops.length > 0 ? (
@@ -90,8 +102,38 @@ const MetroBilbaoDisplays: React.FC = () => {
                     <MetroBilbaoAddTripButton/>
                 </div>
             )}
+            <IonFab slot="fixed" vertical="bottom" horizontal="end">
+                <IonFabButton color="medium" onClick={() =>
+                    presentActionSheet({
+                        header: 'Opciones',
+                        buttons: [
+                            {
+                                text: 'Añadir parada de Metro',
+                                icon: addCircleOutline,
+                                handler: () => history.push('/metro-bilbao-add-stop'),
+                            },
+                            {
+                                text: 'Añadir viaje',
+                                icon: addCircleSharp,
+                                handler: () => history.push('/metro-bilbao-add-route'),
+                            },
+                            {
+                                text: 'Mis visores',
+                                icon: listOutline,
+                                handler: () => history.push('/metro-bilbao-my-displays'),
+                            },
+                        ],
+                    })
+                }>
+                    <IonIcon icon={chevronUpSharp}></IonIcon>
+                </IonFabButton>
+            </IonFab>
+
+
         </Page>
     );
+
+
 
 };
 

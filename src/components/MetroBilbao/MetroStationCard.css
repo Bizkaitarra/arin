@@ -1,0 +1,79 @@
+/* Estilos para la tarjeta de estación de Metro */
+.metro-station-card {
+    margin-bottom: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.metro-station-card-header {
+    background-color: #E4002B;
+    color: #fff;
+    padding: 6px 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.metro-station-card-header ion-card-title {
+    font-size: 1.1em;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.metro-station-card-header .toggle-button {
+    color: #fff;
+}
+
+.metro-station-card-content {
+    padding: 0;
+}
+
+.metro-station-card-content .train-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+}
+
+.train-item:last-child {
+    border-bottom: none;
+}
+
+.train-line-info {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.train-time-info {
+    text-align: right;
+}
+
+.train-time {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #E4002B;
+}
+
+.train-time.is-critical {
+    color: #d9534f;
+}
+
+.next-arrival {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.no-trains {
+    padding: 16px;
+    text-align: center;
+    font-style: italic;
+    color: #888;
+}

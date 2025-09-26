@@ -1,0 +1,43 @@
+.train-list-header {
+    padding: 12px 16px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.train-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+}
+
+.train-item:last-child {
+    border-bottom: none;
+}
+
+.train-destination {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.train-time-info {
+    text-align: right;
+}
+
+.train-time {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.train-time.is-critical {
+    color: #d9534f;
+}
+
+.train-details {
+    font-size: 0.9em;
+    color: #666;
+}

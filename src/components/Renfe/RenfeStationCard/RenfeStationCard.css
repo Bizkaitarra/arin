@@ -1,0 +1,35 @@
+/* Estilos para la tarjeta de estación de Renfe */
+.renfe-station-card {
+    margin-bottom: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.renfe-station-card-header {
+    background-color: #6f2b90;
+    color: #fff;
+    padding: 6px 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.renfe-header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.renfe-station-card-header ion-card-title {
+    font-size: 1.1em;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.renfe-station-card-header .toggle-button {
+    color: #fff;
+}
+
+.renfe-station-card-content {
+    padding: 0;
+}

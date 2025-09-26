@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonButton, IonIcon } from "@ionic/react";
+import { IonCard, IonCardHeader, IonCardTitle, IonButton, IonIcon } from "@ionic/react";
 import { chevronDownOutline, chevronUpOutline } from "ionicons/icons";
-import "./MetroDisplay.css";
+import "./MetroStationCard.css";
 import { MetroStopTrains, MetroTrain } from "../../services/MetroBilbaoStorage";
 import MetroPlatform from "./MetroPlatform";
 import { MetroStop } from "../../services/MetroBilbao/Display";
@@ -55,24 +55,22 @@ const MetroStationCard: React.FC<{ stationData: MetroStopTrains }> = ({ stationD
     }
 
     return (
-        <IonCard className="stop-card">
-            <IonCardHeader className="station-card-header" onClick={toggleOpen}>
+        <IonCard className="metro-station-card">
+            <IonCardHeader className="metro-station-card-header" onClick={toggleOpen}>
                 <div className="header-content">
-                    <IonCardTitle className="station-card-title">
+                    <IonCardTitle className="metro-station-card-title">
                         {title}
                     </IonCardTitle>
-
-                        <IonButton fill="clear" className="toggle-button" onClick={(e) => { e.stopPropagation(); toggleOpen(); }}>
-                            {!isToggleDisabled && (
-                                <IonIcon icon={isOpen ? chevronUpOutline : chevronDownOutline} />
-                            )}
-                        </IonButton>
-
+                    <IonButton fill="clear" className="toggle-button" onClick={(e) => { e.stopPropagation(); toggleOpen(); }}>
+                        {!isToggleDisabled && (
+                            <IonIcon icon={isOpen ? chevronUpOutline : chevronDownOutline} />
+                        )}
+                    </IonButton>
                 </div>
             </IonCardHeader>
 
-            <IonCardContent className={isOpen ? "expanded" : "collapsed"}>
-                <div className="bus-cards-container">
+            {isOpen && (
+                <div className="metro-station-card-content">
                     {[stationData.Platform1, stationData.Platform2].map((platform, platformIndex) => (
                         <MetroPlatform
                             key={platformIndex}
@@ -82,7 +80,7 @@ const MetroStationCard: React.FC<{ stationData: MetroStopTrains }> = ({ stationD
                         />
                     ))}
                 </div>
-            </IonCardContent>
+            )}
         </IonCard>
     );
 };

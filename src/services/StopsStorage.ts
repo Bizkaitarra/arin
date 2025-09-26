@@ -1,6 +1,5 @@
-import {Parada} from "./BizkaibusStorage";
 import {Stop} from "./Stop";
-import {Display} from "./MetroBilbao/Display";
+import {Display} from "./Display";
 
 export abstract class StopsStorage {
 
@@ -23,7 +22,7 @@ export abstract class StopsStorage {
     public getStations(favoritesFirsts: boolean = false): Stop[] {
         const renamedStops = this.renamedStopIds()
         const favoriteIds = this.favoriteStopIds();
-        console.log('renamed stops', renamedStops);
+        console.log('renamed stops', favoriteIds);
         const stops = this.allStops().map(stop => ({
             ...stop,
             customName: renamedStops[stop.id] || stop.name,
@@ -43,6 +42,20 @@ export abstract class StopsStorage {
         });
 
         return [...sortedFavoriteStops, ...nonFavoriteStops];
+    }
+
+    getStationById(id: string): Stop | undefined {
+        const stops = this.allStops();
+        const stop = stops.find(stop => stop.id === id);
+        if (stop) {
+            const renamedStops = this.renamedStopIds();
+            return {
+                ...stop,
+                customName: renamedStops[stop.id] || stop.name,
+                isFavorite: this.favoriteStopIds().includes(stop.id),
+            };
+        }
+        return undefined;
     }
 
     private renamedStopIds() {
@@ -109,4 +122,42 @@ export abstract class StopsStorage {
         localStorage.setItem(this.key, JSON.stringify(favoriteIds));
     }
 
+    public addRoute(route: string): void {
+        const savedStops = localStorage.getItem(this.key);
+        let favoriteIds: string[] = [];
+        if (savedStops) {
+            favoriteIds = JSON.parse(savedStops);
+        }
+        favoriteIds.push(route);
+        localStorage.setItem(this.key, JSON.stringify(favoriteIds));
+    }
+
+    public getSavedDisplays(): Display[] {
+        const favoriteIdsData = localStorage.getItem(this.key);
+        if (!favoriteIdsData) return [];
+        let favoriteIds: string[] = JSON.parse(favoriteIdsData);
+        return favoriteIds.map((stop) => {
+            const [originCode, destinationCode] = stop.split(" - ");
+            const origin = this.allStops().find(p => p.id === originCode);
+            if (!destinationCode) {
+                return {origin}
+            }
+            const destination = destinationCode ? this.allStops().find(p => p.id === destinationCode) : undefined;
+            return {
+                origin,
+                destination
+            };
+        });
+    }
+
+
+    public saveDisplays(displays: Display[]) {
+        const displayIds = displays.map(display => {
+            if (display.destination) {
+                return `${display.origin.id} - ${display.destination.id}`;
+            }
+            return display.origin.id;
+        });
+        localStorage.setItem(this.key, JSON.stringify(displayIds));
+    }
 }
