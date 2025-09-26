@@ -20,9 +20,10 @@ import KBusStopTitle from "../KBus/StopTitle/KBusStopTitle";
 import {KBusStop} from "../../services/KBus/KbusStop";
 import RenameStopComponent from "../RenameStopComponent/RenameStopComponent";
 import BizkaibusAddStopButton from "../../pages/Bizkaibus/BizkaibusAddStopsButton";
-import {BIZKAIBUS_TYPE, KBUS_TYPE, METRO_TYPE} from "../../services/StopType";
+import {BIZKAIBUS_TYPE, KBUS_TYPE, METRO_TYPE, RENFE_TYPE} from "../../services/StopType";
 import KBusAddButton from "../KBus/KBusAddButton/KBusAddButton";
 import MetroBilbaoAddVisorButton from "../MetroBilbao/MetroBilbaoAddVisorButton";
+import RenfeAddButton from "../Renfe/RenfeAddButton/RenfeAddButton";
 
 interface MyDisplaysProps {
     storageService: StopsStorage;
@@ -41,7 +42,7 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
             try {
                 // Cargar paradas guardadas solo después de cargar estaciones
                 const savedStations = storageService.getStations(true).filter(station => station.isFavorite);
-                console.log(savedStations);
+                console.log('stops', savedStations);
                 setSelectedStops(savedStations);
             } catch (error) {
                 console.error(t("Error al cargar las estaciones:"), error);
@@ -146,6 +147,8 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
                             return <BizkaibusAddStopButton/>;
                         case METRO_TYPE:
                             return <MetroBilbaoAddVisorButton/>;
+                        case RENFE_TYPE:
+                            return <RenfeAddButton/>;
                         default:
                             return null;
                     }

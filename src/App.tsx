@@ -40,6 +40,10 @@ import RouteItineraries from "./pages/Bizkaibus/RouteItineraries";
 import KBusMyDisplays from "./pages/KBus/KBusMyDisplays";
 import KBusAddStop from "./pages/KBus/KBusAddStop";
 import KBusDisplays from "./pages/KBus/KBusDisplays";
+import RenfeDisplays from "./pages/Renfe/RenfeDisplays";
+import RenfeMyDisplays from "./pages/Renfe/RenfeMyDisplays";
+import RenfeAddStop from "./pages/Renfe/RenfeAddStop";
+import RenfeAddRoute from "./pages/Renfe/RenfeAddRoute";
 
 setupIonicReact();
 
@@ -86,6 +90,10 @@ const App: React.FC = () => {
                             <Route exact path="/k-bus-displays" component={KBusDisplays} />
                             <Route exact path="/k-bus-my-displays" component={KBusMyDisplays} />
                             <Route exact path="/k-bus-add-stop" component={KBusAddStop} />
+                            <Route exact path="/renfe-displays" component={RenfeDisplays} />
+                            <Route exact path="/renfe-my-displays" component={RenfeMyDisplays} />
+                            <Route exact path="/renfe-add-stop" component={RenfeAddStop} />
+                            <Route exact path="/renfe-add-route" component={RenfeAddRoute} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
                             <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers" />} />

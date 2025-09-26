@@ -1,28 +1,22 @@
 import React from 'react';
-import {IonButton, IonFab, IonFabButton, IonIcon, IonText, useIonActionSheet} from '@ionic/react';
-import StopsDisplay from '../../components/Bizkaibus/StopsDisplay/StopsDisplay';
-import {
-    addCircleOutline,
-    addCircleSharp,
-    busOutline,
-    chevronUpSharp,
-    listOutline,
-    settingsOutline
-} from 'ionicons/icons';
-import {useHistory} from 'react-router-dom';
-import {getSavedStationIds} from '../../services/BizkaibusStorage';
+import {IonFab, IonFabButton, IonIcon, IonText, useIonActionSheet} from '@ionic/react';
+import {addCircleOutline, trainOutline, chevronUpSharp, listOutline} from 'ionicons/icons';
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
-import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
+import StopsDisplay from "../../components/Renfe/StopsDisplay/StopsDisplay";
+import {RenfeStorage} from "../../services/Renfe/RenfeStorage";
+import RenfeAddButton from "../../components/Renfe/RenfeAddButton/RenfeAddButton";
+import {useHistory} from "react-router-dom";
 
-const BizkaibusDisplays: React.FC = () => {
+const RenfeDisplays: React.FC = () => {
     const {t} = useTranslation();
+    const storage = new RenfeStorage();
     const history = useHistory();
     const [presentActionSheet] = useIonActionSheet();
 
     return (
-        <Page title={t("Visores")} icon={busOutline}>
-                {getSavedStationIds().length > 0 ? (
+        <Page title={t("Visores")} icon={trainOutline}>
+                {storage.getSavedStationIds().length > 0 ? (
                     <StopsDisplay/>
                 ) : (
                     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
@@ -30,7 +24,7 @@ const BizkaibusDisplays: React.FC = () => {
                             <h2>{t('No tienes visores favoritos configurados')}</h2>
                             <p>{t('Para poder ver tus visores favoritos, debes configurarlos en la página de configuración')}.</p>
                         </IonText>
-                        <BizkaibusAddStopButton/>
+                        <RenfeAddButton/>
                     </div>
                 )}
             <IonFab slot="fixed" vertical="bottom" horizontal="end">
@@ -39,19 +33,14 @@ const BizkaibusDisplays: React.FC = () => {
                         header: 'Opciones',
                         buttons: [
                             {
-                                text: 'Añadir parada por pueblo',
+                                text: 'Añadir visor',
                                 icon: addCircleOutline,
-                                handler: () => history.push('/bizkaibus-add-stop-by-town'),
-                            },
-                            {
-                                text: 'Añadir parada por localización',
-                                icon: addCircleSharp,
-                                handler: () => history.push('/bizkaibus-add-stop-by-location'),
+                                handler: () => history.push('/renfe-add-route'),
                             },
                             {
                                 text: 'Mis visores',
                                 icon: listOutline,
-                                handler: () => history.push('/bizkaibus-my-displays'),
+                                handler: () => history.push('/renfe-my-displays'),
                             },
                         ],
                     })
@@ -63,4 +52,4 @@ const BizkaibusDisplays: React.FC = () => {
     );
 };
 
-export default BizkaibusDisplays;
+export default RenfeDisplays;

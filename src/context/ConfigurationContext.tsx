@@ -50,13 +50,24 @@ export const ConfigurationProvider: React.FC<ConfigurationProviderProps> = ({ ch
         setSettings((prev) => ({ ...prev, ...newSettings }));
     };
 
+    const deleteSetting = (key: string) => {
+        setSettings((prev: any) => {
+            if (!prev || !(key in prev)) {
+                return prev; // No hacer nada si no existe la clave
+            }
+            const { [key]: _, ...rest } = prev; // Usamos desestructuración para eliminar la clave
+            return rest;
+        });
+    };
+
+
     // Si aún estamos cargando la configuración, no mostramos el provider
     if (settings === null) {
         return null; // O puedes mostrar un "loading..." mientras cargas
     }
 
     return (
-        <ConfigurationContext.Provider value={{ settings, updateSettings }}>
+        <ConfigurationContext.Provider value={{ settings, updateSettings, deleteSetting }}>
             {children}
         </ConfigurationContext.Provider>
     );

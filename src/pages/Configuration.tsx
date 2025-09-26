@@ -1,103 +1,94 @@
-import {IonItem, IonLabel, IonSelect, IonSelectOption, IonToggle} from "@ionic/react";
+import {IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonItem, IonLabel, IonList, IonNote, IonSelect, IonSelectOption, IonToggle} from "@ionic/react";
 import LanguageSwitcher from "../components/LanguageSwitcher";
-import {trainOutline} from "ionicons/icons";
+import {settingsOutline} from "ionicons/icons";
 import Page from "./Page";
 import {useTranslation} from "react-i18next";
 import {useConfiguration} from "../context/ConfigurationContext";
+import {getSelectedVisores, TRANSPORTES} from "../services/Atajos";
 
 const Configuration: React.FC = () => {
     const { t, i18n } = useTranslation();
-    const { settings, updateSettings } = useConfiguration(); // Usamos el hook del contexto
+    const { settings, updateSettings } = useConfiguration();
 
-
-    // Manejo de cambios en los select/input/toggle
-    const handleSelectVisoresChange = (e: CustomEvent) => {
-        const { value } = e.detail;
-        const name = "visores";
+    const handleSettingChange = (name: string, value: any) => {
         updateSettings({ [name]: value });
     };
 
-    const handleToggleFrecuenciaChange = (e: CustomEvent) => {
-        const { checked } = e.detail; // Los toggles usan "checked"
-        const name = "verFrecuencia";
-        updateSettings({ [name]: checked });
-    };
-
-    const handleToggleNumeroVagonesChange = (e: CustomEvent) => {
-        const { checked } = e.detail; // Los toggles usan "checked"
-        const name = "verNumeroVagones";
-        updateSettings({ [name]: checked });
-    };
-
-    const handleMaxTrenes = (e: CustomEvent) => {
-        const { value } = e.detail;
-        const name = "maxTrenes";
-        updateSettings({ [name]: parseInt(value) || 60 }); // Actualizamos el estado global
-    };
-
-    const handleMetroDisplayFolding = (e: CustomEvent) => {
-        const { value } = e.detail;
-        const name = "metroDisplayFolding";
-        updateSettings({ [name]: value || 'disabled' }); // Actualizamos el estado global
-    };
-
-    const handleLanguageChange = (language: string) => {
-        i18n.changeLanguage(language);
-        updateSettings({ language });
-    };
-
     return (
-        <Page title={t("Configuración general")} icon={trainOutline}>
-            <IonItem>
-                <LanguageSwitcher language={settings.language} onLanguageChange={handleLanguageChange} />
-            </IonItem>
-            <p>{t('Indica qué atajos quieres mostrar en la cabecera. Si elijes más de 2 es posible que no se ajuste bien a tu dispositivo')}.</p>
-            <IonItem>
-                <IonLabel>{t('Atajos')}</IonLabel>
-                <IonSelect name="visores" value={settings.visores} onIonChange={handleSelectVisoresChange}>
-                    <IonSelectOption value="bizkaibus_metro">Bizkaibus + Metro Bilbao</IonSelectOption>
-                    <IonSelectOption value="bizkaibus_kbus">Bizkaibus + KBus</IonSelectOption>
-                    <IonSelectOption value="metro_kbus">Metro Bilbao + KBus</IonSelectOption>
-                    <IonSelectOption value="bizkaibus_metro_kbus">Bizkaibus + Metro Bilbao + KBus</IonSelectOption>
-                    <IonSelectOption value="bizkaibus">Bizkaibus</IonSelectOption>
-                    <IonSelectOption value="metro">Metro Bilbao</IonSelectOption>
-                    <IonSelectOption value="kbus">Metro Bilbao</IonSelectOption>
-                    <IonSelectOption value="ninguno">{t('Ninguno')}</IonSelectOption>
-                </IonSelect>
-            </IonItem>
-            <hr></hr>
-            <strong>Metro Bilbao</strong>
-            <p>{t('Indica si deseas ver o no el número de vagones en los resultados del visor')}.</p>
-            <IonItem>
-                <IonLabel>{t('¿Ver número de vagones?')}</IonLabel>
-                <IonToggle name="verNumeroVagones" checked={settings.verNumeroVagones} onIonChange={handleToggleNumeroVagonesChange} />
-            </IonItem>
-            <p>{t('El número de Metros que pueden ser cargados es elevado. Puedes establecer cual es el máximo tiempo de Metros que saldrán.')}</p>
-            <IonItem>
-                <IonLabel>{t('Mostrar metros hasta')}</IonLabel>
-                <IonSelect name="maxTrenes" value={settings.maxTrenes} onIonChange={handleMaxTrenes}>
-                    <IonSelectOption value={15}>15 {t('minutos')}</IonSelectOption>
-                    <IonSelectOption value={30}>30 {t('minutos')}</IonSelectOption>
-                    <IonSelectOption value={45}>45 {t('minutos')}</IonSelectOption>
-                    <IonSelectOption value={60}>60 {t('minutos')}</IonSelectOption>
-                </IonSelect>
-            </IonItem>
-            <p>{t('Indica cómo quieres que se comporte el plegado de visores en Metro Bilbao')}</p>
-            <IonItem>
-                <IonLabel>{t('Plegado de visores')}</IonLabel>
-                <IonSelect okText={t("Confirmar")} cancelText={t("Salir")} name="metroDisplayFolding" value={settings.metroDisplayFolding}  onIonChange={handleMetroDisplayFolding}>
-                    <IonSelectOption value={"disabled"}>{t('Desactivado')}</IonSelectOption>
-                    <IonSelectOption value={"collapsed"}>{t('Empiezan plegados')}</IonSelectOption>
-                    <IonSelectOption value={"not-collapsed"}>{t('Empiezan desplegados')}</IonSelectOption>
-                </IonSelect>
-            </IonItem>
-            <hr></hr>
-            <strong>Bizkaibus</strong>
-            <p>{t('Indica si quieres ver la diferencia de tiempo entre los autobuses que proporiciona Bizkaibus. Esto puede dar una orientación de cuando puede ser el siguiente que venga ya que Bizkaibus solo proporciona dos autobuses por línea.')}</p>
-            <IonItem>
-                <IonLabel>{t('Ver frecuencia')}</IonLabel>
-                <IonToggle name="verFrecuencia" checked={settings.verFrecuencia} onIonChange={handleToggleFrecuenciaChange} />
-            </IonItem>
+        <Page title={t("Configuración")} internalPage={true}>
+            <IonList>
+                <IonCard>
+                    <IonCardHeader>
+                        <IonCardTitle>{t('General')}</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                        <IonItem>
+                            <LanguageSwitcher language={settings.language} onLanguageChange={(lang) => handleSettingChange('language', lang)} />
+                        </IonItem>
+                    </IonCardContent>
+                </IonCard>
+
+                <IonCard>
+                    <IonCardHeader>
+                        <IonCardTitle>{t('Atajos')}</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                        <IonItem>
+                            <IonLabel>{t('Atajos en cabecera')}</IonLabel>
+                            <IonSelect multiple name="atajos" value={getSelectedVisores(settings)} onIonChange={(e) => handleSettingChange('atajos', e.detail.value)}>
+                                {TRANSPORTES.map(t => (
+                                    <IonSelectOption key={t.id} value={t.id}>
+                                        {t.label}
+                                    </IonSelectOption>
+                                ))}
+                            </IonSelect>
+                        </IonItem>
+                        <IonNote className='ion-padding-start'>{t('Indica qué atajos quieres mostrar en la cabecera.')}</IonNote>
+                    </IonCardContent>
+                </IonCard>
+
+                <IonCard>
+                    <IonCardHeader>
+                        <IonCardTitle>Metro Bilbao</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                        <IonItem>
+                            <IonLabel>{t('Ver número de vagones')}</IonLabel>
+                            <IonToggle name="verNumeroVagones" checked={settings.verNumeroVagones} onIonChange={(e) => handleSettingChange('verNumeroVagones', e.detail.checked)} />
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel>{t('Mostrar metros hasta')}</IonLabel>
+                            <IonSelect name="maxTrenes" value={settings.maxTrenes} onIonChange={(e) => handleSettingChange('maxTrenes', parseInt(e.detail.value, 10))}>
+                                <IonSelectOption value={15}>15 {t('minutos')}</IonSelectOption>
+                                <IonSelectOption value={30}>30 {t('minutos')}</IonSelectOption>
+                                <IonSelectOption value={45}>45 {t('minutos')}</IonSelectOption>
+                                <IonSelectOption value={60}>60 {t('minutos')}</IonSelectOption>
+                            </IonSelect>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel>{t('Plegado de visores')}</IonLabel>
+                            <IonSelect name="metroDisplayFolding" value={settings.metroDisplayFolding} onIonChange={(e) => handleSettingChange('metroDisplayFolding', e.detail.value)}>
+                                <IonSelectOption value={"disabled"}>{t('Desactivado')}</IonSelectOption>
+                                <IonSelectOption value={"collapsed"}>{t('Plegados')}</IonSelectOption>
+                                <IonSelectOption value={"not-collapsed"}>{t('Desplegados')}</IonSelectOption>
+                            </IonSelect>
+                        </IonItem>
+                    </IonCardContent>
+                </IonCard>
+
+                <IonCard>
+                    <IonCardHeader>
+                        <IonCardTitle>Bizkaibus</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                        <IonItem>
+                            <IonLabel>{t('Ver frecuencia')}</IonLabel>
+                            <IonToggle name="verFrecuencia" checked={settings.verFrecuencia} onIonChange={(e) => handleSettingChange('verFrecuencia', e.detail.checked)} />
+                        </IonItem>
+                        <IonNote className='ion-padding-start'>{t('Muestra la diferencia de tiempo entre los dos próximos autobuses.')}</IonNote>
+                    </IonCardContent>
+                </IonCard>
+            </IonList>
         </Page>
     );
 };

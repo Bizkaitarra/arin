@@ -49,6 +49,22 @@ ion-tab-button.tab-selected {
 .metro-header-icon ion-icon {
     color: #dd7105;
 }
+
+.renfe-header-icon ion-label {
+    color: #6f2b90;
+}
+
+.renfe-header-icon ion-icon {
+    color: #6f2b90;
+}
+
+.kbus-header-icon ion-label {
+    color: #005c99;
+}
+
+.kbus-header-icon ion-icon {
+    color: #005c99;
+}
 .user-marker-icon {
     width: 20px;
     height: 20px;
@@ -108,4 +124,50 @@ ion-tab-button.tab-selected {
     font-size: 22px;
     cursor: pointer;
     color: black;
+}
+
+.fab-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    min-width: 200px; /* Aumenta el ancho total */
+}
+
+.fab-label {
+    margin-left: 12px;
+    white-space: nowrap; /* Evita salto de línea */
+    color: white;
+    font-size: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px 10px;
+    border-radius: 8px;
+    flex: 1;
+}
+
+/* StopsDisplay.css */
+.stop-card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.stop-card {
+    margin-bottom: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stop-card-header {
+    background-color: #e6f4ea;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.error-card {
+    background-color: #fdecea;
+}
+
+.no-info-card {
+    background-color: #f4f4f4;
+}
+.page-content {
+    padding: 8px 12px;
 }

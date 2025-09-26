@@ -23,6 +23,7 @@ import {
     busOutline,
     informationCircleOutline,
     listOutline,
+    mapOutline,
     menuOutline,
     settingsOutline,
     trainOutline
@@ -58,7 +59,8 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                 } else {
                     if (exitAttempt) {
                         App.exitApp(); // Cierra la app si ya ha pulsado una vez antes
-                    } else {
+                    }
+                    else {
                         setExitAttempt(true);
                         Toast.show({text: 'Pulsa otra vez para salir'});
 
@@ -79,12 +81,15 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
         };
     }, [exitAttempt, history]);
 
-    // Determinar el tipo de transporte según la ruta
-    useState(() => {
+    useEffect(() => {
         if (location.pathname.includes("bizkaibus")) {
             setTransportType('Bizkaibus');
         } else if (location.pathname.includes("metro-bilbao")) {
             setTransportType('Metro Bilbao');
+        } else if (location.pathname.includes("renfe")) {
+            setTransportType('Renfe');
+        } else if (location.pathname.includes("k-bus")) {
+            setTransportType('KBus');
         } else {
             setTransportType('');
         }
@@ -110,6 +115,13 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
             setShowReviewModal(true);
         }
     }, []);
+
+    const transportInfo = {
+        'Bizkaibus': { icon: busOutline, className: 'bizkaibus-header-icon' },
+        'Metro Bilbao': { icon: trainOutline, className: 'metro-header-icon' },
+        'Renfe': { icon: trainOutline, className: 'renfe-header-icon' },
+        'KBus': { icon: mapOutline, className: 'kbus-header-icon' }
+    };
 
     return (
         <>
@@ -143,6 +155,16 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             <IonLabel>{t('Visores')}</IonLabel>
                         </IonItem>
                         <IonItem button onClick={() => handleNavigation("/metro-bilbao-my-displays")}>
+                            <IonIcon slot="start" icon={listOutline}/>
+                            <IonLabel>{t('Mis visores')}</IonLabel>
+                        </IonItem>
+
+                        <h3 className="section-title">Renfe Cercanias</h3>
+                        <IonItem button onClick={() => handleNavigation("/renfe-displays")}>
+                            <IonIcon slot="start" icon={trainOutline}/>
+                            <IonLabel>{t('Visores')}</IonLabel>
+                        </IonItem>
+                        <IonItem button onClick={() => handleNavigation("/renfe-my-displays")}>
                             <IonIcon slot="start" icon={listOutline}/>
                             <IonLabel>{t('Mis visores')}</IonLabel>
                         </IonItem>
@@ -192,10 +214,10 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             width: '100%'
                         }}>
                             <IonTitle>{title}</IonTitle>
-                            {transportType && (
+                            {transportType && transportInfo[transportType] && (
                                 <IonChip outline={true}
-                                         className={transportType === 'Bizkaibus' ? 'bizkaibus-header-icon' : 'metro-header-icon'}>
-                                    <IonIcon icon={transportType === 'Bizkaibus' ? busOutline : trainOutline}/>
+                                         className={transportInfo[transportType].className}>
+                                    <IonIcon icon={transportInfo[transportType].icon}/>
                                     <IonLabel>{transportType}</IonLabel>
                                 </IonChip>
                             )}
@@ -203,13 +225,15 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                     </IonToolbar>
                     <NavigationTabs/>
                 </IonHeader>
-                <IonContent className="ion-padding">
+                <IonContent className="page-content">
                     {children}
                 </IonContent>
             </IonPage>
-            <IonFooter>
-                <AdBanner/>
-            </IonFooter>
+            {!showModal && (
+                <IonFooter>
+
+                </IonFooter>
+            )}
         </>
     );
 };

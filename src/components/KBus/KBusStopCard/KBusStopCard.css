@@ -1,0 +1,59 @@
+/* Estilos para la tarjeta de parada de autobús de KBus */
+.kbus-stop-card {
+    margin-bottom: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.kbus-stop-card-header {
+    background-color: #005c99;
+    color: #fff;
+    padding: 12px 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.kbus-stop-card-header ion-card-title {
+    font-size: 1.3em;
+    color: #fff;
+}
+
+.kbus-stop-card-content .bus-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+}
+
+.bus-item:last-child {
+    border-bottom: none;
+}
+
+.bus-line-info {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.bus-time-info {
+    text-align: right;
+}
+
+.bus-time {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.bus-time.is-critical {
+    color: #d9534f;
+}
+
+.no-buses {
+    padding: 16px;
+    text-align: center;
+    font-style: italic;
+    color: #888;
+}
