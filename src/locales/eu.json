@@ -129,5 +129,14 @@
   "Desde": "Noiztik",
   "Itinerario de la ruta": "Linearen ibilbidea",
   "Cambiar a vuelta": "Etorrira aldatu",
-  "Cambiar a ida": "Joanera aldatu"
+  "Cambiar a ida": "Joanera aldatu",
+  "Ver líneas": "Lineak ikusi",
+  "La línea no existe": "Linea ez da existitzen",
+  "Buscar línea": "Bilatu linea",
+  "Código de línea": "Linearen kodea",
+  "Introduce el código de línea": "Sartu linearen kodea",
+  "Ver línea": "Linea ikusi",
+  "No se encontraron líneas": "Ez da linearik aurkitu",
+  "Selecciona un municipio": "Aukeratu udalerri bat",
+  "Ver información": "Informazioa ikusi"
 }

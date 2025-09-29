@@ -25,6 +25,7 @@ import {
     listOutline,
     mapOutline,
     menuOutline,
+    searchOutline,
     settingsOutline,
     trainOutline
 } from "ionicons/icons";
@@ -147,6 +148,10 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                         <IonItem button onClick={() => handleNavigation("/bizkaibus-my-displays")}>
                             <IonIcon slot="start" icon={listOutline}/>
                             <IonLabel>{t('Mis visores')}</IonLabel>
+                        </IonItem>
+                        <IonItem button onClick={() => handleNavigation("/bizkaibus-search-lines")}>
+                            <IonIcon slot="start" icon={searchOutline}/>
+                            <IonLabel>{t('Ver líneas')}</IonLabel>
                         </IonItem>
 
                         <h3 className="section-title">Metro Bilbao</h3>

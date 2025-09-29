@@ -62,14 +62,10 @@ const BizkaibusRoutes: React.FC = () => {
                         <IonCol size="2">
                             <IonButton onClick={() => handleGoToRoute(route)} size="small" color="danger"><IonIcon icon={mapOutline}></IonIcon></IonButton>
                         </IonCol>
-                        {route.HasScheduledData ? (
-                            <IonCol size="2">
-                                <IonButton onClick={() => handleGoToScheduled(route)} size="small" color="danger"><IonIcon
-                                    icon={timerOutline}></IonIcon></IonButton>
-                            </IonCol>
-                        ) : (
-                            <></>
-                        )}
+                        <IonCol size="2">
+                            <IonButton onClick={() => handleGoToScheduled(route)} size="small" color="danger"><IonIcon
+                                icon={timerOutline}></IonIcon></IonButton>
+                        </IonCol>
                     </IonRow>
                 ))}
             </IonGrid>

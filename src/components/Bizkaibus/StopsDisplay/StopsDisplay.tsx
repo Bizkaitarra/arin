@@ -27,7 +27,6 @@ const StopsDisplay: React.FC = () => {
             setLoading(false);
             setError(null);
         } catch (err) {
-            console.log(err);
             setError(
                 err.message
             );

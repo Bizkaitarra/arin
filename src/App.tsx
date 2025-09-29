@@ -37,6 +37,7 @@ import BizkaibusAddByLocalization from "./pages/Bizkaibus/BizkaibusAddByLocaliza
 import MetroBilbaoAddRoute from "./pages/MetroBilbao/MetroBilbaoAddRoute";
 import BizkaibusRoutes from "./pages/Bizkaibus/BizkaibusRoutes";
 import RouteItineraries from "./pages/Bizkaibus/RouteItineraries";
+import SearchLines from "./pages/Bizkaibus/SearchLines";
 import KBusMyDisplays from "./pages/KBus/KBusMyDisplays";
 import KBusAddStop from "./pages/KBus/KBusAddStop";
 import KBusDisplays from "./pages/KBus/KBusDisplays";
@@ -100,6 +101,7 @@ const App: React.FC = () => {
                             <Route path="/scheduled/:line/:route" component={BizkaibusHorarioPage} />
                             <Route path="/itinerary/:line/:route" component={RouteItineraries} />
                             <Route path="/routes/:line" component={BizkaibusRoutes} />
+                            <Route path="/bizkaibus-search-lines" component={SearchLines} />
                         </IonRouterOutlet>
                     </IonTabs>
                 </IonReactRouter>

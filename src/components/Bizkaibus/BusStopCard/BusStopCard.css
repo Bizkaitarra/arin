@@ -35,6 +35,17 @@
 .bus-line-info {
     font-size: 1.1em;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bus-line-info a {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-top: 4px;
+    color: #147014; /* Bizkaibus green */
+    text-decoration: none;
 }
 
 .bus-time-info {

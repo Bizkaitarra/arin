@@ -125,5 +125,14 @@
   "Vuelta": "Vuelta",
   "Horario de línea": "Horario de línea",
   "Desde": "Desde",
-  "Itinerario de la ruta": "Itinerario de la ruta"
+  "Itinerario de la ruta": "Itinerario de la ruta",
+  "Ver líneas": "Ver líneas",
+  "La línea no existe": "La línea no existe",
+  "Buscar línea": "Buscar línea",
+  "Código de línea": "Código de línea",
+  "Introduce el código de línea": "Introduce el código de línea",
+  "Ver línea": "Ver línea",
+  "No se encontraron líneas": "No se encontraron líneas",
+  "Selecciona un municipio": "Selecciona un municipio",
+  "Ver información": "Ver información"
 }

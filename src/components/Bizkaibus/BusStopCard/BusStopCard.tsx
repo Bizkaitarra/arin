@@ -3,6 +3,7 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/rea
 import { useTranslation } from 'react-i18next';
 import { BusArrivalResponse } from '../../../services/ApiBizkaibus';
 import './BusStopCard.css';
+import { Link } from 'react-router-dom';
 
 interface BusStopCardProps {
     response: BusArrivalResponse;
@@ -31,6 +32,7 @@ const BusStopCard: React.FC<BusStopCardProps> = ({ response }) => {
                             <div className="bus-item" key={index}>
                                 <div className="bus-line-info">
                                     <div>{`${arrival.linea} - ${arrival.ruta}`}</div>
+                                    <Link to={`/routes/${arrival.linea}`}>{t('Ver línea')}</Link>
                                 </div>
                                 <div className="bus-time-info">
                                     <div className={`bus-time ${isCritical ? 'is-critical' : ''}`}>
