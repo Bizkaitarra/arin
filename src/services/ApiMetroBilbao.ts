@@ -10,7 +10,6 @@ async function fetchTrainData(origin: string, destination: string, maxTrains: nu
         const data = await response.json();
         const duration = data.trip?.duration;
 
-        console.log(duration);
         return data.trains
             .filter((train: any) => train.estimated <= maxTrains)
             .map((train: any) => ({
@@ -109,7 +108,6 @@ export async function getBarikData(barikNumber: string) {
                 body: params
             });
             const data = await response.text();
-            console.log(data);
             return parseBarikResponse(data);
         } else {
             response = await fetch(url, {
@@ -118,7 +116,6 @@ export async function getBarikData(barikNumber: string) {
                 body: params
             });
             const data = await response.text();
-            console.log(data);
             return parseBarikResponse(data);
         }
     } catch (error) {
@@ -164,6 +161,26 @@ function parseBarikResponse(xmlString) {
     };
 }
 
+export async function planTrip(params: {
+    origen: string;
+    destino: string;
+    fecha: string; // DD-MM-YYYY
+    hora_inicio: number; // float
+    hora_fin: number; // float
+}) {
+    let language = i18next.language || "es";
+    if (language !== "es" && language !== "eu") {
+        language = "es";
+    }
 
+    const url = `https://api.metrobilbao.eus/metro/obtain-schedule-of-trip/${params.origen}/${params.destino}/${params.hora_inicio}/${params.hora_fin}/${params.fecha}/${language}`;
 
-
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error planning trip:", error);
+        return null;
+    }
+}

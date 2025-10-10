@@ -35,6 +35,7 @@ import {loadSettings} from "./services/ConfigurationStorage";
 import { ConfigurationProvider } from './context/ConfigurationContext';
 import BizkaibusAddByLocalization from "./pages/Bizkaibus/BizkaibusAddByLocalization";
 import MetroBilbaoAddRoute from "./pages/MetroBilbao/MetroBilbaoAddRoute";
+import MetroBilbaoTripPlanner from "./pages/MetroBilbao/MetroBilbaoTripPlanner";
 import BizkaibusRoutes from "./pages/Bizkaibus/BizkaibusRoutes";
 import RouteItineraries from "./pages/Bizkaibus/RouteItineraries";
 import SearchLines from "./pages/Bizkaibus/SearchLines";
@@ -87,6 +88,7 @@ const App: React.FC = () => {
                             <Route exact path="/metro-bilbao-displays" component={MetroBilbaoDisplays} />
                             <Route exact path="/metro-bilbao-add-stop" component={MetroBilbaoAddStop} />
                             <Route exact path="/metro-bilbao-add-route" component={MetroBilbaoAddRoute} />
+                            <Route exact path="/metro-bilbao-trip-planner" component={MetroBilbaoTripPlanner} />
                             <Route exact path="/metro-bilbao-my-displays" component={MetroBilbaoMyDisplays} />
                             <Route exact path="/k-bus-displays" component={KBusDisplays} />
                             <Route exact path="/k-bus-my-displays" component={KBusMyDisplays} />

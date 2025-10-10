@@ -19,6 +19,7 @@ import {
     addCircleSharp,
     chevronUpSharp,
     listOutline,
+    timeOutline,
     trainOutline,
     warningOutline
 } from "ionicons/icons";
@@ -107,6 +108,11 @@ const MetroBilbaoDisplays: React.FC = () => {
                     presentActionSheet({
                         header: 'Opciones',
                         buttons: [
+                            {
+                                text: 'Buscar a otras horas',
+                                icon: timeOutline,
+                                handler: () => history.push('/metro-bilbao-trip-planner'),
+                            },
                             {
                                 text: 'Añadir parada de Metro',
                                 icon: addCircleOutline,
