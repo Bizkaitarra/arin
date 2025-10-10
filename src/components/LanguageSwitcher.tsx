@@ -12,6 +12,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ language, onLanguag
 
     const handleLanguageChange = (e: CustomEvent) => {
         const newLanguage = e.detail.value;
+        i18n.changeLanguage(newLanguage);
         onLanguageChange(newLanguage);
     };
 

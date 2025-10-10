@@ -11,6 +11,14 @@ interface KBusStopCardProps {
 const KBusStopCard: React.FC<KBusStopCardProps> = ({ response }) => {
     const { t } = useTranslation();
 
+    const getArrivalTime = (minutes: number) => {
+        const arrivalTime = new Date(Date.now() + minutes * 60000);
+        return arrivalTime.toLocaleTimeString(navigator.language, {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    };
+
     if (!response) {
         return null;
     }
@@ -32,8 +40,8 @@ const KBusStopCard: React.FC<KBusStopCardProps> = ({ response }) => {
                                     <div>{arrival.line}</div>
                                 </div>
                                 <div className="bus-time-info">
-                                    <div className={`bus-time ${isCritical ? 'is-critical' : ''}`}>
-                                        {arrivalInMinutes} min
+                                    <div className={`bus-time ${isCritical ? 'is-critical' : ''}`} title={`Llegada: ${getArrivalTime(arrivalInMinutes)}`}>
+                                        {arrivalInMinutes} {t('min')}
                                     </div>
                                 </div>
                             </div>

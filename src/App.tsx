@@ -1,5 +1,5 @@
 import {Redirect, Route} from 'react-router-dom';
-import {IonApp, IonRouterOutlet, IonTabs, setupIonicReact} from '@ionic/react';
+import {IonApp, IonRouterOutlet, IonSpinner, IonTabs, setupIonicReact} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
 
 import '@ionic/react/css/core.css';
@@ -73,6 +73,14 @@ const App: React.FC = () => {
             StatusBar.setBackgroundColor({ color: '#ffffff' });
         }
     }, []);
+
+    if (!isLanguageLoaded) {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <IonSpinner />
+            </div>
+        );
+    }
 
     return (
         <IonApp>

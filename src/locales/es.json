@@ -152,5 +152,20 @@
   "Duración media del viaje": "Duración media del viaje",
   "Franja horaria": "Franja horaria",
   "Selecciona una franja horaria": "Selecciona una franja horaria",
-  "Selecciona una fecha": "Selecciona una fecha"
+  "Selecciona una fecha": "Selecciona una fecha",
+  "Más info": "Más info",
+  "min": "min",
+  "Bizkaibus": "Bizkaibus",
+  "Metro Bilbao": "Metro Bilbao",
+  "Renfe Cercanias": "Renfe Cercanías",
+  "K Bus Barakaldo": "K Bus Barakaldo",
+  "Conexión con líneas interurbanas": "Conexión con líneas interurbanas",
+  "Acceso adaptado y parking cercano": "Acceso adaptado y parking cercano",
+  "Parada de KBus con acceso a WiFi": "Parada de KBus con acceso a WiFi",
+  "Renombrar Estación": "Renombrar Estación",
+  "Muestra la diferencia de tiempo entre los dos próximos autobuses.": "Muestra la diferencia de tiempo entre los dos próximos autobuses.",
+  "Error al cargar las estaciones:": "Error al cargar las estaciones:",
+  "Parada eliminada": "Parada eliminada",
+  "Parada renombrada": "Parada renombrada",
+  "Sin nombre personalizado": "Sin nombre personalizado"
 }

@@ -49,7 +49,7 @@ const Configuration: React.FC = () => {
 
                 <IonCard>
                     <IonCardHeader>
-                        <IonCardTitle>Metro Bilbao</IonCardTitle>
+                        <IonCardTitle>{t('Metro Bilbao')}</IonCardTitle>
                     </IonCardHeader>
                     <IonCardContent>
                         <IonItem>
@@ -78,7 +78,7 @@ const Configuration: React.FC = () => {
 
                 <IonCard>
                     <IonCardHeader>
-                        <IonCardTitle>Bizkaibus</IonCardTitle>
+                        <IonCardTitle>{t('Bizkaibus')}</IonCardTitle>
                     </IonCardHeader>
                     <IonCardContent>
                         <IonItem>

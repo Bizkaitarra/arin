@@ -47,9 +47,9 @@ const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRenam
             <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
                 <IonHeader>
                     <IonToolbar>
-                        <IonTitle>{t('Renombrar parada')}</IonTitle>
+                        <IonTitle>{t('Renombrar Estación')}</IonTitle>
                         <IonButtons slot="end">
-                            <IonButton onClick={() => setShowModal(false)}>X</IonButton>
+                            <IonButton onClick={() => setShowModal(false)}>{t('Cerrar')}</IonButton>
                         </IonButtons>
                     </IonToolbar>
                 </IonHeader>
@@ -62,9 +62,9 @@ const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRenam
                                     case KBUS_TYPE:
                                         return <KBusStopResume stop={stop as KBusStop}/>;
                                     case 'BizkaibusStop':
-                                        return <p>Conexión con líneas interurbanas</p>;
+                                        return <p>{t('Conexión con líneas interurbanas')}</p>;
                                     case 'MetroBilbaoStop':
-                                        return <p>Acceso adaptado y parking cercano</p>;
+                                        return <p>{t('Acceso adaptado y parking cercano')}</p>;
                                     default:
                                         return null;
                                 }

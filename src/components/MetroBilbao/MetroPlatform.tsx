@@ -20,6 +20,7 @@ const MetroPlatform: React.FC<{ platform: MetroTrain[], platformIndex: number, t
             <div className="train-list-header">{title}</div>
             {platform.map((train, trainIndex) => {
                 const isCritical = train.Estimated < 2;
+                const arrivalTime = new Date(train.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 return (
                     <div key={trainIndex} className="train-item">
                         <div className="train-destination">
@@ -29,11 +30,11 @@ const MetroPlatform: React.FC<{ platform: MetroTrain[], platformIndex: number, t
                             )}
                         </div>
                         <div className="train-time-info">
-                            <div className={`train-time ${isCritical ? 'is-critical' : ''}`}>
-                                {train.Estimated < 0 ? 0 : train.Estimated} min
+                            <div className={`train-time ${isCritical ? 'is-critical' : ''}`} title={`Llegada: ${arrivalTime}`}>
+                                {train.Estimated < 0 ? 0 : train.Estimated} {t('min')}
                             </div>
                             <div className="train-details">
-                                {new Date(train.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                {arrivalTime}
                                 {settings.verNumeroVagones && ` / ${train.Wagons || 4} ${t('vagones')}`}
                             </div>
                         </div>

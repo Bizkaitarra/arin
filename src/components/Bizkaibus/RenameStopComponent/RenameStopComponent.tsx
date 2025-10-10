@@ -43,9 +43,9 @@ const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRenam
             <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
                 <IonHeader>
                     <IonToolbar>
-                        <IonTitle>Renombrar Estación</IonTitle>
+                        <IonTitle>{t('Renombrar Estación')}</IonTitle>
                         <IonButtons slot="end">
-                            <IonButton onClick={() => setShowModal(false)}>X</IonButton>
+                            <IonButton onClick={() => setShowModal(false)}>{t('Cerrar')}</IonButton>
                         </IonButtons>
                     </IonToolbar>
                 </IonHeader>

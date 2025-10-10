@@ -12,6 +12,14 @@ interface BusStopCardProps {
 const BusStopCard: React.FC<BusStopCardProps> = ({ response }) => {
     const { t } = useTranslation();
 
+    const getArrivalTime = (minutes: number) => {
+        const arrivalTime = new Date(Date.now() + minutes * 60000);
+        return arrivalTime.toLocaleTimeString(navigator.language, {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    };
+
     if (!response || !response.data) {
         return null;
     }
@@ -35,17 +43,17 @@ const BusStopCard: React.FC<BusStopCardProps> = ({ response }) => {
                                     <Link to={`/routes/${arrival.linea}`}>{t('Ver línea')}</Link>
                                 </div>
                                 <div className="bus-time-info">
-                                    <div className={`bus-time ${isCritical ? 'is-critical' : ''}`}>
-                                        {arrival.e1Minutos} min
+                                    <div className={`bus-time ${isCritical ? 'is-critical' : ''}`} title={`Llegada: ${getArrivalTime(arrival.e1Minutos)}`}>
+                                        {arrival.e1Minutos} {t('min')}
                                     </div>
                                     {arrival.e2Minutos && (
-                                        <div className="next-arrival">
-                                            {t('Siguiente')}: {arrival.e2Minutos} min
+                                        <div className="next-arrival" title={`Llegada: ${getArrivalTime(arrival.e2Minutos)}`}>
+                                            {t('Siguiente')}: {arrival.e2Minutos} {t('min')}
                                         </div>
                                     )}
                                     {arrival.e1Minutos && arrival.e2Minutos && (
                                         <div className="frequency">
-                                            {t('Frecuencia')}: {arrival.e2Minutos - arrival.e1Minutos} min
+                                            {t('Frecuencia')}: {arrival.e2Minutos - arrival.e1Minutos} {t('min')}
                                         </div>
                                     )}
                                 </div>

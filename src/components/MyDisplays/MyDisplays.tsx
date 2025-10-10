@@ -63,7 +63,7 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
         storageService.saveStationIds(stops.map(stop => stop.id));
         setSelectedStops(stops);
         presentToast({
-            message: t('`Parada eliminada`'),
+            message: t('Parada eliminada'),
             duration: 2000,
             color: 'success'
         });
@@ -76,7 +76,7 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
         storageService.saveRenamedStation(stop);
         setSelectedStops(updatedStops);
         presentToast({
-            message: t('`Parada renombrada`'),
+            message: t('Parada renombrada'),
             duration: 2000,
             color: 'success'
         });
@@ -106,9 +106,9 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
                                                 case KBUS_TYPE:
                                                     return <KBusStopTitle stop={stop as KBusStop}/>;
                                                 case 'BizkaibusStop':
-                                                    return <p>Conexión con líneas interurbanas</p>;
+                                                    return <p>{t('Conexión con líneas interurbanas')}</p>;
                                                 case 'MetroBilbaoStop':
-                                                    return <p>Acceso adaptado y parking cercano</p>;
+                                                    return <p>{t('Acceso adaptado y parking cercano')}</p>;
                                                 default:
                                                     return null;
                                             }

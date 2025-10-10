@@ -22,8 +22,8 @@ const BusCard: React.FC<Props> = ({ arrival, index }) => {
                 <IonList>
                     <IonItem>
                         <IonLabel>{t('Próximo autobús')}:</IonLabel>
-                        <IonBadge color={arrival.secondsToArrival < 180 ? 'danger' : 'success'}>
-                            {arrivalInMinutes} min ({arrival.timeToArrival})
+                        <IonBadge color={arrival.secondsToArrival < 180 ? 'danger' : 'success'} title={`Llegada: ${arrival.timeToArrival}`}>
+                            {arrivalInMinutes} {t('min')} ({arrival.timeToArrival})
                         </IonBadge>
                     </IonItem>
                 </IonList>

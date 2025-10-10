@@ -134,13 +134,13 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                     <IonToolbar>
                         <IonTitle>{t('Menú')}</IonTitle>
                         <IonButtons slot="end">
-                            <IonButton onClick={() => setShowModal(false)}>{t('X')}</IonButton>
+                            <IonButton onClick={() => setShowModal(false)}>{t('Cerrar')}</IonButton>
                         </IonButtons>
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
                     <IonList>
-                        <h3 className="section-title">Bizkaibus</h3>
+                        <h3 className="section-title">{t('Bizkaibus')}</h3>
                         <IonItem button onClick={() => handleNavigation("/bizkaibus-viewers")}>
                             <IonIcon slot="start" icon={busOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
@@ -154,7 +154,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             <IonLabel>{t('Ver líneas')}</IonLabel>
                         </IonItem>
 
-                        <h3 className="section-title">Metro Bilbao</h3>
+                        <h3 className="section-title">{t('Metro Bilbao')}</h3>
                         <IonItem button onClick={() => handleNavigation("/metro-bilbao-displays")}>
                             <IonIcon slot="start" icon={trainOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
@@ -164,7 +164,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             <IonLabel>{t('Mis visores')}</IonLabel>
                         </IonItem>
 
-                        <h3 className="section-title">Renfe Cercanias</h3>
+                        <h3 className="section-title">{t('Renfe Cercanias')}</h3>
                         <IonItem button onClick={() => handleNavigation("/renfe-displays")}>
                             <IonIcon slot="start" icon={trainOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
@@ -174,7 +174,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             <IonLabel>{t('Mis visores')}</IonLabel>
                         </IonItem>
 
-                        <h3 className="section-title">K Bus Barakaldo</h3>
+                        <h3 className="section-title">{t('K Bus Barakaldo')}</h3>
                         <IonItem button onClick={() => handleNavigation("/k-bus-displays")}>
                             <IonIcon slot="start" icon={trainOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
