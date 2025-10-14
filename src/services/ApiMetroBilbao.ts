@@ -184,3 +184,62 @@ export async function planTrip(params: {
         return null;
     }
 }
+
+export interface FareRate {
+    type: string;
+    zones: number;
+    price: string;
+}
+
+export interface FareItem {
+    code: string;
+    name: string;
+    subTitle: string;
+    personal: string;
+    validate: string;
+    terms: string;
+    where: string;
+    valid: string;
+    required: string;
+    periodicity: number;
+    img: string;
+    imgSlider: string;
+    moreDetails: string;
+    category: string;
+    rates: FareRate[][];
+    limitTravel: number;
+    order: number;
+}
+
+export interface FareCategory {
+    type: string;
+    order: number;
+    items: FareItem[];
+}
+
+export interface FaresResponse {
+    title: string;
+    description: string;
+    configuration: {
+        categorized: { [key: string]: FareCategory };
+    };
+}
+
+export async function getFares(): Promise<FaresResponse> {
+    let language = i18next.language || "es";
+    if (language !== "es" && language !== "eu") {
+        language = "es";
+    }
+
+    const endpoint = language === "eu" ? "tarifa-guztiak" : "todas-las-tarifas";
+    const url = `https://api.metrobilbao.eus/metro_page/${language}/${endpoint}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching fares:", error);
+        throw error;
+    }
+}

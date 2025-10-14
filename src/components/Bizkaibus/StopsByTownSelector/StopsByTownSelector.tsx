@@ -5,6 +5,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Municipio, Parada } from "../../../services/BizkaibusStorage";
 import './StopsByTownSelector.css';
 import {useTranslation} from "react-i18next";
+import {IonCard, IonCardContent, IonIcon, IonLabel} from "@ionic/react";
+import {informationCircleOutline} from "ionicons/icons";
 
 interface AcordeonDeParadasProps {
     paradas: Parada[];
@@ -41,7 +43,12 @@ const StopsByTownSelector: React.FC<AcordeonDeParadasProps> = ({ paradas, onMuni
 
     return (
         <div className="acordeon-container">
-            <p>{t('Para poder añadir paradas a favoritas seleccione un municipio')}</p>
+            <IonCard color="light" style={{ textAlign: 'center', margin: '16px' }}>
+                <IonCardContent style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                    <IonIcon icon={informationCircleOutline} />
+                    <IonLabel>{t('Para poder añadir paradas a favoritas seleccione un municipio')}</IonLabel>
+                </IonCardContent>
+            </IonCard>
             {Object.keys(provincias).map((provincia) => {
                 const filteredMunicipios = provincias[provincia].filter(municipio =>
                     municipio.DESCRIPCION_MUNICIPIO.toLowerCase().includes(searchTerms[provincia].toLowerCase())

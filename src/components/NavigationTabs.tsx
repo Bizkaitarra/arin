@@ -20,7 +20,7 @@ const NavigationTabs: React.FC = () => {
     return (
         <IonTabBar>
             {selectedVisores.includes('bizkaibus') && (
-                <IonTabButton tab="bizkaibus-viewers" href="/bizkaibus-viewers">
+                <IonTabButton tab="bizkaibus-displays" href="/bizkaibus-displays">
                     <span className="subtext">{t('bizkaibus_nav_1')}</span>
                     <IonIcon icon={busOutline} />
                     <IonLabel>{t('bizkaibus_nav_2')}</IonLabel>
@@ -36,7 +36,7 @@ const NavigationTabs: React.FC = () => {
             )}
 
             {selectedVisores.includes('kbus') && (
-                <IonTabButton tab="mkbus-displays" href="/k-bus-displays">
+                <IonTabButton tab="k-bus-displays" href="/k-bus-displays">
                     <span className="subtext">{t('kbus_nav_1')}</span>
                     <IonIcon icon={busOutline} />
                     <IonLabel>{t('kbus_nav_2')}</IonLabel>

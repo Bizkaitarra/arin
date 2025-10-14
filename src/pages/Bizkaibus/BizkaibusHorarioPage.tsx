@@ -6,6 +6,7 @@ import {timerOutline} from "ionicons/icons";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import LineHeader from "../../components/Bizkaibus/LineHeader/LineHeader";
+import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
 
 interface RouteParams {
     line: string;
@@ -23,6 +24,12 @@ const BizkaibusHorarioPage: React.FC = () => {
     useEffect(() => {
         if (line) {
             const fetchHorarios = async () => {
+                if (!navigator.onLine) {
+                    setError(t('No tienes conexión a internet'));
+                    setLoading(false);
+                    return;
+                }
+
                 setLoading(true);
                 setError(null);
                 try {
@@ -50,7 +57,7 @@ const BizkaibusHorarioPage: React.FC = () => {
         <Page title={t("Horario de línea")} icon={timerOutline} internalPage={true}>
 
             {loading && <p>{t('Obteniendo información de Bizkabus, espera con un ☕️...')}</p>}
-            {error && <p>{error}</p>}
+            {error && <ErrorDisplay message={error} />}
             {horarios && Object.keys(horarios).length > 0 && <LineHeader line={line} lineName={horarios[1][0].Descripcion}/>}
             {horarios && Object.keys(horarios).length > 0 && <ScheduleViewer horarios={horarios}/>}
 

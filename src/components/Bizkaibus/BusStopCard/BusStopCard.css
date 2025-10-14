@@ -52,6 +52,14 @@
     text-align: right;
 }
 
+.bus-arrival-primary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 8px;
+}
+
 .bus-time {
     font-size: 1.2em;
     font-weight: bold;
@@ -60,6 +68,12 @@
 
 .bus-time.is-critical {
     color: #d9534f;
+}
+
+.arrival-time-display {
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #666;
 }
 
 .next-arrival {

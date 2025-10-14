@@ -1,0 +1,14 @@
+.error-display-card {
+    margin: 16px;
+}
+
+.error-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.error-content p {
+    margin: 0;
+    font-weight: 500;
+}

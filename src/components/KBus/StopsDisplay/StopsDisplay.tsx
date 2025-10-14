@@ -13,6 +13,7 @@ import {KBusStorage} from "../../../services/KBus/KBusStorage";
 import {KBusStop} from "../../../services/KBus/KbusStop";
 import {KBusArrivalResponse} from "../../../services/KBus/KBusArrivalResponse";
 import KBusStopCard from "../KBusStopCard/KBusStopCard";
+import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
 
 const StopsDisplay: React.FC = () => {
     const { t } = useTranslation();
@@ -23,6 +24,12 @@ const StopsDisplay: React.FC = () => {
     const storageService = new KBusStorage();
 
     const fetchData = async () => {
+        if (!navigator.onLine) {
+            setError(t('No tienes conexión a internet'));
+            setLoading(false);
+            return;
+        }
+
         try {
             setLoading(true);
             const stops: KBusStop[] = storageService.getStations(true).filter(station => station.isFavorite) as KBusStop[]
@@ -32,9 +39,7 @@ const StopsDisplay: React.FC = () => {
             setError(null);
         } catch (err) {
             console.log(err);
-            setError(
-                err.message
-            );
+            setError(t('Error al conectar con KBus'));
             setLoading(false);
         }
     };
@@ -62,13 +67,7 @@ const StopsDisplay: React.FC = () => {
             </IonRefresher>
 
             {loading && <Loader serviceName="KBus" reloading={reloading} />}
-            {error && (
-                <div className="error-container">
-                    <IonText color="danger">
-                        <h4>{error}</h4>
-                    </IonText>
-                </div>
-            )}
+            {error && <ErrorDisplay message={error} />}
             {!loading &&
                 !error &&
                 stopData.length > 0 &&

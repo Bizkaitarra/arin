@@ -40,11 +40,11 @@ const BizkaibusRoutes: React.FC = () => {
     }, [line]);
 
     const handleGoToRoute = (route: BizkaibusRoute) => {
-        history.push(`/itinerary/${line}/${route.RouteNumber}`);
+        history.push(`/bizkaibus/itinerary/${line}/${route.RouteNumber}`);
     }
 
     const handleGoToScheduled = (route: BizkaibusRoute) => {
-        history.push(`/scheduled/${line}/${route.RouteNumber}`);
+        history.push(`/bizkaibus/scheduled/${line}/${route.RouteNumber}`);
     }
 
     return (

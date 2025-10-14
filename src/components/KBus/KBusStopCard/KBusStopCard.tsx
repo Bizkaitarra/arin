@@ -40,8 +40,11 @@ const KBusStopCard: React.FC<KBusStopCardProps> = ({ response }) => {
                                     <div>{arrival.line}</div>
                                 </div>
                                 <div className="bus-time-info">
-                                    <div className={`bus-time ${isCritical ? 'is-critical' : ''}`} title={`Llegada: ${getArrivalTime(arrivalInMinutes)}`}>
-                                        {arrivalInMinutes} {t('min')}
+                                    <div className="bus-arrival-primary">
+                                        <div className={`bus-time ${isCritical ? 'is-critical' : ''}`}>
+                                            {arrivalInMinutes} {t('min')}
+                                        </div>
+                                        <div className="arrival-time-display">({getArrivalTime(arrivalInMinutes)})</div>
                                     </div>
                                 </div>
                             </div>

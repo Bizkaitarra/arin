@@ -171,3 +171,9 @@ ion-tab-button.tab-selected {
 .page-content {
     padding: 8px 12px;
 }
+
+.page-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+}

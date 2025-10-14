@@ -7,6 +7,7 @@ import {setIntervalRenfe} from "../../../services/IntervalServices";
 import Loader from "../../Loader";
 import RenfeStationCard from "../RenfeStationCard/RenfeStationCard";
 import './RenfeDisplay.css';
+import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
 
 
 const StopDisplay: React.FC = () => {
@@ -18,6 +19,12 @@ const StopDisplay: React.FC = () => {
     const storageService = new RenfeStorage();
 
     const fetchData = async () => {
+        if (!navigator.onLine) {
+            setError(t('No tienes conexión a internet'));
+            setLoading(false);
+            return;
+        }
+
         try {
             setLoading(true);
             const displays = await storageService.getSavedDisplays();
@@ -28,7 +35,7 @@ const StopDisplay: React.FC = () => {
             setError(null);
         } catch (err) {
             console.error(err);
-            setError('Error fetching renfe data');
+            setError(t('Error al conectar con Renfe'));
             setLoading(false);
         }
     };
@@ -58,13 +65,7 @@ const StopDisplay: React.FC = () => {
             {loading && (
                 <Loader serviceName={"Renfe"} reloading={reloading}/>
             )}
-            {error && (
-                <div className="error-container">
-                    <IonText color="danger">
-                        <h4>{error}</h4>
-                    </IonText>
-                </div>
-            )}
+            {error && <ErrorDisplay message={error} />}
             {!loading &&
                 !error &&
                 renfeData.length > 0 &&

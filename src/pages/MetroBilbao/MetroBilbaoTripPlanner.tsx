@@ -24,6 +24,7 @@ import { searchOutline } from 'ionicons/icons';
 import metroStations from '../../data/paradas_metro.json';
 import { planTrip } from '../../services/ApiMetroBilbao';
 import './MetroBilbaoTripPlanner.css';
+import ErrorDisplay from '../../components/ErrorDisplay/ErrorDisplay';
 
 const timeSlots = [
     { value: '0-4', label: '00:00 - 04:00' },
@@ -64,6 +65,11 @@ const MetroBilbaoTripPlanner: React.FC = () => {
     });
 
     const handleSearch = async () => {
+        if (!navigator.onLine) {
+            setError(t('No tienes conexión a internet'));
+            return;
+        }
+
         setError(null);
         setResults(null);
 
@@ -85,11 +91,15 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             hora_fin: endHour
         };
 
-        const tripResults = await planTrip(params);
-        if (tripResults && tripResults.trips) {
-            setResults(tripResults);
-        } else {
-            setError(t('Error al planificar el viaje'));
+        try {
+            const tripResults = await planTrip(params);
+            if (tripResults && tripResults.trips) {
+                setResults(tripResults);
+            } else {
+                setError(t('Error al planificar el viaje'));
+            }
+        } catch (e) {
+            setError(t('Error al conectar con Metro Bilbao'));
         }
     };
 
@@ -113,7 +123,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">{t('Fecha')}</IonLabel>
-                <IonDatetime className="trip-planner-datetime" displayFormat="DD-MM-YYYY" value={date} onIonChange={e => setDate(e.detail.value!)} placeholder={t('Selecciona una fecha')} presentation="date"/>
+                <IonDatetime className="trip-planner-datetime" value={date} onIonChange={e => setDate(e.detail.value! as string)} presentation="date" locale="es-ES"/>
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">{t('Franja horaria')}</IonLabel>
@@ -127,7 +137,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                 {t('Buscar viaje')}
             </IonButton>
 
-            {error && <p style={{ textAlign: 'center', color: 'red', marginTop: '1rem' }}>{error}</p>}
+            {error && <ErrorDisplay message={error} />}
 
             {results && results.trips && (
                 <IonCard className="trip-results-card" style={{ marginTop: '1rem' }}>

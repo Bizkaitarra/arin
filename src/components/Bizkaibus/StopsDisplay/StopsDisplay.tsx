@@ -11,6 +11,7 @@ import {setIntervalBizkaibus} from '../../../services/IntervalServices';
 import Loader from '../../Loader';
 import {useTranslation} from "react-i18next";
 import BusStopCard from "../BusStopCard/BusStopCard";
+import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
 
 const StopsDisplay: React.FC = () => {
     const { t } = useTranslation();
@@ -20,6 +21,12 @@ const StopsDisplay: React.FC = () => {
     const [reloading, setReloading] = useState<boolean>(true);
 
     const fetchData = async () => {
+        if (!navigator.onLine) {
+            setError(t('No tienes conexión a internet'));
+            setLoading(false);
+            return;
+        }
+
         try {
             setLoading(true);
             const data = await fetchStopsData(getStations(true).filter(station => station.IS_FAVORITE));
@@ -27,9 +34,7 @@ const StopsDisplay: React.FC = () => {
             setLoading(false);
             setError(null);
         } catch (err) {
-            setError(
-                err.message
-            );
+            setError(t('Error al conectar con Bizkaibus'));
             setLoading(false);
         }
     };
@@ -57,13 +62,7 @@ const StopsDisplay: React.FC = () => {
             </IonRefresher>
 
             {loading && <Loader serviceName="Bizkaibus" reloading={reloading} />}
-            {error && (
-                <div className="error-container">
-                    <IonText color="danger">
-                        <h4>{error}</h4>
-                    </IonText>
-                </div>
-            )}
+            {error && <ErrorDisplay message={error} />}
             {!loading &&
                 !error &&
                 stopData.length > 0 &&

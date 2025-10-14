@@ -1,6 +1,6 @@
 import {IonLabel} from "@ionic/react";
-import {Stop} from "../../services/Stop";
 import {useTranslation} from "react-i18next";
+import {Stop} from "../../../services/Stop";
 
 interface StopTitleProps {
     stop: Stop;

@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import {IonButton, IonIcon, IonItem, IonLabel, useIonViewWillEnter} from '@ionic/react';
+import {IonButton, IonIcon, IonItem, IonLabel, IonSearchbar, useIonViewWillEnter} from '@ionic/react';
 import {listOutline, mapOutline, settingsOutline} from 'ionicons/icons';
 import {getStations, Municipio, Parada, saveStationIds} from "../../services/BizkaibusStorage";
 import Page from "../Page";
@@ -7,13 +6,17 @@ import Map from "../../components/Bizkaibus/Map/Map";
 import StopsByTownSelector from "../../components/Bizkaibus/StopsByTownSelector/StopsByTownSelector";
 import {Star, StarOff} from "lucide-react";
 import {useTranslation} from "react-i18next";
+import {useCustomToast} from "../../components/ArinToast";
+import {useEffect, useState} from "react";
 
 const BizkaibusAddByTown: React.FC = () => {
     const {t} = useTranslation();
+    const { presentArinToast } = useCustomToast();
     const [town, setTown] = useState<Municipio | null>(null);
     const [stations, setStations] = useState<Parada[]>([]);
     const [filteredStations, setFilteredStations] = useState<Parada[]>([]);
     const [isMapView, setIsMapView] = useState<boolean>(true);
+    const [stopSearchTerm, setStopSearchTerm] = useState('');
 
 
     useIonViewWillEnter(() => {
@@ -51,46 +54,26 @@ const BizkaibusAddByTown: React.FC = () => {
     };
 
 
-    const handleAddStop = (stop: Parada) => {
-        const station = stations.find(s => s.PARADA === stop.PARADA);
-
-        if (!station) return; // Evita errores si la estación no se encuentra
-
-        const wasFavorite = station.IS_FAVORITE; // Guardamos el estado actual
-
-        setStations(prevStations =>
-            prevStations.map(s =>
-                s.PARADA === stop.PARADA ? {...s, IS_FAVORITE: !s.IS_FAVORITE} : s
-            )
-        );
-    };
-
-
-    const handleRemoveStop = (stop: Parada) => {
-        const station = stations.find(s => s.PARADA === stop.PARADA);
-
-        if (!station || !station.IS_FAVORITE) return; // Solo eliminamos si es favorito
-
-        setStations(prevStations =>
-            prevStations.map(s =>
-                s.PARADA === stop.PARADA ? {...s, IS_FAVORITE: false} : s
-            )
-        );
-    };
-
     const handleToggleStop = (stop: Parada) => {
         const station = stations.find(s => s.PARADA === stop.PARADA);
-
-        if (!station) return; // Evita errores si la estación no se encuentra
+        if (!station) return;
 
         const newFavoriteStatus = !station.IS_FAVORITE;
 
         setStations(prevStations =>
             prevStations.map(s =>
-                s.PARADA === stop.PARADA ? {...s, IS_FAVORITE: newFavoriteStatus} : s
+                s.PARADA === stop.PARADA ? { ...s, IS_FAVORITE: newFavoriteStatus } : s
             )
         );
+
+        presentArinToast({
+            message: newFavoriteStatus ? t('Parada añadida a favoritos') : t('Parada eliminada de favoritos'),
+            duration: 2000,
+            position: 'top',
+            color: newFavoriteStatus ? 'success' : 'danger'
+        });
     };
+
 
 
     const handleTownSelect = (selectedTown: Municipio) => {
@@ -135,7 +118,15 @@ const BizkaibusAddByTown: React.FC = () => {
                     ) : (
                         <>
                             <h1>{t('Listado de Paradas')}</h1>
-                            {filteredStations.map(station => (
+                            <IonSearchbar
+                                value={stopSearchTerm}
+                                onIonInput={(e) => setStopSearchTerm(e.detail.value!)}
+                                placeholder={t('Escribe para filtrar')}>
+                            </IonSearchbar>
+                            {filteredStations.filter(station =>
+                                station.PARADA.toLowerCase().includes(stopSearchTerm.toLowerCase()) ||
+                                station.DENOMINACION.toLowerCase().includes(stopSearchTerm.toLowerCase())
+                            ).map(station => (
                                 <IonItem key={station.PARADA}>
                                     <IonLabel>
                                         <h3>{station.PARADA} - {station.DENOMINACION} {station.IS_FAVORITE}</h3>
@@ -143,8 +134,8 @@ const BizkaibusAddByTown: React.FC = () => {
                                         <p>{station.DESCRIPCION_MUNICIPIO}, {station.DESCRIPCION_PROVINCIA}</p>
                                     </IonLabel>
                                     {station.IS_FAVORITE ?
-                                        <Star color="red" onClick={() => handleRemoveStop(station)}/> :
-                                        <StarOff color="gray" onClick={() => handleAddStop(station)}/>}
+                                        <Star color="red" onClick={() => handleToggleStop(station)}/> :
+                                        <StarOff color="gray" onClick={() => handleToggleStop(station)}/>}
                                 </IonItem>
                             ))}
                         </>
