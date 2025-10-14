@@ -1,5 +1,5 @@
 import {Redirect, Route} from 'react-router-dom';
-import {IonApp, IonRouterOutlet, IonSpinner, IonTabs, setupIonicReact} from '@ionic/react';
+import {IonApp, IonRouterOutlet, IonTabs, setupIonicReact} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
 
 import '@ionic/react/css/core.css';
@@ -46,6 +46,8 @@ import RenfeDisplays from "./pages/Renfe/RenfeDisplays";
 import RenfeMyDisplays from "./pages/Renfe/RenfeMyDisplays";
 import RenfeAddStop from "./pages/Renfe/RenfeAddStop";
 import RenfeAddRoute from "./pages/Renfe/RenfeAddRoute";
+import MetroTarifas from "./pages/MetroBilbao/MetroTarifas";
+import AppLoader from "./components/AppLoader";
 
 setupIonicReact();
 
@@ -69,17 +71,13 @@ const App: React.FC = () => {
 
     React.useEffect(() => {
         if (Capacitor.isNativePlatform()) {
-            StatusBar.setOverlaysWebView({ overlay: false });
+            StatusBar.setOverlaysWebView({ overlay: true });
             StatusBar.setBackgroundColor({ color: '#ffffff' });
         }
     }, []);
 
     if (!isLanguageLoaded) {
-        return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <IonSpinner />
-            </div>
-        );
+        return <AppLoader serviceName={"language"} reloading={false} />;
     }
 
     return (
@@ -89,7 +87,7 @@ const App: React.FC = () => {
                 <IonReactRouter>
                     <IonTabs>
                         <IonRouterOutlet>
-                            <Route exact path="/bizkaibus-viewers" component={BizkaibusDisplays} />
+                            <Route exact path="/bizkaibus-displays" component={BizkaibusDisplays} />
                             <Route exact path="/bizkaibus-add-stop-by-town" component={BizkaibusAddByTown} />
                             <Route exact path="/bizkaibus-add-stop-by-location" component={BizkaibusAddByLocalization} />
                             <Route exact path="/bizkaibus-my-displays" component={BizkaibusMyDisplays} />
@@ -98,6 +96,7 @@ const App: React.FC = () => {
                             <Route exact path="/metro-bilbao-add-route" component={MetroBilbaoAddRoute} />
                             <Route exact path="/metro-bilbao-trip-planner" component={MetroBilbaoTripPlanner} />
                             <Route exact path="/metro-bilbao-my-displays" component={MetroBilbaoMyDisplays} />
+                            <Route exact path="/metro-bilbao-tarifas" component={MetroTarifas} />
                             <Route exact path="/k-bus-displays" component={KBusDisplays} />
                             <Route exact path="/k-bus-my-displays" component={KBusMyDisplays} />
                             <Route exact path="/k-bus-add-stop" component={KBusAddStop} />
@@ -107,10 +106,10 @@ const App: React.FC = () => {
                             <Route exact path="/renfe-add-route" component={RenfeAddRoute} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
-                            <Route exact path="/" render={() => <Redirect to="/bizkaibus-viewers" />} />
-                            <Route path="/scheduled/:line/:route" component={BizkaibusHorarioPage} />
-                            <Route path="/itinerary/:line/:route" component={RouteItineraries} />
-                            <Route path="/routes/:line" component={BizkaibusRoutes} />
+                            <Route exact path="/" render={() => <Redirect to="/bizkaibus-displays" />} />
+                            <Route path="/bizkaibus/scheduled/:line/:route" component={BizkaibusHorarioPage} />
+                            <Route path="/bizkaibus/itinerary/:line/:route" component={RouteItineraries} />
+                            <Route path="/bizkaibus/routes/:line" component={BizkaibusRoutes} />
                             <Route path="/bizkaibus-search-lines" component={SearchLines} />
                         </IonRouterOutlet>
                     </IonTabs>
@@ -119,5 +118,4 @@ const App: React.FC = () => {
         </IonApp>
     );
 };
-
 export default App;

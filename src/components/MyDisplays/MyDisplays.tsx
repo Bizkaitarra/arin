@@ -24,6 +24,7 @@ import {BIZKAIBUS_TYPE, KBUS_TYPE, METRO_TYPE, RENFE_TYPE} from "../../services/
 import KBusAddButton from "../KBus/KBusAddButton/KBusAddButton";
 import MetroBilbaoAddVisorButton from "../MetroBilbao/MetroBilbaoAddVisorButton";
 import RenfeAddButton from "../Renfe/RenfeAddButton/RenfeAddButton";
+import {useCustomToast} from "../ArinToast";
 
 interface MyDisplaysProps {
     storageService: StopsStorage;
@@ -32,7 +33,7 @@ interface MyDisplaysProps {
 
 const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
     const [selectedStops, setSelectedStops] = useState<Stop[]>([]);
-    const [presentToast] = useIonToast();
+    const { presentArinToast } = useCustomToast();
     const { t } = useTranslation();
 
 
@@ -62,10 +63,10 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
         const stops = selectedStops.filter(stop => stop.id !== id);
         storageService.saveStationIds(stops.map(stop => stop.id));
         setSelectedStops(stops);
-        presentToast({
+        presentArinToast({
             message: t('Parada eliminada'),
             duration: 2000,
-            color: 'success'
+            color: 'danger'
         });
     };
     const handleStopRename = (newStopName: string, stop: Stop) => {
@@ -75,7 +76,7 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
         );
         storageService.saveRenamedStation(stop);
         setSelectedStops(updatedStops);
-        presentToast({
+        presentArinToast({
             message: t('Parada renombrada'),
             duration: 2000,
             color: 'success'

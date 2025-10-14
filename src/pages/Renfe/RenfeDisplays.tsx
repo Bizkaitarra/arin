@@ -1,18 +1,15 @@
 import React from 'react';
-import {IonFab, IonFabButton, IonIcon, IonText, useIonActionSheet} from '@ionic/react';
-import {addCircleOutline, trainOutline, chevronUpSharp, listOutline} from 'ionicons/icons';
+import {IonText} from '@ionic/react';
+import {trainOutline} from 'ionicons/icons';
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import StopsDisplay from "../../components/Renfe/StopsDisplay/StopsDisplay";
 import {RenfeStorage} from "../../services/Renfe/RenfeStorage";
 import RenfeAddButton from "../../components/Renfe/RenfeAddButton/RenfeAddButton";
-import {useHistory} from "react-router-dom";
 
 const RenfeDisplays: React.FC = () => {
     const {t} = useTranslation();
     const storage = new RenfeStorage();
-    const history = useHistory();
-    const [presentActionSheet] = useIonActionSheet();
 
     return (
         <Page title={t("Visores")} icon={trainOutline}>
@@ -27,27 +24,6 @@ const RenfeDisplays: React.FC = () => {
                         <RenfeAddButton/>
                     </div>
                 )}
-            <IonFab slot="fixed" vertical="bottom" horizontal="end">
-                <IonFabButton color="medium" onClick={() =>
-                    presentActionSheet({
-                        header: 'Opciones',
-                        buttons: [
-                            {
-                                text: 'Añadir visor',
-                                icon: addCircleOutline,
-                                handler: () => history.push('/renfe-add-route'),
-                            },
-                            {
-                                text: 'Mis visores',
-                                icon: listOutline,
-                                handler: () => history.push('/renfe-my-displays'),
-                            },
-                        ],
-                    })
-                }>
-                    <IonIcon icon={chevronUpSharp}></IonIcon>
-                </IonFabButton>
-            </IonFab>
         </Page>
     );
 };

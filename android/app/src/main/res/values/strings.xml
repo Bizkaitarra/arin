@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Arin</string>
-    <string name="title_activity_main">Arin</string>
+    <string name="app_name">Arin: Bizkaibus, Metro Bilbao</string>
+    <string name="title_activity_main">Arin: Bizkaibus, Metro Bilbao</string>
     <string name="package_name">bizkaitarra.arin</string>
     <string name="custom_url_scheme">bizkaitarra.arin</string>
     <string name="admob_app_id">ca-app-pub-6441432321179917~5097888783</string>

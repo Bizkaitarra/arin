@@ -8,7 +8,6 @@ import {
     IonReorder,
     IonReorderGroup,
     IonText,
-    useIonToast,
     useIonViewWillEnter
 } from '@ionic/react';
 import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
@@ -17,10 +16,11 @@ import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 import RenameStopComponent from "../../components/Bizkaibus/RenameStopComponent/RenameStopComponent";
+import {useCustomToast} from "../../components/ArinToast";
 
 const BizkaibusMyDisplays: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Parada[]>([]);
-    const [presentToast] = useIonToast();
+    const { presentArinToast } = useCustomToast();
     const { t } = useTranslation();
 
 
@@ -49,10 +49,10 @@ const BizkaibusMyDisplays: React.FC = () => {
         const stops = selectedStops.filter(stop => stop.PARADA !== id);
         saveStationIds(stops.map(stop => stop.PARADA));
         setSelectedStops(stops);
-        presentToast({
-            message: t('`Parada eliminada`'),
+        presentArinToast({
+            message: t('Parada eliminada'),
             duration: 2000,
-            color: 'success'
+            color: 'danger'
         });
     };
     const handleStopRename = (newStopName: string, stop: Parada) => {
@@ -62,8 +62,8 @@ const BizkaibusMyDisplays: React.FC = () => {
         );
         saveRenamedStation(stop);
         setSelectedStops(updatedStops);
-        presentToast({
-            message: t('`Parada renombrada`'),
+        presentArinToast({
+            message: t('Parada renombrada'),
             duration: 2000,
             color: 'success'
         });

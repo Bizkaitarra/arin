@@ -1,6 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import {StopsStorage} from '../../../services/StopsStorage';
+import RenfeAddButton from "../RenfeAddButton/RenfeAddButton";
+import {Display} from "../../../services/Display";
+import {saveMetroDisplays} from "../../../services/MetroBilbaoStorage";
+import {ItemReorderEventDetail} from "@ionic/core";
+import {useCustomToast} from "../../ArinToast";
+import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {reorderThreeOutline, trashBinOutline} from "ionicons/icons";
 import {
     IonButton,
     IonIcon,
@@ -8,16 +13,10 @@ import {
     IonLabel,
     IonList,
     IonReorder,
-    IonReorderGroup,
-    IonText,
-    useIonToast,
+    IonReorderGroup, IonText,
     useIonViewWillEnter
 } from "@ionic/react";
-import {StopsStorage} from '../../../services/StopsStorage';
-import RenfeAddButton from "../RenfeAddButton/RenfeAddButton";
-import {Display} from "../../../services/Display";
-import {saveMetroDisplays} from "../../../services/MetroBilbaoStorage";
-import {ItemReorderEventDetail} from "@ionic/core";
+import {reorderThreeOutline, trashBinOutline} from "ionicons/icons";
 
 interface MyDisplaysProps {
     storageService: StopsStorage;
@@ -26,7 +25,7 @@ interface MyDisplaysProps {
 
 const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
     const [selectedStops, setSelectedStops] = useState<Display[]>([]);
-    const [presentToast] = useIonToast();
+    const { presentArinToast } = useCustomToast();
     const { t } = useTranslation();
 
 
@@ -57,10 +56,10 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
         storageService.saveDisplays(stops);
         setSelectedStops(stops);
 
-        presentToast({
-            message: `Parada eliminada`,
+        presentArinToast({
+            message: t('Parada eliminada'),
             duration: 2000,
-            color: 'success'
+            color: 'danger'
         });
     };
 

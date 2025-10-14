@@ -1,12 +1,11 @@
 import React from 'react';
 import {IonText} from '@ionic/react';
-import {busOutline, mapOutline} from 'ionicons/icons';
-import {getSavedStationIds} from '../../services/BizkaibusStorage';
+import {mapOutline} from 'ionicons/icons';
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
-import KBusAddButton from "../../components/KBus/KBusAddButton/KBusAddButton";
 import StopsDisplay from "../../components/KBus/StopsDisplay/StopsDisplay";
 import {KBusStorage} from "../../services/KBus/KBusStorage";
+import KBusAddButton from "../../components/KBus/KBusAddButton/KBusAddButton";
 
 const KBusDisplays: React.FC = () => {
     const {t} = useTranslation();

@@ -1,15 +1,9 @@
 import React from 'react';
-import {IonButton, IonFab, IonFabButton, IonIcon, IonText, useIonActionSheet} from '@ionic/react';
+import {IonText} from '@ionic/react';
 import StopsDisplay from '../../components/Bizkaibus/StopsDisplay/StopsDisplay';
 import {
-    addCircleOutline,
-    addCircleSharp,
     busOutline,
-    chevronUpSharp,
-    listOutline,
-    settingsOutline
-} from 'ionicons/icons';
-import {useHistory} from 'react-router-dom';
+} from "ionicons/icons";
 import {getSavedStationIds} from '../../services/BizkaibusStorage';
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
@@ -17,8 +11,6 @@ import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 
 const BizkaibusDisplays: React.FC = () => {
     const {t} = useTranslation();
-    const history = useHistory();
-    const [presentActionSheet] = useIonActionSheet();
 
     return (
         <Page title={t("Visores")} icon={busOutline}>
@@ -33,32 +25,6 @@ const BizkaibusDisplays: React.FC = () => {
                         <BizkaibusAddStopButton/>
                     </div>
                 )}
-            <IonFab slot="fixed" vertical="bottom" horizontal="end">
-                <IonFabButton color="medium" onClick={() =>
-                    presentActionSheet({
-                        header: 'Opciones',
-                        buttons: [
-                            {
-                                text: 'Añadir parada por pueblo',
-                                icon: addCircleOutline,
-                                handler: () => history.push('/bizkaibus-add-stop-by-town'),
-                            },
-                            {
-                                text: 'Añadir parada por localización',
-                                icon: addCircleSharp,
-                                handler: () => history.push('/bizkaibus-add-stop-by-location'),
-                            },
-                            {
-                                text: 'Mis visores',
-                                icon: listOutline,
-                                handler: () => history.push('/bizkaibus-my-displays'),
-                            },
-                        ],
-                    })
-                }>
-                    <IonIcon icon={chevronUpSharp}></IonIcon>
-                </IonFabButton>
-            </IonFab>
         </Page>
     );
 };

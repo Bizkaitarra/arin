@@ -3,7 +3,8 @@ import {
     IonButton,
     IonButtons,
     IonChip,
-    IonContent, IonFooter,
+    IonContent,
+    IonFooter,
     IonHeader,
     IonIcon,
     IonItem,
@@ -22,10 +23,8 @@ import {
     arrowBackOutline,
     busOutline,
     informationCircleOutline,
-    listOutline,
     mapOutline,
     menuOutline,
-    searchOutline,
     settingsOutline,
     trainOutline
 } from "ionicons/icons";
@@ -33,7 +32,10 @@ import {useHistory, useLocation} from 'react-router-dom';
 import {App} from '@capacitor/app';
 import {Toast} from '@capacitor/toast';
 import ReviewModal from "./ReviewModal";
-import AdBanner from "../components/AdBanner";
+import {bizkaibusMenuItems, kbusMenuItems, metroMenuItems, renfeMenuItems} from "../components/Menu/menuItems";
+import FabMenu from '../components/FabMenu';
+import {useConfiguration} from '../context/ConfigurationContext';
+import SwipeWrapper from '../components/SwipeWrapper';
 
 interface PageProps {
     title: string;
@@ -44,8 +46,9 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}) => {
     const {t} = useTranslation();
+    const { settings } = useConfiguration();
     const [showModal, setShowModal] = useState(false);
-    const history = useHistory();  // Instancia el hook de historia
+    const history = useHistory();
     const location = useLocation();
     const [transportType, setTransportType] = useState('');
     const [exitAttempt, setExitAttempt] = useState(false);
@@ -124,6 +127,31 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
         'KBus': { icon: mapOutline, className: 'kbus-header-icon' }
     };
 
+    const viewerPages = [
+        { path: '/bizkaibus-displays', id: 'bizkaibus' },
+        { path: '/metro-bilbao-displays', id: 'metro' },
+        { path: '/k-bus-displays', id: 'kbus' },
+        { path: '/renfe-displays', id: 'renfe' }
+    ];
+
+    const activeViewerPages = viewerPages.filter(page => settings?.atajos?.includes(page.id));
+    const isViewerPage = activeViewerPages.some(page => page.path === location.pathname);
+
+    const handleSwipeLeft = () => {
+        const currentIndex = activeViewerPages.findIndex(page => page.path === location.pathname);
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex + 1) % activeViewerPages.length;
+        history.push(activeViewerPages[nextIndex].path);
+    };
+
+    const handleSwipeRight = () => {
+        const currentIndex = activeViewerPages.findIndex(page => page.path === location.pathname);
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex - 1 + activeViewerPages.length) % activeViewerPages.length;
+        history.push(activeViewerPages[nextIndex].path);
+    };
+
+
     return (
         <>
             <ReviewModal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)}/>
@@ -141,51 +169,55 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                 <IonContent>
                     <IonList>
                         <h3 className="section-title">{t('Bizkaibus')}</h3>
-                        <IonItem button onClick={() => handleNavigation("/bizkaibus-viewers")}>
+                        <IonItem button onClick={() => handleNavigation("/bizkaibus-displays")}>
                             <IonIcon slot="start" icon={busOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
                         </IonItem>
-                        <IonItem button onClick={() => handleNavigation("/bizkaibus-my-displays")}>
-                            <IonIcon slot="start" icon={listOutline}/>
-                            <IonLabel>{t('Mis visores')}</IonLabel>
-                        </IonItem>
-                        <IonItem button onClick={() => handleNavigation("/bizkaibus-search-lines")}>
-                            <IonIcon slot="start" icon={searchOutline}/>
-                            <IonLabel>{t('Ver líneas')}</IonLabel>
-                        </IonItem>
+                        {bizkaibusMenuItems.map((item, index) => (
+                            <IonItem key={index} button onClick={() => handleNavigation(item.path)} id={item.id}>
+                                <IonIcon slot="start" icon={item.icon}/>
+                                <IonLabel>{t(item.text)}</IonLabel>
+                            </IonItem>
+                        ))}
 
                         <h3 className="section-title">{t('Metro Bilbao')}</h3>
                         <IonItem button onClick={() => handleNavigation("/metro-bilbao-displays")}>
                             <IonIcon slot="start" icon={trainOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
                         </IonItem>
-                        <IonItem button onClick={() => handleNavigation("/metro-bilbao-my-displays")}>
-                            <IonIcon slot="start" icon={listOutline}/>
-                            <IonLabel>{t('Mis visores')}</IonLabel>
-                        </IonItem>
+                        {metroMenuItems.map((item, index) => (
+                            <IonItem key={index} button onClick={() => handleNavigation(item.path)} id={item.id}>
+                                <IonIcon slot="start" icon={item.icon}/>
+                                <IonLabel>{t(item.text)}</IonLabel>
+                            </IonItem>
+                        ))}
 
                         <h3 className="section-title">{t('Renfe Cercanias')}</h3>
                         <IonItem button onClick={() => handleNavigation("/renfe-displays")}>
                             <IonIcon slot="start" icon={trainOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
                         </IonItem>
-                        <IonItem button onClick={() => handleNavigation("/renfe-my-displays")}>
-                            <IonIcon slot="start" icon={listOutline}/>
-                            <IonLabel>{t('Mis visores')}</IonLabel>
-                        </IonItem>
+                        {renfeMenuItems.map((item, index) => (
+                            <IonItem key={index} button onClick={() => handleNavigation(item.path)} id={item.id}>
+                                <IonIcon slot="start" icon={item.icon}/>
+                                <IonLabel>{t(item.text)}</IonLabel>
+                            </IonItem>
+                        ))}
 
                         <h3 className="section-title">{t('K Bus Barakaldo')}</h3>
                         <IonItem button onClick={() => handleNavigation("/k-bus-displays")}>
                             <IonIcon slot="start" icon={trainOutline}/>
                             <IonLabel>{t('Visores')}</IonLabel>
                         </IonItem>
-                        <IonItem button onClick={() => handleNavigation("/k-bus-my-displays")}>
-                            <IonIcon slot="start" icon={listOutline}/>
-                            <IonLabel>{t('Mis visores')}</IonLabel>
-                        </IonItem>
+                        {kbusMenuItems.map((item, index) => (
+                            <IonItem key={index} button onClick={() => handleNavigation(item.path)} id={item.id}>
+                                <IonIcon slot="start" icon={item.icon}/>
+                                <IonLabel>{t(item.text)}</IonLabel>
+                            </IonItem>
+                        ))}
 
                         <h3 className="section-title">{t('General')}</h3>
-                        <IonItem button onClick={() => handleNavigation("/configuration")}>
+                        <IonItem button onClick={() => handleNavigation("/configuration")} id="config-menu-item">
                             <IonIcon slot="start" icon={settingsOutline}/>
                             <IonLabel>{t('Configuración')}</IonLabel>
                         </IonItem>
@@ -199,14 +231,14 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
 
             <IonPage>
                 <IonHeader>
-                    <IonToolbar>
+                    <IonToolbar style={{ paddingTop: 'var(--ion-safe-area-top)' }}>
                         <IonButtons slot="start">
                             {internalPage ? (
                                 <IonButton onClick={() => history.goBack()}>
                                     <IonIcon icon={arrowBackOutline}/>
                                 </IonButton>
                             ) : (
-                                <IonButton onClick={() => setShowModal(true)}>
+                                <IonButton id="main-menu-button" onClick={() => setShowModal(true)}>
                                     <IonIcon icon={menuOutline}/>
                                 </IonButton>
                             )}
@@ -230,9 +262,16 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                     </IonToolbar>
                     <NavigationTabs/>
                 </IonHeader>
-                <IonContent className="page-content">
-                    {children}
+                <IonContent className={`page-content ${!isViewerPage ? 'page-container' : ''}`}>
+                    {isViewerPage ? (
+                        <SwipeWrapper onSwipeLeft={handleSwipeLeft} onSwipeRight={handleSwipeRight}>
+                            {children}
+                        </SwipeWrapper>
+                    ) : (
+                        children
+                    )}
                 </IonContent>
+                {transportType && <FabMenu transportType={transportType} />}
             </IonPage>
             {!showModal && (
                 <IonFooter>

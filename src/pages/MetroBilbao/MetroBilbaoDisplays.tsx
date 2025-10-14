@@ -6,24 +6,15 @@ import {
     IonCardContent,
     IonCardHeader,
     IonCardTitle,
-    IonFab,
-    IonFabButton,
     IonIcon,
     IonItem,
     IonText,
-    useIonActionSheet
 } from "@ionic/react";
 import MetroDisplay from "../../components/MetroBilbao/MetroDisplay";
 import {
-    addCircleOutline,
-    addCircleSharp,
-    chevronUpSharp,
-    listOutline,
-    timeOutline,
     trainOutline,
     warningOutline
 } from "ionicons/icons";
-import {useHistory} from "react-router-dom";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import {fetchMetroBilbaoIncidents} from "../../services/ApiMetroBilbao";
@@ -33,11 +24,8 @@ const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
 const MetroBilbaoDisplays: React.FC = () => {
     const {t} = useTranslation();
-    const history = useHistory();
     const [installationIssues, setInstallationIssues] = useState([]);
     const stripHtml = (html) => html.replace(/<\/?[^>]+(>|$)/g, "");
-    const [presentActionSheet] = useIonActionSheet();
-
 
     let stops = [];
     const savedStops = localStorage.getItem(STORAGE_KEY);
@@ -103,44 +91,8 @@ const MetroBilbaoDisplays: React.FC = () => {
                     <MetroBilbaoAddTripButton/>
                 </div>
             )}
-            <IonFab slot="fixed" vertical="bottom" horizontal="end">
-                <IonFabButton color="medium" onClick={() =>
-                    presentActionSheet({
-                        header: 'Opciones',
-                        buttons: [
-                            {
-                                text: 'Buscar a otras horas',
-                                icon: timeOutline,
-                                handler: () => history.push('/metro-bilbao-trip-planner'),
-                            },
-                            {
-                                text: 'Añadir parada de Metro',
-                                icon: addCircleOutline,
-                                handler: () => history.push('/metro-bilbao-add-stop'),
-                            },
-                            {
-                                text: 'Añadir viaje',
-                                icon: addCircleSharp,
-                                handler: () => history.push('/metro-bilbao-add-route'),
-                            },
-                            {
-                                text: 'Mis visores',
-                                icon: listOutline,
-                                handler: () => history.push('/metro-bilbao-my-displays'),
-                            },
-                        ],
-                    })
-                }>
-                    <IonIcon icon={chevronUpSharp}></IonIcon>
-                </IonFabButton>
-            </IonFab>
-
-
         </Page>
     );
-
-
-
 };
 
 export default MetroBilbaoDisplays;

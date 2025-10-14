@@ -17,6 +17,7 @@ import { getBizkaibusLinesByMunicipality, getBizkaibusRoutes, BizkaibusRoute } f
 import Page from '../Page';
 import { searchOutline } from 'ionicons/icons';
 import { getStations, Municipio } from '../../services/BizkaibusStorage';
+import ErrorDisplay from '../../components/ErrorDisplay/ErrorDisplay';
 
 const SearchLines: React.FC = () => {
     const { t } = useTranslation();
@@ -76,22 +77,31 @@ const SearchLines: React.FC = () => {
     }
 
     const handleSearch = async () => {
+        if (!navigator.onLine) {
+            setError(t('No tienes conexión a internet'));
+            return;
+        }
+
         setSearchResults([]);
         setError(null);
 
-        let routes: BizkaibusRoute[] = [];
-        if (lineCode) {
-            routes = await getBizkaibusRoutes(lineCode);
-        } else if (municipalityCode) {
-            routes = await getBizkaibusLinesByMunicipality(municipalityCode);
-        }
+        try {
+            let routes: BizkaibusRoute[] = [];
+            if (lineCode) {
+                routes = await getBizkaibusRoutes(lineCode);
+            } else if (municipalityCode) {
+                routes = await getBizkaibusLinesByMunicipality(municipalityCode);
+            }
 
-        const filteredRoutes = filterPrincipalRoutes(routes);
+            const filteredRoutes = filterPrincipalRoutes(routes);
 
-        if (filteredRoutes.length > 0) {
-            setSearchResults(filteredRoutes);
-        } else {
-            setError(t('No se encontraron líneas'));
+            if (filteredRoutes.length > 0) {
+                setSearchResults(filteredRoutes);
+            } else {
+                setError(t('No se encontraron líneas'));
+            }
+        } catch (e) {
+            setError(t('Error al conectar con Bizkaibus'));
         }
     };
 
@@ -123,7 +133,7 @@ const SearchLines: React.FC = () => {
                 {t('Buscar línea')}
             </IonButton>
 
-            {error && <p style={{ textAlign: 'center', color: 'red', marginTop: '1rem' }}>{error}</p>}
+            {error && <ErrorDisplay message={error} />}
 
             {searchResults.length > 0 && (
                 <IonList style={{ marginTop: '1rem' }}>
@@ -133,7 +143,7 @@ const SearchLines: React.FC = () => {
                                 <h2>{route.CodigoLinea} - {route.LineName}</h2>
                                 <p>{route.RouteName}</p>
                             </IonLabel>
-                            <IonButton onClick={() => history.push(`/routes/${route.CodigoLinea}`)}>
+                            <IonButton onClick={() => history.push(`/bizkaibus/routes/${route.CodigoLinea}`)}>
                                 {t('Ver información')}
                             </IonButton>
                         </IonItem>

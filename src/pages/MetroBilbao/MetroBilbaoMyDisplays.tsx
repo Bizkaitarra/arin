@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react';
 import {
     IonButton,
     IonIcon,
@@ -8,7 +7,6 @@ import {
     IonReorder,
     IonReorderGroup,
     IonText,
-    useIonToast,
     useIonViewWillEnter,
 } from '@ionic/react';
 import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
@@ -18,11 +16,13 @@ import {getSavedDisplays, saveMetroDisplays} from "../../services/MetroBilbaoSto
 import {useTranslation} from "react-i18next";
 import MetroBilbaoAddTripButton from "../../components/MetroBilbao/MetroBilbaoAddVisorButton";
 import {Display} from "../../services/MetroBilbao/Display";
+import {useCustomToast} from "../../components/ArinToast";
+import {useEffect, useState} from "react";
 
 
 const MetroBilbaoMyDisplays: React.FC = () => {
     const [selectedStops, setSelectedStops] = useState<Display[]>([]);
-    const [presentToast] = useIonToast();
+    const { presentArinToast } = useCustomToast();
     const {t} = useTranslation();
 
     useIonViewWillEnter(() => {
@@ -44,10 +44,10 @@ const MetroBilbaoMyDisplays: React.FC = () => {
         saveMetroDisplays(stops);
         setSelectedStops(stops);
 
-        presentToast({
-            message: `Parada eliminada`,
+        presentArinToast({
+            message: t('Parada eliminada'),
             duration: 2000,
-            color: 'success'
+            color: 'danger'
         });
     };
 

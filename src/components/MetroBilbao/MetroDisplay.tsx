@@ -8,6 +8,7 @@ import {getSavedDisplays, MetroStopTrains} from "../../services/MetroBilbaoStora
 import {useTranslation} from "react-i18next";
 import {useConfiguration} from "../../context/ConfigurationContext";
 import MetroStationCard from "./MetroStationCard";
+import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
 
 
 const MetroDisplay: React.FC = () => {
@@ -19,6 +20,12 @@ const MetroDisplay: React.FC = () => {
     const { settings } = useConfiguration(); // Accede a los valores del contexto
 
     const fetchData = async () => {
+        if (!navigator.onLine) {
+            setError(t('No tienes conexión a internet'));
+            setLoading(false);
+            return;
+        }
+
         try {
             setLoading(true);
             const displays = getSavedDisplays();
@@ -27,7 +34,7 @@ const MetroDisplay: React.FC = () => {
             setLoading(false);
             setError(null);
         } catch (err) {
-            setError('Error fetching metro data');
+            setError(t('Error al conectar con Metro Bilbao'));
             setLoading(false);
         }
     };
@@ -58,13 +65,7 @@ const MetroDisplay: React.FC = () => {
             {loading && (
                 <Loader serviceName={"Metro Bilbao"} reloading={reloading}/>
             )}
-            {error && (
-                <div className="error-container">
-                    <IonText color="danger">
-                        <h4>{error}</h4>
-                    </IonText>
-                </div>
-            )}
+            {error && <ErrorDisplay message={error} />}
             {!loading &&
                 !error &&
                 metroData.length > 0 &&

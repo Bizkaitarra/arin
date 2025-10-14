@@ -40,18 +40,21 @@ const BusStopCard: React.FC<BusStopCardProps> = ({ response }) => {
                             <div className="bus-item" key={index}>
                                 <div className="bus-line-info">
                                     <div>{`${arrival.linea} - ${arrival.ruta}`}</div>
-                                    <Link to={`/routes/${arrival.linea}`}>{t('Ver línea')}</Link>
+                                    <Link to={`/bizkaibus/routes/${arrival.linea}`}>{t('Ver línea')}</Link>
                                 </div>
                                 <div className="bus-time-info">
-                                    <div className={`bus-time ${isCritical ? 'is-critical' : ''}`} title={`Llegada: ${getArrivalTime(arrival.e1Minutos)}`}>
-                                        {arrival.e1Minutos} {t('min')}
+                                    <div className="bus-arrival-primary">
+                                        <div className={`bus-time ${isCritical ? 'is-critical' : ''}`}>
+                                            {arrival.e1Minutos} {t('min')}
+                                        </div>
+                                        <div className="arrival-time-display">({getArrivalTime(arrival.e1Minutos)})</div>
                                     </div>
                                     {arrival.e2Minutos && (
                                         <div className="next-arrival" title={`Llegada: ${getArrivalTime(arrival.e2Minutos)}`}>
                                             {t('Siguiente')}: {arrival.e2Minutos} {t('min')}
                                         </div>
                                     )}
-                                    {arrival.e1Minutos && arrival.e2Minutos && (
+                                    {arrival.e1Minutos > 0 && arrival.e2Minutos && (
                                         <div className="frequency">
                                             {t('Frecuencia')}: {arrival.e2Minutos - arrival.e1Minutos} {t('min')}
                                         </div>
