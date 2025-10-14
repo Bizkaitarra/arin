@@ -12,9 +12,11 @@ import Loader from '../../Loader';
 import {useTranslation} from "react-i18next";
 import BusStopCard from "../BusStopCard/BusStopCard";
 import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
+import {useConfiguration} from "../../../context/ConfigurationContext";
 
 const StopsDisplay: React.FC = () => {
     const { t } = useTranslation();
+    const { settings } = useConfiguration();
     const [stopData, setStopData] = useState<BusArrivalResponse[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -42,7 +44,7 @@ const StopsDisplay: React.FC = () => {
     useIonViewWillEnter(() => {
         setReloading(false);
         fetchData();
-        setIntervalBizkaibus(reloadData, 60000);
+        setIntervalBizkaibus(reloadData, settings.refreshRate);
     });
 
     const reloadData = async () => {
@@ -67,7 +69,7 @@ const StopsDisplay: React.FC = () => {
                 !error &&
                 stopData.length > 0 &&
                 stopData.map((data, index) => (
-                    <BusStopCard key={index} response={data} />
+                    <BusStopCard key={data.parada.PARADA} response={data} />
                 ))}
         </div>
     );

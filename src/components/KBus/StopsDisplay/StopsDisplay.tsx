@@ -14,9 +14,11 @@ import {KBusStop} from "../../../services/KBus/KbusStop";
 import {KBusArrivalResponse} from "../../../services/KBus/KBusArrivalResponse";
 import KBusStopCard from "../KBusStopCard/KBusStopCard";
 import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
+import {useConfiguration} from "../../../context/ConfigurationContext";
 
 const StopsDisplay: React.FC = () => {
     const { t } = useTranslation();
+    const { settings } = useConfiguration();
     const [stopData, setStopData] = useState<KBusArrivalResponse[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -47,7 +49,7 @@ const StopsDisplay: React.FC = () => {
     useIonViewWillEnter(() => {
         setReloading(false);
         fetchData();
-        setIntervalBizkaibus(reloadData, 60000);
+        setIntervalBizkaibus(reloadData, settings.refreshRate);
     });
 
     const reloadData = async () => {
@@ -72,7 +74,7 @@ const StopsDisplay: React.FC = () => {
                 !error &&
                 stopData.length > 0 &&
                 stopData.map((data, index) => (
-                    <KBusStopCard key={index} response={data} />
+                    <KBusStopCard key={data.stop.id} response={data} />
                 ))}
         </div>
     );

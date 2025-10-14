@@ -48,7 +48,7 @@ const MetroDisplay: React.FC = () => {
         setReloading(false);
         fetchData();
         // Utilizamos el intervalo específico para Metro Bilbao
-        setIntervalMetroBilbao(reloadData, 60000);
+        setIntervalMetroBilbao(reloadData, settings.refreshRate);
     });
 
     const handleRefresh = async (event: CustomEvent) => {
@@ -70,7 +70,7 @@ const MetroDisplay: React.FC = () => {
                 !error &&
                 metroData.length > 0 &&
                 metroData.map((data, index) => (
-                    <MetroStationCard key={index} stationData={data} />
+                    <MetroStationCard key={data.Display.destination ? `${data.Display.origin.Code}-${data.Display.destination.Code}` : data.Display.origin.Code} stationData={data} />
                 ))}
         </div>
     );

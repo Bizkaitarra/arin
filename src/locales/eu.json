@@ -202,5 +202,13 @@
   "Parada añadida a favoritos": "Geltokia gogokoetara gehitu da",
   "Parada eliminada de favoritos": "Geltokia gogokoetatik kendu da",
   "Parada eliminada": "Geltokia ezabatuta",
-  "Parada renombrada": "Geltokiaren izena aldatuta"
+  "Parada renombrada": "Geltokiaren izena aldatuta",
+  "Cargando datos de {{serviceName}}": "{{serviceName}}-ren datuak kargatzen",
+  "Recargando datos de {{serviceName}}": "{{serviceName}}-ren datuak berriro kargatzen",
+  "add_service_nav_1": "Zerbitzua",
+  "add_service_nav_2": "gehitu",
+  "Tasa de refresco": "Freskatze-tasa",
+  "Cada minuto": "Minutuero",
+  "Cada 2 minutos": "Bi minuturo",
+  "Nunca": "Inoiz ez"
 }

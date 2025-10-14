@@ -30,7 +30,6 @@ export interface MetroStopTrains {
 
 export function getMetroStops(favoritesFirsts: Boolean = false): MetroStop[] {
     const savedStops = localStorage.getItem(STORAGE_KEY);
-    console.log(savedStops);
     if (!savedStops) return paradas;
 
     try {
@@ -64,7 +63,6 @@ export function getMetroStops(favoritesFirsts: Boolean = false): MetroStop[] {
 
 export function getSavedDisplays(): Display[] {
     const favoriteIdsData = localStorage.getItem(STORAGE_KEY);
-    console.log(favoriteIdsData);
     if (!favoriteIdsData) return [];
     let favoriteIds: string[] = JSON.parse(favoriteIdsData);
     return favoriteIds.map((stop) => {

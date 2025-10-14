@@ -198,5 +198,13 @@
   "Parada añadida a favoritos": "Parada añadida a favoritos",
   "Parada eliminada de favoritos": "Parada eliminada de favoritos",
   "Parada eliminada": "Parada eliminada",
-  "Parada renombrada": "Parada renombrada"
+  "Parada renombrada": "Parada renombrada",
+  "Cargando datos de {{serviceName}}": "Cargando datos de {{serviceName}}",
+  "Recargando datos de {{serviceName}}": "Recargando datos de {{serviceName}}",
+  "add_service_nav_1": "Añadir",
+  "add_service_nav_2": "Servicio",
+  "Tasa de refresco": "Tasa de refresco",
+  "Cada minuto": "Cada minuto",
+  "Cada 2 minutos": "Cada 2 minutos",
+  "Nunca": "Nunca"
 }

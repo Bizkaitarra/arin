@@ -1,6 +1,16 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { loadSettings, saveSettings } from '../services/ConfigurationStorage';
 
+export interface Configuration {
+    language: string;
+    visores: string;
+    verNumeroVagones: boolean;
+    maxTrenes: number;
+    verFrecuencia: boolean;
+    metroDisplayFolding: string;
+    refreshRate: string; // New property
+}
+
 // Crear el contexto para la configuración
 const ConfigurationContext = createContext<any>(null);
 
@@ -14,7 +24,7 @@ export const useConfiguration = () => {
 };
 
 export const ConfigurationProvider: React.FC<ConfigurationProviderProps> = ({ children }) => {
-    const [settings, setSettings] = useState<any>(null); // Inicializa el estado como null o undefined
+    const [settings, setSettings] = useState<Configuration | null>(null); // Inicializa el estado como null o undefined
 
     // Cargar configuraciones al inicio
     useEffect(() => {
@@ -31,17 +41,16 @@ export const ConfigurationProvider: React.FC<ConfigurationProviderProps> = ({ ch
                     maxTrenes: 60,
                     verFrecuencia: true,
                     metroDisplayFolding: 'disabled',
+                    refreshRate: 'Cada minuto', // New default value
                 });
             }
         };
-        console.log('cargamos los ajustes');
         fetchSettings();
     }, []);
 
     // Guardar configuraciones cuando cambian
     useEffect(() => {
         if (settings) {
-            console.log('Se han modificado los ajustes, guardando...');
             saveSettings(settings);
         }
     }, [settings]);

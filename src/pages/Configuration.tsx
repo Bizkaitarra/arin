@@ -25,6 +25,14 @@ const Configuration: React.FC = () => {
                         <IonItem>
                             <LanguageSwitcher language={settings.language} onLanguageChange={(lang) => handleSettingChange('language', lang)} />
                         </IonItem>
+                        <IonItem>
+                            <IonLabel>{t('Tasa de refresco')}</IonLabel>
+                            <IonSelect name="refreshRate" value={settings.refreshRate} onIonChange={(e) => handleSettingChange('refreshRate', e.detail.value)}>
+                                <IonSelectOption value={"Cada minuto"}>{t('Cada minuto')}</IonSelectOption>
+                                <IonSelectOption value={"Cada 2 minutos"}>{t('Cada 2 minutos')}</IonSelectOption>
+                                <IonSelectOption value={"Nunca"}>{t('Nunca')}</IonSelectOption>
+                            </IonSelect>
+                        </IonItem>
                     </IonCardContent>
                 </IonCard>
 

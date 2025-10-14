@@ -8,10 +8,12 @@ import Loader from "../../Loader";
 import RenfeStationCard from "../RenfeStationCard/RenfeStationCard";
 import './RenfeDisplay.css';
 import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
+import {useConfiguration} from "../../../context/ConfigurationContext";
 
 
 const StopDisplay: React.FC = () => {
     const {t} = useTranslation();
+    const { settings } = useConfiguration();
     const [renfeData, setRenfeData] = useState<Platforms[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -48,7 +50,7 @@ const StopDisplay: React.FC = () => {
     useIonViewWillEnter(() => {
         setReloading(false);
         fetchData();
-        setIntervalRenfe(reloadData, 60000);
+        setIntervalRenfe(reloadData, settings.refreshRate);
     });
 
     const handleRefresh = async (event: CustomEvent) => {
@@ -70,7 +72,7 @@ const StopDisplay: React.FC = () => {
                 !error &&
                 renfeData.length > 0 &&
                 renfeData.map((data, index) => (
-                    <RenfeStationCard key={index} stationData={data} />
+                    <RenfeStationCard key={`${data.origin.id}-${data.destiny.id}`} stationData={data} />
                 ))}
         </div>
     );
