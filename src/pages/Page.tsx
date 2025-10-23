@@ -229,9 +229,9 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                 </IonContent>
             </IonModal>
 
-            <IonPage>
+            <IonPage fullscreen="true">
                 <IonHeader>
-                    <IonToolbar style={{ paddingTop: 'var(--ion-safe-area-top)' }}>
+                    <IonToolbar>
                         <IonButtons slot="start">
                             {internalPage ? (
                                 <IonButton onClick={() => history.goBack()}>

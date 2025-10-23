@@ -1,0 +1,146 @@
+{
+  "co2Metro": {
+    "co2metro": "0.90",
+    "co2Car": "172.46",
+    "co2DistanceMetro": 10.3095,
+    "co2DistanceCar": 1744.7778200000002,
+    "diffRaw": 1734.4683200000002,
+    "diff": "1.734,47",
+    "metroDistance": 11.455,
+    "googleDistance": 10.117
+  },
+  "trains": [
+    {
+      "wagons": 4,
+      "estimated": 0,
+      "direction": "Basauri",
+      "time": "2025-10-23T15:44:30",
+      "timeRounded": "15:44"
+    },
+    {
+      "wagons": 5,
+      "estimated": 5,
+      "direction": "Basauri",
+      "time": "2025-10-23T15:50:11",
+      "timeRounded": "15:50"
+    },
+    {
+      "wagons": 5,
+      "estimated": 11,
+      "direction": "Basauri",
+      "time": "2025-10-23T15:56:59",
+      "timeRounded": "15:57"
+    },
+    {
+      "wagons": 4,
+      "estimated": 18,
+      "direction": "Basauri",
+      "time": "2025-10-23T16:03:21",
+      "timeRounded": "16:03"
+    },
+    {
+      "wagons": 5,
+      "estimated": 25,
+      "direction": "Basauri",
+      "time": "2025-10-23T16:10:01",
+      "timeRounded": "16:10"
+    },
+    {
+      "wagons": 5,
+      "estimated": 31,
+      "direction": "Basauri",
+      "time": "2025-10-23T16:16:41",
+      "timeRounded": "16:17"
+    },
+    {
+      "wagons": 5,
+      "estimated": 38,
+      "direction": "Basauri",
+      "time": "2025-10-23T16:23:21",
+      "timeRounded": "16:23"
+    },
+    {
+      "wagons": 4,
+      "estimated": 45,
+      "direction": "Basauri",
+      "time": "2025-10-23T16:30:01",
+      "timeRounded": "16:30"
+    }
+  ],
+  "messages": [],
+  "trip": {
+    "fromStation": {
+      "code": "BAR",
+      "name": "Barakaldo"
+    },
+    "toStation": {
+      "code": "ARE",
+      "name": "Areeta"
+    },
+    "duration": 17,
+    "line": "L2",
+    "transfer": true,
+    "fromLine1": false
+  },
+  "exits": {
+    "origin": [
+      {
+        "id": 134,
+        "name": "Ascensor Askatasuna Etorbidea, 2 (acceso Elkano)",
+        "elevator": true,
+        "nocturnal": true,
+        "latitude": "43.29531",
+        "longitude": "-2.98890",
+        "issues": []
+      },
+      {
+        "id": 135,
+        "name": "Elkano C\/ Elkano, 19",
+        "elevator": false,
+        "nocturnal": false,
+        "latitude": "43.29623",
+        "longitude": "-2.98903",
+        "issues": []
+      },
+      {
+        "id": 136,
+        "name": "Foruak Paseo Fueros, 18",
+        "elevator": false,
+        "nocturnal": true,
+        "latitude": "43.29530",
+        "longitude": "-2.98824",
+        "issues": []
+      },
+      {
+        "id": 137,
+        "name": "Euskadi  frente P. Justicia",
+        "elevator": false,
+        "nocturnal": false,
+        "latitude": "43.29465",
+        "longitude": "-2.98900",
+        "issues": []
+      }
+    ],
+    "destiny": [
+      {
+        "id": 108,
+        "name": "Geltoki Plaza C\/ Ibaigane, 2",
+        "elevator": true,
+        "nocturnal": true,
+        "latitude": "43.32651",
+        "longitude": "-3.01040",
+        "issues": []
+      },
+      {
+        "id": 109,
+        "name": "Ibaigane C\/ Ibaigane, 23",
+        "elevator": false,
+        "nocturnal": false,
+        "latitude": "43.32548",
+        "longitude": "-3.00885",
+        "issues": []
+      }
+    ]
+  },
+  "fromLine1": false
+}

@@ -9,11 +9,12 @@ import {useTranslation} from "react-i18next";
 import {TrainSchedule} from "../../../services/Renfe/ApiRenfe";
 import './RenfePlatform.css';
 
-const RenfePlatform: React.FC<{ platform: TrainSchedule[], platformIndex: number, title: string, destiny: string }> = ({
+const RenfePlatform: React.FC<{ platform: TrainSchedule[], platformIndex: number, title: string, destiny: string, duration: string | undefined }> = ({
                                                                                                        platform,
                                                                                                        platformIndex,
                                                                                                        title,
-                                                                                                        destiny
+                                                                                                       destiny,
+                                                                                                       duration
                                                                                                    }) => {
     const {t} = useTranslation();
     const [selectedTrain, setSelectedTrain] = useState(null);
@@ -24,7 +25,10 @@ const RenfePlatform: React.FC<{ platform: TrainSchedule[], platformIndex: number
     return (
         <>
             <div className="train-list">
-                <div className="train-list-header">{title}</div>
+                <div className="train-list-header">
+                    {title}
+                    {duration && <div className="duration">{t('Duración estimada')}: {duration}</div>}
+                </div>
                 {platform.map((train, trainIndex) => {
                     const isCritical = train.timeToGo < 2;
                     return (

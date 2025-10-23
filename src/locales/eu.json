@@ -1,6 +1,8 @@
 {
   "Castellano": "Gaztelera",
   "Euskera": "Euskera",
+  "Inglés": "Ingelesa",
+  "Francés": "Frantsesa",
   "Visor": "Bisorea",
   "Visores": "Bisoreak",
   "Mis paradas": "Nire geltokiak",
@@ -210,5 +212,18 @@
   "Tasa de refresco": "Freskatze-tasa",
   "Cada minuto": "Minutuero",
   "Cada 2 minutos": "Bi minuturo",
-  "Nunca": "Inoiz ez"
+  "Nunca": "Inoiz ez",
+  "CASCO_VIEJO_DISPLAY_NAME": "Zazpikaleak",
+  "metroBilbao.l3MixedLineError": "L3a beste linea batekin barne hartzen duen bidaia baten kontsulta ez dago inplementatuta une honetan. Egon adi etorkizuneko eguneraketak",
+  "stationSelector": {
+    "cancel": "Utzi",
+    "origin": "Jatorria",
+    "searchStation": "Geltokia bilatu",
+    "allLines": "Guztiak",
+    "noStationsFound": "Ez da geltokirik aurkitu",
+    "selectOrigin": "Hautatu jatorrizko geltokia",
+    "selectDestination": "Hautatu helmugako geltokia",
+    "errorLoadingStations": "Errorea geltokiak kargatzean:"
+  },
+  "Duración estimada": "Gutxi gorabeherako iraupena"
 }

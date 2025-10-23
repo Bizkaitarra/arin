@@ -1,14 +1,14 @@
 import React from 'react';
-import {IonBadge} from '@ionic/react';
 import './MetroPlatform.css';
 import {MetroTrain} from "../../services/MetroBilbaoStorage";
 import {useTranslation} from "react-i18next";
 import {useConfiguration} from "../../context/ConfigurationContext";
 
-const MetroPlatform: React.FC<{ platform: MetroTrain[], platformIndex: number, title: string }> = ({
+const MetroPlatform: React.FC<{ platform: MetroTrain[], platformIndex: number, title: string, duration: number | undefined }> = ({
                                                                                                        platform,
                                                                                                        platformIndex,
-                                                                                                       title
+                                                                                                       title,
+                                                                                                       duration
                                                                                                    }) => {
     const {t} = useTranslation();
     const {settings} = useConfiguration();
@@ -17,7 +17,10 @@ const MetroPlatform: React.FC<{ platform: MetroTrain[], platformIndex: number, t
 
     return (
         <div className="train-list">
-            <div className="train-list-header">{title}</div>
+            <div className="train-list-header">
+                {title}
+                {duration && <div className="duration">{t('Duración estimada')}: {duration} min</div>}
+            </div>
             {platform.map((train, trainIndex) => {
                 const isCritical = train.Estimated < 2;
                 const arrivalTime = new Date(train.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

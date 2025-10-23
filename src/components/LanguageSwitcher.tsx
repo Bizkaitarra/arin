@@ -22,6 +22,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ language, onLanguag
             <IonSelect value={language} onIonChange={handleLanguageChange}>
                 <IonSelectOption value="eu">{t("Euskera")}</IonSelectOption>
                 <IonSelectOption value="es">{t("Castellano")}</IonSelectOption>
+                <IonSelectOption value="en">{t("Inglés")}</IonSelectOption>
+                <IonSelectOption value="fr">{t("Francés")}</IonSelectOption>
             </IonSelect>
         </>
     );

@@ -43,6 +43,9 @@ const MetroStationCard: React.FC<{ stationData: MetroStopTrains }> = ({ stationD
         const hasTrainToEtxebarriOrBasauri = platform.some(train => train.Direction === "Etxebarri" || train.Direction === "Basauri");
         const hasL1 = stationData.Display.origin.Lines.includes("L1");
         const hasL2 = stationData.Display.origin.Lines.includes("L2");
+        if (stationData.Display.origin.Lines.includes("L3") && platform.length > 0) {
+            return platform[0].Direction;
+        }
         if (hasTrainToEtxebarriOrBasauri) {
             return hasL1 && hasL2 ? "Etxebarri/Basauri" : hasL1 ? "Etxebarri" : "Basauri";
         }
@@ -77,6 +80,7 @@ const MetroStationCard: React.FC<{ stationData: MetroStopTrains }> = ({ stationD
                             platform={platform}
                             platformIndex={platformIndex}
                             title={getPlatformTitle(platform, platformIndex)}
+                            duration={platformIndex === 0 ? stationData.duration : stationData.duration2}
                         />
                     ))}
                 </div>

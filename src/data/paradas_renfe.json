@@ -3,678 +3,1034 @@
     "id": "13200",
     "name": "Abando",
     "latitude": 43.262985,
-    "longitude": -2.92701
+    "longitude": -2.92701,
+    "Lines": [
+      "C1",
+      "C2",
+      "C3"
+    ]
   },
   {
     "id": "13118",
     "name": "Abaroa-San Miguel",
     "latitude": 43.192,
-    "longitude": -2.846
+    "longitude": -2.846,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "13206",
     "name": "Ametzola",
     "latitude": 43.254,
-    "longitude": -2.94
+    "longitude": -2.94,
+    "Lines": [
+      "C1",
+      "C2",
+      "C4"
+    ]
   },
   {
     "id": "05452",
     "name": "Ametzola",
     "latitude": 43.254,
-    "longitude": -2.94
+    "longitude": -2.94,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13101",
     "name": "Amurrio",
     "latitude": 43.051,
-    "longitude": -2.985
+    "longitude": -2.985,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "13121",
     "name": "Amurrio-Iparralde",
     "latitude": 43.055,
-    "longitude": -2.983
+    "longitude": -2.983,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "13117",
     "name": "Arakaldo",
     "latitude": 43.133,
-    "longitude": -2.917
+    "longitude": -2.917,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05473",
     "name": "Aranguren",
     "latitude": 43.200,
-    "longitude": -3.083
+    "longitude": -3.083,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05474",
     "name": "Aranguren/Apdro.",
     "latitude": 43.200,
-    "longitude": -3.083
+    "longitude": -3.083,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13108",
     "name": "Arbide",
     "latitude": 43.067,
-    "longitude": -2.983
+    "longitude": -2.983,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05489",
     "name": "Arcentales",
     "latitude": 43.233,
-    "longitude": -3.267
+    "longitude": -3.267,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13107",
     "name": "Areta",
     "latitude": 43.15,
-    "longitude": -2.883
+    "longitude": -2.883,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05740",
     "name": "Arija",
     "latitude": 42.983,
-    "longitude": -3.983
+    "longitude": -3.983,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05721",
     "name": "Arla-Berrón",
     "latitude": 43.383,
-    "longitude": -3.017
+    "longitude": -3.017,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13109",
     "name": "Arrankudiaga",
     "latitude": 43.200,
-    "longitude": -2.9
+    "longitude": -2.9,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "13111",
     "name": "Arrigorriaga",
     "latitude": 43.217,
-    "longitude": -2.867
+    "longitude": -2.867,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05469",
     "name": "Artxube",
     "latitude": 43.267,
-    "longitude": -2.933
+    "longitude": -2.933,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13207",
     "name": "Autonomia",
     "latitude": 43.26,
-    "longitude": -2.943
+    "longitude": -2.943,
+    "Lines": [
+      "C1",
+      "C2",
+      "C4"
+    ]
   },
   {
     "id": "13115",
     "name": "Bakiola",
     "latitude": 43.233,
-    "longitude": -2.85
+    "longitude": -2.85,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05483",
     "name": "Balmaseda",
     "latitude": 43.2,
-    "longitude": -3.2
+    "longitude": -3.2,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13112",
     "name": "Basauri",
     "latitude": 43.233,
-    "longitude": -2.883
+    "longitude": -2.883,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05455",
     "name": "Basurto Hospital",
     "latitude": 43.256,
-    "longitude": -2.95
+    "longitude": -2.95,
+    "Lines": [
+      "C1",
+      "C2",
+      "C4"
+    ]
   },
   {
     "id": "05730",
     "name": "Bercedo Montija",
     "latitude": 43.067,
-    "longitude": -3.5
+    "longitude": -3.5,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13113",
     "name": "Bidebieta-Basauri",
     "latitude": 43.233,
-    "longitude": -2.883
+    "longitude": -2.883,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05451",
     "name": "Bilbao La Concordia",
     "latitude": 43.263,
-    "longitude": -2.925
+    "longitude": -2.925,
+    "Lines": [
+      "C4",
+      "R3"
+    ]
   },
   {
     "id": "05766",
     "name": "Boñar",
     "latitude": 42.9,
-    "longitude": -5.217
+    "longitude": -5.217,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05739",
     "name": "Cabañas De Virtus",
     "latitude": 43.05,
-    "longitude": -3.9
+    "longitude": -3.9,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05727",
     "name": "Cadagua",
     "latitude": 43.233,
-    "longitude": -3.083
+    "longitude": -3.083,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05497",
     "name": "Carranza",
     "latitude": 43.233,
-    "longitude": -3.333
+    "longitude": -3.333,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05750",
     "name": "Castrejón De La Peña",
     "latitude": 42.9,
-    "longitude": -4.583
+    "longitude": -4.583,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05799",
     "name": "Cerezal De La Guzpeña",
     "latitude": 42.85,
-    "longitude": -5.033
+    "longitude": -5.033,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05747",
     "name": "Cillamayor",
     "latitude": 42.85,
-    "longitude": -4.35
+    "longitude": -4.35,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05761",
     "name": "Cistierna",
     "latitude": 42.8,
-    "longitude": -5.05
+    "longitude": -5.05,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05477",
     "name": "Colegio",
     "latitude": 43.267,
-    "longitude": -3.083
+    "longitude": -3.083,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13400",
     "name": "Desertu-Barakaldo",
     "latitude": 43.295,
-    "longitude": -2.99
+    "longitude": -2.99,
+    "Lines": [
+      "C1",
+      "C2"
+    ]
   },
   {
     "id": "05736",
     "name": "Dosante Cidad",
     "latitude": 43.067,
-    "longitude": -3.75
+    "longitude": -3.75,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05732",
     "name": "Espinosa De Los Monteros",
     "latitude": 43.067,
-    "longitude": -3.55
+    "longitude": -3.55,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13501",
     "name": "Galindo",
     "latitude": 43.3,
-    "longitude": -2.983
+    "longitude": -2.983,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "13508",
     "name": "Gallarta",
     "latitude": 43.317,
-    "longitude": -3.05
+    "longitude": -3.05,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "05754",
     "name": "Guardo",
     "latitude": 42.8,
-    "longitude": -4.833
+    "longitude": -4.833,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05753",
     "name": "Guardo/Apdro.",
     "latitude": 42.8,
-    "longitude": -4.833
+    "longitude": -4.833,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05471",
     "name": "Güeñes",
     "latitude": 43.217,
-    "longitude": -3.1
+    "longitude": -3.1,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05479",
     "name": "Ibarra",
     "latitude": 43.2,
-    "longitude": -3.067
+    "longitude": -3.067,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13116",
     "name": "Inarratxu",
     "latitude": 43.233,
-    "longitude": -2.867
+    "longitude": -2.867,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05461",
     "name": "Irauregui",
     "latitude": 43.250,
-    "longitude": -2.95
+    "longitude": -2.95,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05460",
     "name": "Kastrexana",
     "latitude": 43.260,
-    "longitude": -2.96
+    "longitude": -2.96,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05803",
     "name": "La Asunción/Universidad",
     "latitude": 43.250,
-    "longitude": -2.94
+    "longitude": -2.94,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05485",
     "name": "La Calzada",
     "latitude": 43.255,
-    "longitude": -2.935
+    "longitude": -2.935,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05763",
     "name": "La Ercina",
     "latitude": 43.270,
-    "longitude": -2.92
+    "longitude": -2.92,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05756",
     "name": "La Espina",
     "latitude": 43.265,
-    "longitude": -2.93
+    "longitude": -2.93,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05481",
     "name": "La Herrera",
     "latitude": 43.257,
-    "longitude": -2.945
+    "longitude": -2.945,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13402",
     "name": "La Iberia",
     "latitude": 43.280,
-    "longitude": -2.96
+    "longitude": -2.96,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05755",
     "name": "La Llama De La Guzpeña",
     "latitude": 43.275,
-    "longitude": -2.97
+    "longitude": -2.97,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "13119",
     "name": "La Peña",
     "latitude": 43.290,
-    "longitude": -2.98
+    "longitude": -2.98,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05465",
     "name": "La Quadra",
     "latitude": 43.285,
-    "longitude": -2.975
+    "longitude": -2.975,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05767",
     "name": "La Vecilla",
     "latitude": 43.280,
-    "longitude": -2.97
+    "longitude": -2.97,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05470",
     "name": "Lambarri",
     "latitude": 43.275,
-    "longitude": -2.965
+    "longitude": -2.965,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05742",
     "name": "Las Rozas De Valdearroyo",
     "latitude": 43.290,
-    "longitude": -2.96
+    "longitude": -2.96,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05741",
     "name": "Llano",
     "latitude": 43.295,
-    "longitude": -2.955
+    "longitude": -2.955,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13106",
     "name": "Llodio",
     "latitude": 43.300,
-    "longitude": -2.95
+    "longitude": -2.95,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05744",
     "name": "Los Carabeos",
     "latitude": 43.305,
-    "longitude": -2.945
+    "longitude": -2.945,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13103",
     "name": "Luiaondo",
     "latitude": 43.310,
-    "longitude": -2.94
+    "longitude": -2.94,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "13305",
     "name": "Lutxana-Barakaldo",
     "latitude": 43.315,
-    "longitude": -2.935
+    "longitude": -2.935,
+    "Lines": [
+      "C1",
+      "C2"
+    ]
   },
   {
     "id": "05770",
     "name": "Matallana",
     "latitude": 43.320,
-    "longitude": -2.93
+    "longitude": -2.93,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "14200",
     "name": "Mataporquera",
     "latitude": 43.325,
-    "longitude": -2.925
+    "longitude": -2.925,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05724",
     "name": "Mercadillo-Villasana",
     "latitude": 43.330,
-    "longitude": -2.92
+    "longitude": -2.92,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05484",
     "name": "Mimetiz",
     "latitude": 43.335,
-    "longitude": -2.915
+    "longitude": -2.915,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13120",
     "name": "Miribilla",
     "latitude": 43.340,
-    "longitude": -2.91
+    "longitude": -2.91,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05743",
     "name": "Montes Claros",
     "latitude": 43.345,
-    "longitude": -2.905
+    "longitude": -2.905,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13506",
     "name": "Muskiz",
     "latitude": 43.350,
-    "longitude": -2.9
+    "longitude": -2.9,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "13303",
     "name": "Olabeaga",
     "latitude": 43.355,
-    "longitude": -2.895
+    "longitude": -2.895,
+    "Lines": [
+      "C1",
+      "C2"
+    ]
   },
   {
     "id": "13114",
     "name": "Ollargan",
     "latitude": 43.360,
-    "longitude": -2.89
+    "longitude": -2.89,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "13100",
     "name": "Orduña",
     "latitude": 43.365,
-    "longitude": -2.885
+    "longitude": -2.885,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "13504",
     "name": "Ortuella",
     "latitude": 43.370,
-    "longitude": -2.88
+    "longitude": -2.88,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "13404",
     "name": "Peñota",
     "latitude": 43.375,
-    "longitude": -2.875
+    "longitude": -2.875,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05735",
     "name": "Pedrosa",
     "latitude": 43.380,
-    "longitude": -2.87
+    "longitude": -2.87,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13403",
     "name": "Portugalete",
     "latitude": 43.385,
-    "longitude": -2.865
+    "longitude": -2.865,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05759",
     "name": "Prado De La Guzpeña",
     "latitude": 43.390,
-    "longitude": -2.86
+    "longitude": -2.86,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05758",
     "name": "Puente Almuhey",
     "latitude": 43.395,
-    "longitude": -2.855
+    "longitude": -2.855,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "13505",
     "name": "Putxeta",
     "latitude": 43.400,
-    "longitude": -2.85
+    "longitude": -2.85,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "05731",
     "name": "Quintana De Los Prados",
     "latitude": 43.405,
-    "longitude": -2.845
+    "longitude": -2.845,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05733",
     "name": "Redondo",
     "latitude": 43.410,
-    "longitude": -2.84
+    "longitude": -2.84,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05737",
     "name": "Robredo Ahedo",
     "latitude": 43.415,
-    "longitude": -2.835
+    "longitude": -2.835,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13509",
     "name": "Sagrada Familia",
     "latitude": 43.420,
-    "longitude": -2.83
+    "longitude": -2.83,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "13102",
     "name": "Salbio",
     "latitude": 43.425,
-    "longitude": -2.825
+    "longitude": -2.825,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05748",
     "name": "Salinas De Pisuerga",
     "latitude": 43.430,
-    "longitude": -2.82
+    "longitude": -2.82,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05776",
     "name": "San Feliz",
     "latitude": 43.435,
-    "longitude": -2.815
+    "longitude": -2.815,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "13208",
     "name": "San Mames",
     "latitude": 43.440,
-    "longitude": -2.81
+    "longitude": -2.81,
+    "Lines": [
+      "C1",
+      "C2",
+      "C4"
+    ]
   },
   {
     "id": "05459",
     "name": "Santa Agueda",
     "latitude": 43.445,
-    "longitude": -2.805
+    "longitude": -2.805,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13104",
     "name": "Santa Cruz Llodio",
     "latitude": 43.450,
-    "longitude": -2.8
+    "longitude": -2.8,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05752",
     "name": "Santibañez De La Peña",
     "latitude": 43.455,
-    "longitude": -2.795
+    "longitude": -2.795,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "13405",
     "name": "Santurtzi",
     "latitude": 43.460,
-    "longitude": -2.79
+    "longitude": -2.79,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "13401",
     "name": "Sestao",
     "latitude": 43.465,
-    "longitude": -2.785
+    "longitude": -2.785,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05467",
     "name": "Sodupe",
     "latitude": 43.470,
-    "longitude": -2.78
+    "longitude": -2.78,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05738",
     "name": "Soncillo",
     "latitude": 43.475,
-    "longitude": -2.775
+    "longitude": -2.775,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "05790",
     "name": "Sorriba",
     "latitude": 43.480,
-    "longitude": -2.77
+    "longitude": -2.77,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05734",
     "name": "Sotoscueva",
     "latitude": 43.485,
-    "longitude": -2.765
+    "longitude": -2.765,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13502",
     "name": "Trapaga",
     "latitude": 43.490,
-    "longitude": -2.76
+    "longitude": -2.76,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "05487",
     "name": "Traslaviña",
     "latitude": 43.495,
-    "longitude": -2.755
+    "longitude": -2.755,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13110",
     "name": "Ugao-Miraballes",
     "latitude": 43.500,
-    "longitude": -2.75
+    "longitude": -2.75,
+    "Lines": [
+      "C3"
+    ]
   },
   {
     "id": "05722",
     "name": "Ungo Nava",
     "latitude": 43.505,
-    "longitude": -2.745
+    "longitude": -2.745,
+    "Lines": [
+      "R3"
+    ]
   },
   {
     "id": "13507",
     "name": "Urioste",
     "latitude": 43.510,
-    "longitude": -2.74
+    "longitude": -2.74,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "05749",
     "name": "Vado Cervera",
     "latitude": 43.515,
-    "longitude": -2.735
+    "longitude": -2.735,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05757",
     "name": "Valcuende",
     "latitude": 43.520,
-    "longitude": -2.73
+    "longitude": -2.73,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "05760",
     "name": "Valle De Las Casas",
     "latitude": 43.525,
-    "longitude": -2.725
+    "longitude": -2.725,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "13503",
     "name": "Valle Trapaga-Trapaga",
     "latitude": 43.530,
-    "longitude": -2.72
+    "longitude": -2.72,
+    "Lines": [
+      "C2"
+    ]
   },
   {
     "id": "05493",
     "name": "Villaverde de Trucios",
     "latitude": 43.535,
-    "longitude": -2.715
+    "longitude": -2.715,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05751",
     "name": "Villaverde Tarilonte",
     "latitude": 43.540,
-    "longitude": -2.710
+    "longitude": -2.710,
+    "Lines": [
+      "C1"
+    ]
   },
   {
     "id": "13205",
     "name": "Zabalburu",
     "latitude": 43.545,
-    "longitude": -2.705
+    "longitude": -2.705,
+    "Lines": [
+      "C1",
+      "C2",
+      "C3"
+    ]
   },
   {
     "id": "05475",
     "name": "Zalla",
     "latitude": 43.550,
-    "longitude": -2.700
+    "longitude": -2.700,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "05463",
     "name": "Zaramillo",
     "latitude": 43.555,
-    "longitude": -2.695
+    "longitude": -2.695,
+    "Lines": [
+      "C4"
+    ]
   },
   {
     "id": "13304",
     "name": "Zorrotza",
     "latitude": 43.560,
-    "longitude": -2.690
+    "longitude": -2.690,
+    "Lines": [
+      "C1",
+      "C2"
+    ]
   },
   {
     "id": "05457",
     "name": "Zorroza Zorrozgoiti",
     "latitude": 43.565,
-    "longitude": -2.685
+    "longitude": -2.685,
+    "Lines": [
+      "C4"
+    ]
   }
 ]

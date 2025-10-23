@@ -1,16 +1,23 @@
 import {Capacitor} from "@capacitor/core";
-import {MetroStop, MetroStopTrains, MetroTrain} from "./MetroBilbaoStorage";
+import {MetroStopTrains, MetroTrain} from "./MetroBilbaoStorage";
 import {IncidentsResult, MetroBilbaoResponse} from "./MetroBilbao/Incidences";
 import i18next from "i18next";
 import {Display} from "./MetroBilbao/Display";
+import {getEuskotrenL3StopTrains} from "./ApiMetroBilbaoL3";
+import paradasMetro from "../data/paradas_metro.json";
 
-async function fetchTrainData(origin: string, destination: string, maxTrains: number): Promise<MetroTrain[]> {
+function isL3Station(stationCode: string): boolean {
+    const station = paradasMetro.find(p => p.Code === stationCode);
+    return station?.Lines.includes("L3") || false;
+}
+
+async function fetchTrainData(origin: string, destination: string, maxTrains: number): Promise<{ trains: MetroTrain[], duration: number | undefined }> {
     try {
         const response = await fetch(`https://api.metrobilbao.eus/metro/real-time/${origin}/${destination}`);
         const data = await response.json();
         const duration = data.trip?.duration;
 
-        return data.trains
+        const trains = data.trains
             .filter((train: any) => train.estimated <= maxTrains)
             .map((train: any) => ({
                 Wagons: train.wagons,
@@ -21,16 +28,52 @@ async function fetchTrainData(origin: string, destination: string, maxTrains: nu
                 Duration: duration,
                 Transfer: data.trip.transfer
             }));
+
+        return { trains, duration };
     } catch (error) {
         console.error(`Error fetching train data for ${origin} to ${destination}:`, error);
-        return [];
+        return { trains: [], duration: undefined };
     }
 }
 
 async function getMetroStopTrains(display: Display, maxTrains: number): Promise<MetroStopTrains> {
+    const originStation = paradasMetro.find(p => p.Code === display.origin.Code);
+    if (!originStation) {
+        console.error(`Origin station ${display.origin.Code} not found in paradasMetro.json`);
+        return { Display: display, Platform1: [], Platform2: [], isRoute: false };
+    }
+
+    const processPlatform = async (platformDestinations: string[]): Promise<MetroTrain[]> => {
+        const allTrains: MetroTrain[] = [];
+        for (const destCode of platformDestinations) {
+            const destinationStation = paradasMetro.find(p => p.Code === destCode);
+            if (!destinationStation) {
+                console.warn(`Destination station ${destCode} not found in paradasMetro.json`);
+                continue;
+            }
+
+            const originIsL3 = isL3Station(originStation.Code);
+            const destinationIsL3 = isL3Station(destinationStation.Code);
+
+            if (originIsL3 && destinationIsL3) {
+                const tempDisplay: Display = {
+                    origin: originStation,
+                    destination: destinationStation,
+                };
+                const l3Trains = await getEuskotrenL3StopTrains(tempDisplay, maxTrains);
+                allTrains.push(...l3Trains.Platform1);
+            } else {
+                const { trains } = await fetchTrainData(originStation.Code, destCode, maxTrains);
+                allTrains.push(...trains);
+            }
+        }
+        return allTrains;
+    };
+
     if (!display.destination) {
-        const platform1Trains = await Promise.all(display.origin.Platform1.map(dest => fetchTrainData(display.origin.Code, dest, maxTrains)));
-        const platform2Trains = await Promise.all(display.origin.Platform2.map(dest => fetchTrainData(display.origin.Code, dest, maxTrains)));
+        const platform1Trains = await processPlatform(originStation.Platform1);
+        const platform2Trains = await processPlatform(originStation.Platform2);
+
         return {
             Display: display,
             Platform1: platform1Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
@@ -38,19 +81,35 @@ async function getMetroStopTrains(display: Display, maxTrains: number): Promise<
             isRoute: false
         };
     }
-    const platform1Trains = [await fetchTrainData(display.origin.Code, display.destination.Code, maxTrains)];
-    const platform2Trains = [await fetchTrainData(display.destination.Code, display.origin.Code, maxTrains)];
+
+    const [platform1Data, platform2Data] = await Promise.all([
+        fetchTrainData(display.origin.Code, display.destination.Code, maxTrains),
+        fetchTrainData(display.destination.Code, display.origin.Code, maxTrains)
+    ]);
+
     return {
         Display: display,
-        Platform1: platform1Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
-        Platform2: platform2Trains.flat().sort((a, b) => a.Estimated - b.Estimated),
-        isRoute: true
+        Platform1: platform1Data.trains.flat().sort((a, b) => a.Estimated - b.Estimated),
+        Platform2: platform2Data.trains.flat().sort((a, b) => a.Estimated - b.Estimated),
+        isRoute: true,
+        duration: platform1Data.duration,
+        duration2: platform2Data.duration
     };
 }
 
-
 export async function getMetroDisplaysTrains(displays: Display[], maxTrains: number = 60): Promise<MetroStopTrains[]> {
-    const promises = displays.map(display => getMetroStopTrains(display, maxTrains));
+    const promises = displays.map(display => {
+        const originIsL3 = isL3Station(display.origin.Code);
+        const destinationIsL3 = display.destination ? isL3Station(display.destination.Code) : false;
+
+        if (display.destination && originIsL3 && destinationIsL3) {
+            // Both origin and destination are L3 stations, use the L3 API
+            return getEuskotrenL3StopTrains(display, maxTrains);
+        } else {
+            // Otherwise, use the original Metro Bilbao API
+            return getMetroStopTrains(display, maxTrains);
+        }
+    });
     return Promise.all(promises);
 }
 
@@ -74,7 +133,10 @@ export async function fetchMetroBilbaoIncidents(): Promise<IncidentsResult> {
     const data: MetroBilbaoResponse = await response.json();
 
     return {
-        serviceIssues: [],
+        serviceIssues: data.configuration.incidences.service_issue.map(incident => ({
+            ...incident,
+            station: { code: null },
+        })),
         installationIssues: data.configuration.incidences.installation_issue.map(incident => ({
             ...incident,
             station: { code: incident.station.code },

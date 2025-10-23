@@ -17,10 +17,7 @@ export const useCustomToast = () => {
     const presentArinToast = (options: ArinToastOptions) => {
         present({
             ...options,
-            message: `<div style="display: flex; align-items: center; gap: 10px;">
-                        <img src="${arinLogo}" alt="Arin Logo" style="width: 24px; height: 24px;" />
-                        <span>${options.message}</span>
-                      </div>`,
+            message: options.message,
         });
     };
 

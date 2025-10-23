@@ -75,10 +75,10 @@ export const renfeMenuItems = [
         id: 'renfe-my-displays'
     },
     {
-        text: 'Añadir visor',
+        text: 'Añadir viaje',
         icon: addCircleOutline,
         path: '/renfe-add-route',
-        id: 'renfe-add-display'
+        id: 'renfe-add-trip'
     },
 ];
 

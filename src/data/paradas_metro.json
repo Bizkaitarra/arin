@@ -289,8 +289,57 @@
   {
     "Code": "CAV",
     "Name": "Zazpikaleak\/Casco Viejo",
-    "Lines": ["L1", "L2", "L3"],
+    "Lines": ["L1", "L2"],
     "Platform1": ["ABA"],
     "Platform2": ["SAN"]
+  },
+  {
+    "Code": "2597",
+    "Name": "Matiko",
+    "Lines": ["L3"],
+    "Platform1": [],
+    "Platform2": ["2641"]
+  },
+  {
+    "Code": "2641",
+    "Name": "Uribarri",
+    "Lines": ["L3"],
+    "Platform1": ["2597"],
+    "Platform2": ["2577"]
+  },
+  {
+    "Code": "2577",
+    "Name": "Zazpi kaleak/Casco viejo",
+    "Lines": ["L3"],
+    "Platform1": ["2641"],
+    "Platform2": ["2617"]
+  },
+  {
+    "Code": "2617",
+    "Name": "Zurbaranbarri",
+    "Lines": ["L3"],
+    "Platform1": ["2577"],
+    "Platform2": ["2609"]
+  },
+  {
+    "Code": "2609",
+    "Name": "Txudinaga",
+    "Lines": ["L3"],
+    "Platform1": ["2617"],
+    "Platform2": ["2663"]
+  },
+  {
+    "Code": "2663",
+    "Name": "Otxarkoaga",
+    "Lines": ["L3"],
+    "Platform1": ["2609"],
+    "Platform2": ["2639"]
+  },
+  {
+    "Code": "2639",
+    "Name": "Kukuilaga - Etxebarri",
+    "Lines": ["L3"],
+    "Platform1": ["2663"],
+    "Platform2": []
   }
 ]

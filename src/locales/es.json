@@ -1,6 +1,8 @@
 {
   "Castellano": "Castellano",
   "Euskera": "Euskera",
+  "Inglés": "Inglés",
+  "Francés": "Francés",
   "Visor": "Visor",
   "Visores": "Visores",
   "Mis paradas": "Mis paradas",
@@ -206,5 +208,18 @@
   "Tasa de refresco": "Tasa de refresco",
   "Cada minuto": "Cada minuto",
   "Cada 2 minutos": "Cada 2 minutos",
-  "Nunca": "Nunca"
+  "Nunca": "Nunca",
+  "CASCO_VIEJO_DISPLAY_NAME": "Casco Viejo",
+  "metroBilbao.l3MixedLineError": "La consulta de un viaje que incluya L3 con otra línea no está implementado en este momento. Estate atento las futuras actualizaciones",
+  "stationSelector": {
+    "cancel": "Cancelar",
+    "origin": "Origen",
+    "searchStation": "Buscar estación",
+    "allLines": "Todos",
+    "noStationsFound": "No se encontraron estaciones",
+    "selectOrigin": "Selecciona estación de origen",
+    "selectDestination": "Selecciona estación de destino",
+    "errorLoadingStations": "Error al cargar las estaciones:"
+  },
+  "Duración estimada": "Duración estimada"
 }

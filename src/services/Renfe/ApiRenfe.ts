@@ -159,6 +159,8 @@ export interface Platforms {
     destiny: RenfeStop;
     Platform1: TrainSchedule[];
     Platform2: TrainSchedule[];
+    duration1?: string;
+    duration2?: string;
 }
 
 export async function getPlatforms(display: Display): Promise<Platforms> {
@@ -168,7 +170,9 @@ export async function getPlatforms(display: Display): Promise<Platforms> {
         origin: display.origin,
         destiny: display.destination,
         Platform1: schedule1,
-        Platform2: schedule2
+        Platform2: schedule2,
+        duration1: schedule1.length > 0 ? schedule1[0].duration : undefined,
+        duration2: schedule2.length > 0 ? schedule2[0].duration : undefined
     };
 }
 

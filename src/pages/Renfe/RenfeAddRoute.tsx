@@ -1,117 +1,114 @@
+
 import React, { useEffect, useState } from 'react';
-import { IonGrid, IonInput, IonItem, IonLabel, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, useIonViewWillEnter } from '@ionic/react';
+import { useIonViewWillEnter } from '@ionic/react';
 import { settingsOutline } from 'ionicons/icons';
 import Page from "../Page";
 import { useTranslation } from "react-i18next";
-import {Toast} from "@capacitor/toast";
-import {useHistory} from "react-router-dom";
-import {RenfeStop} from "../../services/Renfe/RenfeStop";
-import {RenfeStorage} from "../../services/Renfe/RenfeStorage";
+import { Toast } from "@capacitor/toast";
+import { useHistory, useLocation } from "react-router-dom";
+import { RenfeStop } from '../../services/Renfe/RenfeStop';
+import { getRenfeStops, addRenfeRoute } from '../../services/RenfeStorageFunctions';
+import RenfeStationSelectorModal from '../../components/Renfe/RenfeStationSelectorModal';
 
 const RenfeAddRoute: React.FC = () => {
-    const [searchTerm, setSearchTerm] = useState<string>('');
     const [stations, setStations] = useState<RenfeStop[]>([]);
-    const [filteredStations, setFilteredStations] = useState<RenfeStop[]>([]);
     const [origin, setOrigin] = useState<RenfeStop | null>(null);
+    const [originName, setOriginName] = useState('');
     const [destination, setDestination] = useState<RenfeStop | null>(null);
-    const [selectingOrigin, setSelectingOrigin] = useState<boolean>(true);
+    const [destinationName, setDestinationName] = useState('');
+    const [showStationModal, setShowStationModal] = useState(true);
+    const [isSelectingOrigin, setIsSelectingOrigin] = useState(true);
     const { t } = useTranslation();
     const history = useHistory();
-    const storage = new RenfeStorage();
+    const location = useLocation<{ originStation?: RenfeStop }>();
+    const passedOriginStation = location.state?.originStation;
+    const [allLines, setAllLines] = useState<string[]>([]);
 
     useIonViewWillEnter(() => {
         fetchStations();
-    }, []);
-
-    const fetchStations = async () => {
-        try {
-            setStations(storage.getStations());
-        } catch (error) {
-            console.error(t("Error al cargar las estaciones:"), error);
+        if (passedOriginStation) {
+            setOrigin(passedOriginStation);
+            setOriginName(passedOriginStation.name);
+            setIsSelectingOrigin(false);
+            setShowStationModal(true);
+        } else {
+            setOrigin(null);
+            setOriginName('');
+            setDestination(null);
+            setDestinationName('');
+            setIsSelectingOrigin(true);
+            setShowStationModal(true);
         }
-    };
+    }, [passedOriginStation]);
 
     useEffect(() => {
         if (stations.length > 0) {
-            filterStations();
+            const lines = [...new Set(stations.flatMap(s => s.Lines))];
+            setAllLines(lines);
         }
-    }, [searchTerm, stations]);
+    }, [stations]);
 
-    const filterStations = () => {
-        let results = stations.filter(station =>
-            station.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredStations(results);
+    const fetchStations = async () => {
+        try {
+            setStations(getRenfeStops());
+        } catch (error) {
+            console.error(t("stationSelector.errorLoadingStations"), error);
+        }
     };
 
-    const handleSelectStation = (station: RenfeStop) => {
-        if (selectingOrigin) {
-            setOrigin(station);
-            setSelectingOrigin(false);
-            setSearchTerm('');
+    const handleAddRoute = async (selectedOrigin: RenfeStop, selectedDestination: RenfeStop) => {
+        addRenfeRoute(selectedOrigin.id + ' - ' + selectedDestination.id);
+        await Toast.show({ text: t('Viaje añadido') });
+        history.push('/renfe-displays');
+    };
+
+    const handleSelectStation = (stationId: string, stationName: string) => {
+        const selectedStation = stations.find(s => s.id === stationId);
+        if (!selectedStation) return;
+
+        if (isSelectingOrigin) {
+            setOrigin(selectedStation);
+            setOriginName(stationName);
+            setIsSelectingOrigin(false);
         } else {
-            setDestination(station);
+            if (!origin) {
+                console.error("Origin not set when selecting destination.");
+                setShowStationModal(false);
+                history.push('/renfe-displays');
+                return;
+            }
+            setDestination(selectedStation);
+            setDestinationName(stationName);
+            setShowStationModal(false);
+            handleAddRoute(origin, selectedStation);
         }
     };
 
-    const handleToggleSelection = (isOrigin: boolean) => {
-        setSelectingOrigin(isOrigin);
-        setSearchTerm('');
+    const handleCancelSelection = () => {
+        setShowStationModal(false);
+        history.push('/renfe-displays');
     };
 
-    const handleAddRoute = () => {
-        storage.addRoute(origin.id + ' - ' + destination.id);
-        Toast.show({ text: t('Viaje añadido') });
-        history.push('/renfe-my-displays');
-    };
+    const getModalTitle = () => {
+        if (isSelectingOrigin) {
+            return t('stationSelector.selectOrigin');
+        }
+        return t('stationSelector.selectDestination');
+    }
 
     return (
         <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>
             <p>{t('Selecciona un origen y destino para definir un viaje. El visor mostrará tanto la ida como la vuelta del viaje.')}</p>
-            <IonCard color={selectingOrigin ? "primary" : "light"}>
-                <IonCardHeader>
-                    <IonCardTitle>{t('Origen')}</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
-                    {origin ? origin.name : t('No seleccionado')}
-                    {origin && <IonButton size="small" fill="clear" onClick={() => handleToggleSelection(true)}>{t('Modificar')}</IonButton>}
-                </IonCardContent>
-            </IonCard>
-
-            <IonCard color={!selectingOrigin ? "primary" : "light"}>
-                <IonCardHeader>
-                    <IonCardTitle>{t('Destino')}</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
-                    {destination ? destination.name : t('No seleccionado')}
-                    {destination && <IonButton size="small" fill="clear" onClick={() => handleToggleSelection(false)}>{t('Modificar')}</IonButton>}
-                </IonCardContent>
-            </IonCard>
-
-            {origin && destination && (
-                <IonButton expand="full" color="success"  onClick={() => handleAddRoute()}>
-                    {t('Añadir viaje')}
-                </IonButton>
-            )}
-
-            <IonItem>
-                <IonLabel position="stacked">{t('Nombre de la estación')}</IonLabel>
-                <IonInput
-                    value={searchTerm}
-                    placeholder={t('Escribe para filtrar')}
-                    onIonInput={(e) => setSearchTerm(e.detail.value!)}
-                />
-            </IonItem>
-
-            <IonGrid>
-                {filteredStations.map((stop) => (
-                    <IonItem key={stop.id} button onClick={() => handleSelectStation(stop)}>
-                        <IonLabel>
-                            <h3>{stop.name}</h3>
-                        </IonLabel>
-                    </IonItem>
-                ))}
-            </IonGrid>
+            <RenfeStationSelectorModal
+                isOpen={showStationModal}
+                onClose={handleCancelSelection}
+                onCancel={handleCancelSelection}
+                onSelectStation={handleSelectStation}
+                stations={stations}
+                title={getModalTitle()}
+                originStationName={origin ? origin.name : null}
+                allLines={allLines}
+            />
         </Page>
     );
 };

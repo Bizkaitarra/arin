@@ -58,9 +58,9 @@ const RenfeStationCard: React.FC<{ stationData: Platforms }> = ({stationData}) =
                             platformIndex={platformIndex}
                             title={getPlatformTitle(stationData, platformIndex)}
                             destiny={platformIndex === 0 ? stationData.destiny.name : stationData.origin.name}
+                            duration={platformIndex === 0 ? stationData.duration1 : stationData.duration2}
                         />
-                    ))}
-                </div>
+                    ))}                </div>
             )}
         </IonCard>
     );

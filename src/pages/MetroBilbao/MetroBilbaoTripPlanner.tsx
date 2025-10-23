@@ -13,8 +13,8 @@ import {
     IonLabel,
     IonList,
     IonPage,
-    IonSelect,
-    IonSelectOption,
+    IonSelect, // Re-added
+    IonSelectOption, // Re-added
     useIonViewWillEnter
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
@@ -25,6 +25,7 @@ import metroStations from '../../data/paradas_metro.json';
 import { planTrip } from '../../services/ApiMetroBilbao';
 import './MetroBilbaoTripPlanner.css';
 import ErrorDisplay from '../../components/ErrorDisplay/ErrorDisplay';
+import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal'; // Correctly placed import
 
 const timeSlots = [
     { value: '0-4', label: '00:00 - 04:00' },
@@ -47,17 +48,24 @@ const getCurrentTimeSlot = () => {
 };
 
 const MetroBilbaoTripPlanner: React.FC = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [origin, setOrigin] = useState('');
+    const [originName, setOriginName] = useState('');
     const [destination, setDestination] = useState('');
+    const [destinationName, setDestinationName] = useState('');
     const [date, setDate] = useState(new Date().toISOString());
     const [timeSlot, setTimeSlot] = useState(getCurrentTimeSlot());
     const [results, setResults] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
+    const [showOriginModal, setShowOriginModal] = useState(false);
+    const [showDestinationModal, setShowDestinationModal] = useState(false);
+
     useIonViewWillEnter(() => {
         setOrigin('');
+        setOriginName('');
         setDestination('');
+        setDestinationName('');
         setDate(new Date().toISOString());
         setTimeSlot(getCurrentTimeSlot());
         setResults(null);
@@ -103,27 +111,54 @@ const MetroBilbaoTripPlanner: React.FC = () => {
         }
     };
 
+    const locale = i18n.language === 'eu' ? 'eu-ES' : 'es-ES';
+
+    const filteredMetroStations = metroStations.filter(station => !station.Lines.includes('L3'));
+
     return (
         <Page title={t('Planificar viaje')} icon={searchOutline} internalPage={true}>
-            <IonItem>
+            <IonItem button onClick={() => setShowOriginModal(true)}>
                 <IonLabel position="stacked">{t('Origen')}</IonLabel>
-                <IonSelect value={origin} placeholder={t('Selecciona una estación')} onIonChange={e => setOrigin(e.detail.value)}>
-                    {metroStations.map(station => (
-                        <IonSelectOption key={station.Code} value={station.Code}>{station.Name}</IonSelectOption>
-                    ))}
-                </IonSelect>
+                <IonInput
+                    value={originName}
+                    placeholder={t('Selecciona una estación')}
+                    readonly
+                />
             </IonItem>
-            <IonItem>
+            <StationSelectorModal
+                isOpen={showOriginModal}
+                onClose={() => setShowOriginModal(false)}
+                onSelectStation={(code, name) => {
+                    setOrigin(code);
+                    setOriginName(name);
+                }}
+                stations={filteredMetroStations}
+                title={t('Selecciona estación de origen')}
+                allLines={['L1', 'L2']} // Changed prop name
+            />
+
+            <IonItem button onClick={() => setShowDestinationModal(true)}>
                 <IonLabel position="stacked">{t('Destino')}</IonLabel>
-                <IonSelect value={destination} placeholder={t('Selecciona una estación')} onIonChange={e => setDestination(e.detail.value)}>
-                    {metroStations.map(station => (
-                        <IonSelectOption key={station.Code} value={station.Code}>{station.Name}</IonSelectOption>
-                    ))}
-                </IonSelect>
+                <IonInput
+                    value={destinationName}
+                    placeholder={t('Selecciona una estación')}
+                    readonly
+                />
             </IonItem>
+            <StationSelectorModal
+                isOpen={showDestinationModal}
+                onClose={() => setShowDestinationModal(false)}
+                onSelectStation={(code, name) => {
+                    setDestination(code);
+                    setDestinationName(name);
+                }}
+                stations={filteredMetroStations}
+                title={t('Selecciona estación de destino')}
+                allLines={['L1', 'L2']} // Changed prop name
+            />
             <IonItem>
                 <IonLabel position="stacked">{t('Fecha')}</IonLabel>
-                <IonDatetime className="trip-planner-datetime" value={date} onIonChange={e => setDate(e.detail.value! as string)} presentation="date" locale="es-ES"/>
+                <IonDatetime className="trip-planner-datetime" value={date} onIonChange={e => setDate(e.detail.value! as string)} presentation="date" locale={locale} firstDayOfWeek={1}/>
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">{t('Franja horaria')}</IonLabel>

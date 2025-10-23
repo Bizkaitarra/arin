@@ -26,6 +26,8 @@ export interface MetroStopTrains {
     Platform1: MetroTrain[];
     Platform2: MetroTrain[];
     isRoute: boolean;
+    duration?: number;
+    duration2?: number;
 }
 
 export function getMetroStops(favoritesFirsts: Boolean = false): MetroStop[] {

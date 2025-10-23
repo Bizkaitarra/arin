@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter,} from '@ionic/react';
+import {IonGrid, IonItem, IonLabel, IonSearchbar, IonSegment, IonSegmentButton, useIonViewWillEnter,} from '@ionic/react';
 import {settingsOutline} from 'ionicons/icons';
 import Page from "../Page";
 import {addDisplay, getMetroStops, MetroStop, removeDisplay, saveMetroStops} from "../../services/MetroBilbaoStorage";
@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 const MetroBilbaoAddStop: React.FC = () => {
     const [stopName, setStopName] = useState<string>('');
     const [stations, setStations] = useState<MetroStop[]>([]);
+    const [selectedLines, setSelectedLines] = useState<string[]>([]);
     const [filteredStations, setFilteredStations] = useState<MetroStop[]>([]);
     const { t } = useTranslation();
 
@@ -21,22 +22,26 @@ const MetroBilbaoAddStop: React.FC = () => {
         try {
             setStations(getMetroStops());
         } catch (error) {
-            console.error(t("Error al cargar las estaciones:"), error);
+            console.error(t("stationSelector.errorLoadingStations"), error);
         }
     };
 
     useEffect(() => {
-        if (stations.length > 0) {
-            filterStations();
-        }
-    }, [stopName, stations]);
-
-    const filterStations = () => {
         let results = stations.filter(station =>
-            (station.Name.toLowerCase().includes(stopName.toLowerCase()))
+            (station.Name.toLowerCase().includes(stopName.toLowerCase())) &&
+            (selectedLines.length === 0 || station.Lines.some(line => selectedLines.includes(line)))
         );
         setFilteredStations(results);
-    }
+    }, [stopName, stations, selectedLines]);
+
+    const handleLineSegmentChange = (e: CustomEvent) => {
+        const segmentValue = e.detail.value;
+        if (segmentValue === 'all') {
+            setSelectedLines([]);
+        } else {
+            setSelectedLines([segmentValue]);
+        }
+    };
 
 
 
@@ -69,17 +74,27 @@ const MetroBilbaoAddStop: React.FC = () => {
         );
     };
 
+    const allLines = ['L1', 'L2', 'L3'];
+
     return (
         <Page title={`${t('Añadir paradas')}`} icon={settingsOutline} internalPage={true}>
             <p>{t('Añade o elimina las paradas favoritas usando la estrella')}</p>
-            <IonItem>
-                <IonLabel position="stacked">{t('Nombre de la parada')}</IonLabel>
-                <IonInput
-                    value={stopName}
-                    placeholder={t('Escribe para filtrar')}
-                    onIonInput={(e) => setStopName(e.detail.value!)}
-                />
-            </IonItem>
+            <IonSearchbar
+                value={stopName}
+                placeholder={t('stationSelector.searchStation')}
+                onIonInput={(e) => setStopName(e.detail.value!)}
+            />
+
+            <IonSegment value={selectedLines.length === 0 ? 'all' : selectedLines[0]} onIonChange={handleLineSegmentChange}>
+                <IonSegmentButton value="all">
+                    <IonLabel>{t('stationSelector.allLines')}</IonLabel>
+                </IonSegmentButton>
+                {allLines.map(line => (
+                    <IonSegmentButton key={line} value={line}>
+                        <IonLabel>{line}</IonLabel>
+                    </IonSegmentButton>
+                ))}
+            </IonSegment>
 
             <IonGrid>
                 {filteredStations.map((stop) => (

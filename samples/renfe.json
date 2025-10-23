@@ -1,0 +1,256 @@
+{
+  "actTiempoReal": true,
+  "peticion": {
+    "cdgoEstOrigen": "13118",
+    "cdgoEstDestino": "13200",
+    "fchaViaje": "20251023",
+    "horaDesde": "15",
+    "horaHasta": "26",
+    "descEstOrigen": "ABAROA-SAN MIGUEL",
+    "descEstDestino": "BILBAO-INTERMOD. ABANDO INDALECIO PRIETO"
+  },
+  "horario": [
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35847",
+      "horaSalida": "15:18",
+      "horaLlegada": "15:32",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35623",
+      "horaSalida": "15:43",
+      "horaSalidaReal": "15:45",
+      "horaLlegada": "15:58",
+      "horaLlegadaReal": "16:00",
+      "duracion": "15min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35849",
+      "horaSalida": "15:53",
+      "horaSalidaReal": "15:52",
+      "horaLlegada": "16:07",
+      "horaLlegadaReal": "16:06",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35851",
+      "horaSalida": "16:20",
+      "horaSalidaReal": "16:21",
+      "horaLlegada": "16:34",
+      "horaLlegadaReal": "16:35",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35625",
+      "horaSalida": "16:37",
+      "horaSalidaReal": "16:37",
+      "horaLlegada": "16:52",
+      "horaLlegadaReal": "16:52",
+      "duracion": "15min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35853",
+      "horaSalida": "16:50",
+      "horaSalidaReal": "16:50",
+      "horaLlegada": "17:04",
+      "horaLlegadaReal": "17:04",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35627",
+      "horaSalida": "17:11",
+      "horaLlegada": "17:26",
+      "duracion": "15min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35857",
+      "horaSalida": "17:25",
+      "horaSalidaReal": "17:25",
+      "horaLlegada": "17:39",
+      "horaLlegadaReal": "17:39",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35859",
+      "horaSalida": "17:48",
+      "horaLlegada": "18:02",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35861",
+      "horaSalida": "18:20",
+      "horaLlegada": "18:34",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35629",
+      "horaSalida": "18:37",
+      "horaLlegada": "18:52",
+      "duracion": "15min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35863",
+      "horaSalida": "18:48",
+      "horaLlegada": "19:02",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35865",
+      "horaSalida": "19:25",
+      "horaLlegada": "19:39",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35677",
+      "horaSalida": "19:38",
+      "horaLlegada": "19:53",
+      "duracion": "15min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35867",
+      "horaSalida": "19:48",
+      "horaLlegada": "20:02",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35869",
+      "horaSalida": "20:18",
+      "horaLlegada": "20:32",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35679",
+      "horaSalida": "20:37",
+      "horaLlegada": "20:52",
+      "duracion": "15min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35871",
+      "horaSalida": "20:48",
+      "horaLlegada": "21:02",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35873",
+      "horaSalida": "21:17",
+      "horaLlegada": "21:31",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35875",
+      "horaSalida": "21:47",
+      "horaLlegada": "22:01",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35877",
+      "horaSalida": "22:26",
+      "horaLlegada": "22:40",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35879",
+      "horaSalida": "22:56",
+      "horaLlegada": "23:10",
+      "duracion": "14min.",
+      "accesible": false
+    },
+    {
+      "linea": "C3",
+      "lineaEstOrigen": "C3",
+      "lineaEstDestino": "C3",
+      "cdgoTren": "35881",
+      "horaSalida": "23:45",
+      "horaLlegada": "23:59",
+      "duracion": "14min.",
+      "accesible": false
+    }
+  ]
+}
