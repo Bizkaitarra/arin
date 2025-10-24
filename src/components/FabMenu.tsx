@@ -3,7 +3,7 @@ import { IonFab, IonFabButton, IonIcon, useIonActionSheet } from '@ionic/react';
 import { chevronUpSharp } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { bizkaibusMenuItems, metroMenuItems, renfeMenuItems, kbusMenuItems } from './Menu/menuItems';
+import { bizkaibusMenuItems, metroMenuItems, renfeMenuItems, kbusMenuItems, euskotrenMenuItems } from './Menu/menuItems';
 
 interface FabMenuProps {
     transportType: string;
@@ -27,6 +27,9 @@ const FabMenu: React.FC<FabMenuProps> = ({ transportType }) => {
             break;
         case 'KBus':
             menuItems = kbusMenuItems;
+            break;
+        case 'Euskotren':
+            menuItems = euskotrenMenuItems;
             break;
         default:
             return null;

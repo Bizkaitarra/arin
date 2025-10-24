@@ -96,3 +96,18 @@ export const kbusMenuItems = [
         id: 'kbus-add-stop'
     },
 ];
+
+export const euskotrenMenuItems = [
+    {
+        text: 'Mis visores',
+        icon: listOutline,
+        path: '/euskotren-my-displays',
+        id: 'euskotren-my-displays'
+    },
+    {
+        text: 'Añadir viaje',
+        icon: addCircleOutline,
+        path: '/euskotren-add-route',
+        id: 'euskotren-add-trip'
+    },
+];

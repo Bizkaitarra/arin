@@ -9,6 +9,8 @@ export interface Configuration {
     verFrecuencia: boolean;
     metroDisplayFolding: string;
     refreshRate: string; // New property
+    euskotrenMaxTrenes: number;
+    euskotrenDisplayFolding: string;
 }
 
 // Crear el contexto para la configuración
@@ -42,6 +44,8 @@ export const ConfigurationProvider: React.FC<ConfigurationProviderProps> = ({ ch
                     verFrecuencia: true,
                     metroDisplayFolding: 'disabled',
                     refreshRate: 'Cada minuto', // New default value
+                    euskotrenMaxTrenes: 60,
+                    euskotrenDisplayFolding: 'disabled',
                 });
             }
         };

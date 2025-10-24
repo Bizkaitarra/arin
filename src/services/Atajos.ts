@@ -2,7 +2,8 @@ export const TRANSPORTES = [
     { id: "bizkaibus", label: "Bizkaibus" },
     { id: "metro", label: "Metro Bilbao" },
     { id: "kbus", label: "KBus" },
-    { id: "renfe", label: "Renfe" }
+    { id: "renfe", label: "Renfe" },
+    { id: "euskotren", label: "Euskotren" }
 ];
 
 

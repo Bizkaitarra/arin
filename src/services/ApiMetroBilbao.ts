@@ -3,7 +3,7 @@ import {MetroStopTrains, MetroTrain} from "./MetroBilbaoStorage";
 import {IncidentsResult, MetroBilbaoResponse} from "./MetroBilbao/Incidences";
 import i18next from "i18next";
 import {Display} from "./MetroBilbao/Display";
-import {getEuskotrenL3StopTrains} from "./ApiMetroBilbaoL3";
+import {getMetroBilbaoL3StopTrains} from "./ApiMetroBilbaoL3";
 import paradasMetro from "../data/paradas_metro.json";
 
 function isL3Station(stationCode: string): boolean {
@@ -60,7 +60,7 @@ async function getMetroStopTrains(display: Display, maxTrains: number): Promise<
                     origin: originStation,
                     destination: destinationStation,
                 };
-                const l3Trains = await getEuskotrenL3StopTrains(tempDisplay, maxTrains);
+                const l3Trains = await getMetroBilbaoL3StopTrains(tempDisplay, maxTrains);
                 allTrains.push(...l3Trains.Platform1);
             } else {
                 const { trains } = await fetchTrainData(originStation.Code, destCode, maxTrains);
@@ -104,7 +104,7 @@ export async function getMetroDisplaysTrains(displays: Display[], maxTrains: num
 
         if (display.destination && originIsL3 && destinationIsL3) {
             // Both origin and destination are L3 stations, use the L3 API
-            return getEuskotrenL3StopTrains(display, maxTrains);
+            return getMetroBilbaoL3StopTrains(display, maxTrains);
         } else {
             // Otherwise, use the original Metro Bilbao API
             return getMetroStopTrains(display, maxTrains);

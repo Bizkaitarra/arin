@@ -49,6 +49,10 @@ import RenfeAddRoute from "./pages/Renfe/RenfeAddRoute";
 import MetroTarifas from "./pages/MetroBilbao/MetroTarifas";
 import AppLoader from "./components/AppLoader";
 
+import EuskotrenDisplays from "./pages/Euskotren/EuskotrenDisplays";
+import EuskotrenMyDisplays from "./pages/Euskotren/EuskotrenMyDisplays";
+import EuskotrenAddRoute from "./pages/Euskotren/EuskotrenAddRoute";
+
 setupIonicReact();
 
 
@@ -104,6 +108,9 @@ const App: React.FC = () => {
                             <Route exact path="/renfe-my-displays" component={RenfeMyDisplays} />
                             <Route exact path="/renfe-add-stop" component={RenfeAddStop} />
                             <Route exact path="/renfe-add-route" component={RenfeAddRoute} />
+                            <Route exact path="/euskotren-displays" component={EuskotrenDisplays} />
+                            <Route exact path="/euskotren-my-displays" component={EuskotrenMyDisplays} />
+                            <Route exact path="/euskotren-add-route" component={EuskotrenAddRoute} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
                             <Route exact path="/" render={() => <Redirect to="/bizkaibus-displays" />} />

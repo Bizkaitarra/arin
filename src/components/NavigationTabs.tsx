@@ -46,8 +46,16 @@ const NavigationTabs: React.FC = () => {
             {selectedVisores.includes('renfe') && (
                 <IonTabButton tab="renfe-displays" href="/renfe-displays">
                     <span className="subtext">{t('renfe_nav_1')}</span>
-                    <IonIcon icon={busOutline} />
+                    <IonIcon icon={trainOutline} />
                     <IonLabel>{t('renfe_nav_2')}</IonLabel>
+                </IonTabButton>
+            )}
+
+            {selectedVisores.includes('euskotren') && (
+                <IonTabButton tab="euskotren-displays" href="/euskotren-displays">
+                    <span className="subtext">{t('euskotren_nav_1')}</span>
+                    <IonIcon icon={trainOutline} />
+                    <IonLabel>{t('euskotren_nav_2')}</IonLabel>
                 </IonTabButton>
             )}
 
