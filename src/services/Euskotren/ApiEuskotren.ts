@@ -156,11 +156,17 @@ export async function getEuskotrenStopTrains(display: Display, maxTrains: number
     const platform1Trains = await fetchEuskotrenData(display.origin.Code, display.destination.Code, today, maxTrains);
     const platform2Trains = await fetchEuskotrenData(display.destination.Code, display.origin.Code, today, maxTrains);
 
+    // Calculate duration from the first train in each platform, if available
+    const duration1 = platform1Trains.length > 0 ? platform1Trains[0].Duration : undefined;
+    const duration2 = platform2Trains.length > 0 ? platform2Trains[0].Duration : undefined;
+
     return {
         Display: display,
         Platform1: platform1Trains.sort((a, b) => a.Estimated - b.Estimated),
         Platform2: platform2Trains.sort((a, b) => a.Estimated - b.Estimated),
-        isRoute: true
+        isRoute: true,
+        duration: duration1,
+        duration2: duration2
     };
 }
 
