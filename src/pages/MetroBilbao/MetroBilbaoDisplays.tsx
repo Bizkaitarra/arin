@@ -17,7 +17,7 @@ import {
 } from "ionicons/icons";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
-import {fetchMetroBilbaoIncidents} from "../../services/ApiMetroBilbao";
+import {ApiMetroBilbao} from "../../services/MetroBilbao/ApiMetroBilbao";
 import MetroBilbaoAddTripButton from "../../components/MetroBilbao/MetroBilbaoAddVisorButton";
 import {IncidentsResult} from "../../services/MetroBilbao/Incidences";
 
@@ -45,7 +45,7 @@ const MetroBilbaoDisplays: React.FC = () => {
     }
 
     useEffect(() => {
-        fetchMetroBilbaoIncidents()
+        new ApiMetroBilbao().fetchMetroBilbaoIncidents()
             .then(data => updateIssues(data))
             .catch(error => console.error("Error fetching incidents", error));
     }, []);

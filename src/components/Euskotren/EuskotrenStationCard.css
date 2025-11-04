@@ -7,7 +7,7 @@
 }
 
 .euskotren-station-card-header {
-    background-color: #009933; /* Euskotren green */
+    background-color: #8BC34A; /* Euskotren Green */
     color: #fff;
     padding: 6px 10px;
     font-weight: bold;
@@ -56,19 +56,14 @@
     text-align: right;
 }
 
-.train-time {
+.euskotren-train-time {
     font-size: 1.2em;
     font-weight: bold;
-    color: #009933; /* Euskotren green */
+    color: #000; /* Black */
 }
 
-.train-time.is-critical {
+.euskotren-train-time.is-critical {
     color: #d9534f;
-}
-
-.next-arrival {
-    font-size: 0.9em;
-    color: #666;
 }
 
 .no-trains {

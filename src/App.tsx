@@ -52,6 +52,7 @@ import AppLoader from "./components/AppLoader";
 import EuskotrenDisplays from "./pages/Euskotren/EuskotrenDisplays";
 import EuskotrenMyDisplays from "./pages/Euskotren/EuskotrenMyDisplays";
 import EuskotrenAddRoute from "./pages/Euskotren/EuskotrenAddRoute";
+import EuskotrenAddStop from "./pages/Euskotren/EuskotrenAddStop";
 
 setupIonicReact();
 
@@ -111,6 +112,7 @@ const App: React.FC = () => {
                             <Route exact path="/euskotren-displays" component={EuskotrenDisplays} />
                             <Route exact path="/euskotren-my-displays" component={EuskotrenMyDisplays} />
                             <Route exact path="/euskotren-add-route" component={EuskotrenAddRoute} />
+                            <Route exact path="/euskotren-add-stop" component={EuskotrenAddStop} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
                             <Route exact path="/" render={() => <Redirect to="/bizkaibus-displays" />} />

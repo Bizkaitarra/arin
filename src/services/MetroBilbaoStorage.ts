@@ -1,15 +1,7 @@
 import paradas from "../data/paradas_metro.json";
-import {Display} from "./MetroBilbao/Display";
-const STORAGE_KEY = 'metro_bilbao_selected_stops';
+import {Display, MetroStop} from "./MetroBilbao/Display";
 
-export interface MetroStop {
-    Code: string;
-    Name: string;
-    Lines: string[];
-    IsFavorite?: boolean;
-    Platform1: string[];
-    Platform2: string[];
-}
+const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
 export interface MetroTrain {
     Wagons: number;
@@ -67,18 +59,29 @@ export function getSavedDisplays(): Display[] {
     const favoriteIdsData = localStorage.getItem(STORAGE_KEY);
     if (!favoriteIdsData) return [];
     let favoriteIds: string[] = JSON.parse(favoriteIdsData);
-    return favoriteIds.map((stop) => {
+    console.log("favoriteIds from localStorage:", favoriteIds);
+    const displays = favoriteIds.map((stop) => {
         const [originCode, destinationCode] = stop.split(" - ");
         const origin = paradas.find(p => p.Code === originCode);
+        if (!origin) {
+            console.warn(`Origin stop with code ${originCode} not found in paradas.`);
+            return null; // Return null for invalid stops
+        }
         if (!destinationCode) {
             return {origin}
         }
         const destination = destinationCode ? paradas.find(p => p.Code === destinationCode) : undefined;
+        if (destinationCode && !destination) {
+            console.warn(`Destination stop with code ${destinationCode} not found in paradas.`);
+            return null; // Return null for invalid stops
+        }
         return {
             origin,
             destination
         };
-    });
+    }).filter(display => display !== null) as Display[]; // Filter out nulls and cast
+    console.log("Constructed displays:", displays);
+    return displays;
 }
 
 export function addDisplay(display: Display): void {

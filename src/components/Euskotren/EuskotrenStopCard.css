@@ -1,0 +1,13 @@
+.euskotren-stop-card {
+    margin-bottom: 10px;
+}
+
+.euskotren-stop-card h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.euskotren-stop-card p {
+    font-size: 0.9em;
+    color: #666;
+}

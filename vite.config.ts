@@ -14,5 +14,19 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
-  }
+  },
+  server: {
+    proxy: {
+      '/api-euskotren': {
+        target: 'https://www.euskotren.eus',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-euskotren/, ''),
+      },
+      '/api-metrobilbao': {
+        target: 'https://api.metrobilbao.eus',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-metrobilbao/, ''),
+      },
+    },
+  },
 })

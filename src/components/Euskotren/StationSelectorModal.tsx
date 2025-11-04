@@ -12,10 +12,12 @@ import {
     IonButton,
     IonIcon,
     IonSegment,
-    IonSegmentButton
+    IonSegmentButton,
+    IonChip
 } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
 import { useTranslation } from 'react-i18next';
+import './StationSelectorModal.css';
 
 interface EuskotrenStation {
     Code: string;
@@ -46,18 +48,28 @@ const StationSelectorModal: React.FC<StationSelectorModalProps> = ({
 }) => {
     const { t } = useTranslation();
     const [searchText, setSearchText] = useState('');
+    const [selectedLines, setSelectedLines] = useState<string[]>([]); // New state for line filtering
     const [filteredStations, setFilteredStations] = useState<EuskotrenStation[]>(stations);
 
     useEffect(() => {
         setFilteredStations(
             stations.filter(station =>
-                station.Name.toLowerCase().includes(searchText.toLowerCase())
+                station.Name.toLowerCase().includes(searchText.toLowerCase()) &&
+                (selectedLines.length === 0 || station.Lines.some(line => selectedLines.includes(line)))
             )
         );
-    }, [searchText, stations]);
+    }, [searchText, stations, selectedLines]); // Add selectedLines to dependency array
 
     const handleSelect = (station: EuskotrenStation) => {
         onSelectStation(station.Code, station.Name);
+    };
+
+    const handleLineChipClick = (lineValue: string) => {
+        if (lineValue === 'all') {
+            setSelectedLines([]);
+        } else {
+            setSelectedLines([lineValue]);
+        }
     };
 
     return (
@@ -84,18 +96,24 @@ const StationSelectorModal: React.FC<StationSelectorModalProps> = ({
                     onIonInput={(e) => setSearchText(e.detail.value!)}
                     placeholder={t('stationSelector.searchStation')}
                 />
-                {/* allLines will be empty for Euskotren, so this segment will not render */}
                 {allLines.length > 0 && (
-                    <IonSegment value="all">
-                        <IonSegmentButton value="all">
+                    <div className="line-filters-container">
+                        <IonChip
+                            onClick={() => handleLineChipClick('all')}
+                            color={selectedLines.length === 0 ? 'primary' : 'medium'}
+                        >
                             <IonLabel>{t('stationSelector.allLines')}</IonLabel>
-                        </IonSegmentButton>
+                        </IonChip>
                         {allLines.map(line => (
-                            <IonSegmentButton key={line} value={line}>
+                            <IonChip
+                                key={line}
+                                onClick={() => handleLineChipClick(line)}
+                                color={selectedLines.includes(line) ? 'primary' : 'medium'}
+                            >
                                 <IonLabel>{line}</IonLabel>
-                            </IonSegmentButton>
+                            </IonChip>
                         ))}
-                    </IonSegment>
+                    </div>
                 )}
                 <IonList>
                     {filteredStations.length > 0 ? (

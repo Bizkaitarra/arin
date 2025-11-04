@@ -22,7 +22,7 @@ import { useTranslation } from 'react-i18next';
 import Page from '../Page';
 import { searchOutline } from 'ionicons/icons';
 import metroStations from '../../data/paradas_metro.json';
-import { planTrip } from '../../services/ApiMetroBilbao';
+import { ApiMetroBilbao } from '../../services/MetroBilbao/ApiMetroBilbao';
 import './MetroBilbaoTripPlanner.css';
 import ErrorDisplay from '../../components/ErrorDisplay/ErrorDisplay';
 import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal'; // Correctly placed import
@@ -100,7 +100,8 @@ const MetroBilbaoTripPlanner: React.FC = () => {
         };
 
         try {
-            const tripResults = await planTrip(params);
+            const api = new ApiMetroBilbao();
+            const tripResults = await api.planTrip(params);
             if (tripResults && tripResults.trips) {
                 setResults(tripResults);
             } else {

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { IonContent, IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonIcon, IonList, IonThumbnail } from '@ionic/react';
 import { useTranslation } from 'react-i18next';
-import { getFares, FaresResponse, FareCategory, FareItem } from '../../services/ApiMetroBilbao';
+import { ApiMetroBilbao } from '../../services/MetroBilbao/ApiMetroBilbao';
+import { FaresResponse } from '../../services/MetroBilbao/FaresResponse';
+import { FareCategory } from '../../services/MetroBilbao/FareCategory';
+import { FareItem } from '../../services/MetroBilbao/FareItem';
 import Page from '../Page';
 import { chevronDownOutline, chevronUpOutline } from 'ionicons/icons';
 
@@ -77,7 +80,8 @@ const MetroTarifas: React.FC = () => {
     useEffect(() => {
         const fetchFares = async () => {
             try {
-                const data = await getFares();
+                const api = new ApiMetroBilbao();
+                const data = await api.getFares();
                 setFares(data);
             } catch (error) {
                 console.error("Failed to fetch fares", error);

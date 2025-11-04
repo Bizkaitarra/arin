@@ -1,0 +1,10 @@
+.line-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the chips */
+    padding: 8px;
+}
+
+.line-filters-container ion-chip {
+    margin: 4px;
+}

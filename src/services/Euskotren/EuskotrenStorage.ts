@@ -1,6 +1,8 @@
+
 import paradas from "../../data/paradas_euskotren.json";
-import {Display} from "../MetroBilbao/Display";
-const EUSKOTREN_STORAGE_KEY = 'euskotren_selected_stops';
+import {Display} from "./Display";
+
+const STORAGE_KEY = 'euskotren_selected_stops';
 
 export interface EuskotrenStop {
     Code: string;
@@ -31,7 +33,7 @@ export interface EuskotrenStopTrains {
 }
 
 export function getEuskotrenStops(favoritesFirsts: Boolean = false): EuskotrenStop[] {
-    const savedStops = localStorage.getItem(EUSKOTREN_STORAGE_KEY);
+    const savedStops = localStorage.getItem(STORAGE_KEY);
     if (!savedStops) return paradas;
 
     try {
@@ -63,44 +65,42 @@ export function getEuskotrenStops(favoritesFirsts: Boolean = false): EuskotrenSt
     }
 }
 
-export function getSavedEuskotrenDisplays(): Display[] {
-    const favoriteIdsData = localStorage.getItem(EUSKOTREN_STORAGE_KEY);
+export function getSavedDisplays(): Display[] {
+    const favoriteIdsData = localStorage.getItem(STORAGE_KEY);
     if (!favoriteIdsData) return [];
     let favoriteIds: string[] = JSON.parse(favoriteIdsData);
     return favoriteIds.map((stop) => {
         const [originCode, destinationCode] = stop.split(" - ");
         const origin = paradas.find(p => p.Code === originCode);
-        if (!destinationCode) {
-            return {origin}
-        }
-        const destination = destinationCode ? paradas.find(p => p.Code === destinationCode) : undefined;
+        const destination = destinationCode ? paradas.find(p => p.Code === destinationCode) : undefined; // If no destinationCode, destination is undefined
+
         return {
             origin,
-            destination
+            destination,
         };
     });
 }
 
-export function addEuskotrenDisplay(display: Display): void {
-    const savedDisplays = localStorage.getItem(EUSKOTREN_STORAGE_KEY);
+export function addDisplay(display: Display): void {
+    const savedDisplays = localStorage.getItem(STORAGE_KEY);
     let favoriteIds: string[] = [];
     if (savedDisplays) {
         favoriteIds = JSON.parse(savedDisplays);
     }
     const displayId = display.destination ? `${display.origin.Code} - ${display.destination.Code}` : display.origin.Code;
     favoriteIds.push(displayId);
-    localStorage.setItem(EUSKOTREN_STORAGE_KEY, JSON.stringify(favoriteIds));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteIds));
 }
 
-export function removeEuskotrenDisplay(display: Display): void {
-    const savedDisplays = localStorage.getItem(EUSKOTREN_STORAGE_KEY);
+export function removeDisplay(display: Display): void {
+    const savedDisplays = localStorage.getItem(STORAGE_KEY);
     let favoriteIds: string[] = [];
     if (savedDisplays) {
         favoriteIds = JSON.parse(savedDisplays);
     }
     const displayId = display.destination ? `${display.origin.Code} - ${display.destination.Code}` : display.origin.Code;
     favoriteIds = favoriteIds.filter(id => id !== displayId);
-    localStorage.setItem(EUSKOTREN_STORAGE_KEY, JSON.stringify(favoriteIds));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteIds));
 }
 
 export function saveEuskotrenDisplays(displays: Display[]): void {
@@ -110,7 +110,7 @@ export function saveEuskotrenDisplays(displays: Display[]): void {
         }
         return display.origin.Code;
     });
-    localStorage.setItem(EUSKOTREN_STORAGE_KEY, JSON.stringify(displayIds));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(displayIds));
 }
 
 
@@ -118,16 +118,16 @@ export function saveEuskotrenDisplays(displays: Display[]): void {
 export function saveEuskotrenStops(stations: EuskotrenStop[]): void {
     const selectedStops = stations.filter(station => station.IsFavorite);
     const stationIds = selectedStops.map((stop) => stop.Code);
-    localStorage.setItem(EUSKOTREN_STORAGE_KEY, JSON.stringify(stationIds));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stationIds));
 }
 
-export function addEuskotrenRoute(route: string): void {
-    const savedStops = localStorage.getItem(EUSKOTREN_STORAGE_KEY);
+export function addRoute(route: string): void {
+    const savedStops = localStorage.getItem(STORAGE_KEY);
     let favoriteIds: string[] = [];
     if (savedStops) {
         favoriteIds = JSON.parse(savedStops);
     }
     favoriteIds.push(route);
     console.log(favoriteIds);
-    localStorage.setItem(EUSKOTREN_STORAGE_KEY, JSON.stringify(favoriteIds));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteIds));
 }

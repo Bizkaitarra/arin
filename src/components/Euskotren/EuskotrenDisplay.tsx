@@ -4,13 +4,13 @@ import {getEuskotrenDisplaysTrains} from '../../services/Euskotren/ApiEuskotren'
 import './EuskotrenDisplay.css';
 import {setIntervalEuskotren} from '../../services/IntervalServices';
 import Loader from '../Loader';
-import {getSavedEuskotrenDisplays, EuskotrenStopTrains} from "../../services/Euskotren/EuskotrenStorage";
+import {getSavedDisplays, EuskotrenStopTrains} from "../../services/Euskotren/EuskotrenStorage";
 import {useTranslation} from "react-i18next";
 import {useConfiguration} from "../../context/ConfigurationContext";
 import EuskotrenStationCard from "./EuskotrenStationCard";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
 import paradasEuskotren from "../../data/paradas_euskotren.json";
-import {Display} from "../../services/MetroBilbao/Display";
+import {Display} from "../../services/Euskotren/Display";
 
 const EuskotrenDisplay: React.FC = () => {
     const {t} = useTranslation();
@@ -29,12 +29,15 @@ const EuskotrenDisplay: React.FC = () => {
 
         try {
             setLoading(true);
-            const displays = getSavedEuskotrenDisplays();
+            const displays = getSavedDisplays();
+            console.log('Euskotren displays from storage', displays);
             const data = await getEuskotrenDisplaysTrains(displays, settings.maxTrenes);
+            console.log('Euskotren data from API', data);
             setEuskotrenData(data);
             setLoading(false);
             setError(null);
         } catch (err) {
+            console.error('Error fetching Euskotren data', err);
             setError(t('Error al conectar con Euskotren'));
             setLoading(false);
         }

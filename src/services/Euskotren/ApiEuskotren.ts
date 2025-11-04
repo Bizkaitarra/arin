@@ -1,4 +1,4 @@
-import { MetroStop, MetroTrain, MetroStopTrains } from "../MetroBilbaoStorage";
+import { MetroTrain, MetroStopTrains } from "../MetroBilbaoStorage";
 import { Display } from "../MetroBilbao/Display";
 import i18next from "i18next";
 import {Http} from "@capacitor-community/http";
@@ -32,6 +32,7 @@ export async function fetchEuskotrenData(
             }
         });
         const html = response.data;
+
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
@@ -83,7 +84,7 @@ export async function fetchEuskotrenData(
                         })
                         .join('');
                 }
-                console.log('Raw destination name:', destinationName);
+
 
                 if (destinationName.toLowerCase().includes('zazpi') || destinationName.toLowerCase().includes('casco')) {
                     destinationName = i18next.t('CASCO_VIEJO_DISPLAY_NAME');
@@ -144,27 +145,51 @@ export async function fetchEuskotrenData(
 
 export async function getEuskotrenStopTrains(display: Display, maxTrains: number): Promise<MetroStopTrains> {
     const today = new Date();
-    if (!display.origin || !display.destination) {
-        return {
-            Display: display,
-            Platform1: [],
-            Platform2: [],
-            isRoute: false
-        };
+
+    let platform1Trains: MetroTrain[] = [];
+    let platform2Trains: MetroTrain[] = [];
+
+    if (display.origin && display.destination) {
+        platform1Trains = await fetchEuskotrenData(display.origin.Code, display.destination.Code, today, maxTrains);
+        platform2Trains = await fetchEuskotrenData(display.destination.Code, display.origin.Code, today, maxTrains);
+    } else {
+        const originCode = display.origin.Code;
+
+        if (display.origin.Platform1?.length) {
+            const results = await Promise.all(
+                display.origin.Platform1.map((fromCode: string) =>
+                    fetchEuskotrenData(fromCode, originCode, today, maxTrains)
+                )
+            );
+            platform1Trains = results.flat();
+        }
+
+        if (display.origin.Platform2?.length) {
+            const results = await Promise.all(
+                display.origin.Platform2.map((fromCode: string) =>
+                    fetchEuskotrenData(fromCode, originCode, today, maxTrains)
+                )
+            );
+            platform2Trains = results.flat();
+        }
+
     }
 
-    const platform1Trains = await fetchEuskotrenData(display.origin.Code, display.destination.Code, today, maxTrains);
-    const platform2Trains = await fetchEuskotrenData(display.destination.Code, display.origin.Code, today, maxTrains);
-
-    // Calculate duration from the first train in each platform, if available
     const duration1 = platform1Trains.length > 0 ? platform1Trains[0].Duration : undefined;
     const duration2 = platform2Trains.length > 0 ? platform2Trains[0].Duration : undefined;
-
+console.log({
+    Display: display,
+    Platform1: platform1Trains.sort((a, b) => a.Estimated - b.Estimated),
+    Platform2: platform2Trains.sort((a, b) => a.Estimated - b.Estimated),
+    isRoute: display.destination !== undefined ,
+    duration: duration1,
+    duration2: duration2
+});
     return {
         Display: display,
         Platform1: platform1Trains.sort((a, b) => a.Estimated - b.Estimated),
         Platform2: platform2Trains.sort((a, b) => a.Estimated - b.Estimated),
-        isRoute: true,
+        isRoute: display.destination !== undefined ,
         duration: duration1,
         duration2: duration2
     };

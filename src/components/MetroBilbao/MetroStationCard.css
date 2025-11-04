@@ -56,14 +56,14 @@
     text-align: right;
 }
 
-.train-time {
+.metro-train-time {
     font-size: 1.2em;
     font-weight: bold;
-    color: #E4002B;
+    color: #000; /* Black */
 }
 
-.train-time.is-critical {
-    color: #d9534f;
+.metro-train-time.is-critical {
+    color: #E4002B; /* Metro Bilbao Red */
 }
 
 .next-arrival {

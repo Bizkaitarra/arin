@@ -12,10 +12,10 @@ import {
 import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {ItemReorderEventDetail} from '@ionic/core';
 import Page from "../Page";
-import {getSavedEuskotrenDisplays, saveEuskotrenDisplays} from "../../services/Euskotren/EuskotrenStorage";
+import {getSavedDisplays, saveEuskotrenDisplays} from "../../services/Euskotren/EuskotrenStorage";
 import {useTranslation} from "react-i18next";
 import EuskotrenAddTripButton from "../../components/Euskotren/EuskotrenAddVisorButton";
-import {Display} from "../../services/MetroBilbao/Display";
+import {Display} from "../../services/Euskotren/Display";
 import {useCustomToast} from "../../components/ArinToast";
 import {useEffect, useState} from "react";
 
@@ -26,7 +26,7 @@ const EuskotrenMyDisplays: React.FC = () => {
     const {t} = useTranslation();
 
     useIonViewWillEnter(() => {
-        setSelectedStops(getSavedEuskotrenDisplays);
+        setSelectedStops(getSavedDisplays());
     }, []);
 
     useEffect(() => {

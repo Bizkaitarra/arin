@@ -30,7 +30,7 @@ const EuskotrenPlatform: React.FC<{ platform: EuskotrenTrain[], platformIndex: n
                             {train.Direction || 'N/A'}
                         </div>
                         <div className="train-time-info">
-                            <div className={`train-time ${isCritical ? 'is-critical' : ''}`} title={`Llegada: ${arrivalTime}`}>
+                            <div className={`euskotren-train-time ${isCritical ? 'is-critical' : ''}`} title={`Llegada: ${arrivalTime}`}>
                                 {train.Estimated < 0 ? 0 : train.Estimated} {t('min')}
                             </div>
                             <div className="train-details">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IonInput, IonItem, IonLabel, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, useIonViewWillEnter } from '@ionic/react';
 import { settingsOutline } from 'ionicons/icons';
 import Page from "../Page";
-import {addEuskotrenRoute, getEuskotrenStops, EuskotrenStop} from "../../services/Euskotren/EuskotrenStorage";
+import {addRoute, getEuskotrenStops, EuskotrenStop} from "../../services/Euskotren/EuskotrenStorage";
 import { useTranslation } from "react-i18next";
 import {Toast} from "@capacitor/toast";
 import {useHistory, useLocation} from "react-router-dom";
@@ -50,7 +50,7 @@ const EuskotrenSelectRoute: React.FC = () => {
     };
 
     const handleAddRoute = async (selectedOrigin: EuskotrenStop, selectedDestination: EuskotrenStop) => {
-        addEuskotrenRoute(selectedOrigin.Code + ' - ' + selectedDestination.Code);
+        addRoute(selectedOrigin.Code + ' - ' + selectedDestination.Code);
 
         await Toast.show({ text: t('Viaje añadido') });
         history.push('/euskotren-my-displays');
@@ -95,6 +95,15 @@ const EuskotrenSelectRoute: React.FC = () => {
         return t('stationSelector.selectDestination');
     }
 
+    const allLines = stations.reduce((lines, station) => {
+        station.Lines.forEach(line => {
+            if (!lines.includes(line)) {
+                lines.push(line);
+            }
+        });
+        return lines;
+    }, [] as string[]).sort();
+
     return (
         <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>
             <p>{t('Selecciona un origen y destino para definir un viaje. El visor mostrará tanto la ida como la vuelta del viaje.')}</p>
@@ -109,7 +118,7 @@ const EuskotrenSelectRoute: React.FC = () => {
                 stations={stations}
                 title={getModalTitle()}
                 originStationName={origin ? origin.Name : null} // new prop
-                allLines={[]}
+                allLines={allLines}
             />
         </Page>
     );
