@@ -1,5 +1,6 @@
 import paradas from "../data/paradas_metro.json";
 import {Display, MetroStop} from "./MetroBilbao/Display";
+export type {MetroStop};
 
 const STORAGE_KEY = 'metro_bilbao_selected_stops';
 

@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { IonInput, IonItem, IonLabel, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, useIonViewWillEnter } from '@ionic/react';
 import { settingsOutline } from 'ionicons/icons';
 import Page from "../Page";
-import {addRoute, getEuskotrenStops, EuskotrenStop} from "../../services/Euskotren/EuskotrenStorage";
+import { addRoute, getEuskotrenStops, EuskotrenStop } from "../../services/Euskotren/EuskotrenStorage";
 import { useTranslation } from "react-i18next";
-import {Toast} from "@capacitor/toast";
-import {useHistory, useLocation} from "react-router-dom";
-import {useCustomToast} from "../../components/ArinToast";
+import { Toast } from "@capacitor/toast";
+import { useHistory, useLocation } from "react-router-dom";
+import { useCustomToast } from "../../components/ArinToast";
 import StationSelectorModal from '../../components/Euskotren/StationSelectorModal'; // New import
 
-const EuskotrenSelectRoute: React.FC = () => {
+interface EuskotrenSelectRouteProps {
+    onComplete?: () => void;
+}
+
+const EuskotrenSelectRoute: React.FC<EuskotrenSelectRouteProps> = ({ onComplete }) => {
     const [stations, setStations] = useState<EuskotrenStop[]>([]);
     const [origin, setOrigin] = useState<EuskotrenStop | null>(null);
     const [originName, setOriginName] = useState('');
@@ -24,7 +28,7 @@ const EuskotrenSelectRoute: React.FC = () => {
     const { presentArinToast } = useCustomToast();
 
 
-    useIonViewWillEnter(() => {
+    useEffect(() => {
         fetchStations();
         if (passedOriginStation) {
             setOrigin(passedOriginStation);
@@ -36,8 +40,8 @@ const EuskotrenSelectRoute: React.FC = () => {
             setOriginName('');
             setDestination(null);
             setDestinationName('');
-            setIsSelectingOrigin(true); // Start by selecting origin
-            setShowStationModal(true); // Open modal automatically
+            setIsSelectingOrigin(true);
+            setShowStationModal(true);
         }
     }, [passedOriginStation]);
 
@@ -53,7 +57,11 @@ const EuskotrenSelectRoute: React.FC = () => {
         addRoute(selectedOrigin.Code + ' - ' + selectedDestination.Code);
 
         await Toast.show({ text: t('Viaje añadido') });
-        history.push('/euskotren-my-displays');
+        if (onComplete) {
+            onComplete();
+        } else {
+            history.push('/euskotren-my-displays');
+        }
     };
 
     const handleSelectStation = (stationCode: string, stationName: string) => {
@@ -73,7 +81,11 @@ const EuskotrenSelectRoute: React.FC = () => {
                 // but as a safeguard, we can log an error or reset
                 console.error("Origin not set when selecting destination.");
                 setShowStationModal(false);
-                history.push('/euskotren-my-displays'); // Go back to safety
+                if (onComplete) {
+                    onComplete();
+                } else {
+                    history.push('/euskotren-my-displays');
+                }
                 return;
             }
             setDestination(selectedStation);
@@ -85,7 +97,11 @@ const EuskotrenSelectRoute: React.FC = () => {
 
     const handleCancelSelection = () => {
         setShowStationModal(false);
-        history.push('/euskotren-my-displays'); // Navigate back to "Mis visores"
+        if (onComplete) {
+            onComplete();
+        } else {
+            history.push('/euskotren-my-displays');
+        }
     };
 
     const getModalTitle = () => {
@@ -104,8 +120,8 @@ const EuskotrenSelectRoute: React.FC = () => {
         return lines;
     }, [] as string[]).sort();
 
-    return (
-        <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>
+    const content = (
+        <div>
             <p>{t('Selecciona un origen y destino para definir un viaje. El visor mostrará tanto la ida como la vuelta del viaje.')}</p>
             {/* No IonItem for origin/destination here, selection is modal-driven */}
             {/* No "Add Route" button here, as it's automatic */}
@@ -120,8 +136,11 @@ const EuskotrenSelectRoute: React.FC = () => {
                 originStationName={origin ? origin.Name : null} // new prop
                 allLines={allLines}
             />
-        </Page>
+            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+        </div>
     );
+
+    return onComplete ? content : <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>{content}</Page>;
 };
 
 

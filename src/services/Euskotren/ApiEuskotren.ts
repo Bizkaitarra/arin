@@ -1,7 +1,7 @@
 import { MetroTrain, MetroStopTrains } from "../MetroBilbaoStorage";
 import { Display } from "../MetroBilbao/Display";
 import i18next from "i18next";
-import {Http} from "@capacitor-community/http";
+import {HTTPClient} from "../HTTPClient";
 
 // Helper to format date as YYYY-MM-DD
 function formatDate(date: Date): string {
@@ -21,10 +21,7 @@ export async function fetchEuskotrenData(
     const url = `https://www.euskotren.eus/eu/horarios/resultados?parada_origen=${originCode}&parada_destino=${destinationCode}&fecha-hora=${formattedDate}&modo=L3`;
 
     try {
-        const response = await Http.request({
-            method: 'GET',
-            url: url,
-            params: {},
+        const response = await HTTPClient.get(url, {
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
                 'Accept-Language': 'es-ES,es;q=0.9',
@@ -210,10 +207,7 @@ export async function planTrip(params: {
     const url = `https://www.euskotren.eus/eu/horarios/resultados?parada_origen=${params.origen}&parada_destino=${params.destino}&fecha-hora=${params.fecha}&modo=L3`;
 
     try {
-        const response = await Http.request({
-            method: 'GET',
-            url: url,
-            params: {},
+        const response = await HTTPClient.get(url, {
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
                 'Accept-Language': 'es-ES,es;q=0.9',

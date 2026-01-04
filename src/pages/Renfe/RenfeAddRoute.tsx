@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useIonViewWillEnter } from '@ionic/react';
+import { useIonViewWillEnter, IonButton } from '@ionic/react';
 import { settingsOutline } from 'ionicons/icons';
 import Page from "../Page";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,11 @@ import { RenfeStop } from '../../services/Renfe/RenfeStop';
 import { getRenfeStops, addRenfeRoute } from '../../services/RenfeStorageFunctions';
 import RenfeStationSelectorModal from '../../components/Renfe/RenfeStationSelectorModal';
 
-const RenfeAddRoute: React.FC = () => {
+interface RenfeAddRouteProps {
+    onComplete?: () => void;
+}
+
+const RenfeAddRoute: React.FC<RenfeAddRouteProps> = ({ onComplete }) => {
     const [stations, setStations] = useState<RenfeStop[]>([]);
     const [origin, setOrigin] = useState<RenfeStop | null>(null);
     const [originName, setOriginName] = useState('');
@@ -24,7 +28,7 @@ const RenfeAddRoute: React.FC = () => {
     const passedOriginStation = location.state?.originStation;
     const [allLines, setAllLines] = useState<string[]>([]);
 
-    useIonViewWillEnter(() => {
+    useEffect(() => {
         fetchStations();
         if (passedOriginStation) {
             setOrigin(passedOriginStation);
@@ -59,7 +63,11 @@ const RenfeAddRoute: React.FC = () => {
     const handleAddRoute = async (selectedOrigin: RenfeStop, selectedDestination: RenfeStop) => {
         addRenfeRoute(selectedOrigin.id + ' - ' + selectedDestination.id);
         await Toast.show({ text: t('Viaje añadido') });
-        history.push('/renfe-displays');
+        if (onComplete) {
+            onComplete();
+        } else {
+            history.push('/renfe-displays');
+        }
     };
 
     const handleSelectStation = (stationId: string, stationName: string) => {
@@ -74,7 +82,11 @@ const RenfeAddRoute: React.FC = () => {
             if (!origin) {
                 console.error("Origin not set when selecting destination.");
                 setShowStationModal(false);
-                history.push('/renfe-displays');
+                if (onComplete) {
+                    onComplete();
+                } else {
+                    history.push('/renfe-displays');
+                }
                 return;
             }
             setDestination(selectedStation);
@@ -86,7 +98,11 @@ const RenfeAddRoute: React.FC = () => {
 
     const handleCancelSelection = () => {
         setShowStationModal(false);
-        history.push('/renfe-displays');
+        if (onComplete) {
+            onComplete();
+        } else {
+            history.push('/renfe-displays');
+        }
     };
 
     const getModalTitle = () => {
@@ -96,8 +112,8 @@ const RenfeAddRoute: React.FC = () => {
         return t('stationSelector.selectDestination');
     }
 
-    return (
-        <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>
+    const content = (
+        <div>
             <p>{t('Selecciona un origen y destino para definir un viaje. El visor mostrará tanto la ida como la vuelta del viaje.')}</p>
             <RenfeStationSelectorModal
                 isOpen={showStationModal}
@@ -109,8 +125,11 @@ const RenfeAddRoute: React.FC = () => {
                 originStationName={origin ? origin.name : null}
                 allLines={allLines}
             />
-        </Page>
+            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+        </div>
     );
+
+    return onComplete ? content : <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>{content}</Page>;
 };
 
 export default RenfeAddRoute;

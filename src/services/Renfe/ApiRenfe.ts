@@ -1,9 +1,10 @@
 import {RenfeStop} from "./RenfeStop";
 import {Display} from "../Display";
-import {Http} from '@capacitor-community/http';
+import {HTTPClient} from "../HTTPClient";
 import {RenfeStorage} from "./RenfeStorage";
 import {TrainSchedule} from "./TrainSchedule";
 import {Platforms} from "./Platforms";
+export type {TrainSchedule};
 
 export class ApiRenfe {
     private static readonly RENFE_URL = 'https://horarios.renfe.com/cer/HorariosServlet';
@@ -139,16 +140,13 @@ export class ApiRenfe {
             accesibilidadTrenes: false,
         };
 
-        const response = await Http.request({
-            method: 'POST',
-            url: ApiRenfe.RENFE_URL,
+        const response = await HTTPClient.post(ApiRenfe.RENFE_URL, body, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Accept-Language': 'es-ES,es;q=0.9',
                 'Content-Type': 'application/json;charset=UTF-8',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
-            },
-            data: body,
+            }
         });
 
         if (response.status < 200 || response.status >= 300) {

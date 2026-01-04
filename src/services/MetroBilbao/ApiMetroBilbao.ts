@@ -1,8 +1,9 @@
 import {Capacitor} from "@capacitor/core";
-import {MetroStopTrains, MetroTrain} from "./MetroBilbaoStorage";
-import {IncidentsResult, MetroBilbaoResponse} from "./MetroBilbao/Incidences";
+import {MetroStopTrains, MetroTrain} from "../MetroBilbaoStorage";
+import {IncidentsResult, MetroBilbaoResponse} from "./Incidences";
+import {HTTPClient} from "../HTTPClient";
 import i18next from "i18next";
-import {Display} from "./MetroBilbao/Display";
+import {Display} from "./Display";
 import {getMetroBilbaoL3StopTrains} from "../ApiMetroBilbaoL3";
 import paradasMetro from "../../data/paradas_metro.json";
 import {FareRate} from "./FareRate";
@@ -17,15 +18,18 @@ export class ApiMetroBilbao {
         this.paradasMetro = paradasMetro;
     }
 
-    private #isL3Station(stationCode: string): boolean {
+
+
+    #isL3Station(stationCode: string): boolean {
         const station = this.paradasMetro.find(p => p.Code === stationCode);
         return station?.Lines.includes("L3") || false;
     }
 
-    private async #fetchTrainData(origin: string, destination: string, maxTrains: number): Promise<{ trains: MetroTrain[], duration: number | undefined }> {
+    async #fetchTrainData(origin: string, destination: string, maxTrains: number): Promise<{ trains: MetroTrain[], duration: number | undefined }> {
         try {
-            const response = await fetch(`/api-metrobilbao/metro/real-time/${origin}/${destination}`);
-            const data = await response.json();
+            const url = `https://api.metrobilbao.eus/metro/real-time/${origin}/${destination}`;
+            const response = await HTTPClient.get(url);
+            const data = response.data;
             const duration = data.trip?.duration;
 
             const trains = data.trains
@@ -46,7 +50,7 @@ export class ApiMetroBilbao {
         }
     }
 
-    private async #getMetroStopTrains(display: Display, maxTrains: number): Promise<MetroStopTrains> {
+    async #getMetroStopTrains(display: Display, maxTrains: number): Promise<MetroStopTrains> {
         const originStation = this.paradasMetro.find(p => p.Code === display.origin.Code);
         if (!originStation) {
             console.error(`Origin station ${display.origin.Code} not found in paradasMetro.json`);
@@ -132,13 +136,14 @@ export class ApiMetroBilbao {
         }
 
         const endpoint = language === "eu" ? "abisuak" : "avisos";
-        const response = await fetch(`/api-metrobilbao/metro_page/${language}/${endpoint}`);
+        const url = `https://api.metrobilbao.eus/metro_page/${language}/${endpoint}`;
+        const response = await HTTPClient.get(url);
 
-        if (!response.ok) {
+        if (response.status !== 200) {
             throw new Error("Error fetching Metro Bilbao incidents");
         }
 
-        const data: MetroBilbaoResponse = await response.json();
+        const data: MetroBilbaoResponse = response.data;
 
         return {
             serviceIssues: data.configuration.incidences.service_issue.map(incident => ({
@@ -168,23 +173,9 @@ export class ApiMetroBilbao {
                 "Sec-Fetch-Site": "same-origin" // Cabecera Sec-Fetch-Site
             };
 
-            if (Capacitor.isNativePlatform()) {
-                response = await fetch(url, {
-                    method: "POST",
-                    headers: headers,
-                    body: params
-                });
-                const data = await response.text();
-                return this.#parseBarikResponse(data);
-            } else {
-                response = await fetch(url, {
-                    method: "POST",
-                    headers: headers,
-                    body: params
-                });
-                const data = await response.text();
-                return this.#parseBarikResponse(data);
-            }
+            response = await HTTPClient.post(url, params, {headers});
+            const data = response.data;
+            return this.#parseBarikResponse(data);
         } catch (error) {
             console.error("Error es:", error);
             return {
@@ -195,7 +186,7 @@ export class ApiMetroBilbao {
         }
     }
 
-    private #parseBarikResponse(xmlString: string) {
+    #parseBarikResponse(xmlString: string) {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlString, "text/xml");
 
@@ -238,11 +229,11 @@ export class ApiMetroBilbao {
             language = "es";
         }
 
-        const url = `/api-metrobilbao/metro/obtain-schedule-of-trip/${params.origen}/${params.destino}/${params.hora_inicio}/${params.hora_fin}/${params.fecha}/${language}`;
+        const url = `https://api.metrobilbao.eus/metro/obtain-schedule-of-trip/${params.origen}/${params.destino}/${params.hora_inicio}/${params.hora_fin}/${params.fecha}/${language}`;
 
         try {
-            const response = await fetch(url);
-            const data = await response.json();
+            const response = await HTTPClient.get(url);
+            const data = response.data;
             return data;
         } catch (error) {
             console.error("Error planning trip:", error);
@@ -257,11 +248,11 @@ export class ApiMetroBilbao {
         }
 
         const endpoint = language === "eu" ? "tarifa-guztiak" : "todas-las-tarifas";
-        const url = `/api-metrobilbao/metro_page/${language}/${endpoint}`;
+        const url = `https://api.metrobilbao.eus/metro_page/${language}/${endpoint}`;
 
         try {
-            const response = await fetch(url);
-            const data = await response.json();
+            const response = await HTTPClient.get(url);
+            const data = response.data;
             return data;
         } catch (error) {
             console.error("Error fetching fares:", error);

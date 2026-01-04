@@ -16,7 +16,7 @@ export interface MetroBilbaoInstallationIncident {
 export interface MetroBilbaoResponse {
     configuration: {
         incidences: {
-            service_issue: [];
+            service_issue: MetroBilbaoInstallationIncident[];
             installation_issue: MetroBilbaoInstallationIncident[];
             issue_special_service: [];
         };

@@ -10,7 +10,11 @@ import {
 import EuskotrenStopCard from "../../components/Euskotren/EuskotrenStopCard";
 import {Display} from "../../services/Euskotren/Display";
 
-const AddStop: React.FC = () => {
+interface AddStopProps {
+  onComplete?: () => void;
+}
+
+const AddStop: React.FC<AddStopProps> = ({ onComplete }) => {
     const {t} = useTranslation();
     const [stops, setStops] = useState<EuskotrenStop[]>([]);
 
@@ -32,7 +36,20 @@ const AddStop: React.FC = () => {
         setStops(loadedStops);
     };
 
-    return (
+    const content = (
+        <IonList>
+            {stops.map((stop) => (
+                <EuskotrenStopCard
+                    key={stop.Code}
+                    station={stop}
+                    onFavoriteToggle={() => handleFavoriteToggle(stop)}
+                />
+            ))}
+            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+        </IonList>
+    );
+
+    return onComplete ? content : (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
@@ -43,15 +60,7 @@ const AddStop: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonList>
-                    {stops.map((stop) => (
-                        <EuskotrenStopCard
-                            key={stop.Code}
-                            station={stop}
-                            onFavoriteToggle={() => handleFavoriteToggle(stop)}
-                        />
-                    ))}
-                </IonList>
+                {content}
             </IonContent>
         </IonPage>
     );

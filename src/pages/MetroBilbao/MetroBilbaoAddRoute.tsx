@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { IonInput, IonItem, IonLabel, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, useIonViewWillEnter } from '@ionic/react';
 import { settingsOutline } from 'ionicons/icons';
 import Page from "../Page";
-import {addRoute, getMetroStops, MetroStop} from "../../services/MetroBilbaoStorage";
+import { addRoute, getMetroStops, MetroStop } from "../../services/MetroBilbaoStorage";
 import { useTranslation } from "react-i18next";
-import {Toast} from "@capacitor/toast";
-import {useHistory, useLocation} from "react-router-dom";
-import {useCustomToast} from "../../components/ArinToast";
+import { Toast } from "@capacitor/toast";
+import { useHistory, useLocation } from "react-router-dom";
+import { useCustomToast } from "../../components/ArinToast";
 import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal'; // New import
 
-const MetroBilbaoSelectRoute: React.FC = () => {
+interface MetroBilbaoSelectRouteProps {
+    onComplete?: () => void;
+}
+
+const MetroBilbaoSelectRoute: React.FC<MetroBilbaoSelectRouteProps> = ({ onComplete }) => {
     const [stations, setStations] = useState<MetroStop[]>([]);
     const [origin, setOrigin] = useState<MetroStop | null>(null);
     const [originName, setOriginName] = useState('');
@@ -24,7 +28,7 @@ const MetroBilbaoSelectRoute: React.FC = () => {
     const { presentArinToast } = useCustomToast();
 
 
-    useIonViewWillEnter(() => {
+    useEffect(() => {
         fetchStations();
         if (passedOriginStation) {
             setOrigin(passedOriginStation);
@@ -68,7 +72,12 @@ const MetroBilbaoSelectRoute: React.FC = () => {
         addRoute(selectedOrigin.Code + ' - ' + selectedDestination.Code);
 
         await Toast.show({ text: t('Viaje añadido') });
-        history.push('/metro-bilbao-my-displays');
+
+        if (onComplete) {
+            onComplete();
+        } else {
+            history.push('/metro-bilbao-my-displays');
+        }
     };
 
     const handleSelectStation = (stationCode: string, stationName: string) => {
@@ -114,8 +123,8 @@ const MetroBilbaoSelectRoute: React.FC = () => {
         return t('stationSelector.selectDestination');
     }
 
-    return (
-        <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>
+    const content = (
+        <div>
             <p>{t('Selecciona un origen y destino para definir un viaje. El visor mostrará tanto la ida como la vuelta del viaje.')}</p>
             {/* No IonItem for origin/destination here, selection is modal-driven */}
             {/* No "Add Route" button here, as it's automatic */}
@@ -130,8 +139,11 @@ const MetroBilbaoSelectRoute: React.FC = () => {
                 originStationName={origin ? origin.Name : null} // new prop
                 allLines={['L1', 'L2', 'L3']}
             />
-        </Page>
+            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+        </div>
     );
+
+    return onComplete ? content : <Page title={t('Seleccionar ruta')} icon={settingsOutline} internalPage={true}>{content}</Page>;
 };
 
 

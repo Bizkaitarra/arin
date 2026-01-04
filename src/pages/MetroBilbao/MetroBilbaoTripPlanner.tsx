@@ -129,6 +129,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             <StationSelectorModal
                 isOpen={showOriginModal}
                 onClose={() => setShowOriginModal(false)}
+                onCancel={() => setShowOriginModal(false)}
                 onSelectStation={(code, name) => {
                     setOrigin(code);
                     setOriginName(name);
@@ -149,6 +150,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             <StationSelectorModal
                 isOpen={showDestinationModal}
                 onClose={() => setShowDestinationModal(false)}
+                onCancel={() => setShowDestinationModal(false)}
                 onSelectStation={(code, name) => {
                     setDestination(code);
                     setDestinationName(name);

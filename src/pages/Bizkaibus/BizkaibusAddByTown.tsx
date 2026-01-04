@@ -1,16 +1,20 @@
-import {IonButton, IonIcon, IonItem, IonLabel, IonSearchbar, useIonViewWillEnter} from '@ionic/react';
-import {listOutline, mapOutline, settingsOutline} from 'ionicons/icons';
-import {getStations, Municipio, Parada, saveStationIds} from "../../services/BizkaibusStorage";
+import { IonButton, IonIcon, IonItem, IonLabel, IonSearchbar, useIonViewWillEnter } from '@ionic/react';
+import { listOutline, mapOutline, settingsOutline } from 'ionicons/icons';
+import { getStations, Municipio, Parada, saveStationIds } from "../../services/BizkaibusStorage";
 import Page from "../Page";
 import Map from "../../components/Bizkaibus/Map/Map";
 import StopsByTownSelector from "../../components/Bizkaibus/StopsByTownSelector/StopsByTownSelector";
-import {Star, StarOff} from "lucide-react";
-import {useTranslation} from "react-i18next";
-import {useCustomToast} from "../../components/ArinToast";
-import {useEffect, useState} from "react";
+import { Star, StarOff } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useCustomToast } from "../../components/ArinToast";
+import { useEffect, useState } from "react";
 
-const BizkaibusAddByTown: React.FC = () => {
-    const {t} = useTranslation();
+interface BizkaibusAddByTownProps {
+    onComplete?: () => void;
+}
+
+const BizkaibusAddByTown: React.FC<BizkaibusAddByTownProps> = ({ onComplete }) => {
+    const { t } = useTranslation();
     const { presentArinToast } = useCustomToast();
     const [town, setTown] = useState<Municipio | null>(null);
     const [stations, setStations] = useState<Parada[]>([]);
@@ -19,7 +23,7 @@ const BizkaibusAddByTown: React.FC = () => {
     const [stopSearchTerm, setStopSearchTerm] = useState('');
 
 
-    useIonViewWillEnter(() => {
+    useEffect(() => {
         fetchStations();
     }, []);
 
@@ -47,8 +51,8 @@ const BizkaibusAddByTown: React.FC = () => {
 
     const loadFilteredStations = () => {
         let results = stations.filter(station =>
-            (!town ||
-                (station.MUNICIPIO === town.MUNICIPIO && station.PROVINCIA === town.PROVINCIA))
+        (!town ||
+            (station.MUNICIPIO === town.MUNICIPIO && station.PROVINCIA === town.PROVINCIA))
         );
         setFilteredStations(results);
     };
@@ -84,11 +88,11 @@ const BizkaibusAddByTown: React.FC = () => {
         setTown(null);
     };
 
-    return (
-        <Page title={t("Añadir paradas")} icon={settingsOutline} internalPage={true}>
+    const content = (
+        <div>
             <div>
                 {!town ? (
-                    <StopsByTownSelector paradas={stations} onMunicipioClick={handleTownSelect}/>
+                    <StopsByTownSelector paradas={stations} onMunicipioClick={handleTownSelect} />
                 ) : (
                     <p>
                         <strong>{t('Pueblo seleccionado')}:</strong> {town.DESCRIPCION_MUNICIPIO}{' ('}{town.DESCRIPCION_PROVINCIA}{')'}
@@ -106,14 +110,14 @@ const BizkaibusAddByTown: React.FC = () => {
                         color="primary"
                         onClick={() => setIsMapView(!isMapView)}
                     >
-                        <IonIcon icon={isMapView ? listOutline : mapOutline} slot="start"/>
+                        <IonIcon icon={isMapView ? listOutline : mapOutline} slot="start" />
                         {isMapView ? t('Ver como lista') : t('Ver como mapa')}
                     </IonButton>
 
                     {isMapView ? (
                         <div>
                             <h1>{t('Mapa de Paradas')}</h1>
-                            <Map paradas={filteredStations} onToggleFavorite={handleToggleStop}/>
+                            <Map paradas={filteredStations} onToggleFavorite={handleToggleStop} />
                         </div>
                     ) : (
                         <>
@@ -134,16 +138,19 @@ const BizkaibusAddByTown: React.FC = () => {
                                         <p>{station.DESCRIPCION_MUNICIPIO}, {station.DESCRIPCION_PROVINCIA}</p>
                                     </IonLabel>
                                     {station.IS_FAVORITE ?
-                                        <Star color="red" onClick={() => handleToggleStop(station)}/> :
-                                        <StarOff color="gray" onClick={() => handleToggleStop(station)}/>}
+                                        <Star color="red" onClick={() => handleToggleStop(station)} /> :
+                                        <StarOff color="gray" onClick={() => handleToggleStop(station)} />}
                                 </IonItem>
                             ))}
                         </>
                     )}
                 </>
             )}
-        </Page>
+            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+        </div>
     );
+
+    return onComplete ? content : <Page title={t("Añadir paradas")} icon={settingsOutline} internalPage={true}>{content}</Page>;
 };
 
 export default BizkaibusAddByTown;

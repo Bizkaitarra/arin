@@ -26,7 +26,8 @@ import {
     mapOutline,
     menuOutline,
     settingsOutline,
-    trainOutline
+    trainOutline,
+    helpCircleOutline
 } from "ionicons/icons";
 import {useHistory, useLocation} from 'react-router-dom';
 import {App} from '@capacitor/app';
@@ -52,6 +53,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
     const location = useLocation();
     const [transportType, setTransportType] = useState('');
     const [exitAttempt, setExitAttempt] = useState(false);
+
 
     useEffect(() => {
         let backButtonListener: any;
@@ -158,6 +160,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
 
     return (
         <>
+
             <ReviewModal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)}/>
 
             {/* Modal en lugar del menú lateral */}
@@ -246,7 +249,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                 </IonContent>
             </IonModal>
 
-            <IonPage fullscreen="true">
+            <IonPage>
                 <IonHeader>
                     <IonToolbar>
                         <IonButtons slot="start">
@@ -256,11 +259,15 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                                 </IonButton>
                             ) : (
                                 <IonButton id="main-menu-button" onClick={() => setShowModal(true)}>
-                                    <IonIcon icon={menuOutline}/>
-                                </IonButton>
-                            )}
-
-                        </IonButtons>
+                                                                    <IonIcon icon={menuOutline}/>
+                                                                    </IonButton>
+                                                                )}
+                                                            </IonButtons>
+                                                            <IonButtons slot="end">
+                                                                <IonButton onClick={() => history.push('/guided-setup')}>
+                                                                    <IonIcon icon={helpCircleOutline}/>
+                                                                </IonButton>
+                                                            </IonButtons>
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
