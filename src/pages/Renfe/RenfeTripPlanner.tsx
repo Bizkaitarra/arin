@@ -1,34 +1,25 @@
 import React, { useState } from 'react';
 import {
     IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonContent,
-    IonDatetime,
     IonInput,
     IonItem,
     IonLabel,
-    IonList,
-    IonPage,
-    IonSelect, // Re-added
-    IonSelectOption, // Re-added
+    IonDatetime,
+    IonSelect,
+    IonSelectOption,
     useIonViewWillEnter
 } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Page from '../Page';
 import { searchOutline } from 'ionicons/icons';
-import metroStations from '../../data/paradas_metro.json';
-import { ApiMetroBilbao } from '../../services/MetroBilbao/ApiMetroBilbao';
-import './MetroBilbaoTripPlanner.css';
+import renfeStations from '../../data/paradas_renfe.json';
+import { ApiRenfe } from '../../services/Renfe/ApiRenfe';
+import './RenfeTripPlanner.css';
 import ErrorDisplay from '../../components/ErrorDisplay/ErrorDisplay';
-import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal';
-import '../../components/MetroBilbao/MetroStationCard.css';
-import '../../components/MetroBilbao/MetroPlatform.css';
-import MetroTripResultCard from '../../components/MetroBilbao/MetroTripResultCard';
+import RenfeStationSelectorModal from '../../components/Renfe/RenfeStationSelectorModal';
+import '../../components/Renfe/RenfeStationCard/RenfeStationCard.css';
+import '../../components/Renfe/RenfePlatform/RenfePlatform.css';
+import RenfeTripResultCard from '../../components/Renfe/RenfeTripResultCard';
 
 const timeSlots = [
     { value: '0-4', label: '00:00 - 04:00' },
@@ -50,7 +41,7 @@ const getCurrentTimeSlot = () => {
     return ''; // Default
 };
 
-const MetroBilbaoTripPlanner: React.FC = () => {
+const RenfeTripPlanner: React.FC = () => {
     const { t, i18n } = useTranslation();
     const [origin, setOrigin] = useState('');
     const [originName, setOriginName] = useState('');
@@ -103,21 +94,35 @@ const MetroBilbaoTripPlanner: React.FC = () => {
         };
 
         try {
-            const api = new ApiMetroBilbao();
+            const api = new ApiRenfe();
             const tripResults = await api.planTrip(params);
-            if (tripResults && tripResults.trips) {
-                setResults(tripResults);
+            if (tripResults && tripResults.horario) {
+                setResults({
+                    origin: originName,
+                    destination: destinationName,
+                    trains: tripResults.horario
+                });
             } else {
-                setError(t('Error al planificar el viaje'));
+                setError(t('No se encontraron trenes o ocurrió un error.'));
+                // If API returns success but empty list handled in component, 
+                // but if result is null it is error.
+                if (tripResults) {
+                    setResults({
+                        origin: originName,
+                        destination: destinationName,
+                        trains: []
+                    });
+                }
             }
         } catch (e) {
-            setError(t('Error al conectar con Metro Bilbao'));
+            setError(t('Error al conectar con Renfe'));
         }
     };
 
     const locale = i18n.language === 'eu' ? 'eu-ES' : 'es-ES';
 
-    const filteredMetroStations = metroStations.filter(station => !station.Lines.includes('L3'));
+    // Type casting/mapping for stations if needed
+    const stations: any[] = renfeStations.map(s => ({ ...s, id: s.id, name: s.name, Lines: s.Lines || [] }));
 
     return (
         <Page title={t('Planificar viaje')} icon={searchOutline} internalPage={true}>
@@ -129,7 +134,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     readonly
                 />
             </IonItem>
-            <StationSelectorModal
+            <RenfeStationSelectorModal
                 isOpen={showOriginModal}
                 onClose={() => setShowOriginModal(false)}
                 onCancel={() => setShowOriginModal(false)}
@@ -138,9 +143,9 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     setOriginName(name);
                     setShowOriginModal(false);
                 }}
-                stations={filteredMetroStations}
+                stations={stations}
                 title={t('Selecciona estación de origen')}
-                allLines={['L1', 'L2']} // Changed prop name
+                allLines={['C1', 'C2', 'C3', 'C4']}
             />
 
             <IonItem button onClick={() => setShowDestinationModal(true)}>
@@ -151,7 +156,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     readonly
                 />
             </IonItem>
-            <StationSelectorModal
+            <RenfeStationSelectorModal
                 isOpen={showDestinationModal}
                 onClose={() => setShowDestinationModal(false)}
                 onCancel={() => setShowDestinationModal(false)}
@@ -160,9 +165,9 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     setDestinationName(name);
                     setShowDestinationModal(false);
                 }}
-                stations={filteredMetroStations}
+                stations={stations}
                 title={t('Selecciona estación de destino')}
-                allLines={['L1', 'L2']} // Changed prop name
+                allLines={['C1', 'C2', 'C3', 'C4']}
             />
             <IonItem>
                 <IonLabel position="stacked">{t('Fecha')}</IonLabel>
@@ -176,17 +181,19 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     ))}
                 </IonSelect>
             </IonItem>
-            <IonButton expand="full" onClick={handleSearch} style={{ marginTop: '1rem' }} color="danger">
+            <IonButton expand="full" onClick={handleSearch} style={{ marginTop: '1rem' }} color="tertiary">
                 {t('Buscar viaje')}
             </IonButton>
 
             {error && <ErrorDisplay message={error} />}
 
-            {results && results.trips && (
-                <MetroTripResultCard results={results} />
+            {results && (
+                <div className="trip-results-card">
+                    <RenfeTripResultCard results={results} />
+                </div>
             )}
         </Page>
     );
 };
 
-export default MetroBilbaoTripPlanner;
+export default RenfeTripPlanner;

@@ -1,34 +1,27 @@
 import React, { useState } from 'react';
 import {
     IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
     IonContent,
     IonDatetime,
     IonInput,
     IonItem,
     IonLabel,
-    IonList,
     IonPage,
-    IonSelect, // Re-added
-    IonSelectOption, // Re-added
+    IonSelect,
+    IonSelectOption,
     useIonViewWillEnter
 } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Page from '../Page';
 import { searchOutline } from 'ionicons/icons';
-import metroStations from '../../data/paradas_metro.json';
-import { ApiMetroBilbao } from '../../services/MetroBilbao/ApiMetroBilbao';
-import './MetroBilbaoTripPlanner.css';
+import euskotrenStations from '../../data/paradas_euskotren.json';
+import { planTrip } from '../../services/Euskotren/ApiEuskotren';
+import './EuskotrenTripPlanner.css';
 import ErrorDisplay from '../../components/ErrorDisplay/ErrorDisplay';
-import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal';
-import '../../components/MetroBilbao/MetroStationCard.css';
-import '../../components/MetroBilbao/MetroPlatform.css';
-import MetroTripResultCard from '../../components/MetroBilbao/MetroTripResultCard';
+import StationSelectorModal from '../../components/Euskotren/StationSelectorModal';
+import '../../components/Euskotren/EuskotrenStationCard.css';
+import '../../components/Euskotren/EuskotrenPlatform.css';
+import EuskotrenTripResultCard from '../../components/Euskotren/EuskotrenTripResultCard';
 
 const timeSlots = [
     { value: '0-4', label: '00:00 - 04:00' },
@@ -50,7 +43,7 @@ const getCurrentTimeSlot = () => {
     return ''; // Default
 };
 
-const MetroBilbaoTripPlanner: React.FC = () => {
+const EuskotrenTripPlanner: React.FC = () => {
     const { t, i18n } = useTranslation();
     const [origin, setOrigin] = useState('');
     const [originName, setOriginName] = useState('');
@@ -103,21 +96,37 @@ const MetroBilbaoTripPlanner: React.FC = () => {
         };
 
         try {
-            const api = new ApiMetroBilbao();
-            const tripResults = await api.planTrip(params);
-            if (tripResults && tripResults.trips) {
-                setResults(tripResults);
+            const tripResults = await planTrip(params);
+            if (tripResults && tripResults.trips && tripResults.trips.length > 0) {
+                // The ApiEuskotren.planTrip returns a flat array of trips in 'trips' property.
+                // But MetroTripResultCard expects 'trips' to be a Record<string, Trip[]>.
+                // MetroTripResultCard logic: Object.values(results.trips).flat()
+                // So we need to wrap the trips in a structure or adjust the component.
+                // EuskotrenTripResultCard was copied from MetroTripResultCard.
+                // Let's adjust the structure here to match what EuskotrenTripResultCard expects (which mimics Metro).
+                // MetroTripResultCard expects: trips: Record<string, Trip[]>
+                // But Euskotren's planTrip returns: trips: any[] (array of objects)
+                // So I should wrap it: { all: tripResults.trips }
+                setResults({
+                    ...tripResults,
+                    origin: { name: originName },
+                    destiny: { name: destinationName },
+                    trips: { all: tripResults.trips }
+                });
+            } else if (tripResults && tripResults.trips && tripResults.trips.length === 0) {
+                setError(t('No se han encontrado viajes'));
             } else {
                 setError(t('Error al planificar el viaje'));
             }
         } catch (e) {
-            setError(t('Error al conectar con Metro Bilbao'));
+            setError(t('Error al conectar con Euskotren'));
         }
     };
 
     const locale = i18n.language === 'eu' ? 'eu-ES' : 'es-ES';
 
-    const filteredMetroStations = metroStations.filter(station => !station.Lines.includes('L3'));
+    // Unique lines for filter
+    const allLines = Array.from(new Set(euskotrenStations.flatMap(s => s.Lines))).sort();
 
     return (
         <Page title={t('Planificar viaje')} icon={searchOutline} internalPage={true}>
@@ -138,9 +147,9 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     setOriginName(name);
                     setShowOriginModal(false);
                 }}
-                stations={filteredMetroStations}
+                stations={euskotrenStations}
                 title={t('Selecciona estación de origen')}
-                allLines={['L1', 'L2']} // Changed prop name
+                allLines={allLines}
             />
 
             <IonItem button onClick={() => setShowDestinationModal(true)}>
@@ -160,9 +169,9 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     setDestinationName(name);
                     setShowDestinationModal(false);
                 }}
-                stations={filteredMetroStations}
+                stations={euskotrenStations}
                 title={t('Selecciona estación de destino')}
-                allLines={['L1', 'L2']} // Changed prop name
+                allLines={allLines}
             />
             <IonItem>
                 <IonLabel position="stacked">{t('Fecha')}</IonLabel>
@@ -176,17 +185,17 @@ const MetroBilbaoTripPlanner: React.FC = () => {
                     ))}
                 </IonSelect>
             </IonItem>
-            <IonButton expand="full" onClick={handleSearch} style={{ marginTop: '1rem' }} color="danger">
+            <IonButton expand="full" onClick={handleSearch} style={{ marginTop: '1rem' }} color="success">
                 {t('Buscar viaje')}
             </IonButton>
 
             {error && <ErrorDisplay message={error} />}
 
             {results && results.trips && (
-                <MetroTripResultCard results={results} />
+                <EuskotrenTripResultCard results={results} />
             )}
         </Page>
     );
 };
 
-export default MetroBilbaoTripPlanner;
+export default EuskotrenTripPlanner;

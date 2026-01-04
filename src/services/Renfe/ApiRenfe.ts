@@ -1,10 +1,10 @@
-import {RenfeStop} from "./RenfeStop";
-import {Display} from "../Display";
-import {HTTPClient} from "../HTTPClient";
-import {RenfeStorage} from "./RenfeStorage";
-import {TrainSchedule} from "./TrainSchedule";
-import {Platforms} from "./Platforms";
-export type {TrainSchedule};
+import { RenfeStop } from "./RenfeStop";
+import { Display } from "../Display";
+import { HTTPClient } from "../HTTPClient";
+import { RenfeStorage } from "./RenfeStorage";
+import { TrainSchedule } from "./TrainSchedule";
+import { Platforms } from "./Platforms";
+export type { TrainSchedule };
 
 export class ApiRenfe {
     private static readonly RENFE_URL = 'https://horarios.renfe.com/cer/HorariosServlet';
@@ -18,6 +18,26 @@ export class ApiRenfe {
         return await Promise.all(
             displays.map(display => this.#getPlatforms(display))
         );
+    }
+
+    public async planTrip(params: {
+        origen: string;
+        destino: string;
+        fecha: string; // DD-MM-YYYY
+        hora_inicio: number;
+        hora_fin: number;
+    }): Promise<any> {
+        const [day, month, year] = params.fecha.split('-');
+        const formattedDate = `${year}${month}${day}`;
+        const hourFrom = this.#pad(params.hora_inicio);
+        const hourTo = this.#pad(params.hora_fin);
+
+        try {
+            return await this.#fetchSchedule(params.origen, params.destino, formattedDate, hourFrom, hourTo);
+        } catch (error) {
+            console.error("Error planning trip:", error);
+            return null;
+        }
     }
 
     async #getPlatforms(display: Display): Promise<Platforms> {

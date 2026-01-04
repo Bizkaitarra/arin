@@ -80,6 +80,12 @@ export const renfeMenuItems = [
         path: '/renfe-add-route',
         id: 'renfe-add-trip'
     },
+    {
+        text: 'Buscar a otras horas',
+        icon: timeOutline,
+        path: '/renfe-trip-planner',
+        id: 'renfe-trip-planner'
+    },
 ];
 
 export const kbusMenuItems = [
@@ -109,5 +115,11 @@ export const euskotrenMenuItems = [
         icon: addCircleOutline,
         path: '/euskotren-add-route',
         id: 'euskotren-add-trip'
+    },
+    {
+        text: 'Buscar a otras horas',
+        icon: timeOutline,
+        path: '/euskotren-trip-planner',
+        id: 'euskotren-trip-planner'
     },
 ];

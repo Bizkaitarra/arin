@@ -46,6 +46,7 @@ import RenfeDisplays from "./pages/Renfe/RenfeDisplays";
 import RenfeMyDisplays from "./pages/Renfe/RenfeMyDisplays";
 import RenfeAddStop from "./pages/Renfe/RenfeAddStop";
 import RenfeAddRoute from "./pages/Renfe/RenfeAddRoute";
+import RenfeTripPlanner from "./pages/Renfe/RenfeTripPlanner";
 import MetroTarifas from "./pages/MetroBilbao/MetroTarifas";
 import AppLoader from "./components/AppLoader";
 
@@ -53,6 +54,7 @@ import EuskotrenDisplays from "./pages/Euskotren/EuskotrenDisplays";
 import EuskotrenMyDisplays from "./pages/Euskotren/EuskotrenMyDisplays";
 import EuskotrenAddRoute from "./pages/Euskotren/EuskotrenAddRoute";
 import EuskotrenAddStop from "./pages/Euskotren/EuskotrenAddStop";
+import EuskotrenTripPlanner from "./pages/Euskotren/EuskotrenTripPlanner";
 import GuidedSetup from "./pages/GuidedSetup";
 
 setupIonicReact();
@@ -118,10 +120,12 @@ const App: React.FC = () => {
                             <Route exact path="/renfe-my-displays" component={RenfeMyDisplays} />
                             <Route exact path="/renfe-add-stop" component={RenfeAddStop} />
                             <Route exact path="/renfe-add-route" component={RenfeAddRoute} />
+                            <Route exact path="/renfe-trip-planner" component={RenfeTripPlanner} />
                             <Route exact path="/euskotren-displays" component={EuskotrenDisplays} />
                             <Route exact path="/euskotren-my-displays" component={EuskotrenMyDisplays} />
                             <Route exact path="/euskotren-add-route" component={EuskotrenAddRoute} />
                             <Route exact path="/euskotren-add-stop" component={EuskotrenAddStop} />
+                            <Route exact path="/euskotren-trip-planner" component={EuskotrenTripPlanner} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
                             <Route path="/bizkaibus/scheduled/:line/:route" component={BizkaibusHorarioPage} />
