@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList} from '@ionic/react';
+import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonButton} from '@ionic/react';
 import {useTranslation} from 'react-i18next';
 import {
     addDisplay,
@@ -8,6 +8,7 @@ import {
     removeDisplay,
 } from '../../services/Euskotren/EuskotrenStorage';
 import EuskotrenStopCard from "../../components/Euskotren/EuskotrenStopCard";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 import {Display} from "../../services/Euskotren/Display";
 
 interface AddStopProps {
@@ -45,7 +46,11 @@ const AddStop: React.FC<AddStopProps> = ({ onComplete }) => {
                     onFavoriteToggle={() => handleFavoriteToggle(stop)}
                 />
             ))}
-            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+            {onComplete && (
+                <SafeAreaBottom>
+                    <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                </SafeAreaBottom>
+            )}
         </IonList>
     );
 

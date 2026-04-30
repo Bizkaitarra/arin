@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import { Toast } from "@capacitor/toast";
 import { useHistory, useLocation } from "react-router-dom";
 import { useCustomToast } from "../../components/ArinToast";
-import StationSelectorModal from '../../components/Euskotren/StationSelectorModal'; // New import
+import StationSelectorModal from '../../components/Euskotren/StationSelectorModal';
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 
 interface EuskotrenSelectRouteProps {
     onComplete?: () => void;
@@ -136,7 +137,11 @@ const EuskotrenSelectRoute: React.FC<EuskotrenSelectRouteProps> = ({ onComplete 
                 originStationName={origin ? origin.Name : null} // new prop
                 allLines={allLines}
             />
-            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+            {onComplete && (
+                <SafeAreaBottom>
+                    <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                </SafeAreaBottom>
+            )}
         </div>
     );
 

@@ -5,6 +5,7 @@ import Page from "../Page";
 import { addDisplay, getMetroStops, MetroStop, removeDisplay, saveMetroStops } from "../../services/MetroBilbaoStorage";
 import { Star, StarOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 
 
 interface MetroBilbaoAddStopProps {
@@ -117,15 +118,17 @@ const MetroBilbaoAddStop: React.FC<MetroBilbaoAddStopProps> = ({ onComplete }) =
             </div>
             {
                 onComplete && (
-                    <div style={{
-                        padding: '16px',
-                        background: 'var(--ion-background-color)',
-                        borderTop: '1px solid var(--ion-color-step-150, #d7d8da)',
-                    }}>
-                        <IonButton expand="block" onClick={onComplete}>
-                            {t('Terminar y Continuar')}
-                        </IonButton>
-                    </div>
+                    <SafeAreaBottom extraPadding={0}>
+                        <div style={{
+                            padding: '16px',
+                            background: 'var(--ion-background-color)',
+                            borderTop: '1px solid var(--ion-color-step-150, #d7d8da)',
+                        }}>
+                            <IonButton expand="block" onClick={onComplete}>
+                                {t('Terminar y Continuar')}
+                            </IonButton>
+                        </div>
+                    </SafeAreaBottom>
                 )
             }
         </div >

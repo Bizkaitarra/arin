@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter,} from '@ionic/react';
+import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter, IonButton} from '@ionic/react';
 import {settingsOutline} from 'ionicons/icons';
 import Page from "../Page";
 import {Star, StarOff} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {RenfeStop} from "../../services/Renfe/RenfeStop";
 import {RenfeStorage} from "../../services/Renfe/RenfeStorage";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 
 
 interface RenfeAddStopProps {
@@ -84,7 +85,11 @@ const RenfeAddStop: React.FC<RenfeAddStopProps> = ({ onComplete }) => {
                     </IonItem>
                 ))}
             </IonGrid>
-            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+            {onComplete && (
+                <SafeAreaBottom>
+                    <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                </SafeAreaBottom>
+            )}
         </div>
     );
 

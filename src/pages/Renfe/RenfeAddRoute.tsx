@@ -8,6 +8,7 @@ import { Toast } from "@capacitor/toast";
 import { useHistory, useLocation } from "react-router-dom";
 import { RenfeStop } from '../../services/Renfe/RenfeStop';
 import { getRenfeStops, addRenfeRoute } from '../../services/RenfeStorageFunctions';
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 import RenfeStationSelectorModal from '../../components/Renfe/RenfeStationSelectorModal';
 
 interface RenfeAddRouteProps {
@@ -125,7 +126,11 @@ const RenfeAddRoute: React.FC<RenfeAddRouteProps> = ({ onComplete }) => {
                 originStationName={origin ? origin.name : null}
                 allLines={allLines}
             />
-            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+            {onComplete && (
+                <SafeAreaBottom>
+                    <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                </SafeAreaBottom>
+            )}
         </div>
     );
 

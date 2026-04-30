@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import { Toast } from "@capacitor/toast";
 import { useHistory, useLocation } from "react-router-dom";
 import { useCustomToast } from "../../components/ArinToast";
-import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal'; // New import
+import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal';
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 
 interface MetroBilbaoSelectRouteProps {
     onComplete?: () => void;
@@ -139,7 +140,11 @@ const MetroBilbaoSelectRoute: React.FC<MetroBilbaoSelectRouteProps> = ({ onCompl
                 originStationName={origin ? origin.Name : null} // new prop
                 allLines={['L1', 'L2', 'L3']}
             />
-            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+            {onComplete && (
+                <SafeAreaBottom>
+                    <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                </SafeAreaBottom>
+            )}
         </div>
     );
 

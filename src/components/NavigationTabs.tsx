@@ -18,7 +18,7 @@ const NavigationTabs: React.FC = () => {
     const shouldShowAddButton = selectedVisores.length < maxVisores;
 
     return (
-        <IonTabBar>
+        <IonTabBar style={{ paddingBottom: 'var(--ion-safe-area-bottom)' }}>
             {selectedVisores.includes('bizkaibus') && (
                 <IonTabButton tab="bizkaibus-displays" href="/bizkaibus-displays">
                     <span className="subtext">{t('bizkaibus_nav_1')}</span>

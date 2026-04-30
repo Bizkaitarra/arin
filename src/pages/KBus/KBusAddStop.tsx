@@ -8,6 +8,7 @@ import { Star, StarOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { KBusStorage } from "../../services/KBus/KBusStorage";
 import { Stop } from "../../services/Stop";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 import { KBusStop } from "../../services/KBus/KbusStop";
 
 
@@ -92,7 +93,13 @@ const KBusAddStop: React.FC<KBusAddStopProps> = ({ onComplete }) => {
                 </IonGrid>
             </div>
             {/* Wizard handles navigation via "Volver" button */}
-            {!onComplete && <div style={{ flexShrink: 0 }}><IonButton onClick={onComplete}>{t('Siguiente')}</IonButton></div>}
+            {!onComplete && (
+                <SafeAreaBottom>
+                    <div style={{ flexShrink: 0 }}>
+                        <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                    </div>
+                </SafeAreaBottom>
+            )}
         </div>
     );
 

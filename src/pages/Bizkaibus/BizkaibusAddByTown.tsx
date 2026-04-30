@@ -8,6 +8,7 @@ import { Star, StarOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useCustomToast } from "../../components/ArinToast";
 import { useEffect, useState } from "react";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 
 interface BizkaibusAddByTownProps {
     onComplete?: () => void;
@@ -146,7 +147,11 @@ const BizkaibusAddByTown: React.FC<BizkaibusAddByTownProps> = ({ onComplete }) =
                     )}
                 </>
             )}
-            {onComplete && <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>}
+            {onComplete && (
+                <SafeAreaBottom>
+                    <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                </SafeAreaBottom>
+            )}
         </div>
     );
 

@@ -42,7 +42,7 @@ const FabMenu: React.FC<FabMenuProps> = ({ transportType }) => {
     }));
 
     return (
-        <IonFab style={{ '--offset-bottom': 'calc(env(safe-area-inset-bottom, 0px) + 25px)' }} slot="fixed" vertical="bottom" horizontal="end">
+        <IonFab style={{ '--offset-bottom': 'calc(var(--ion-safe-area-bottom, 0px) + 25px)' }} slot="fixed" vertical="bottom" horizontal="end">
             <IonFabButton color="medium" onClick={() =>
                 presentActionSheet({
                     header: t('Opciones'),
