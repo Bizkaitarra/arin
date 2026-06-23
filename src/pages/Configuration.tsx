@@ -1,4 +1,4 @@
-import {IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonItem, IonLabel, IonList, IonNote, IonSelect, IonSelectOption, IonToggle} from "@ionic/react";
+import {IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonItem, IonLabel, IonList, IonNote, IonSelect, IonSelectOption, IonToggle, IonReorder, IonReorderGroup} from "@ionic/react";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import {settingsOutline} from "ionicons/icons";
 import Page from "./Page";
@@ -38,20 +38,69 @@ const Configuration: React.FC = () => {
 
                 <IonCard>
                     <IonCardHeader>
-                        <IonCardTitle>{t('Atajos')}</IonCardTitle>
+                        <IonCardTitle>{t('Servicios Activos')}</IonCardTitle>
                     </IonCardHeader>
-                    <IonCardContent>
-                        <IonItem>
-                            <IonLabel>{t('Atajos en cabecera')}</IonLabel>
-                            <IonSelect multiple name="atajos" value={getSelectedVisores(settings)} onIonChange={(e) => handleSettingChange('atajos', e.detail.value)}>
-                                {TRANSPORTES.map(t => (
-                                    <IonSelectOption key={t.id} value={t.id}>
-                                        {t.label}
-                                    </IonSelectOption>
-                                ))}
-                            </IonSelect>
-                        </IonItem>
-                        <IonNote className='ion-padding-start'>{t('Indica qué atajos quieres mostrar en la cabecera.')}</IonNote>
+                    <IonCardContent style={{ padding: 0 }}>
+                        <IonList lines="full" style={{ padding: 0 }}>
+                            <IonReorderGroup 
+                                disabled={false} 
+                                onIonItemReorder={(e) => {
+                                    const activeIds = getSelectedVisores(settings);
+                                    const orderedTransports = [...TRANSPORTES].sort((a, b) => {
+                                        let indexA = activeIds.indexOf(a.id);
+                                        let indexB = activeIds.indexOf(b.id);
+                                        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                                        if (indexA !== -1) return -1;
+                                        if (indexB !== -1) return 1;
+                                        return 0;
+                                    });
+                                    const reorderedList = [...orderedTransports];
+                                    const [movedItem] = reorderedList.splice(e.detail.from, 1);
+                                    reorderedList.splice(e.detail.to, 0, movedItem);
+                                    
+                                    const newActiveIds = reorderedList.filter(t => activeIds.includes(t.id)).map(t => t.id);
+                                    handleSettingChange('atajos', newActiveIds);
+                                    e.detail.complete();
+                                }}
+                            >
+                                {(() => {
+                                    const activeIds = getSelectedVisores(settings);
+                                    const orderedTransports = [...TRANSPORTES].sort((a, b) => {
+                                        let indexA = activeIds.indexOf(a.id);
+                                        let indexB = activeIds.indexOf(b.id);
+                                        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                                        if (indexA !== -1) return -1;
+                                        if (indexB !== -1) return 1;
+                                        return 0;
+                                    });
+
+                                    return orderedTransports.map(transport => {
+                                        const isActive = activeIds.includes(transport.id);
+                                        return (
+                                            <IonItem key={transport.id}>
+                                                <IonLabel>{t(transport.label)}</IonLabel>
+                                                <IonToggle 
+                                                    slot="end" 
+                                                    checked={isActive}
+                                                    onIonChange={(e) => {
+                                                        const isChecked = e.detail.checked;
+                                                        if (isChecked && !isActive) {
+                                                            handleSettingChange('atajos', [...activeIds, transport.id]);
+                                                        } else if (!isChecked && isActive) {
+                                                            handleSettingChange('atajos', activeIds.filter(id => id !== transport.id));
+                                                        }
+                                                    }}
+                                                />
+                                                <IonReorder slot="end" />
+                                            </IonItem>
+                                        );
+                                    });
+                                })()}
+                            </IonReorderGroup>
+                        </IonList>
+                        <div style={{ padding: '16px' }}>
+                            <IonNote>{t('Activa los servicios que usas y arrástralos para ordenarlos en la pantalla de Inicio.')}</IonNote>
+                        </div>
                     </IonCardContent>
                 </IonCard>
 

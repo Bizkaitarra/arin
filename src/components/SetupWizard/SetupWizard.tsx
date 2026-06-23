@@ -12,6 +12,7 @@ import ConfigExplanationStep from './steps/ConfigExplanationStep';
 import ServiceSelectionStep from './steps/ServiceSelectionStep';
 import ServiceConfigStep from './steps/ServiceConfigStep';
 import CompletionStep from './steps/CompletionStep';
+import SwipeWrapper from '../SwipeWrapper';
 
 const SetupWizard: React.FC = () => {
     const history = useHistory();
@@ -83,9 +84,6 @@ const SetupWizard: React.FC = () => {
         { component: CompletionStep, key: 'completion' }
     ];
 
-    const currentStepConfig = steps[step];
-    const CurrentStepComponent = currentStepConfig.component;
-
     const handleNext = () => {
         if (step < steps.length - 1) {
             setStep(step + 1);
@@ -121,29 +119,45 @@ const SetupWizard: React.FC = () => {
     };
 
     return (
-        <div className="setup-wizard-container">
-            <div className="wizard-card">
-                <div className="step-indicator">
-                    {steps.map((_, index) => (
-                        <div
-                            key={index}
-                            className={`step-dot ${index === step ? 'active' : ''}`}
-                            style={{ opacity: index <= step ? 1 : 0.3 }}
-                        />
-                    ))}
-                </div>
+        <SwipeWrapper onSwipeLeft={handleNext} onSwipeRight={handleBack}>
+            <div className="setup-wizard-container">
+                <div className="wizard-card">
+                    <div className="step-indicator">
+                        {steps.map((_, index) => (
+                            <div
+                                key={index}
+                                className={`step-dot ${index === step ? 'active' : ''}`}
+                                style={{ opacity: index <= step ? 1 : 0.3 }}
+                            />
+                        ))}
+                    </div>
 
-                <CurrentStepComponent
-                    onNext={handleNext}
-                    onBack={handleBack}
-                    onFinish={handleFinish}
-                    onSkip={handleSkip}
-                    selectedServices={selectedServices}
-                    onServiceToggle={handleServiceToggle}
-                    {...(currentStepConfig.props || {})}
-                />
+                    <div className="wizard-slides-wrapper">
+                        <div
+                            className="wizard-slides-container"
+                            style={{ transform: `translateX(-${step * 100}%)` }}
+                        >
+                            {steps.map((stepConfig, index) => {
+                                const StepComponent = stepConfig.component;
+                                return (
+                                    <div key={stepConfig.key} className="wizard-slide">
+                                        <StepComponent
+                                            onNext={handleNext}
+                                            onBack={handleBack}
+                                            onFinish={handleFinish}
+                                            onSkip={handleSkip}
+                                            selectedServices={selectedServices}
+                                            onServiceToggle={handleServiceToggle}
+                                            {...(stepConfig.props || {})}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </SwipeWrapper>
     );
 };
 

@@ -5,7 +5,6 @@ import {
     busOutline,
 } from "ionicons/icons";
 import {getSavedStationIds} from '../../services/BizkaibusStorage';
-import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import BizkaibusAddStopButton from "./BizkaibusAddStopsButton";
 
@@ -13,7 +12,7 @@ const BizkaibusDisplays: React.FC = () => {
     const {t} = useTranslation();
 
     return (
-        <Page title={t("Visores")} icon={busOutline}>
+        <div className="transport-section" style={{ marginBottom: "24px" }}>
                 {getSavedStationIds().length > 0 ? (
                     <StopsDisplay/>
                 ) : (
@@ -25,7 +24,7 @@ const BizkaibusDisplays: React.FC = () => {
                         <BizkaibusAddStopButton/>
                     </div>
                 )}
-        </Page>
+        </div>
     );
 };
 

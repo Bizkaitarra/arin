@@ -2,24 +2,21 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
     background: var(--ion-background-color);
-    padding: 20px;
-    overflow-y: auto;
+    padding: 0;
+    overflow: hidden;
 }
 
 .wizard-card {
     background: var(--ion-card-background, #ffffff);
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    box-shadow: none;
     padding: 24px;
     width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    height: 90vh;
-    /* Fixed height to ensure scrolling works */
-    /* Ensure it fits on mobile screens */
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -28,16 +25,34 @@
     overflow: hidden;
 }
 
+/* On tablet/desktop screens, display it as a centered card */
+@media (min-width: 576px) {
+    .setup-wizard-container {
+        padding: 20px;
+    }
+    .wizard-card {
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        max-width: 500px;
+        max-height: 90vh;
+        height: 90vh;
+    }
+}
+
 /* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
     .wizard-card {
         background: #1e1e1e;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
+    @media (max-width: 575px) {
+        .wizard-card {
+            box-shadow: none;
+        }
+    }
 
     .wizard-title {
         color: var(--ion-text-color);
-        /* In dark mode, use standard text color as dark blue might not be visible */
     }
 }
 
@@ -47,7 +62,6 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    /* Prevent double scrollbars */
 }
 
 .wizard-title {
@@ -56,7 +70,6 @@
     margin-bottom: 16px;
     flex-shrink: 0;
     color: #1f3d60;
-    /* Matches .section-title in variables.css */
     text-align: center;
 }
 
@@ -73,8 +86,6 @@
     flex: 1;
     overflow-y: auto;
     padding-right: 4px;
-    /* Space for scrollbar if needed */
-    /* Custom scrollbar styling could go here */
 }
 
 .scroll-shadow-top,
@@ -115,19 +126,12 @@
 }
 
 @keyframes bounce {
-
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
+    0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
     }
-
     40% {
         transform: translateY(-10px);
     }
-
     60% {
         transform: translateY(-5px);
     }
@@ -138,7 +142,6 @@
     margin-top: auto;
     padding-top: 16px;
     border-top: 1px solid var(--ion-color-step-100, transparent);
-    /* Optional separator */
 }
 
 .wizard-description {
@@ -158,7 +161,6 @@
 .wizard-btn {
     flex: 1;
     font-weight: 600;
-    /* Use standard Ionic button styles */
 }
 
 .wizard-btn-secondary {
@@ -173,7 +175,6 @@
     gap: 8px;
     margin-bottom: 24px;
     flex-shrink: 0;
-    /* Keep indicator fixed at top */
 }
 
 .step-dot {
@@ -181,13 +182,15 @@
     height: 8px;
     border-radius: 50%;
     background: var(--ion-color-step-200, #e0e0e0);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: scale(0.95);
 }
 
 .step-dot.active {
     background: var(--ion-color-primary);
     width: 24px;
     border-radius: 4px;
+    transform: scale(1.05);
 }
 
 .service-option {
@@ -212,13 +215,36 @@
     margin-right: 16px;
 }
 
+/* Slides specific styles */
+.wizard-slides-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.wizard-slides-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.wizard-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);

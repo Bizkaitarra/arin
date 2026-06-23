@@ -1,7 +1,6 @@
 import React from 'react';
 import {IonText} from '@ionic/react';
 import {trainOutline} from 'ionicons/icons';
-import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import StopsDisplay from "../../components/Renfe/StopsDisplay/StopsDisplay";
 import {RenfeStorage} from "../../services/Renfe/RenfeStorage";
@@ -12,7 +11,7 @@ const RenfeDisplays: React.FC = () => {
     const storage = new RenfeStorage();
 
     return (
-        <Page title={t("Visores")} icon={trainOutline}>
+        <div className="transport-section" style={{ marginBottom: "24px" }}>
                 {storage.getSavedStationIds().length > 0 ? (
                     <StopsDisplay/>
                 ) : (
@@ -24,7 +23,7 @@ const RenfeDisplays: React.FC = () => {
                         <RenfeAddButton/>
                     </div>
                 )}
-        </Page>
+        </div>
     );
 };
 

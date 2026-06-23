@@ -1,33 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
-    IonAccordion,
-    IonAccordionGroup,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonIcon,
-    IonItem,
     IonText,
 } from "@ionic/react";
 import MetroDisplay from "../../components/MetroBilbao/MetroDisplay";
-import {
-    trainOutline,
-    warningOutline
-} from "ionicons/icons";
-import Page from "../Page";
 import {useTranslation} from "react-i18next";
-import {ApiMetroBilbao} from "../../services/MetroBilbao/ApiMetroBilbao";
 import MetroBilbaoAddTripButton from "../../components/MetroBilbao/MetroBilbaoAddVisorButton";
-import {IncidentsResult} from "../../services/MetroBilbao/Incidences";
 
 const STORAGE_KEY = 'metro_bilbao_selected_stops';
 
 const MetroBilbaoDisplays: React.FC = () => {
     const {t} = useTranslation();
-    const [installationIssues, setInstallationIssues] = useState([]);
-    const [serviceIssues, setServiceIssues] = useState([]);
-    const stripHtml = (html) => html.replace(/<\/?[^>]+(>|$)/g, "");
 
     let stops = [];
     const savedStops = localStorage.getItem(STORAGE_KEY);
@@ -39,95 +21,21 @@ const MetroBilbaoDisplays: React.FC = () => {
         }
     }
 
-    const updateIssues = (data:IncidentsResult) => {
-        setServiceIssues(data.serviceIssues);
-        setInstallationIssues(data.installationIssues);
-    }
-
-    useEffect(() => {
-        new ApiMetroBilbao().fetchMetroBilbaoIncidents()
-            .then(data => updateIssues(data))
-            .catch(error => console.error("Error fetching incidents", error));
-    }, []);
-
     return (
-        <Page title={t("Visores")} icon={trainOutline}>
-            {serviceIssues.length > 0 && (
-                <IonAccordionGroup>
-                    <IonAccordion value="generalIssues">
-                        <IonItem slot="header" color="light">
-                            <IonIcon icon={warningOutline} slot="start"/>
-                            <IonText>{t("Incidencias generales")}</IonText>
-                        </IonItem>
-                        <div slot="content"
-                             style={{padding: '1rem', background: '#f8f9fa', borderTop: '1px solid #ddd'}}>
-                            {serviceIssues.map((issue, index) => {
-                                const title = issue?.title?.trim() || '';
-                                const resume = issue?.resume?.trim() || '';
-
-                                return (
-                                    <IonCard key={index} color="light">
-                                        <IonCardHeader>
-                                            <IonCardTitle style={{fontSize: '1rem'}}>{title}</IonCardTitle>
-                                        </IonCardHeader>
-                                        <IonCardContent style={{fontSize: '0.9rem', color: '#666'}}>
-                                            {stripHtml(issue?.description?.trim() || '')}
-                                        </IonCardContent>
-
-                                    </IonCard>
-                                );
-                            })}
-                        </div>
-                    </IonAccordion>
-                </IonAccordionGroup>
-            )}
-            {installationIssues.length > 0 && (
-                <IonAccordionGroup>
-                    <IonAccordion value="installationIssues">
-                        <IonItem slot="header" color="light">
-                            <IonIcon icon={warningOutline} slot="start"/>
-                            <IonText>{t("Incidencias en instalaciones")}</IonText>
-                        </IonItem>
-                        <div slot="content"
-                             style={{padding: '1rem', background: '#f8f9fa', borderTop: '1px solid #ddd'}}>
-                            {installationIssues.map((issue, index) => {
-                                const title = issue?.title?.trim() || '';
-                                const resume = issue?.resume?.trim() || '';
-
-                                return (
-                                    <IonCard key={index} color="light">
-                                        <IonCardHeader>
-                                            <IonCardTitle style={{fontSize: '1rem'}}>{title}</IonCardTitle>
-                                        </IonCardHeader>
-                                        <IonCardContent style={{fontSize: '0.9rem', color: '#666'}}>
-                                            {stripHtml(issue?.description?.trim() || '')}
-                                        </IonCardContent>
-
-                                    </IonCard>
-                                );
-                            })}
-                        </div>
-                    </IonAccordion>
-                </IonAccordionGroup>
-            )}
-
-
+        <div className="transport-section" style={{ marginBottom: "24px" }}>
             {stops.length > 0 ? (
                 <div>
                     <MetroDisplay/>
                 </div>
             ) : (
-                <div style={{textAlign: 'center', marginTop: '2rem'}}>
+                <div style={{textAlign: 'center', marginTop: '1rem'}}>
                     <IonText>
-                        <h2>{t('No tienes visores favoritos configurados')}</h2>
-                        <p>
-                            {t('Para poder ver tus visores favoritos, debes configurarlos en la página de configuración')}.
-                        </p>
+                        <h2>{t('No tienes visores configurados para Metro Bilbao')}</h2>
                     </IonText>
                     <MetroBilbaoAddTripButton/>
                 </div>
             )}
-        </Page>
+        </div>
     );
 };
 

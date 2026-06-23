@@ -15,7 +15,6 @@ import {
     trainOutline,
     warningOutline
 } from "ionicons/icons";
-import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import EuskotrenAddTripButton from "../../components/Euskotren/EuskotrenAddVisorButton";
 
@@ -35,7 +34,7 @@ const EuskotrenDisplays: React.FC = () => {
     }
 
     return (
-        <Page title={t("Visores")} icon={trainOutline}>
+        <div className="transport-section" style={{ marginBottom: "24px" }}>
             {stops.length > 0 ? (
                 <div>
                     <EuskotrenDisplay/>
@@ -51,7 +50,7 @@ const EuskotrenDisplays: React.FC = () => {
                     <EuskotrenAddTripButton/>
                 </div>
             )}
-        </Page>
+        </div>
     );
 };
 

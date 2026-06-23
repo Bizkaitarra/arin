@@ -1,7 +1,6 @@
 import React from 'react';
 import {IonText} from '@ionic/react';
 import {mapOutline} from 'ionicons/icons';
-import Page from "../Page";
 import {useTranslation} from "react-i18next";
 import StopsDisplay from "../../components/KBus/StopsDisplay/StopsDisplay";
 import {KBusStorage} from "../../services/KBus/KBusStorage";
@@ -11,7 +10,7 @@ const KBusDisplays: React.FC = () => {
     const {t} = useTranslation();
     const storage = new KBusStorage();
     return (
-        <Page title={t("Visores")} icon={mapOutline}>
+        <div className="transport-section" style={{ marginBottom: "24px" }}>
                 {storage.getSavedStationIds().length > 0 ? (
                     <StopsDisplay/>
                 ) : (
@@ -23,7 +22,7 @@ const KBusDisplays: React.FC = () => {
                         <KBusAddButton/>
                     </div>
                 )}
-        </Page>
+        </div>
     );
 };
 

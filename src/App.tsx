@@ -1,6 +1,7 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonTabs, setupIonicReact } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { homeOutline, searchOutline, mapOutline, settingsOutline } from 'ionicons/icons';
 
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -16,52 +17,57 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 import './theme/variables.css';
 
-import BizkaibusDisplays from "./pages/Bizkaibus/BizkaibusDisplays";
-import BizkaibusAddByTown from "./pages/Bizkaibus/BizkaibusAddByTown";
-import MetroBilbaoDisplays from "./pages/MetroBilbao/MetroBilbaoDisplays";
-import MetroBilbaoAddStop from "./pages/MetroBilbao/MetroBilbaoAddStop";
-import BizkaibusHorarioPage from "./pages/Bizkaibus/BizkaibusHorarioPage";
 import React, { useEffect, useState } from "react";
 import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
-import BizkaibusMyDisplays from "./pages/Bizkaibus/BizkaibusMyDisplays";
-import MetroBilbaoMyDisplays from "./pages/MetroBilbao/MetroBilbaoMyDisplays";
-import AboutTheApp from "./pages/AboutTheApp";
-import Configuration from "./pages/Configuration";
 import { useTranslation } from "react-i18next";
 import { loadSettings } from "./services/ConfigurationStorage";
 
-// Importar el ConfigurationProvider
+// Context
 import { ConfigurationProvider } from './context/ConfigurationContext';
+
+// Main Tabs
+import Home from "./pages/Home/Home";
+import Explore from "./pages/Explore/Explore";
+import Planners from "./pages/Planners/Planners";
+import Configuration from "./pages/Configuration";
+
+// Other Pages
+import BizkaibusAddByTown from "./pages/Bizkaibus/BizkaibusAddByTown";
 import BizkaibusAddByLocalization from "./pages/Bizkaibus/BizkaibusAddByLocalization";
-import MetroBilbaoAddRoute from "./pages/MetroBilbao/MetroBilbaoAddRoute";
-import MetroBilbaoTripPlanner from "./pages/MetroBilbao/MetroBilbaoTripPlanner";
+import BizkaibusHorarioPage from "./pages/Bizkaibus/BizkaibusHorarioPage";
+import BizkaibusMyDisplays from "./pages/Bizkaibus/BizkaibusMyDisplays";
 import BizkaibusRoutes from "./pages/Bizkaibus/BizkaibusRoutes";
 import RouteItineraries from "./pages/Bizkaibus/RouteItineraries";
 import SearchLines from "./pages/Bizkaibus/SearchLines";
-import KBusMyDisplays from "./pages/KBus/KBusMyDisplays";
+
+import MetroBilbaoAddStop from "./pages/MetroBilbao/MetroBilbaoAddStop";
+import MetroBilbaoAddRoute from "./pages/MetroBilbao/MetroBilbaoAddRoute";
+import MetroBilbaoTripPlanner from "./pages/MetroBilbao/MetroBilbaoTripPlanner";
+import MetroBilbaoMyDisplays from "./pages/MetroBilbao/MetroBilbaoMyDisplays";
+import MetroTarifas from "./pages/MetroBilbao/MetroTarifas";
+
 import KBusAddStop from "./pages/KBus/KBusAddStop";
-import KBusDisplays from "./pages/KBus/KBusDisplays";
-import RenfeDisplays from "./pages/Renfe/RenfeDisplays";
-import RenfeMyDisplays from "./pages/Renfe/RenfeMyDisplays";
+import KBusMyDisplays from "./pages/KBus/KBusMyDisplays";
+
 import RenfeAddStop from "./pages/Renfe/RenfeAddStop";
 import RenfeAddRoute from "./pages/Renfe/RenfeAddRoute";
 import RenfeTripPlanner from "./pages/Renfe/RenfeTripPlanner";
-import MetroTarifas from "./pages/MetroBilbao/MetroTarifas";
-import AppLoader from "./components/AppLoader";
+import RenfeMyDisplays from "./pages/Renfe/RenfeMyDisplays";
 
-import EuskotrenDisplays from "./pages/Euskotren/EuskotrenDisplays";
-import EuskotrenMyDisplays from "./pages/Euskotren/EuskotrenMyDisplays";
 import EuskotrenAddRoute from "./pages/Euskotren/EuskotrenAddRoute";
 import EuskotrenAddStop from "./pages/Euskotren/EuskotrenAddStop";
 import EuskotrenTripPlanner from "./pages/Euskotren/EuskotrenTripPlanner";
+import EuskotrenMyDisplays from "./pages/Euskotren/EuskotrenMyDisplays";
+
+import AboutTheApp from "./pages/AboutTheApp";
 import GuidedSetup from "./pages/GuidedSetup";
+import AppLoader from "./components/AppLoader";
 
 setupIonicReact();
 
-
 const App: React.FC = () => {
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const [isLanguageLoaded, setIsLanguageLoaded] = useState(false);
 
     useEffect(() => {
@@ -119,48 +125,81 @@ const App: React.FC = () => {
                     <Route exact path="/" render={() => {
                         const hasSeenGuidedSetup = localStorage.getItem('hasSeenGuidedSetup');
                         if (hasSeenGuidedSetup) {
-                            return <Redirect to="/bizkaibus-displays" />;
+                            return <Redirect to="/home" />;
                         } else {
                             return <Redirect to="/guided-setup" />;
                         }
                     }} />
+                    
+                    <Route exact path="/guided-setup" component={GuidedSetup} />
+                    
                     <IonTabs>
                         <IonRouterOutlet>
-                            <Route exact path="/bizkaibus-displays" component={BizkaibusDisplays} />
+                            {/* Main Tabs */}
+                            <Route exact path="/home" component={Home} />
+                            <Route exact path="/explore" component={Explore} />
+                            <Route exact path="/planners" component={Planners} />
+                            <Route exact path="/configuration" component={Configuration} />
+
+                            {/* Bizkaibus */}
                             <Route exact path="/bizkaibus-add-stop-by-town" component={BizkaibusAddByTown} />
                             <Route exact path="/bizkaibus-add-stop-by-location" component={BizkaibusAddByLocalization} />
                             <Route exact path="/bizkaibus-my-displays" component={BizkaibusMyDisplays} />
-                            <Route exact path="/metro-bilbao-displays" component={MetroBilbaoDisplays} />
+                            <Route path="/bizkaibus/scheduled/:line/:route" component={BizkaibusHorarioPage} />
+                            <Route path="/bizkaibus/itinerary/:line/:route" component={RouteItineraries} />
+                            <Route path="/bizkaibus/routes/:line" component={BizkaibusRoutes} />
+                            <Route path="/bizkaibus-search-lines" component={SearchLines} />
+
+                            {/* Metro Bilbao */}
                             <Route exact path="/metro-bilbao-add-stop" component={MetroBilbaoAddStop} />
                             <Route exact path="/metro-bilbao-add-route" component={MetroBilbaoAddRoute} />
                             <Route exact path="/metro-bilbao-trip-planner" component={MetroBilbaoTripPlanner} />
                             <Route exact path="/metro-bilbao-my-displays" component={MetroBilbaoMyDisplays} />
                             <Route exact path="/metro-bilbao-tarifas" component={MetroTarifas} />
-                            <Route exact path="/k-bus-displays" component={KBusDisplays} />
-                            <Route exact path="/k-bus-my-displays" component={KBusMyDisplays} />
+
+                            {/* K-Bus */}
                             <Route exact path="/k-bus-add-stop" component={KBusAddStop} />
-                            <Route exact path="/renfe-displays" component={RenfeDisplays} />
-                            <Route exact path="/renfe-my-displays" component={RenfeMyDisplays} />
+                            <Route exact path="/k-bus-my-displays" component={KBusMyDisplays} />
+
+                            {/* Renfe */}
                             <Route exact path="/renfe-add-stop" component={RenfeAddStop} />
                             <Route exact path="/renfe-add-route" component={RenfeAddRoute} />
                             <Route exact path="/renfe-trip-planner" component={RenfeTripPlanner} />
-                            <Route exact path="/euskotren-displays" component={EuskotrenDisplays} />
-                            <Route exact path="/euskotren-my-displays" component={EuskotrenMyDisplays} />
+                            <Route exact path="/renfe-my-displays" component={RenfeMyDisplays} />
+
+                            {/* Euskotren */}
                             <Route exact path="/euskotren-add-route" component={EuskotrenAddRoute} />
                             <Route exact path="/euskotren-add-stop" component={EuskotrenAddStop} />
                             <Route exact path="/euskotren-trip-planner" component={EuskotrenTripPlanner} />
+                            <Route exact path="/euskotren-my-displays" component={EuskotrenMyDisplays} />
+
+                            {/* General */}
                             <Route exact path="/about-app" component={AboutTheApp} />
-                            <Route exact path="/configuration" component={Configuration} />
-                            <Route path="/bizkaibus/scheduled/:line/:route" component={BizkaibusHorarioPage} />
-                            <Route path="/bizkaibus/itinerary/:line/:route" component={RouteItineraries} />
-                            <Route path="/bizkaibus/routes/:line" component={BizkaibusRoutes} />
-                            <Route path="/bizkaibus-search-lines" component={SearchLines} />
-                            <Route exact path="/guided-setup" component={GuidedSetup} />
                         </IonRouterOutlet>
+
+                        <IonTabBar slot="bottom">
+                            <IonTabButton tab="home" href="/home">
+                                <IonIcon icon={homeOutline} />
+                                <IonLabel>{t('Inicio', 'Inicio')}</IonLabel>
+                            </IonTabButton>
+                            <IonTabButton tab="explore" href="/explore">
+                                <IonIcon icon={searchOutline} />
+                                <IonLabel>{t('Explorar', 'Explorar')}</IonLabel>
+                            </IonTabButton>
+                            <IonTabButton tab="planners" href="/planners">
+                                <IonIcon icon={mapOutline} />
+                                <IonLabel>{t('Viajes', 'Viajes')}</IonLabel>
+                            </IonTabButton>
+                            <IonTabButton tab="configuration" href="/configuration">
+                                <IonIcon icon={settingsOutline} />
+                                <IonLabel>{t('Ajustes', 'Ajustes')}</IonLabel>
+                            </IonTabButton>
+                        </IonTabBar>
                     </IonTabs>
                 </IonReactRouter>
             </ConfigurationProvider>
         </IonApp>
     );
 };
+
 export default App;
