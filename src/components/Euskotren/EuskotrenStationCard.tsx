@@ -63,6 +63,7 @@ const EuskotrenStationCard: React.FC<{ stationData: EuskotrenStopTrains }> = ({ 
                             platformIndex={platformIndex}
                             title={getPlatformTitle(platform, platformIndex)}
                             duration={platformIndex === 0 ? stationData.duration : stationData.duration2}
+                            originLines={stationData.Display.origin.Lines || []}
                         />
                     ))}
                 </div>

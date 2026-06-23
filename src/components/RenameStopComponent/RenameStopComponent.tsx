@@ -10,7 +10,8 @@ import {
     IonLabel,
     IonModal,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    IonItemOption
 } from '@ionic/react';
 import {pencilOutline} from 'ionicons/icons';
 import './RenameStopComponent.css';
@@ -24,9 +25,10 @@ interface RenameStopComponentProps {
     stop: Stop;
     onRename: (newName: string, stop: Stop) => void;
     stopType: string;
+    isOption?: boolean;
 }
 
-const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRename, stopType }) => {
+const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRename, stopType, isOption }) => {
     const { t } = useTranslation();
     const [showModal, setShowModal] = useState(false);
     const [newStopName, setNewStopName] = useState(stop.customName || '');
@@ -40,9 +42,15 @@ const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRenam
 
     return (
         <>
-            <IonButton fill="clear" slot="end" color="danger" size="default" onClick={() => setShowModal(true)}>
-                <IonIcon icon={pencilOutline} />
-            </IonButton>
+            {isOption ? (
+                <IonItemOption color="primary" onClick={() => setShowModal(true)}>
+                    <IonIcon slot="icon-only" icon={pencilOutline} />
+                </IonItemOption>
+            ) : (
+                <IonButton fill="clear" slot="end" color="danger" size="default" onClick={() => setShowModal(true)}>
+                    <IonIcon icon={pencilOutline} />
+                </IonButton>
+            )}
 
             <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
                 <IonHeader>

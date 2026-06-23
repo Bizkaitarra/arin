@@ -3,15 +3,15 @@
     margin-bottom: 16px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: #fff;
+    background: var(--arin-card-background);
 }
 
 .renfe-station-card-header {
-    background-color: #6f2b90;
+    background-color: var(--arin-renfe-color);
     color: #fff;
     padding: 6px 10px;
     font-weight: bold;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--arin-border-color);
 }
 
 .renfe-header-content {

@@ -21,7 +21,7 @@ const StopDisplay: React.FC = () => {
     const [reloading, setReloading] = useState<boolean>(true);
     const storageService = new RenfeStorage();
 
-    const fetchData = async () => {
+    const fetchData = async (isBackground = false) => {
         if (!navigator.onLine) {
             setError(t('No tienes conexión a internet'));
             setLoading(false);
@@ -29,7 +29,9 @@ const StopDisplay: React.FC = () => {
         }
 
         try {
-            setLoading(true);
+            if (!isBackground) {
+                setLoading(true);
+            }
             const displays = await storageService.getSavedDisplays();
             const api = new ApiRenfe();
             const data = await api.getPlatformsForDisplays(displays);
@@ -46,7 +48,7 @@ const StopDisplay: React.FC = () => {
 
     const reloadData = async () => {
         setReloading(true);
-        await fetchData();
+        await fetchData(true);
     };
 
     useIonViewWillEnter(() => {

@@ -22,7 +22,7 @@ const StopsDisplay: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [reloading, setReloading] = useState<boolean>(true);
 
-    const fetchData = async () => {
+    const fetchData = async (isBackground = false) => {
         if (!navigator.onLine) {
             setError(t('No tienes conexión a internet'));
             setLoading(false);
@@ -30,7 +30,9 @@ const StopsDisplay: React.FC = () => {
         }
 
         try {
-            setLoading(true);
+            if (!isBackground) {
+                setLoading(true);
+            }
             const data = await fetchStopsData(getStations(true).filter(station => station.IS_FAVORITE));
             setStopData(data);
             setLoading(false);
@@ -49,7 +51,7 @@ const StopsDisplay: React.FC = () => {
 
     const reloadData = async () => {
         setReloading(true);
-        await fetchData();
+        await fetchData(true);
     };
 
     const handleRefresh = async (event: CustomEvent) => {

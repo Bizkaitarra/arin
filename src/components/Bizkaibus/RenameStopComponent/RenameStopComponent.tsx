@@ -10,7 +10,8 @@ import {
     IonContent,
     IonItem,
     IonLabel,
-    IonInput
+    IonInput,
+    IonItemOption
 } from '@ionic/react';
 import { pencilOutline } from 'ionicons/icons';
 import { Parada } from "../../../services/BizkaibusStorage";
@@ -20,9 +21,10 @@ import {useTranslation} from "react-i18next";
 interface RenameStopComponentProps {
     stop: Parada;
     onRename: (newName: string, stop: Parada) => void;
+    isOption?: boolean;
 }
 
-const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRename }) => {
+const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRename, isOption }) => {
     const { t } = useTranslation();
     const [showModal, setShowModal] = useState(false);
     const [newStopName, setNewStopName] = useState(stop.CUSTOM_NAME || ''); // Inicializar con CUSTOM_NAME si existe
@@ -36,9 +38,15 @@ const RenameStopComponent: React.FC<RenameStopComponentProps> = ({ stop, onRenam
 
     return (
         <>
-            <IonButton fill="clear" slot="end" color="danger" size="default" onClick={() => setShowModal(true)}>
-                <IonIcon icon={pencilOutline} />
-            </IonButton>
+            {isOption ? (
+                <IonItemOption color="primary" onClick={() => setShowModal(true)}>
+                    <IonIcon slot="icon-only" icon={pencilOutline} />
+                </IonItemOption>
+            ) : (
+                <IonButton fill="clear" slot="end" color="danger" size="default" onClick={() => setShowModal(true)}>
+                    <IonIcon icon={pencilOutline} />
+                </IonButton>
+            )}
 
             <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
                 <IonHeader>

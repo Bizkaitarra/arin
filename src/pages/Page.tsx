@@ -14,7 +14,8 @@ import {
     IonPage,
     IonTitle,
     IonToolbar,
-    useIonViewWillLeave
+    useIonViewWillLeave,
+    useIonRouter
 } from '@ionic/react';
 import NavigationTabs from "../components/NavigationTabs";
 import {clearIntervals} from "../services/IntervalServices";
@@ -50,6 +51,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
     const { settings } = useConfiguration();
     const [showModal, setShowModal] = useState(false);
     const history = useHistory();
+    const ionRouter = useIonRouter();
     const location = useLocation();
     const [transportType, setTransportType] = useState('');
     const [exitAttempt, setExitAttempt] = useState(false);
@@ -147,14 +149,14 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
         const currentIndex = activeViewerPages.findIndex(page => page.path === location.pathname);
         if (currentIndex === -1) return;
         const nextIndex = (currentIndex + 1) % activeViewerPages.length;
-        history.push(activeViewerPages[nextIndex].path);
+        ionRouter.push(activeViewerPages[nextIndex].path, 'forward', 'push');
     };
 
     const handleSwipeRight = () => {
         const currentIndex = activeViewerPages.findIndex(page => page.path === location.pathname);
         if (currentIndex === -1) return;
         const nextIndex = (currentIndex - 1 + activeViewerPages.length) % activeViewerPages.length;
-        history.push(activeViewerPages[nextIndex].path);
+        ionRouter.push(activeViewerPages[nextIndex].path, 'back', 'push');
     };
 
 

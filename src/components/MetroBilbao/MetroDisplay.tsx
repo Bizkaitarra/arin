@@ -20,7 +20,7 @@ const MetroDisplay: React.FC = () => {
     const [reloading, setReloading] = useState<boolean>(true);
     const { settings } = useConfiguration(); // Accede a los valores del contexto
 
-    const fetchData = async () => {
+    const fetchData = async (isBackground = false) => {
         if (!navigator.onLine) {
             setError(t('No tienes conexión a internet'));
             setLoading(false);
@@ -28,7 +28,9 @@ const MetroDisplay: React.FC = () => {
         }
 
         try {
-            setLoading(true);
+            if (!isBackground) {
+                setLoading(true);
+            }
             const displays = getSavedDisplays();
             const api = new ApiMetroBilbao();
             const data = await api.getMetroDisplaysTrains(displays, settings.maxTrenes);
@@ -43,7 +45,7 @@ const MetroDisplay: React.FC = () => {
 
     const reloadData = async () => {
         setReloading(true);
-        await fetchData();
+        await fetchData(true);
     };
 
     useIonViewWillEnter(() => {

@@ -8,7 +8,10 @@ import {
     IonReorder,
     IonReorderGroup,
     IonText,
-    useIonViewWillEnter
+    useIonViewWillEnter,
+    IonItemSliding,
+    IonItemOptions,
+    IonItemOption
 } from '@ionic/react';
 import {reorderThreeOutline, settingsOutline, trashBinOutline} from 'ionicons/icons';
 import {getStations, Parada, saveRenamedStation, saveStationIds} from "../../services/BizkaibusStorage";
@@ -86,9 +89,9 @@ const BizkaibusMyDisplays: React.FC = () => {
                 <>
                     <IonList>
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
-                            {selectedStops.map((stop) => (
+                             {selectedStops.map((stop) => (
                                 <IonItem key={stop.PARADA}>
-                                    <IonLabel>
+                                    <IonLabel style={{ color: 'var(--arin-text-color)' }}>
                                         <h3>{stop.PARADA} - {stop.CUSTOM_NAME}</h3>
                                         <p>{stop.DESCRIPCION_MUNICIPIO}, {stop.DESCRIPCION_PROVINCIA}</p>
                                     </IonLabel>

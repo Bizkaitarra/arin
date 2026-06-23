@@ -20,6 +20,12 @@ const BusStopCard: React.FC<BusStopCardProps> = ({ response }) => {
         });
     };
 
+    const getMinutesStatusClass = (mins: number) => {
+        if (mins <= 3) return 'status-critical';
+        if (mins <= 10) return 'status-warning';
+        return 'status-normal';
+    };
+
     if (!response || !response.data) {
         return null;
     }
@@ -34,17 +40,20 @@ const BusStopCard: React.FC<BusStopCardProps> = ({ response }) => {
             <IonCardContent className="bus-stop-card-content">
                 {arrivals && arrivals.length > 0 ? (
                     arrivals.map((arrival, index) => {
-                        const isCritical = arrival.e1Minutos < 5;
+                        const statusClass = getMinutesStatusClass(arrival.e1Minutos);
 
                         return (
                             <div className="bus-item" key={index}>
-                                <div className="bus-line-info">
-                                    <div>{`${arrival.linea} - ${arrival.ruta}`}</div>
-                                    <Link to={`/bizkaibus/routes/${arrival.linea}`}>{t('Ver línea')}</Link>
+                                <div className="bus-line-info" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span className="line-badge bizkaibus-badge">{arrival.linea}</span>
+                                        <span style={{ fontSize: '0.95em', color: 'var(--arin-text-color)' }}>{arrival.ruta}</span>
+                                    </div>
+                                    <Link to={`/bizkaibus/routes/${arrival.linea}`} style={{ marginLeft: '40px' }}>{t('Ver línea')}</Link>
                                 </div>
                                 <div className="bus-time-info">
                                     <div className="bus-arrival-primary">
-                                        <div className={`bus-time ${isCritical ? 'is-critical' : ''}`}>
+                                        <div className={`bus-time ${statusClass}`}>
                                             {arrival.e1Minutos} {t('min')}
                                         </div>
                                         <div className="arrival-time-display">({getArrivalTime(arrival.e1Minutos)})</div>

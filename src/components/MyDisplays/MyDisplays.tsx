@@ -11,7 +11,10 @@ import {
     IonReorderGroup,
     IonText,
     useIonToast,
-    useIonViewWillEnter
+    useIonViewWillEnter,
+    IonItemSliding,
+    IonItemOptions,
+    IonItemOption
 } from "@ionic/react";
 
 import {StopsStorage} from "../../services/StopsStorage";
@@ -101,17 +104,20 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
                         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
                             {selectedStops.map((stop) => (
                                 <IonItem key={stop.id}>
+                                    <IonReorder slot="start">
+                                        <IonIcon size="default" icon={reorderThreeOutline}/>
+                                    </IonReorder>
                                     {
                                         (() => {
                                             switch (stopType) {
                                                 case KBUS_TYPE:
                                                     return <KBusStopTitle stop={stop as KBusStop}/>;
                                                 case 'BizkaibusStop':
-                                                    return <p>{t('Conexión con líneas interurbanas')}</p>;
+                                                    return <p style={{ color: 'var(--arin-text-color)' }}>{t('Conexión con líneas interurbanas')}</p>;
                                                 case 'MetroBilbaoStop':
-                                                    return <p>{t('Acceso adaptado y parking cercano')}</p>;
+                                                    return <p style={{ color: 'var(--arin-text-color)' }}>{t('Acceso adaptado y parking cercano')}</p>;
                                                 default:
-                                                    return null;
+                                                    return <IonLabel style={{ color: 'var(--arin-text-color)' }}><h3>{stop.customName || stop.name}</h3></IonLabel>;
                                             }
                                         })()
                                     }
@@ -121,10 +127,6 @@ const MyDisplays: React.FC<MyDisplaysProps> = ({storageService, stopType}) => {
                                                onClick={() => handleRemoveStop(stop.id)}>
                                         <IonIcon icon={trashBinOutline}/>
                                     </IonButton>
-
-                                    <IonReorder slot="start">
-                                        <IonIcon size="default" icon={reorderThreeOutline}/>
-                                    </IonReorder>
                                 </IonItem>
                             ))}
                         </IonReorderGroup>

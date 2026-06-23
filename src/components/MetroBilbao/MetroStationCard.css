@@ -3,15 +3,15 @@
     margin-bottom: 16px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: #fff;
+    background: var(--arin-card-background);
 }
 
 .metro-station-card-header {
-    background-color: #E4002B;
+    background-color: var(--arin-metro-red);
     color: #fff;
     padding: 6px 10px;
     font-weight: bold;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--arin-border-color);
 }
 
 .header-content {
@@ -36,7 +36,7 @@
 
 .metro-station-card-content .train-item {
     padding: 12px 16px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--arin-border-color);
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
@@ -59,21 +59,21 @@
 .metro-train-time {
     font-size: 1.2em;
     font-weight: bold;
-    color: #000; /* Black */
+    color: var(--arin-text-color); /* Black */
 }
 
 .metro-train-time.is-critical {
-    color: #E4002B; /* Metro Bilbao Red */
+    color: var(--arin-metro-red); /* Metro Bilbao Red */
 }
 
 .next-arrival {
     font-size: 0.9em;
-    color: #666;
+    color: var(--arin-subtext-color);
 }
 
 .no-trains {
     padding: 16px;
     text-align: center;
     font-style: italic;
-    color: #888;
+    color: var(--arin-subtext-color);
 }

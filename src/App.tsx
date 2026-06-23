@@ -22,7 +22,7 @@ import MetroBilbaoDisplays from "./pages/MetroBilbao/MetroBilbaoDisplays";
 import MetroBilbaoAddStop from "./pages/MetroBilbao/MetroBilbaoAddStop";
 import BizkaibusHorarioPage from "./pages/Bizkaibus/BizkaibusHorarioPage";
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "@capacitor/status-bar";
+import { StatusBar, Style } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
 import BizkaibusMyDisplays from "./pages/Bizkaibus/BizkaibusMyDisplays";
 import MetroBilbaoMyDisplays from "./pages/MetroBilbao/MetroBilbaoMyDisplays";
@@ -81,7 +81,30 @@ const App: React.FC = () => {
     useEffect(() => {
         if (Capacitor.isNativePlatform()) {
             StatusBar.setOverlaysWebView({ overlay: true });
-            StatusBar.setBackgroundColor({ color: '#ffffff' });
+            
+            const updateStatusBarTheme = (isDark: boolean) => {
+                try {
+                    if (isDark) {
+                        StatusBar.setBackgroundColor({ color: '#1a1a1a' });
+                        StatusBar.setStyle({ style: Style.Dark });
+                    } else {
+                        StatusBar.setBackgroundColor({ color: '#ffffff' });
+                        StatusBar.setStyle({ style: Style.Light });
+                    }
+                } catch (err) {
+                    console.error('Error configuring StatusBar:', err);
+                }
+            };
+
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            updateStatusBarTheme(mediaQuery.matches);
+
+            const handler = (e: MediaQueryListEvent) => updateStatusBarTheme(e.matches);
+            mediaQuery.addEventListener('change', handler);
+
+            return () => {
+                mediaQuery.removeEventListener('change', handler);
+            };
         }
     }, []);
 

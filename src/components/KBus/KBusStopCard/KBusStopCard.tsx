@@ -19,6 +19,12 @@ const KBusStopCard: React.FC<KBusStopCardProps> = ({ response }) => {
         });
     };
 
+    const getMinutesStatusClass = (mins: number) => {
+        if (mins <= 3) return 'status-critical';
+        if (mins <= 10) return 'status-warning';
+        return 'status-normal';
+    };
+
     if (!response) {
         return null;
     }
@@ -32,16 +38,16 @@ const KBusStopCard: React.FC<KBusStopCardProps> = ({ response }) => {
                 {response.arrivals && response.arrivals.length > 0 ? (
                     response.arrivals.map((arrival, index) => {
                         const arrivalInMinutes = Math.floor(arrival.secondsToArrival / 60);
-                        const isCritical = arrival.secondsToArrival < 120;
+                        const statusClass = getMinutesStatusClass(arrivalInMinutes);
 
                         return (
                             <div className="bus-item" key={index}>
-                                <div className="bus-line-info">
-                                    <div>{arrival.line}</div>
+                                <div className="bus-line-info" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <span className="line-badge kbus-badge">{arrival.line}</span>
                                 </div>
                                 <div className="bus-time-info">
                                     <div className="bus-arrival-primary">
-                                        <div className={`bus-time ${isCritical ? 'is-critical' : ''}`}>
+                                        <div className={`bus-time ${statusClass}`}>
                                             {arrivalInMinutes} {t('min')}
                                         </div>
                                         <div className="arrival-time-display">({getArrivalTime(arrivalInMinutes)})</div>

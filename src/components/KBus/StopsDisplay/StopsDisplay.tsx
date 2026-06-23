@@ -25,7 +25,7 @@ const StopsDisplay: React.FC = () => {
     const [reloading, setReloading] = useState<boolean>(true);
     const storageService = new KBusStorage();
 
-    const fetchData = async () => {
+    const fetchData = async (isBackground = false) => {
         if (!navigator.onLine) {
             setError(t('No tienes conexión a internet'));
             setLoading(false);
@@ -33,7 +33,9 @@ const StopsDisplay: React.FC = () => {
         }
 
         try {
-            setLoading(true);
+            if (!isBackground) {
+                setLoading(true);
+            }
             const stops: KBusStop[] = storageService.getStations(true).filter(station => station.isFavorite) as KBusStop[]
             const data = await fetchStopsData(stops);
             setStopData(data);
@@ -54,7 +56,7 @@ const StopsDisplay: React.FC = () => {
 
     const reloadData = async () => {
         setReloading(true);
-        await fetchData();
+        await fetchData(true);
     };
 
     const handleRefresh = async (event: CustomEvent) => {

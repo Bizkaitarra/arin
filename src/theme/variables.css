@@ -1,10 +1,41 @@
-/* For information on how to create your own theme, please see:
-http://ionicframework.com/docs/theming/ */
-
-
 :root {
     --ion-safe-area-bottom: env(safe-area-inset-bottom);
     --ion-safe-area-top: env(safe-area-inset-top);
+
+    /* Transport Operator Colors */
+    --arin-bizkaibus-color: #147014;
+    --arin-metro-orange: #dd7105;
+    --arin-metro-red: #e4002b;
+    --arin-renfe-color: #6f2b90;
+    --arin-kbus-color: #005c99;
+    --arin-euskotren-color: #8bc34a;
+
+    /* Theme colors */
+    --arin-card-background: #ffffff;
+    --arin-card-header-stop: #e6f4ea;
+    --arin-card-header-error: #fdecea;
+    --arin-card-header-no-info: #f4f4f4;
+    --arin-text-color: #000000;
+    --arin-subtext-color: #666666;
+    --arin-border-color: #e0e0e0;
+    --arin-section-title-color: #1f3d60;
+    --arin-section-title-border: #ccc;
+    --arin-toggle-button-color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --arin-card-background: var(--ion-color-step-100, #1a1a1a);
+        --arin-card-header-stop: rgba(20, 112, 20, 0.15);
+        --arin-card-header-error: rgba(217, 83, 79, 0.15);
+        --arin-card-header-no-info: rgba(255, 255, 255, 0.05);
+        --arin-text-color: #ffffff;
+        --arin-subtext-color: #b3b3b3;
+        --arin-border-color: #2d2d2d;
+        --arin-section-title-color: #8ab4f8;
+        --arin-section-title-border: #444;
+        --arin-toggle-button-color: #ffffff;
+    }
 }
 
 .submenu-item {
@@ -29,41 +60,41 @@ ion-tab-button.tab-selected {
     margin: 20px 0;
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #ccc;
-    color: #1f3d60;
+    border-bottom: 2px solid var(--arin-section-title-border);
+    color: var(--arin-section-title-color);
     margin-left: 30px;
 }
 
 .bizkaibus-header-icon ion-label {
-    color: #147014;
+    color: var(--arin-bizkaibus-color);
     font-size: large;
 }
 
 .metro-header-icon ion-label {
-    color: #dd7105;
+    color: var(--arin-metro-orange);
     font-size: large;
 }
 .bizkaibus-header-icon ion-icon {
-    color: #147014;
+    color: var(--arin-bizkaibus-color);
 }
 .metro-header-icon ion-icon {
-    color: #dd7105;
+    color: var(--arin-metro-orange);
 }
 
 .renfe-header-icon ion-label {
-    color: #6f2b90;
+    color: var(--arin-renfe-color);
 }
 
 .renfe-header-icon ion-icon {
-    color: #6f2b90;
+    color: var(--arin-renfe-color);
 }
 
 .kbus-header-icon ion-label {
-    color: #005c99;
+    color: var(--arin-kbus-color);
 }
 
 .kbus-header-icon ion-icon {
-    color: #005c99;
+    color: var(--arin-kbus-color);
 }
 .user-marker-icon {
     width: 20px;
@@ -123,7 +154,7 @@ ion-tab-button.tab-selected {
 .toggle-button {
     font-size: 22px;
     cursor: pointer;
-    color: black;
+    color: var(--arin-toggle-button-color);
 }
 
 .fab-item {
@@ -156,17 +187,17 @@ ion-tab-button.tab-selected {
 }
 
 .stop-card-header {
-    background-color: #e6f4ea;
+    background-color: var(--arin-card-header-stop);
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
 
 .error-card {
-    background-color: #fdecea;
+    background-color: var(--arin-card-header-error);
 }
 
 .no-info-card {
-    background-color: #f4f4f4;
+    background-color: var(--arin-card-header-no-info);
 }
 .page-content {
     padding: 8px 12px;
@@ -176,4 +207,46 @@ ion-tab-button.tab-selected {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 16px;
+}
+
+/* Badges de línea */
+.line-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #fff !important;
+}
+.bizkaibus-badge {
+    background-color: var(--arin-bizkaibus-color);
+}
+.metro-badge {
+    background-color: var(--arin-metro-red);
+}
+.renfe-badge {
+    background-color: var(--arin-renfe-color);
+}
+.kbus-badge {
+    background-color: var(--arin-kbus-color);
+}
+.euskotren-badge {
+    background-color: var(--arin-euskotren-color);
+}
+
+/* Semáforo de tiempos */
+.status-critical {
+    color: #d9534f !important; /* Rojo */
+    font-weight: bold;
+}
+.status-warning {
+    color: #f0ad4e !important; /* Naranja */
+    font-weight: bold;
+}
+.status-normal {
+    color: var(--arin-text-color) !important;
 }
