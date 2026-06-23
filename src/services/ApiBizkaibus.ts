@@ -85,8 +85,13 @@ async function fetchStopData(parada: Parada): Promise<BusArrivalResponse> {
 
 
 export async function fetchStopsData(stops: Parada[]): Promise<BusArrivalResponse[]> {
-    const promises = stops.map(stop => fetchStopData(stop));
-    return Promise.all(promises);
+    try {
+        const promises = stops.map(stop => fetchStopData(stop));
+        return Promise.all(promises);
+    } catch (error) {
+        console.error("Error fetching stops data:", error);
+        return stops.map(stop => ({ status: "ERROR", parada: stop }));
+    }
 }
 
 

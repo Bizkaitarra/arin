@@ -128,33 +128,39 @@ export class ApiMetroBilbao {
     }
 
     public async fetchMetroBilbaoIncidents(): Promise<IncidentsResult> {
-        let language = i18next.language || "es"; // Idioma actual o español por defecto
+        let language = i18next.language || "es";
 
-        // Solo permitimos "es" y "eu", cualquier otro idioma usa "es"
         if (language !== "es" && language !== "eu") {
             language = "es";
         }
 
         const endpoint = language === "eu" ? "abisuak" : "avisos";
         const url = `https://api.metrobilbao.eus/metro_page/${language}/${endpoint}`;
-        const response = await HTTPClient.get(url);
 
-        if (response.status !== 200) {
-            throw new Error("Error fetching Metro Bilbao incidents");
+        try {
+            const response = await HTTPClient.get(url);
+
+            if (response.status !== 200) {
+                console.error("Error fetching Metro Bilbao incidents: invalid status", response.status);
+                return { serviceIssues: [], installationIssues: [] };
+            }
+
+            const data: MetroBilbaoResponse = response.data;
+
+            return {
+                serviceIssues: data.configuration.incidences.service_issue.map(incident => ({
+                    ...incident,
+                    station: { code: null },
+                })),
+                installationIssues: data.configuration.incidences.installation_issue.map(incident => ({
+                    ...incident,
+                    station: { code: incident.station.code },
+                })),
+            };
+        } catch (error) {
+            console.error("Error fetching Metro Bilbao incidents:", error);
+            return { serviceIssues: [], installationIssues: [] };
         }
-
-        const data: MetroBilbaoResponse = response.data;
-
-        return {
-            serviceIssues: data.configuration.incidences.service_issue.map(incident => ({
-                ...incident,
-                station: { code: null },
-            })),
-            installationIssues: data.configuration.incidences.installation_issue.map(incident => ({
-                ...incident,
-                station: { code: incident.station.code },
-            })),
-        };
     }
 
     public async getBarikData(barikNumber: string) {
@@ -256,7 +262,7 @@ export class ApiMetroBilbao {
             return data;
         } catch (error) {
             console.error("Error fetching fares:", error);
-            throw error;
+            return { title: "", description: "", configuration: { categorized: {} } };
         }
     }
 }

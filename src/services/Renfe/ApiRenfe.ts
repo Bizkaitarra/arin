@@ -41,80 +41,97 @@ export class ApiRenfe {
     }
 
     async #getPlatforms(display: Display): Promise<Platforms> {
-        const schedule1 = await this.#getTrainSchedules(display.origin.id, display.destination.id);
-        const schedule2 = await this.#getTrainSchedules(display.destination.id, display.origin.id);
-        return {
-            origin: display.origin as RenfeStop,
-            destiny: display.destination as RenfeStop,
-            Platform1: schedule1,
-            Platform2: schedule2,
-            duration1: schedule1.length > 0 ? schedule1[0].duration : undefined,
-            duration2: schedule2.length > 0 ? schedule2[0].duration : undefined
-        };
+        try {
+            const schedule1 = await this.#getTrainSchedules(display.origin.id, display.destination.id);
+            const schedule2 = await this.#getTrainSchedules(display.destination.id, display.origin.id);
+            return {
+                origin: display.origin as RenfeStop,
+                destiny: display.destination as RenfeStop,
+                Platform1: schedule1,
+                Platform2: schedule2,
+                duration1: schedule1.length > 0 ? schedule1[0].duration : undefined,
+                duration2: schedule2.length > 0 ? schedule2[0].duration : undefined
+            };
+        } catch (error) {
+            console.error(`Error getting platforms for ${display.origin.id} to ${display.destination.id}:`, error);
+            return {
+                origin: display.origin as RenfeStop,
+                destiny: display.destination as RenfeStop,
+                Platform1: [],
+                Platform2: [],
+                duration1: undefined,
+                duration2: undefined
+            };
+        }
     }
 
     async #getTrainSchedules(origin: string, destination: string): Promise<TrainSchedule[]> {
-        const now = new Date();
-        const currentHour = now.getUTCHours();
-        const travelDateToday = this.#formatDate(now);
-        const finalHourCandidate = currentHour + 12;
-        let results: any[] = [];
+        try {
+            const now = new Date();
+            const currentHour = now.getUTCHours();
+            const travelDateToday = this.#formatDate(now);
+            const finalHourCandidate = currentHour + 12;
+            let results: any[] = [];
 
-        if (finalHourCandidate <= 26) {
-            const hourFrom = this.#pad(currentHour);
-            const hourTo = this.#pad(finalHourCandidate);
-            const data = await this.#fetchSchedule(origin, destination, travelDateToday, hourFrom, hourTo);
-            results = data.horario || [];
-        } else {
-            const hourFrom1 = this.#pad(currentHour);
-            const hourTo1 = "26";
-            const data1 = await this.#fetchSchedule(origin, destination, travelDateToday, hourFrom1, hourTo1);
-            const results1 = data1.horario || [];
-            const extraHours = finalHourCandidate - 26;
-            const hourFrom2 = "00";
-            const hourTo2 = this.#pad(extraHours);
-            const tomorrow = new Date(now);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            const travelDateTomorrow = this.#formatDate(tomorrow);
-            const data2 = await this.#fetchSchedule(origin, destination, travelDateTomorrow, hourFrom2, hourTo2);
-            const results2 = data2.horario || [];
-            results = [...results1, ...results2];
-        }
-
-        const mappedSchedule: TrainSchedule[] = results.map((item: any) => {
-            const departure = item.horaSalida;
-            const timeToGo = this.#computeTimeToGo(departure, now);
-            let transStation = null;
-
-            let data: TrainSchedule = {
-                line: item.linea || item.lineaEstOrigen || "",
-                trainId: item.cdgoTren,
-                timeToGo,
-                departure,
-                arrival: item.horaLlegadaReal || item.horaLlegada,
-                duration: item.duracion,
-                isAccessible: item.accesible,
-            };
-
-            if (item.trans !== undefined) {
-                const transStopCode = item.trans[0].cdgoEstacion;
-                transStation = this.storageService.getStationById(transStopCode);
-                const timeToGo = this.#computeTimeToGo(item.trans[0].horaSalida, now);
-                data.transData = {
-                    transStation: transStation,
-                    arrival: item.trans[0].horaLlegada,
-                    departure: item.trans[0].horaSalida,
-                    line: item.trans[0].linea,
-                    timeToGo
-                };
+            if (finalHourCandidate <= 26) {
+                const hourFrom = this.#pad(currentHour);
+                const hourTo = this.#pad(finalHourCandidate);
+                const data = await this.#fetchSchedule(origin, destination, travelDateToday, hourFrom, hourTo);
+                results = data?.horario || [];
+            } else {
+                const hourFrom1 = this.#pad(currentHour);
+                const hourTo1 = "26";
+                const data1 = await this.#fetchSchedule(origin, destination, travelDateToday, hourFrom1, hourTo1);
+                const results1 = data1?.horario || [];
+                const extraHours = finalHourCandidate - 26;
+                const hourFrom2 = "00";
+                const hourTo2 = this.#pad(extraHours);
+                const tomorrow = new Date(now);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const travelDateTomorrow = this.#formatDate(tomorrow);
+                const data2 = await this.#fetchSchedule(origin, destination, travelDateTomorrow, hourFrom2, hourTo2);
+                const results2 = data2?.horario || [];
+                results = [...results1, ...results2];
             }
 
-            return data;
-        });
+            const mappedSchedule: TrainSchedule[] = results.map((item: any) => {
+                const departure = item.horaSalida;
+                const timeToGo = this.#computeTimeToGo(departure, now);
+                let transStation = null;
 
-        return mappedSchedule
-            .filter(item => item.timeToGo < 120)
-            .sort((a, b) => a.timeToGo - b.timeToGo);
+                let data: TrainSchedule = {
+                    line: item.linea || item.lineaEstOrigen || "",
+                    trainId: item.cdgoTren,
+                    timeToGo,
+                    departure,
+                    arrival: item.horaLlegadaReal || item.horaLlegada,
+                    duration: item.duracion,
+                    isAccessible: item.accesible,
+                };
+
+                if (item.trans !== undefined) {
+                    const transStopCode = item.trans[0].cdgoEstacion;
+                    transStation = this.storageService.getStationById(transStopCode);
+                    const timeToGo = this.#computeTimeToGo(item.trans[0].horaSalida, now);
+                    data.transData = {
+                        transStation: transStation,
+                        arrival: item.trans[0].horaLlegada,
+                        departure: item.trans[0].horaSalida,
+                        line: item.trans[0].linea,
+                        timeToGo
+                    };
+                }
+
+                return data;
+            });
+
+            return mappedSchedule
+                .filter(item => item.timeToGo < 120)
+                .sort((a, b) => a.timeToGo - b.timeToGo);
+        } catch (error) {
+            console.error(`Error fetching train schedules for ${origin} to ${destination}:`, error);
+            return [];
+        }
     }
 
     #pad(n: number): string {
