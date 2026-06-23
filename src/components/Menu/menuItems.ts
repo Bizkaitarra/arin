@@ -80,6 +80,12 @@ export const renfeMenuItems = [
         path: '/renfe-add-route',
         id: 'renfe-add-trip'
     },
+    {
+        text: 'Buscar a otras horas',
+        icon: timeOutline,
+        path: '/renfe-trip-planner',
+        id: 'renfe-trip-planner'
+    },
 ];
 
 export const kbusMenuItems = [
@@ -94,5 +100,26 @@ export const kbusMenuItems = [
         icon: addCircleOutline,
         path: '/k-bus-add-stop',
         id: 'kbus-add-stop'
+    },
+];
+
+export const euskotrenMenuItems = [
+    {
+        text: 'Mis visores',
+        icon: listOutline,
+        path: '/euskotren-my-displays',
+        id: 'euskotren-my-displays'
+    },
+    {
+        text: 'Añadir viaje',
+        icon: addCircleOutline,
+        path: '/euskotren-add-route',
+        id: 'euskotren-add-trip'
+    },
+    {
+        text: 'Buscar a otras horas',
+        icon: timeOutline,
+        path: '/euskotren-trip-planner',
+        id: 'euskotren-trip-planner'
     },
 ];

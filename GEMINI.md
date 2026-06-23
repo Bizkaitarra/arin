@@ -11,8 +11,7 @@ To build and run the application, you can use the following commands:
 *   **Install dependencies:** `npm install`
 *   **Run in the browser:** `npm run dev`
 *   **Build for production:** `npm run build`
-*   **Run unit tests:** `npm run test.unit`
-*   **Run e2e tests:** `npm run test.e2e`
+*   **Run unit tests:** `make test`
 
 ## Development Conventions
 

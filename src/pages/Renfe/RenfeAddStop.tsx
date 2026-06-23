@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter,} from '@ionic/react';
+import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter, IonButton} from '@ionic/react';
 import {settingsOutline} from 'ionicons/icons';
 import Page from "../Page";
 import {Star, StarOff} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {RenfeStop} from "../../services/Renfe/RenfeStop";
 import {RenfeStorage} from "../../services/Renfe/RenfeStorage";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 
 
-const RenfeAddStop: React.FC = () => {
+interface RenfeAddStopProps {
+  onComplete?: () => void;
+}
+
+const RenfeAddStop: React.FC<RenfeAddStopProps> = ({ onComplete }) => {
     const [stopName, setStopName] = useState<string>('');
     const [stations, setStations] = useState<RenfeStop[]>([]);
     const [filteredStations, setFilteredStations] = useState<RenfeStop[]>([]);
@@ -56,8 +61,8 @@ const RenfeAddStop: React.FC = () => {
         fetchStations();
     };
 
-    return (
-        <Page title={`${t('Añadir paradas')}`} icon={settingsOutline} internalPage={true}>
+    const content = (
+        <div>
             <p>{t('Añade o elimina las paradas favoritas usando la estrella')}</p>
             <IonItem>
                 <IonLabel position="stacked">{t('Nombre de la parada')}</IonLabel>
@@ -80,8 +85,15 @@ const RenfeAddStop: React.FC = () => {
                     </IonItem>
                 ))}
             </IonGrid>
-        </Page>
+            {onComplete && (
+                <SafeAreaBottom>
+                    <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                </SafeAreaBottom>
+            )}
+        </div>
     );
+
+    return onComplete ? content : <Page title={`${t('Añadir paradas')}`} icon={settingsOutline} internalPage={true}>{content}</Page>;
 };
 
 export default RenfeAddStop;

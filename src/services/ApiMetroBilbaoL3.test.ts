@@ -1,19 +1,31 @@
 import { describe, it, expect } from 'vitest';
-import { fetchEuskotrenL3Data } from './ApiMetroBilbaoL3';
+import { getMetroBilbaoL3StopTrains } from './ApiMetroBilbaoL3';
+import { fetchEuskotrenData } from './Euskotren/ApiEuskotren';
+import { Display } from "./MetroBilbao/Display";
 
-describe('fetchEuskotrenL3Data', () => {
+describe('getMetroBilbaoL3StopTrains', () => {
     it('should fetch L3 train data and validate its structure', async () => {
         const originCode = '2641'; // URIBARRI-BILBAO
         const destinationCode = '2597'; // MATIKO-BILBAO
         const today = new Date();
         const maxTrains = 5;
 
-        const trainSchedules = await fetchEuskotrenL3Data(originCode, destinationCode, today, maxTrains);
+        const display: Display = {
+            origin: { Code: originCode, Name: "URIBARRI-BILBAO", Lines: ["L3"], Platform1: [], Platform2: [] },
+            destination: { Code: destinationCode, Name: "MATIKO-BILBAO", Lines: ["L3"], Platform1: [], Platform2: [] },
+        };
 
-        expect(trainSchedules).toBeInstanceOf(Array);
-        expect(trainSchedules.length).toBeGreaterThan(0);
+        const metroStopTrains = await getMetroBilbaoL3StopTrains(display, maxTrains);
 
-        trainSchedules.forEach(train => {
+        expect(metroStopTrains).toHaveProperty('Display');
+        expect(metroStopTrains).toHaveProperty('Platform1');
+        expect(metroStopTrains).toHaveProperty('Platform2');
+        expect(metroStopTrains).toHaveProperty('isRoute');
+
+        expect(metroStopTrains.Platform1).toBeInstanceOf(Array);
+        expect(metroStopTrains.Platform1.length).toBeGreaterThan(0);
+
+        metroStopTrains.Platform1.forEach(train => {
             expect(train).toHaveProperty('Wagons');
             expect(train.Wagons).toBe(0);
 

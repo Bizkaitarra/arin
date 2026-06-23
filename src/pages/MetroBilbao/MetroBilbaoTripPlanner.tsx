@@ -22,10 +22,13 @@ import { useTranslation } from 'react-i18next';
 import Page from '../Page';
 import { searchOutline } from 'ionicons/icons';
 import metroStations from '../../data/paradas_metro.json';
-import { planTrip } from '../../services/ApiMetroBilbao';
+import { ApiMetroBilbao } from '../../services/MetroBilbao/ApiMetroBilbao';
 import './MetroBilbaoTripPlanner.css';
 import ErrorDisplay from '../../components/ErrorDisplay/ErrorDisplay';
-import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal'; // Correctly placed import
+import StationSelectorModal from '../../components/MetroBilbao/StationSelectorModal';
+import '../../components/MetroBilbao/MetroStationCard.css';
+import '../../components/MetroBilbao/MetroPlatform.css';
+import MetroTripResultCard from '../../components/MetroBilbao/MetroTripResultCard';
 
 const timeSlots = [
     { value: '0-4', label: '00:00 - 04:00' },
@@ -100,7 +103,8 @@ const MetroBilbaoTripPlanner: React.FC = () => {
         };
 
         try {
-            const tripResults = await planTrip(params);
+            const api = new ApiMetroBilbao();
+            const tripResults = await api.planTrip(params);
             if (tripResults && tripResults.trips) {
                 setResults(tripResults);
             } else {
@@ -128,9 +132,11 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             <StationSelectorModal
                 isOpen={showOriginModal}
                 onClose={() => setShowOriginModal(false)}
+                onCancel={() => setShowOriginModal(false)}
                 onSelectStation={(code, name) => {
                     setOrigin(code);
                     setOriginName(name);
+                    setShowOriginModal(false);
                 }}
                 stations={filteredMetroStations}
                 title={t('Selecciona estación de origen')}
@@ -148,9 +154,11 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             <StationSelectorModal
                 isOpen={showDestinationModal}
                 onClose={() => setShowDestinationModal(false)}
+                onCancel={() => setShowDestinationModal(false)}
                 onSelectStation={(code, name) => {
                     setDestination(code);
                     setDestinationName(name);
+                    setShowDestinationModal(false);
                 }}
                 stations={filteredMetroStations}
                 title={t('Selecciona estación de destino')}
@@ -158,7 +166,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             />
             <IonItem>
                 <IonLabel position="stacked">{t('Fecha')}</IonLabel>
-                <IonDatetime className="trip-planner-datetime" value={date} onIonChange={e => setDate(e.detail.value! as string)} presentation="date" locale={locale} firstDayOfWeek={1}/>
+                <IonDatetime className="trip-planner-datetime" value={date} onIonChange={e => setDate(e.detail.value! as string)} presentation="date" locale={locale} firstDayOfWeek={1} />
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">{t('Franja horaria')}</IonLabel>
@@ -175,24 +183,7 @@ const MetroBilbaoTripPlanner: React.FC = () => {
             {error && <ErrorDisplay message={error} />}
 
             {results && results.trips && (
-                <IonCard className="trip-results-card" style={{ marginTop: '1rem' }}>
-                    <IonCardHeader className="metro-station-card-header">
-                        <IonCardTitle className="metro-station-card-title">{`${results.origin.name} -> ${results.destiny.name}`}</IonCardTitle>
-                    </IonCardHeader>
-                    <IonCardContent>
-                        <div className="train-list-header">{t('Duración media del viaje')}: {results.time} {t('minutos')}</div>
-                        <IonList>
-                            {Object.values(results.trips).flat().map((trip: any, index: number) => (
-                                <IonItem key={index}>
-                                    <IonLabel>
-                                        <p><strong>{t('Salida')}:</strong> {trip.originArrivalTimeRounder}</p>
-                                        <p><strong>{t('Llegada')}:</strong> {trip.destinyArrivalTimeRounder}</p>
-                                    </IonLabel>
-                                </IonItem>
-                            ))}
-                        </IonList>
-                    </IonCardContent>
-                </IonCard>
+                <MetroTripResultCard results={results} />
             )}
         </Page>
     );

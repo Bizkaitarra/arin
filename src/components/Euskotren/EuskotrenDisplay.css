@@ -1,0 +1,32 @@
+/* Contenedor principal */
+.euskotren-display {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: #f9f9f9;
+}
+
+/* Contenedores de error y carga */
+.error-container,
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Opcional: Clase para parpadeo si se requiere */
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Clase para ocultar elementos */
+.d-none {
+    display: none;
+}

@@ -1,6 +1,7 @@
 let bizkaibusIntervalId: NodeJS.Timeout | null = null;
 let metroBilbaoIntervalId: NodeJS.Timeout | null = null;
 let renfeIntervalId: NodeJS.Timeout | null = null;
+let euskotrenIntervalId: NodeJS.Timeout | null = null;
 
 function getIntervalMs(refreshRate: string): number {
   switch (refreshRate) {
@@ -36,9 +37,17 @@ export function setIntervalMetroBilbao(callback: () => void, refreshRate: string
     metroBilbaoIntervalId = setInterval(callback, intervalMs);
   }
 }
+export function setIntervalEuskotren(callback: () => void, refreshRate: string) {
+  if (euskotrenIntervalId) clearInterval(euskotrenIntervalId);
+  const intervalMs = getIntervalMs(refreshRate);
+  if (intervalMs > 0) {
+    euskotrenIntervalId = setInterval(callback, intervalMs);
+  }
+}
 
 export function clearIntervals() {
   if (bizkaibusIntervalId) clearInterval(bizkaibusIntervalId);
   if (metroBilbaoIntervalId) clearInterval(metroBilbaoIntervalId);
   if (renfeIntervalId) clearInterval(renfeIntervalId);
+  if (euskotrenIntervalId) clearInterval(euskotrenIntervalId);
 }

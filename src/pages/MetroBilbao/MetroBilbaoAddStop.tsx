@@ -1,21 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {IonGrid, IonItem, IonLabel, IonSearchbar, IonSegment, IonSegmentButton, useIonViewWillEnter,} from '@ionic/react';
-import {settingsOutline} from 'ionicons/icons';
+import React, { useEffect, useState } from 'react';
+import { IonButton, IonGrid, IonItem, IonLabel, IonSearchbar, IonSegment, IonSegmentButton, useIonViewWillEnter, } from '@ionic/react';
+import { settingsOutline } from 'ionicons/icons';
 import Page from "../Page";
-import {addDisplay, getMetroStops, MetroStop, removeDisplay, saveMetroStops} from "../../services/MetroBilbaoStorage";
-import {Star, StarOff} from "lucide-react";
-import {useTranslation} from "react-i18next";
+import { addDisplay, getMetroStops, MetroStop, removeDisplay, saveMetroStops } from "../../services/MetroBilbaoStorage";
+import { Star, StarOff } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
 
 
-const MetroBilbaoAddStop: React.FC = () => {
+interface MetroBilbaoAddStopProps {
+    onComplete?: () => void;
+}
+
+const MetroBilbaoAddStop: React.FC<MetroBilbaoAddStopProps> = ({ onComplete }) => {
     const [stopName, setStopName] = useState<string>('');
     const [stations, setStations] = useState<MetroStop[]>([]);
     const [selectedLines, setSelectedLines] = useState<string[]>([]);
     const [filteredStations, setFilteredStations] = useState<MetroStop[]>([]);
     const { t } = useTranslation();
 
-    useIonViewWillEnter(() => {
-         fetchStations();
+    useEffect(() => {
+        fetchStations();
     }, []);
 
     const fetchStations = async () => {
@@ -69,15 +74,15 @@ const MetroBilbaoAddStop: React.FC = () => {
 
         setStations(prevStations =>
             prevStations.map(s =>
-                s.Code === stop.Code ? {...s, IsFavorite: newFavoriteStatus} : s
+                s.Code === stop.Code ? { ...s, IsFavorite: newFavoriteStatus } : s
             )
         );
     };
 
     const allLines = ['L1', 'L2', 'L3'];
 
-    return (
-        <Page title={`${t('Añadir paradas')}`} icon={settingsOutline} internalPage={true}>
+    const content = (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <p>{t('Añade o elimina las paradas favoritas usando la estrella')}</p>
             <IonSearchbar
                 value={stopName}
@@ -96,21 +101,40 @@ const MetroBilbaoAddStop: React.FC = () => {
                 ))}
             </IonSegment>
 
-            <IonGrid>
-                {filteredStations.map((stop) => (
-                    <IonItem key={stop.Code}>
-                        <IonLabel>
-                            <h3>{stop.Code} - {stop.Name}</h3>
-                            <p>{stop.Lines.join(',')}</p>
-                        </IonLabel>
-                        {stop.IsFavorite ?
-                            <Star color="red" onClick={() => handleRemoveStop(stop)}/> :
-                            <StarOff color="gray" onClick={() => handleAddStop(stop)}/>}
-                    </IonItem>
-                ))}
-            </IonGrid>
-        </Page>
+            <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
+                <IonGrid>
+                    {filteredStations.map((stop) => (
+                        <IonItem key={stop.Code}>
+                            <IonLabel>
+                                <h3>{stop.Code} - {stop.Name}</h3>
+                                <p>{stop.Lines.join(',')}</p>
+                            </IonLabel>
+                            {stop.IsFavorite ?
+                                <Star color="red" onClick={() => handleRemoveStop(stop)} /> :
+                                <StarOff color="gray" onClick={() => handleAddStop(stop)} />}
+                        </IonItem>
+                    ))}
+                </IonGrid>
+            </div>
+            {
+                onComplete && (
+                    <SafeAreaBottom extraPadding={0}>
+                        <div style={{
+                            padding: '16px',
+                            background: 'var(--ion-background-color)',
+                            borderTop: '1px solid var(--ion-color-step-150, #d7d8da)',
+                        }}>
+                            <IonButton expand="block" onClick={onComplete}>
+                                {t('Terminar y Continuar')}
+                            </IonButton>
+                        </div>
+                    </SafeAreaBottom>
+                )
+            }
+        </div >
     );
+
+    return onComplete ? content : <Page title={`${t('Añadir paradas')}`} icon={settingsOutline} internalPage={true}>{content}</Page>;
 };
 
 export default MetroBilbaoAddStop;

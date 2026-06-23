@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {IonRefresher, IonRefresherContent, IonText, useIonViewWillEnter,} from '@ionic/react';
-import {getMetroDisplaysTrains} from '../../services/ApiMetroBilbao';
+import {ApiMetroBilbao} from '../../services/MetroBilbao/ApiMetroBilbao';
 import './MetroDisplay.css';
 import {setIntervalMetroBilbao} from '../../services/IntervalServices';
 import Loader from '../Loader';
@@ -9,25 +9,8 @@ import {useTranslation} from "react-i18next";
 import {useConfiguration} from "../../context/ConfigurationContext";
 import MetroStationCard from "./MetroStationCard";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
-import paradasMetro from "../../data/paradas_metro.json";
-import {Display} from "../../services/MetroBilbao/Display";
 
-function isL3Station(stationCode: string): boolean {
-    const station = paradasMetro.find(p => p.Code === stationCode);
-    return station?.Lines.includes("L3") || false;
-}
 
-function isMixedL3Display(display: Display): boolean {
-    const originIsL3 = isL3Station(display.origin.Code);
-    const destinationIsL3 = display.destination ? isL3Station(display.destination.Code) : false;
-
-    if (!display.destination) { // Single stop
-        return originIsL3; // Ignore if it's a single L3 stop
-    } else { // Route
-        // Ignore if one is L3 and the other is not
-        return (originIsL3 && !destinationIsL3) || (!originIsL3 && destinationIsL3);
-    }
-}
 
 const MetroDisplay: React.FC = () => {
     const {t} = useTranslation();
@@ -47,7 +30,8 @@ const MetroDisplay: React.FC = () => {
         try {
             setLoading(true);
             const displays = getSavedDisplays();
-            const data = await getMetroDisplaysTrains(displays, settings.maxTrenes);
+            const api = new ApiMetroBilbao();
+            const data = await api.getMetroDisplaysTrains(displays, settings.maxTrenes);
             setMetroData(data);
             setLoading(false);
             setError(null);

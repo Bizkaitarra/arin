@@ -1,24 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import {IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter,} from '@ionic/react';
-import {settingsOutline} from 'ionicons/icons';
+
+import React, { useEffect, useState } from 'react';
+import { IonGrid, IonInput, IonItem, IonLabel, useIonViewWillEnter, IonButton } from '@ionic/react';
+import { settingsOutline } from 'ionicons/icons';
 import Page from "../Page";
-import {addDisplay, getMetroStops, MetroStop, removeDisplay, saveMetroStops} from "../../services/MetroBilbaoStorage";
-import {Star, StarOff} from "lucide-react";
-import {useTranslation} from "react-i18next";
-import {KBusStorage} from "../../services/KBus/KBusStorage";
-import {Stop} from "../../services/Stop";
-import {KBusStop} from "../../services/KBus/KbusStop";
+import { addDisplay, getMetroStops, MetroStop, removeDisplay, saveMetroStops } from "../../services/MetroBilbaoStorage";
+import { Star, StarOff } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { KBusStorage } from "../../services/KBus/KBusStorage";
+import { Stop } from "../../services/Stop";
+import SafeAreaBottom from '../../components/SafeAreaBottom';
+import { KBusStop } from "../../services/KBus/KbusStop";
 
 
-const KBusAddStop: React.FC = () => {
+interface KBusAddStopProps {
+    onComplete?: () => void;
+}
+
+const KBusAddStop: React.FC<KBusAddStopProps> = ({ onComplete }) => {
     const [stopName, setStopName] = useState<string>('');
     const [stations, setStations] = useState<KBusStop[]>([]);
     const [filteredStations, setFilteredStations] = useState<KBusStop[]>([]);
     const { t } = useTranslation();
     const storageService = new KBusStorage();
 
-    useIonViewWillEnter(() => {
-         fetchStations();
+    useEffect(() => {
+        fetchStations();
     }, []);
 
     const fetchStations = async () => {
@@ -58,32 +64,46 @@ const KBusAddStop: React.FC = () => {
         fetchStations();
     };
 
-    return (
-        <Page title={`${t('Añadir paradas')}`} icon={settingsOutline} internalPage={true}>
-            <p>{t('Añade o elimina las paradas favoritas usando la estrella')}</p>
-            <IonItem>
-                <IonLabel position="stacked">{t('Nombre de la parada')}</IonLabel>
-                <IonInput
-                    value={stopName}
-                    placeholder={t('Escribe para filtrar')}
-                    onIonInput={(e) => setStopName(e.detail.value!)}
-                />
-            </IonItem>
+    const content = (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div style={{ flexShrink: 0 }}>
+                <p>{t('Añade o elimina las paradas favoritas usando la estrella')}</p>
+                <IonItem>
+                    <IonLabel position="stacked">{t('Nombre de la parada')}</IonLabel>
+                    <IonInput
+                        value={stopName}
+                        placeholder={t('Escribe para filtrar')}
+                        onIonInput={(e) => setStopName(e.detail.value!)}
+                    />
+                </IonItem>
+            </div>
 
-            <IonGrid>
-                {filteredStations.map((stop) => (
-                    <IonItem key={stop.id}>
-                        <IonLabel>
-                            <h3>{stop.name}</h3>
-                        </IonLabel>
-                        {stop.isFavorite ?
-                            <Star color="red" onClick={() => handleRemoveStop(stop)}/> :
-                            <StarOff color="gray" onClick={() => handleAddStop(stop)}/>}
-                    </IonItem>
-                ))}
-            </IonGrid>
-        </Page>
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+                <IonGrid>
+                    {filteredStations.map((stop) => (
+                        <IonItem key={stop.id}>
+                            <IonLabel>
+                                <h3>{stop.name}</h3>
+                            </IonLabel>
+                            {stop.isFavorite ?
+                                <Star color="red" onClick={() => handleRemoveStop(stop)} /> :
+                                <StarOff color="gray" onClick={() => handleAddStop(stop)} />}
+                        </IonItem>
+                    ))}
+                </IonGrid>
+            </div>
+            {/* Wizard handles navigation via "Volver" button */}
+            {!onComplete && (
+                <SafeAreaBottom>
+                    <div style={{ flexShrink: 0 }}>
+                        <IonButton onClick={onComplete}>{t('Siguiente')}</IonButton>
+                    </div>
+                </SafeAreaBottom>
+            )}
+        </div>
     );
+
+    return onComplete ? content : <Page title={`${t('Añadir paradas')} `} icon={settingsOutline} internalPage={true}>{content}</Page>;
 };
 
 export default KBusAddStop;

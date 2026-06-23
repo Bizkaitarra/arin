@@ -86,6 +86,31 @@ const Configuration: React.FC = () => {
 
                 <IonCard>
                     <IonCardHeader>
+                        <IonCardTitle>{t('Euskotren')}</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                        <IonItem>
+                            <IonLabel>{t('Mostrar trenes hasta')}</IonLabel>
+                            <IonSelect name="euskotrenMaxTrenes" value={settings.euskotrenMaxTrenes} onIonChange={(e) => handleSettingChange('euskotrenMaxTrenes', parseInt(e.detail.value, 10))}>
+                                <IonSelectOption value={15}>15 {t('minutos')}</IonSelectOption>
+                                <IonSelectOption value={30}>30 {t('minutos')}</IonSelectOption>
+                                <IonSelectOption value={45}>45 {t('minutos')}</IonSelectOption>
+                                <IonSelectOption value={60}>60 {t('minutos')}</IonSelectOption>
+                            </IonSelect>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel>{t('Plegado de visores')}</IonLabel>
+                            <IonSelect name="euskotrenDisplayFolding" value={settings.euskotrenDisplayFolding} onIonChange={(e) => handleSettingChange('euskotrenDisplayFolding', e.detail.value)}>
+                                <IonSelectOption value={"disabled"}>{t('Desactivado')}</IonSelectOption>
+                                <IonSelectOption value={"collapsed"}>{t('Plegados')}</IonSelectOption>
+                                <IonSelectOption value={"not-collapsed"}>{t('Desplegados')}</IonSelectOption>
+                            </IonSelect>
+                        </IonItem>
+                    </IonCardContent>
+                </IonCard>
+
+                <IonCard>
+                    <IonCardHeader>
                         <IonCardTitle>{t('Bizkaibus')}</IonCardTitle>
                     </IonCardHeader>
                     <IonCardContent>

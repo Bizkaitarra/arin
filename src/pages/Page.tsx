@@ -26,13 +26,14 @@ import {
     mapOutline,
     menuOutline,
     settingsOutline,
-    trainOutline
+    trainOutline,
+    helpCircleOutline
 } from "ionicons/icons";
 import {useHistory, useLocation} from 'react-router-dom';
 import {App} from '@capacitor/app';
 import {Toast} from '@capacitor/toast';
 import ReviewModal from "./ReviewModal";
-import {bizkaibusMenuItems, kbusMenuItems, metroMenuItems, renfeMenuItems} from "../components/Menu/menuItems";
+import {bizkaibusMenuItems, kbusMenuItems, metroMenuItems, renfeMenuItems, euskotrenMenuItems} from "../components/Menu/menuItems";
 import FabMenu from '../components/FabMenu';
 import {useConfiguration} from '../context/ConfigurationContext';
 import SwipeWrapper from '../components/SwipeWrapper';
@@ -52,6 +53,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
     const location = useLocation();
     const [transportType, setTransportType] = useState('');
     const [exitAttempt, setExitAttempt] = useState(false);
+
 
     useEffect(() => {
         let backButtonListener: any;
@@ -94,6 +96,8 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
             setTransportType('Renfe');
         } else if (location.pathname.includes("k-bus")) {
             setTransportType('KBus');
+        } else if (location.pathname.includes("euskotren")) {
+            setTransportType('Euskotren');
         } else {
             setTransportType('');
         }
@@ -124,14 +128,16 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
         'Bizkaibus': { icon: busOutline, className: 'bizkaibus-header-icon' },
         'Metro Bilbao': { icon: trainOutline, className: 'metro-header-icon' },
         'Renfe': { icon: trainOutline, className: 'renfe-header-icon' },
-        'KBus': { icon: mapOutline, className: 'kbus-header-icon' }
+        'KBus': { icon: mapOutline, className: 'kbus-header-icon' },
+        'Euskotren': { icon: trainOutline, className: 'euskotren-header-icon' } // Added Euskotren
     };
 
     const viewerPages = [
         { path: '/bizkaibus-displays', id: 'bizkaibus' },
         { path: '/metro-bilbao-displays', id: 'metro' },
         { path: '/k-bus-displays', id: 'kbus' },
-        { path: '/renfe-displays', id: 'renfe' }
+        { path: '/renfe-displays', id: 'renfe' },
+        { path: '/euskotren-displays', id: 'euskotren' } // Added Euskotren
     ];
 
     const activeViewerPages = viewerPages.filter(page => settings?.atajos?.includes(page.id));
@@ -154,6 +160,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
 
     return (
         <>
+
             <ReviewModal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)}/>
 
             {/* Modal en lugar del menú lateral */}
@@ -216,6 +223,19 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                             </IonItem>
                         ))}
 
+                        {/* Euskotren Menu Items */}
+                        <h3 className="section-title">{t('Euskotren')}</h3>
+                        <IonItem button onClick={() => handleNavigation("/euskotren-displays")}>
+                            <IonIcon slot="start" icon={trainOutline}/>
+                            <IonLabel>{t('Visores')}</IonLabel>
+                        </IonItem>
+                        {euskotrenMenuItems.map((item, index) => (
+                            <IonItem key={index} button onClick={() => handleNavigation(item.path)} id={item.id}>
+                                <IonIcon slot="start" icon={item.icon}/>
+                                <IonLabel>{t(item.text)}</IonLabel>
+                            </IonItem>
+                        ))}
+
                         <h3 className="section-title">{t('General')}</h3>
                         <IonItem button onClick={() => handleNavigation("/configuration")} id="config-menu-item">
                             <IonIcon slot="start" icon={settingsOutline}/>
@@ -229,7 +249,7 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                 </IonContent>
             </IonModal>
 
-            <IonPage fullscreen="true">
+            <IonPage>
                 <IonHeader>
                     <IonToolbar>
                         <IonButtons slot="start">
@@ -239,11 +259,15 @@ const Page: React.FC<PageProps> = ({title, icon, children, internalPage = false}
                                 </IonButton>
                             ) : (
                                 <IonButton id="main-menu-button" onClick={() => setShowModal(true)}>
-                                    <IonIcon icon={menuOutline}/>
-                                </IonButton>
-                            )}
-
-                        </IonButtons>
+                                                                    <IonIcon icon={menuOutline}/>
+                                                                    </IonButton>
+                                                                )}
+                                                            </IonButtons>
+                                                            <IonButtons slot="end">
+                                                                <IonButton onClick={() => history.push('/guided-setup')}>
+                                                                    <IonIcon icon={helpCircleOutline}/>
+                                                                </IonButton>
+                                                            </IonButtons>
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',

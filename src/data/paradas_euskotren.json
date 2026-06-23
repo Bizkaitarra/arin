@@ -1,0 +1,1776 @@
+[
+    {
+        "Code": "2603",
+        "Name": "Traña-Abadiño",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2618"
+        ],
+        "Platform2": [
+            "2619"
+        ]
+    },
+    {
+        "Code": "2592",
+        "Name": "Aia-Orio",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2664"
+        ],
+        "Platform2": [
+            "2653"
+        ]
+    },
+    {
+        "Code": "2637",
+        "Name": "Amorebieta Geltokia",
+        "Lines": [
+            "E4",
+            "FCC"
+        ],
+        "Platform1": [
+            "2586",
+            "2587"
+        ],
+        "Platform2": [
+            "2606"
+        ]
+    },
+    {
+        "Code": "2586",
+        "Name": "Amorebieta Geralekua",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2657"
+        ],
+        "Platform2": [
+            "2637"
+        ]
+    },
+    {
+        "Code": "2606",
+        "Name": "Euba-Amorebieta",
+        "Lines": [
+            "FCC"
+        ],
+        "Platform1": [
+            "2637"
+        ],
+        "Platform2": [
+            "2618"
+        ]
+    },
+    {
+        "Code": "2646",
+        "Name": "Ariz-Basauri",
+        "Lines": [
+            "FCC",
+            "E1"
+        ],
+        "Platform1": [
+            "2591",
+            "2639"
+        ],
+        "Platform2": [
+            "2598",
+            "2587"
+        ]
+    },
+    {
+        "Code": "2620",
+        "Name": "Bedia",
+        "Lines": [
+            "FCC"
+        ],
+        "Platform1": [
+            "2661"
+        ],
+        "Platform2": [
+            "2587"
+        ]
+    },
+    {
+        "Code": "2579",
+        "Name": "Bermeo",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [],
+        "Platform2": [
+            "2616"
+        ]
+    },
+    {
+        "Code": "2600",
+        "Name": "Berriz",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2603"
+        ],
+        "Platform2": [
+            "2655"
+        ]
+    },
+    {
+        "Code": "1471",
+        "Name": "Abando",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1478"
+        ],
+        "Platform2": [
+            "1480"
+        ]
+    },
+    {
+        "Code": "1475",
+        "Name": "Abandoibarra",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1479"
+        ],
+        "Platform2": [
+            "1476"
+        ]
+    },
+    {
+        "Code": "2673",
+        "Name": "Abusu",
+        "Lines": [
+            "E1",
+            "E4"
+        ],
+        "Platform1": [
+            "2671"
+        ],
+        "Platform2": [
+            "2674"
+        ]
+    },
+    {
+        "Code": "1480",
+        "Name": "Arriaga",
+        "Lines": [
+            "Tranvia-Bilbao",
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1471",
+            "1559"
+        ],
+        "Platform2": [
+            "1473",
+            "1569"
+        ]
+    },
+    {
+        "Code": "1468",
+        "Name": "Atxuri",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1473"
+        ],
+        "Platform2": []
+    },
+    {
+        "Code": "1481",
+        "Name": "Basurto",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1477"
+        ],
+        "Platform2": [
+            "1472"
+        ]
+    },
+    {
+        "Code": "2674",
+        "Name": "Bolueta",
+        "Lines": [
+            "E1",
+            "E4"
+        ],
+        "Platform1": [
+            "2673"
+        ],
+        "Platform2": [
+            "2675"
+        ]
+    },
+    {
+        "Code": "1479",
+        "Name": "Euskalduna",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1474"
+        ],
+        "Platform2": [
+            "1475"
+        ]
+    },
+    {
+        "Code": "1476",
+        "Name": "Guggenheim",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1475"
+        ],
+        "Platform2": [
+            "1469"
+        ]
+    },
+    {
+        "Code": "1472",
+        "Name": "Hospital/Ospitalea",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1481"
+        ],
+        "Platform2": [
+            "1470"
+        ]
+    },
+    {
+        "Code": "1477",
+        "Name": "la Casilla",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [],
+        "Platform2": [
+            "1481"
+        ]
+    },
+    {
+        "Code": "2597",
+        "Name": "Matiko (Bilbao)",
+        "Lines": [
+            "E3",
+            "FCC",
+            "E1"
+        ],
+        "Platform1": [
+            "2585"
+        ],
+        "Platform2": [
+            "2641",
+            "2577"
+        ]
+    },
+    {
+        "Code": "2663",
+        "Name": "Otxarkoaga-Bilbao",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2609"
+        ],
+        "Platform2": [
+            "2639"
+        ]
+    },
+    {
+        "Code": "1478",
+        "Name": "Pio Baroja",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1469"
+        ],
+        "Platform2": [
+            "1471"
+        ]
+    },
+    {
+        "Code": "1473",
+        "Name": "Ribera",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1480"
+        ],
+        "Platform2": [
+            "1468"
+        ]
+    },
+    {
+        "Code": "1474",
+        "Name": "Sabino Arana",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1470"
+        ],
+        "Platform2": [
+            "1479"
+        ]
+    },
+    {
+        "Code": "1470",
+        "Name": "San Mames",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1472"
+        ],
+        "Platform2": [
+            "1474"
+        ]
+    },
+    {
+        "Code": "2609",
+        "Name": "Txurdinaga-Bilbao",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2617"
+        ],
+        "Platform2": [
+            "2663"
+        ]
+    },
+    {
+        "Code": "2641",
+        "Name": "Uribarri-Bilbao",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2597"
+        ],
+        "Platform2": [
+            "2577"
+        ]
+    },
+    {
+        "Code": "1469",
+        "Name": "Uribitarte",
+        "Lines": [
+            "Tranvia-Bilbao"
+        ],
+        "Platform1": [
+            "1476"
+        ],
+        "Platform2": [
+            "1478"
+        ]
+    },
+    {
+        "Code": "2577",
+        "Name": "Zazpikaleak/Casco Viejo",
+        "Lines": [
+            "E3",
+            "FCC",
+            "E1"
+        ],
+        "Platform1": [
+            "2641",
+            "2597"
+        ],
+        "Platform2": [
+            "2617",
+            "2639"
+        ]
+    },
+    {
+        "Code": "2617",
+        "Name": "Zurbaranbarri-Bilbao",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2577"
+        ],
+        "Platform2": [
+            "2609"
+        ]
+    },
+    {
+        "Code": "2615",
+        "Name": "Axpe-Busturia",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2599"
+        ],
+        "Platform2": [
+            "2660"
+        ]
+    },
+    {
+        "Code": "2599",
+        "Name": "Itsasbegi-Busturia",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2616"
+        ],
+        "Platform2": [
+            "2615"
+        ]
+    },
+    {
+        "Code": "2660",
+        "Name": "San Kristobal-Busturia",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2615"
+        ],
+        "Platform2": [
+            "2643"
+        ]
+    },
+    {
+        "Code": "2633",
+        "Name": "Deba",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2650",
+            "2622"
+        ],
+        "Platform2": [
+            "2613",
+            "2604"
+        ]
+    },
+    {
+        "Code": "2614",
+        "Name": "Derio",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2652"
+        ],
+        "Platform2": [
+            "2629"
+        ]
+    },
+    {
+        "Code": "2631",
+        "Name": "Altza-Donostia",
+        "Lines": [
+            "E5"
+        ],
+        "Platform1": [
+            "2624"
+        ],
+        "Platform2": []
+    },
+    {
+        "Code": "2581",
+        "Name": "Amara (Donostia)",
+        "Lines": [
+            "E5",
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2621"
+        ],
+        "Platform2": [
+            "2590"
+        ]
+    },
+    {
+        "Code": "2590",
+        "Name": "Anoeta",
+        "Lines": [
+            "E5",
+            "E2"
+        ],
+        "Platform1": [
+            "2581"
+        ],
+        "Platform2": [
+            "2608",
+            "3001"
+        ]
+    },
+    {
+        "Code": "2647",
+        "Name": "Añorga",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2651",
+            "2653"
+        ],
+        "Platform2": [
+            "2621"
+        ]
+    },
+    {
+        "Code": "2651",
+        "Name": "Errekalde",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2653",
+            "2580"
+        ],
+        "Platform2": [
+            "2647"
+        ]
+    },
+    {
+        "Code": "2624",
+        "Name": "Herrera",
+        "Lines": [
+            "E5",
+            "E2"
+        ],
+        "Platform1": [
+            "2648"
+        ],
+        "Platform2": [
+            "2631",
+            "2667"
+        ]
+    },
+    {
+        "Code": "2648",
+        "Name": "Intxaurrondo",
+        "Lines": [
+            "E5",
+            "E2"
+        ],
+        "Platform1": [
+            "2608",
+            "3001"
+        ],
+        "Platform2": [
+            "2624"
+        ]
+    },
+    {
+        "Code": "2608",
+        "Name": "Loiola-Donostia",
+        "Lines": [
+            "E5"
+        ],
+        "Platform1": [
+            "2590"
+        ],
+        "Platform2": [
+            "2648"
+        ]
+    },
+    {
+        "Code": "2621",
+        "Name": "Lugaritz",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2647"
+        ],
+        "Platform2": [
+            "2581"
+        ]
+    },
+    {
+        "Code": "2618",
+        "Name": "Durango",
+        "Lines": [
+            "FCC",
+            "E1"
+        ],
+        "Platform1": [
+            "2606",
+            "2587"
+        ],
+        "Platform2": [
+            "2622",
+            "2603"
+        ]
+    },
+    {
+        "Code": "2635",
+        "Name": "Amaña-Eibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2594"
+        ],
+        "Platform2": [
+            "2656"
+        ]
+    },
+    {
+        "Code": "2656",
+        "Name": "Ardantza-Eibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2635"
+        ],
+        "Platform2": [
+            "2619"
+        ]
+    },
+    {
+        "Code": "2640",
+        "Name": "Azitain-Eibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2619"
+        ],
+        "Platform2": [
+            "2622"
+        ]
+    },
+    {
+        "Code": "2619",
+        "Name": "Eibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2656",
+            "2603"
+        ],
+        "Platform2": [
+            "2640",
+            "2622"
+        ]
+    },
+    {
+        "Code": "2594",
+        "Name": "Unibertsitatea-Eibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2627"
+        ],
+        "Platform2": [
+            "2635"
+        ]
+    },
+    {
+        "Code": "2626",
+        "Name": "Altzola-Elgoibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2658"
+        ],
+        "Platform2": [
+            "2650"
+        ]
+    },
+    {
+        "Code": "2622",
+        "Name": "Elgoibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2640",
+            "2619"
+        ],
+        "Platform2": [
+            "2658",
+            "2633"
+        ]
+    },
+    {
+        "Code": "2658",
+        "Name": "Toletxegain-Elgoibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2622"
+        ],
+        "Platform2": [
+            "2626"
+        ]
+    },
+    {
+        "Code": "2576",
+        "Name": "Lutxana-Erandio",
+        "Lines": [
+            "E3A"
+        ],
+        "Platform1": [
+            "2611"
+        ],
+        "Platform2": []
+    },
+    {
+        "Code": "2666",
+        "Name": "Ermua",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2655"
+        ],
+        "Platform2": [
+            "2602"
+        ]
+    },
+    {
+        "Code": "2602",
+        "Name": "Errotabarri-Ermua",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2666"
+        ],
+        "Platform2": [
+            "2627"
+        ]
+    },
+    {
+        "Code": "2627",
+        "Name": "San Lorentzo-Ermua",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2602"
+        ],
+        "Platform2": [
+            "2594"
+        ]
+    },
+    {
+        "Code": "2665",
+        "Name": "Errenteria",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2610"
+        ],
+        "Platform2": [
+            "2625"
+        ]
+    },
+    {
+        "Code": "2625",
+        "Name": "Fanderia-Errenteria",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2665"
+        ],
+        "Platform2": [
+            "2612"
+        ]
+    },
+    {
+        "Code": "2610",
+        "Name": "Galtzaraborda-Errenteria",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2667"
+        ],
+        "Platform2": [
+            "2665"
+        ]
+    },
+    {
+        "Code": "2591",
+        "Name": "Etxebarri",
+        "Lines": [
+            "FCC"
+        ],
+        "Platform1": [
+            "2639"
+        ],
+        "Platform2": [
+            "2646"
+        ]
+    },
+    {
+        "Code": "2639",
+        "Name": "Kukullaga-Etxebarri",
+        "Lines": [
+            "E3",
+            "FCC",
+            "E1"
+        ],
+        "Platform1": [
+            "2663",
+            "2577"
+        ],
+        "Platform2": [
+            "2591",
+            "2646"
+        ]
+    },
+    {
+        "Code": "2643",
+        "Name": "Forua",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2660"
+        ],
+        "Platform2": [
+            "2593"
+        ]
+    },
+    {
+        "Code": "2598",
+        "Name": "Zuhaztu-Galdakao",
+        "Lines": [
+            "FCC"
+        ],
+        "Platform1": [
+            "2646"
+        ],
+        "Platform2": [
+            "2661"
+        ]
+    },
+    {
+        "Code": "2645",
+        "Name": "Gernika",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2593"
+        ],
+        "Platform2": [
+            "2588"
+        ]
+    },
+    {
+        "Code": "2593",
+        "Name": "Institutoa-Gernika",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2643"
+        ],
+        "Platform2": [
+            "2645"
+        ]
+    },
+    {
+        "Code": "2588",
+        "Name": "Lurgorri-Gernika",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2645"
+        ],
+        "Platform2": [
+            "2596"
+        ]
+    },
+    {
+        "Code": "2582",
+        "Name": "Hendaia",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2589"
+        ],
+        "Platform2": []
+    },
+    {
+        "Code": "2636",
+        "Name": "Belaskoenea",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2632"
+        ],
+        "Platform2": [
+            "2589"
+        ]
+    },
+    {
+        "Code": "2632",
+        "Name": "Bentak (Irún)",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2612"
+        ],
+        "Platform2": [
+            "2636"
+        ]
+    },
+    {
+        "Code": "2649",
+        "Name": "Ficoba-Irun",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2631"
+        ],
+        "Platform2": [
+            "2633"
+        ]
+    },
+    {
+        "Code": "2589",
+        "Name": "Irun-Colon",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2636"
+        ],
+        "Platform2": [
+            "2582"
+        ]
+    },
+    {
+        "Code": "2580",
+        "Name": "Lasarte-Oria",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [],
+        "Platform2": [
+            "2651"
+        ]
+    },
+    {
+        "Code": "2587",
+        "Name": "Lemoa",
+        "Lines": [
+            "FCC",
+            "E1"
+        ],
+        "Platform1": [
+            "2620",
+            "2646"
+        ],
+        "Platform2": [
+            "2603",
+            "2637",
+            "2618"
+        ]
+    },
+    {
+        "Code": "2638",
+        "Name": "Kurtzea-Lezama",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2607"
+        ],
+        "Platform2": [
+            "2642"
+        ]
+    },
+    {
+        "Code": "2607",
+        "Name": "Lezama",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [],
+        "Platform2": [
+            "2638"
+        ]
+    },
+    {
+        "Code": "2654",
+        "Name": "Gaintxurizketa-Lezo",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2615"
+        ],
+        "Platform2": [
+            "2626"
+        ]
+    },
+    {
+        "Code": "2629",
+        "Name": "Elotxelerri-Loiu",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2614"
+        ],
+        "Platform2": [
+            "2601"
+        ]
+    },
+    {
+        "Code": "2601",
+        "Name": "Larrondo-Loiu",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2629"
+        ],
+        "Platform2": [
+            "2595"
+        ]
+    },
+    {
+        "Code": "2650",
+        "Name": "Mendaro",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2626"
+        ],
+        "Platform2": [
+            "2633"
+        ]
+    },
+    {
+        "Code": "2616",
+        "Name": "Mundaka",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2579"
+        ],
+        "Platform2": [
+            "2599"
+        ]
+    },
+    {
+        "Code": "2596",
+        "Name": "Muxika",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2588"
+        ],
+        "Platform2": [
+            "2657"
+        ]
+    },
+    {
+        "Code": "2657",
+        "Name": "Zugaztieta-Muxika",
+        "Lines": [
+            "E4"
+        ],
+        "Platform1": [
+            "2596"
+        ],
+        "Platform2": [
+            "2586"
+        ]
+    },
+    {
+        "Code": "2612",
+        "Name": "Oiartzun",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2625"
+        ],
+        "Platform2": [
+            "2632"
+        ]
+    },
+    {
+        "Code": "2667",
+        "Name": "Pasaia",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2624"
+        ],
+        "Platform2": [
+            "2610"
+        ]
+    },
+    {
+        "Code": "2585",
+        "Name": "Ola-Sondika",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2595"
+        ],
+        "Platform2": [
+            "2597"
+        ]
+    },
+    {
+        "Code": "2595",
+        "Name": "Sondika",
+        "Lines": [
+            "E3",
+            "E3A",
+            "FCC"
+        ],
+        "Platform1": [
+            "2601"
+        ],
+        "Platform2": [
+            "2585",
+            "2611"
+        ]
+    },
+    {
+        "Code": "2611",
+        "Name": "Zangroiz-Sondika",
+        "Lines": [
+            "E3A"
+        ],
+        "Platform1": [
+            "2595"
+        ],
+        "Platform2": [
+            "2576"
+        ]
+    },
+    {
+        "Code": "2661",
+        "Name": "Usansolo",
+        "Lines": [
+            "FCC"
+        ],
+        "Platform1": [
+            "2598"
+        ],
+        "Platform2": [
+            "2620"
+        ]
+    },
+    {
+        "Code": "2653",
+        "Name": "Usurbil",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2592"
+        ],
+        "Platform2": [
+            "2651",
+            "2647"
+        ]
+    },
+    {
+        "Code": "1580",
+        "Name": "la Escontrilla",
+        "Lines": [
+            "FUN-LARRAINETA"
+        ],
+        "Platform1": [
+            "1581"
+        ],
+        "Platform2": []
+    },
+    {
+        "Code": "1581",
+        "Name": "Larreineta",
+        "Lines": [
+            "FUN-LARRAINETA"
+        ],
+        "Platform1": [
+            "1580"
+        ],
+        "Platform2": []
+    },
+    {
+        "Code": "1560",
+        "Name": "Abetxuko",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1568"
+        ],
+        "Platform2": []
+    },
+    {
+        "Code": "1573",
+        "Name": "Angulema",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1564",
+            "2670"
+        ],
+        "Platform2": [
+            "2670",
+            "1564"
+        ]
+    },
+    {
+        "Code": "1575",
+        "Name": "Antso Jakituna/Sancho el Sabio",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1566",
+            "1561"
+        ],
+        "Platform2": [
+            "1561",
+            "1566"
+        ]
+    },
+    {
+        "Code": "1570",
+        "Name": "Arriaga",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1559"
+        ],
+        "Platform2": [
+            "1569"
+        ]
+    },
+    {
+        "Code": "1569",
+        "Name": "Artapadura",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1570"
+        ],
+        "Platform2": [
+            "1577"
+        ]
+    },
+    {
+        "Code": "1566",
+        "Name": "Europa",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1572",
+            "1575"
+        ],
+        "Platform2": [
+            "1575",
+            "1572"
+        ]
+    },
+    {
+        "Code": "1574",
+        "Name": "Euskal Herria",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1578",
+            "1572"
+        ],
+        "Platform2": [
+            "1572",
+            "1578"
+        ]
+    },
+    {
+        "Code": "2670",
+        "Name": "Florida",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1573",
+            "2669",
+            "2677"
+        ],
+        "Platform2": [
+            "2669",
+            "1573"
+        ]
+    },
+    {
+        "Code": "1563",
+        "Name": "Forondako Atea/Portal de Foronda",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1571"
+        ],
+        "Platform2": [
+            "1559"
+        ]
+    },
+    {
+        "Code": "1559",
+        "Name": "Gernikako Arbola",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1563"
+        ],
+        "Platform2": [
+            "1570"
+        ]
+    },
+    {
+        "Code": "2669",
+        "Name": "Hegoalde",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "2670",
+            "2671"
+        ],
+        "Platform2": [
+            "2671",
+            "2670"
+        ]
+    },
+    {
+        "Code": "1572",
+        "Name": "Honduras",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1574",
+            "1566"
+        ],
+        "Platform2": [
+            "1566",
+            "1571",
+            "1574"
+        ]
+    },
+    {
+        "Code": "1565",
+        "Name": "Ibaiondo",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1562"
+        ],
+        "Platform2": [
+            "1562"
+        ]
+    },
+    {
+        "Code": "2678",
+        "Name": "Iliada",
+        "Lines": [
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "2679"
+        ],
+        "Platform2": [
+            "2677"
+        ]
+    },
+    {
+        "Code": "1571",
+        "Name": "Intermodal",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1572"
+        ],
+        "Platform2": [
+            "1563"
+        ]
+    },
+    {
+        "Code": "1577",
+        "Name": "Kañabenta",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1569"
+        ],
+        "Platform2": [
+            "1568"
+        ]
+    },
+    {
+        "Code": "1568",
+        "Name": "Kristo",
+        "Lines": [
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "1577"
+        ],
+        "Platform2": [
+            "1560"
+        ]
+    },
+    {
+        "Code": "2676",
+        "Name": "la Unión",
+        "Lines": [
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "2675"
+        ],
+        "Platform2": [
+            "2679"
+        ]
+    },
+    {
+        "Code": "1567",
+        "Name": "Lakuabizkarra",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1562",
+            "1576"
+        ],
+        "Platform2": [
+            "1576",
+            "1562"
+        ]
+    },
+    {
+        "Code": "1562",
+        "Name": "Landaberde",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1565",
+            "1567"
+        ],
+        "Platform2": [
+            "1567",
+            "1565"
+        ]
+    },
+    {
+        "Code": "1564",
+        "Name": "Legebiltzarra/Parlamento",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1561",
+            "1573"
+        ],
+        "Platform2": [
+            "1573",
+            "1561"
+        ]
+    },
+    {
+        "Code": "1561",
+        "Name": "Lovaina",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1575",
+            "1564"
+        ],
+        "Platform2": [
+            "1564",
+            "1575"
+        ]
+    },
+    {
+        "Code": "2679",
+        "Name": "Nikosia",
+        "Lines": [
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "2676"
+        ],
+        "Platform2": [
+            "2678"
+        ]
+    },
+    {
+        "Code": "2675",
+        "Name": "Salburua",
+        "Lines": [
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [],
+        "Platform2": [
+            "2676"
+        ]
+    },
+    {
+        "Code": "2677",
+        "Name": "Santa Luzia",
+        "Lines": [
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "2678"
+        ],
+        "Platform2": [
+            "2670"
+        ]
+    },
+    {
+        "Code": "1578",
+        "Name": "Txagorritxu",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1576",
+            "1574"
+        ],
+        "Platform2": [
+            "1574",
+            "1576"
+        ]
+    },
+    {
+        "Code": "2671",
+        "Name": "Unibertsitatea",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG1"
+        ],
+        "Platform1": [
+            "2669"
+        ],
+        "Platform2": [
+            "2669"
+        ]
+    },
+    {
+        "Code": "1576",
+        "Name": "Wellington",
+        "Lines": [
+            "TRAN-VG-41",
+            "TRAN-VG-TG2"
+        ],
+        "Platform1": [
+            "1567",
+            "1578"
+        ],
+        "Platform2": [
+            "1578",
+            "1567"
+        ]
+    },
+    {
+        "Code": "2655",
+        "Name": "Zaldibar",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2600"
+        ],
+        "Platform2": [
+            "2666"
+        ]
+    },
+    {
+        "Code": "2652",
+        "Name": "Lekunbiz-Zamudio",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2642"
+        ],
+        "Platform2": [
+            "2614"
+        ]
+    },
+    {
+        "Code": "2642",
+        "Name": "Zamudio",
+        "Lines": [
+            "E3",
+            "FCC"
+        ],
+        "Platform1": [
+            "2638"
+        ],
+        "Platform2": [
+            "2652"
+        ]
+    },
+    {
+        "Code": "2584",
+        "Name": "San Pelaio-Zarautz",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2664"
+        ],
+        "Platform2": [
+            "2592"
+        ]
+    },
+    {
+        "Code": "2664",
+        "Name": "Zarautz",
+        "Lines": [
+            "E1",
+            "E2"
+        ],
+        "Platform1": [
+            "2604"
+        ],
+        "Platform2": [
+            "2584",
+            "2592"
+        ]
+    },
+    {
+        "Code": "2613",
+        "Name": "Arroa-Zestoa",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2633"
+        ],
+        "Platform2": [
+            "2604"
+        ]
+    },
+    {
+        "Code": "2604",
+        "Name": "Zumaia",
+        "Lines": [
+            "E1"
+        ],
+        "Platform1": [
+            "2613",
+            "2633"
+        ],
+        "Platform2": [
+            "2664"
+        ]
+    },
+    {
+        "Code": "3001",
+        "Name": "Donostia/Centro (Easo)",
+        "Lines": [
+            "E2"
+        ],
+        "Platform1": [
+            "2590"
+        ],
+        "Platform2": [
+            "2648"
+        ]
+    }
+]

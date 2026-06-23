@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {IonButton, IonCard, IonCardHeader, IonCardTitle, IonIcon} from "@ionic/react";
 import {chevronDownOutline, chevronUpOutline} from "ionicons/icons";
-import {Platforms} from "../../../services/Renfe/ApiRenfe";
+import {Platforms} from "../../../services/Renfe/Platforms";
 import {useConfiguration} from "../../../context/ConfigurationContext";
 import RenfePlatform from "../RenfePlatform/RenfePlatform";
 import './RenfeStationCard.css';

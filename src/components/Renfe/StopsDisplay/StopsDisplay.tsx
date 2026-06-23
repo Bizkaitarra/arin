@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {IonRefresher, IonRefresherContent, IonText, useIonViewWillEnter,} from '@ionic/react';
 import {useTranslation} from "react-i18next";
 import {RenfeStorage} from "../../../services/Renfe/RenfeStorage";
-import {getPlatformsForDisplays, Platforms} from "../../../services/Renfe/ApiRenfe";
+import {ApiRenfe} from "../../../services/Renfe/ApiRenfe";
+import {Platforms} from "../../../services/Renfe/Platforms";
 import {setIntervalRenfe} from "../../../services/IntervalServices";
 import Loader from "../../Loader";
 import RenfeStationCard from "../RenfeStationCard/RenfeStationCard";
@@ -30,7 +31,8 @@ const StopDisplay: React.FC = () => {
         try {
             setLoading(true);
             const displays = await storageService.getSavedDisplays();
-            const data = await getPlatformsForDisplays(displays);
+            const api = new ApiRenfe();
+            const data = await api.getPlatformsForDisplays(displays);
             console.log(data);
             setRenfeData(data);
             setLoading(false);

@@ -1,6 +1,6 @@
-import {Redirect, Route} from 'react-router-dom';
-import {IonApp, IonRouterOutlet, IonTabs, setupIonicReact} from '@ionic/react';
-import {IonReactRouter} from '@ionic/react-router';
+import { Redirect, Route } from 'react-router-dom';
+import { IonApp, IonRouterOutlet, IonTabs, setupIonicReact } from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
 
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -21,15 +21,15 @@ import BizkaibusAddByTown from "./pages/Bizkaibus/BizkaibusAddByTown";
 import MetroBilbaoDisplays from "./pages/MetroBilbao/MetroBilbaoDisplays";
 import MetroBilbaoAddStop from "./pages/MetroBilbao/MetroBilbaoAddStop";
 import BizkaibusHorarioPage from "./pages/Bizkaibus/BizkaibusHorarioPage";
-import React, {useEffect, useState} from "react";
-import {StatusBar} from "@capacitor/status-bar";
-import {Capacitor} from "@capacitor/core";
+import React, { useEffect, useState } from "react";
+import { StatusBar } from "@capacitor/status-bar";
+import { Capacitor } from "@capacitor/core";
 import BizkaibusMyDisplays from "./pages/Bizkaibus/BizkaibusMyDisplays";
 import MetroBilbaoMyDisplays from "./pages/MetroBilbao/MetroBilbaoMyDisplays";
 import AboutTheApp from "./pages/AboutTheApp";
 import Configuration from "./pages/Configuration";
-import {useTranslation} from "react-i18next";
-import {loadSettings} from "./services/ConfigurationStorage";
+import { useTranslation } from "react-i18next";
+import { loadSettings } from "./services/ConfigurationStorage";
 
 // Importar el ConfigurationProvider
 import { ConfigurationProvider } from './context/ConfigurationContext';
@@ -46,30 +46,39 @@ import RenfeDisplays from "./pages/Renfe/RenfeDisplays";
 import RenfeMyDisplays from "./pages/Renfe/RenfeMyDisplays";
 import RenfeAddStop from "./pages/Renfe/RenfeAddStop";
 import RenfeAddRoute from "./pages/Renfe/RenfeAddRoute";
+import RenfeTripPlanner from "./pages/Renfe/RenfeTripPlanner";
 import MetroTarifas from "./pages/MetroBilbao/MetroTarifas";
 import AppLoader from "./components/AppLoader";
+
+import EuskotrenDisplays from "./pages/Euskotren/EuskotrenDisplays";
+import EuskotrenMyDisplays from "./pages/Euskotren/EuskotrenMyDisplays";
+import EuskotrenAddRoute from "./pages/Euskotren/EuskotrenAddRoute";
+import EuskotrenAddStop from "./pages/Euskotren/EuskotrenAddStop";
+import EuskotrenTripPlanner from "./pages/Euskotren/EuskotrenTripPlanner";
+import GuidedSetup from "./pages/GuidedSetup";
 
 setupIonicReact();
 
 
 const App: React.FC = () => {
     const { i18n } = useTranslation();
-    const [isLanguageLoaded, setIsLanguageLoaded] = useState(false); // Estado para evitar re-render innecesario
+    const [isLanguageLoaded, setIsLanguageLoaded] = useState(false);
 
-    // Cargar idioma guardado en configuración
     useEffect(() => {
-        const fetchLanguage = async () => {
+        const checkConfiguration = async () => {
             const settings = await loadSettings();
-            if (settings?.language) {
-                await i18n.changeLanguage(settings.language); // Cambiamos el idioma en i18next
+            if (settings) {
+                if (settings.language) {
+                    await i18n.changeLanguage(settings.language);
+                }
             }
-            setIsLanguageLoaded(true); // Indicamos que se cargó el idioma
+            setIsLanguageLoaded(true);
         };
 
-        fetchLanguage();
+        checkConfiguration();
     }, [i18n]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (Capacitor.isNativePlatform()) {
             StatusBar.setOverlaysWebView({ overlay: true });
             StatusBar.setBackgroundColor({ color: '#ffffff' });
@@ -77,14 +86,21 @@ const App: React.FC = () => {
     }, []);
 
     if (!isLanguageLoaded) {
-        return <AppLoader serviceName={"language"} reloading={false} />;
+        return <AppLoader serviceName={"configuration"} reloading={false} />;
     }
 
     return (
         <IonApp>
-            {/* Envolver la aplicación en el ConfigurationProvider */}
             <ConfigurationProvider>
                 <IonReactRouter>
+                    <Route exact path="/" render={() => {
+                        const hasSeenGuidedSetup = localStorage.getItem('hasSeenGuidedSetup');
+                        if (hasSeenGuidedSetup) {
+                            return <Redirect to="/bizkaibus-displays" />;
+                        } else {
+                            return <Redirect to="/guided-setup" />;
+                        }
+                    }} />
                     <IonTabs>
                         <IonRouterOutlet>
                             <Route exact path="/bizkaibus-displays" component={BizkaibusDisplays} />
@@ -104,13 +120,19 @@ const App: React.FC = () => {
                             <Route exact path="/renfe-my-displays" component={RenfeMyDisplays} />
                             <Route exact path="/renfe-add-stop" component={RenfeAddStop} />
                             <Route exact path="/renfe-add-route" component={RenfeAddRoute} />
+                            <Route exact path="/renfe-trip-planner" component={RenfeTripPlanner} />
+                            <Route exact path="/euskotren-displays" component={EuskotrenDisplays} />
+                            <Route exact path="/euskotren-my-displays" component={EuskotrenMyDisplays} />
+                            <Route exact path="/euskotren-add-route" component={EuskotrenAddRoute} />
+                            <Route exact path="/euskotren-add-stop" component={EuskotrenAddStop} />
+                            <Route exact path="/euskotren-trip-planner" component={EuskotrenTripPlanner} />
                             <Route exact path="/about-app" component={AboutTheApp} />
                             <Route exact path="/configuration" component={Configuration} />
-                            <Route exact path="/" render={() => <Redirect to="/bizkaibus-displays" />} />
                             <Route path="/bizkaibus/scheduled/:line/:route" component={BizkaibusHorarioPage} />
                             <Route path="/bizkaibus/itinerary/:line/:route" component={RouteItineraries} />
                             <Route path="/bizkaibus/routes/:line" component={BizkaibusRoutes} />
                             <Route path="/bizkaibus-search-lines" component={SearchLines} />
+                            <Route exact path="/guided-setup" component={GuidedSetup} />
                         </IonRouterOutlet>
                     </IonTabs>
                 </IonReactRouter>

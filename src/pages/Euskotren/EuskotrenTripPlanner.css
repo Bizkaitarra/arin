@@ -1,0 +1,48 @@
+.euskotren-trip-results-card .euskotren-station-card-header {
+    background-color: #005eb8; /* Euskotren Blue - overriding green for specific branding if needed, but file says green 8BC34A. Wait, Euskotren is usually blue/white. The CSS file I read said #8BC34A... which is green. That's odd. Euskotren Trena is usually blue. Let me re-read the EuskotrenStationCard.css carefully. */
+    /* Use the same color as the station card for consistency */
+    background-color: #005eb8; 
+    color: #fff;
+    padding: 6px 10px;
+    font-weight: bold;
+}
+
+/* 
+ * Wait, I see "8BC34A" in EuskotrenStationCard.css. That is a light green. 
+ * Is it possible the user considers Euskotren green? Or is it because of the "B" icon which is green?
+ * However, commonly Euskotren is associated with blue (Trena). 
+ * But I must follow "The design shall be consistent with other Euskotren elements". 
+ * If EuskotrenStationCard uses #8BC34A, I should probably stick to it or a compatible one.
+ * BUT, if I look at MetroBilbaoTripPlanner.css, it was #E4002B (Red).
+ * Let's stick to what is in EuskotrenStationCard.css: #8BC34A.
+ * actually #8BC34A is Android Green.
+ * Let me check if there are other files with Euskotren colors.
+ * I will use #005eb8 (Blue) as the button color or primary color as per general knowledge, 
+ * BUT if the existing code uses #8BC34A, I will use that.
+ * LET'S STICK TO THE EXISTING CODE '#8BC34A'.
+ */
+
+.trip-results-card .euskotren-station-card-header {
+    background-color: #8BC34A;
+    color: #fff;
+    padding: 6px 10px;
+    font-weight: bold;
+}
+
+.trip-results-card .euskotren-station-card-title {
+    font-size: 1.1em;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.trip-results-card .train-list-header {
+    padding: 12px 16px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+ion-datetime.trip-planner-datetime {
+    --day-background-selected: #8BC34A;
+    --day-color-selected: #fff;
+}

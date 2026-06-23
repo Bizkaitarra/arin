@@ -17,7 +17,7 @@ import {
 } from "ionicons/icons";
 import Page from "../Page";
 import {useTranslation} from "react-i18next";
-import {fetchMetroBilbaoIncidents} from "../../services/ApiMetroBilbao";
+import {ApiMetroBilbao} from "../../services/MetroBilbao/ApiMetroBilbao";
 import MetroBilbaoAddTripButton from "../../components/MetroBilbao/MetroBilbaoAddVisorButton";
 import {IncidentsResult} from "../../services/MetroBilbao/Incidences";
 
@@ -45,7 +45,7 @@ const MetroBilbaoDisplays: React.FC = () => {
     }
 
     useEffect(() => {
-        fetchMetroBilbaoIncidents()
+        new ApiMetroBilbao().fetchMetroBilbaoIncidents()
             .then(data => updateIssues(data))
             .catch(error => console.error("Error fetching incidents", error));
     }, []);
@@ -62,8 +62,8 @@ const MetroBilbaoDisplays: React.FC = () => {
                         <div slot="content"
                              style={{padding: '1rem', background: '#f8f9fa', borderTop: '1px solid #ddd'}}>
                             {serviceIssues.map((issue, index) => {
-                                const title = issue.title.trim();
-                                const resume = issue.resume.trim();
+                                const title = issue?.title?.trim() || '';
+                                const resume = issue?.resume?.trim() || '';
 
                                 return (
                                     <IonCard key={index} color="light">
@@ -71,7 +71,7 @@ const MetroBilbaoDisplays: React.FC = () => {
                                             <IonCardTitle style={{fontSize: '1rem'}}>{title}</IonCardTitle>
                                         </IonCardHeader>
                                         <IonCardContent style={{fontSize: '0.9rem', color: '#666'}}>
-                                            {stripHtml(issue.description.trim())}
+                                            {stripHtml(issue?.description?.trim() || '')}
                                         </IonCardContent>
 
                                     </IonCard>
@@ -91,8 +91,8 @@ const MetroBilbaoDisplays: React.FC = () => {
                         <div slot="content"
                              style={{padding: '1rem', background: '#f8f9fa', borderTop: '1px solid #ddd'}}>
                             {installationIssues.map((issue, index) => {
-                                const title = issue.title.trim();
-                                const resume = issue.resume.trim();
+                                const title = issue?.title?.trim() || '';
+                                const resume = issue?.resume?.trim() || '';
 
                                 return (
                                     <IonCard key={index} color="light">
@@ -100,7 +100,7 @@ const MetroBilbaoDisplays: React.FC = () => {
                                             <IonCardTitle style={{fontSize: '1rem'}}>{title}</IonCardTitle>
                                         </IonCardHeader>
                                         <IonCardContent style={{fontSize: '0.9rem', color: '#666'}}>
-                                            {stripHtml(issue.description.trim())}
+                                            {stripHtml(issue?.description?.trim() || '')}
                                         </IonCardContent>
 
                                     </IonCard>

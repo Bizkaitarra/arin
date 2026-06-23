@@ -3,7 +3,7 @@ import { IonFab, IonFabButton, IonIcon, useIonActionSheet } from '@ionic/react';
 import { chevronUpSharp } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { bizkaibusMenuItems, metroMenuItems, renfeMenuItems, kbusMenuItems } from './Menu/menuItems';
+import { bizkaibusMenuItems, metroMenuItems, renfeMenuItems, kbusMenuItems, euskotrenMenuItems } from './Menu/menuItems';
 
 interface FabMenuProps {
     transportType: string;
@@ -28,6 +28,9 @@ const FabMenu: React.FC<FabMenuProps> = ({ transportType }) => {
         case 'KBus':
             menuItems = kbusMenuItems;
             break;
+        case 'Euskotren':
+            menuItems = euskotrenMenuItems;
+            break;
         default:
             return null;
     }
@@ -39,7 +42,7 @@ const FabMenu: React.FC<FabMenuProps> = ({ transportType }) => {
     }));
 
     return (
-        <IonFab style={{ '--offset-bottom': 'calc(env(safe-area-inset-bottom, 0px) + 25px)' }} slot="fixed" vertical="bottom" horizontal="end">
+        <IonFab style={{ '--offset-bottom': 'calc(var(--ion-safe-area-bottom, 0px) + 25px)' }} slot="fixed" vertical="bottom" horizontal="end">
             <IonFabButton color="medium" onClick={() =>
                 presentActionSheet({
                     header: t('Opciones'),
